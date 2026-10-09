@@ -21,6 +21,9 @@ const cookies = (...names: string[]) => ({
 describe('route protection helpers', () => {
   it('keeps login and public freelancer registration routes public', () => {
     expect(isPublicRoute('/login')).toBe(true);
+    // Family opening a shared gallery have no account; the token is the credential.
+    expect(isPublicRoute('/share/abc123')).toBe(true);
+    expect(isPublicRoute('/share')).toBe(true);
     expect(isPublicRoute('/freelancer/login')).toBe(true);
     expect(isPublicRoute('/freelancer/join')).toBe(true);
     expect(isPublicRoute('/freelancer/onboarding')).toBe(true);

@@ -15,12 +15,16 @@ import {
   IndianRupee,
   MapPin,
   Phone,
+  ImagePlus,
   Search,
+  Sparkles,
   UserPlus,
   UsersRound,
 } from 'lucide-react';
 import { Badge, BTN_CREAM, BTN_GHOST, BTN_PRIMARY, CARD, EmptyState, FIELD, KpiCard } from '@/features/team/components/TeamUiKit';
 import { usePermission } from '@/features/access';
+import { useClientPortalSync } from '@/features/client-portal';
+import { GalleryUploadModal } from '@/features/client-portal/GalleryUploadModal';
 
 interface ClientsDirectoryViewProps {
   projects: Project[];
@@ -62,8 +66,11 @@ export const ClientsDirectoryView: React.FC<ClientsDirectoryViewProps> = ({
   onAddClient,
 }) => {
   const { can } = usePermission();
+  // Keeps each wedding's gallery prepared so "Open Portal" is never an empty screen.
+  const { hydrated: portalReady, openPortal } = useClientPortalSync(projects);
   const canAdd = can('clients.create');
   const canSeePay = can('finance.view_payments');
+  const [galleryProject, setGalleryProject] = useState<Project | null>(null);
   const [search, setSearch] = useState('');
   const [filter, setFilter] = useState<ClientFilter>('all');
   const today = new Date().toISOString().split('T')[0];
@@ -406,10 +413,29 @@ export const ClientsDirectoryView: React.FC<ClientsDirectoryViewProps> = ({
                   </div>
                   )}
                 </button>
-                <footer className="flex items-center justify-between border-t border-[#eee7e2] bg-[#fbfaf8] px-4 py-3">
-                  <button type="button" onClick={() => onOpenClient(project)} className={BTN_PRIMARY}>
-                    <Eye className="size-3.5" /> Open Client
-                  </button>
+                <footer className="flex flex-wrap items-center justify-between gap-2 border-t border-[#eee7e2] bg-[#fbfaf8] px-4 py-3">
+                  <div className="flex items-center gap-2">
+                    <button type="button" onClick={() => onOpenClient(project)} className={BTN_PRIMARY}>
+                      <Eye className="size-3.5" /> Open Client
+                    </button>
+                    <button
+                      type="button"
+                      disabled={!portalReady}
+                      onClick={() => openPortal(project.id)}
+                      title="Open this couple's Luxury Client Gallery in a new tab"
+                      className={BTN_GHOST}
+                    >
+                      <Sparkles className="size-3.5 text-[#a07a4a]" /> Open Portal
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => setGalleryProject(project)}
+                      title="Upload and manage this couple's gallery photos"
+                      className={BTN_GHOST}
+                    >
+                      <ImagePlus className="size-3.5 text-[#8f3655]" /> Photos
+                    </button>
+                  </div>
                   {nextShoot && (
                     <span className="rounded-full border border-[#ddc89c] bg-[#f9f3e8] px-2.5 py-1 text-[10px] font-extrabold text-[#8a6d3b]">
                       {formatDateDDMMYYYY(nextShoot.date)}
@@ -420,6 +446,10 @@ export const ClientsDirectoryView: React.FC<ClientsDirectoryViewProps> = ({
             );
           })}
         </div>
+      )}
+
+      {galleryProject && (
+        <GalleryUploadModal project={galleryProject} onClose={() => setGalleryProject(null)} />
       )}
     </div>
   );

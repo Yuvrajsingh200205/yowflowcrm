@@ -601,7 +601,7 @@ export const TeamMonitoringPanel: React.FC<TeamMonitoringPanelProps> = ({
                               ? 'opacity-30 cursor-not-allowed bg-slate-100 text-slate-400 border-slate-200'
                               : 'bg-white hover:bg-[#8f3655] hover:text-white text-slate-700 border-slate-300 cursor-pointer shadow-2xs'
                           }`}
-                          title="Piche Karein (Move Left / Up)"
+                          title="Move Left / Up"
                         >
                           <ArrowLeft className="w-3.5 h-3.5" />
                         </button>
@@ -617,7 +617,7 @@ export const TeamMonitoringPanel: React.FC<TeamMonitoringPanelProps> = ({
                               ? 'opacity-30 cursor-not-allowed bg-slate-100 text-slate-400 border-slate-200'
                               : 'bg-white hover:bg-[#8f3655] hover:text-white text-slate-700 border-slate-300 cursor-pointer shadow-2xs'
                           }`}
-                          title="Aage Karein (Move Right / Down)"
+                          title="Move Right / Down"
                         >
                           <ArrowRight className="w-3.5 h-3.5" />
                         </button>

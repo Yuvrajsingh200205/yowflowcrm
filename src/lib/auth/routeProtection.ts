@@ -6,6 +6,10 @@ export const FREELANCER_REFRESH_COOKIE = 'wpp_freelancer_refresh_token';
 export const FREELANCER_SESSION_COOKIE = 'wpp_freelancer_session';
 
 const PUBLIC_PREFIXES = [
+  // A shared gallery is opened by family who have no CRM account; the token in
+  // the URL is the credential and the API enforces revocation, expiry and any
+  // password before returning a single photograph.
+  '/share',
   '/login',
   '/pricing',
   '/features',
