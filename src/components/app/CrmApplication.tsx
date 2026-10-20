@@ -20,6 +20,7 @@ import {
 } from '@/types';
 
 import { Sidebar, TopHeader, TabType } from '@/components/layout';
+import { VerifyEmailBanner } from '@/components/layout/VerifyEmailBanner';
 import { ClientsDirectoryView } from '@/features/clients/ClientsDirectoryView';
 import { LoginScreen } from '@/components/auth/LoginScreen';
 import { LoginInput } from '@/lib/api/auth';
@@ -1043,6 +1044,7 @@ export default function App() {
           onLogout={handleLogout}
           counts={counts}
         />
+        <VerifyEmailBanner email={currentUser?.email} verified={currentUser?.emailVerified} />
 
         {/* Scrollable Canvas Area */}
         <div className="crm-canvas min-h-0 flex-1 space-y-6 overflow-y-auto p-4 sm:p-6">

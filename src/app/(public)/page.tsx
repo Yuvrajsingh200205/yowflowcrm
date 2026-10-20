@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import { BRAND } from '@/config/brand';
+import { FAQS, PLANS } from '@/config/marketing';
 import { PricingSection } from '@/features/marketing/PricingSection';
 import { ProductShowcase } from '@/features/marketing/ProductShowcase';
 import { Reveal } from '@/features/marketing/Reveal';
@@ -9,12 +10,28 @@ export const metadata: Metadata = {
   title: { absolute: `${BRAND.name} — ${BRAND.tagline}` },
   description: BRAND.description,
   alternates: { canonical: '/' },
-  openGraph: { title: `${BRAND.name} — ${BRAND.tagline}`, description: BRAND.description, url: '/', type: 'website' },
+};
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    { '@type': 'Organization', name: BRAND.name, url: BRAND.siteUrl, logo: `${BRAND.siteUrl}/brand/mark-256.png`, email: BRAND.supportEmail },
+    {
+      '@type': 'SoftwareApplication',
+      name: BRAND.name,
+      applicationCategory: 'BusinessApplication',
+      operatingSystem: 'Web',
+      description: BRAND.description,
+      offers: { '@type': 'AggregateOffer', priceCurrency: 'INR', lowPrice: String(PLANS[0].monthly), highPrice: String(PLANS[PLANS.length - 1].monthly), offerCount: PLANS.length },
+    },
+    { '@type': 'FAQPage', mainEntity: FAQS.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) },
+  ],
 };
 
 export default function HomePage() {
   return (
     <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       <Hero />
       <ProofStrip />
       <ProblemSolution />

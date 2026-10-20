@@ -10,6 +10,9 @@ export const metadata: Metadata = {
   metadataBase: new URL(BRAND.siteUrl),
   title: { default: `${BRAND.name} — ${BRAND.tagline}`, template: `%s | ${BRAND.shortName}` },
   description: BRAND.description,
+  applicationName: BRAND.name,
+  openGraph: { type: 'website', siteName: BRAND.name, locale: 'en_IN', images: [{ url: '/brand/og.png', width: 1200, height: 630, alt: `${BRAND.name} — ${BRAND.tagline}` }] },
+  twitter: { card: 'summary_large_image', images: ['/brand/og.png'] },
 };
 
 export const viewport: Viewport = {
