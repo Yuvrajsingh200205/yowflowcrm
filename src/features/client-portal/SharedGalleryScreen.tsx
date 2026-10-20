@@ -54,8 +54,8 @@ export const SharedGalleryScreen: React.FC<{ token: string }> = ({ token }) => {
           onSubmit={(e) => { e.preventDefault(); void open(password); }}
           className="w-full max-w-xs space-y-3 text-center"
         >
-          <Lock className="mx-auto size-6 text-[#464B43]" />
-          <h1 className="font-serif text-xl text-[#1C1F1B]">This gallery is protected</h1>
+          <Lock className="mx-auto size-6 text-[#24291E]" />
+          <h1 className="font-serif text-xl text-[#0F110C]">This gallery is protected</h1>
           <p className="text-xs text-slate-500">Enter the password the couple shared with you.</p>
           <input type="password" required value={password} onChange={(e) => setPassword(e.target.value)} placeholder="Password" className={FIELD} />
           {error && <p className="text-xs font-bold text-red-600">{error}</p>}
@@ -69,7 +69,7 @@ export const SharedGalleryScreen: React.FC<{ token: string }> = ({ token }) => {
     return (
       <Shell>
         <div className="max-w-sm space-y-2 text-center">
-          <h1 className="font-serif text-xl text-[#1C1F1B]">Gallery unavailable</h1>
+          <h1 className="font-serif text-xl text-[#0F110C]">Gallery unavailable</h1>
           <p className="text-sm text-slate-500">{error || 'This link may have been revoked or expired.'}</p>
         </div>
       </Shell>
@@ -79,10 +79,10 @@ export const SharedGalleryScreen: React.FC<{ token: string }> = ({ token }) => {
   return (
     <main className="min-h-screen bg-[#fffdfb]">
       <header className="sticky top-0 z-30 border-b border-[#e2d9d3] bg-white/95 backdrop-blur-md">
-        <div className="h-1 bg-[linear-gradient(90deg,#CCEB8E_0%,#464B43_48%,#373B35_100%)]" />
+        <div className="h-1 bg-[linear-gradient(90deg,#CCEB8E_0%,#24291E_48%,#1C2018_100%)]" />
         <div className="mx-auto flex w-full max-w-[1800px] items-center justify-between gap-3 px-3 py-3 sm:px-5 lg:px-6 xl:px-10">
           <div className="min-w-0">
-            <p className="truncate font-serif text-base text-[#1C1F1B] sm:text-lg">{gallery.title}</p>
+            <p className="truncate font-serif text-base text-[#0F110C] sm:text-lg">{gallery.title}</p>
             <p className="truncate text-[10px] font-bold uppercase tracking-[.14em] text-[#a07a4a]">
               {gallery.projectName} · {gallery.studioName}
             </p>
@@ -111,7 +111,7 @@ export const SharedGalleryScreen: React.FC<{ token: string }> = ({ token }) => {
                     href={item.url}
                     download={item.originalName}
                     title="Download"
-                    className="absolute right-1.5 top-1.5 rounded-lg bg-white/90 p-1.5 text-[#373B35] opacity-0 shadow transition group-hover:opacity-100"
+                    className="absolute right-1.5 top-1.5 rounded-lg bg-white/90 p-1.5 text-[#1C2018] opacity-0 shadow transition group-hover:opacity-100"
                   >
                     <Download className="size-3.5" />
                   </a>

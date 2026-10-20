@@ -7,7 +7,6 @@ import { NotificationBell } from '@/features/notifications/NotificationBell';
 import { Logo } from '@/components/ui/Logo';
 import { Button } from '@/components/ui/Button';
 import { Dropdown, DropdownContent, DropdownItem, DropdownLabel, DropdownSeparator, DropdownTrigger } from '@/components/ui/Dropdown';
-import { ThemeToggle } from '@/components/ui/Theme';
 import { Tooltip } from '@/components/ui/Tooltip';
 import { cn } from '@/lib/cn';
 import { CommandPalette, useCommandShortcut, type Command } from './CommandPalette';
@@ -216,7 +215,6 @@ export const TopHeader: React.FC<TopHeaderProps> = ({
           )}
 
           {currentUser && <NotificationBell enabled />}
-          <ThemeToggle />
         </div>
       </div>
       <CommandPalette commands={commands} open={paletteOpen} onOpenChange={setPaletteOpen} />

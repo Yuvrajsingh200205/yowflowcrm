@@ -67,8 +67,8 @@ type StatusFilter = 'all' | AccessRoleStatus;
 const FILTER_BTN = (active: boolean) =>
   `rounded-full border px-3 py-1.5 text-xs font-extrabold transition ${
     active
-      ? 'border-[#464B43] bg-[#464B43] text-white'
-      : 'border-[#ded5cf] bg-white text-slate-600 hover:border-[#464B43]/40'
+      ? 'border-[#24291E] bg-[#24291E] text-white'
+      : 'border-[#ded5cf] bg-white text-slate-600 hover:border-[#24291E]/40'
   }`;
 
 const Switch = ({ on, disabled, onClick }: { on: boolean; disabled?: boolean; onClick: () => void }) => (
@@ -79,7 +79,7 @@ const Switch = ({ on, disabled, onClick }: { on: boolean; disabled?: boolean; on
     disabled={disabled}
     onClick={onClick}
     className={`relative h-6 w-11 shrink-0 rounded-full transition ${
-      on ? 'bg-[#464B43]' : 'bg-[#ded5cf]'
+      on ? 'bg-[#24291E]' : 'bg-[#ded5cf]'
     } disabled:opacity-50`}
   >
     <span className={`absolute top-0.5 size-5 rounded-full bg-white shadow transition ${on ? 'left-5' : 'left-0.5'}`} />
@@ -288,7 +288,7 @@ export const RolesPermissionsManager: React.FC<Props> = ({
 
   return (
     <div className="space-y-6 pb-8">
-      <section className="relative overflow-hidden rounded-3xl border border-[#CCEB8E]/35 bg-[radial-gradient(circle_at_88%_8%,rgba(204,235,142,.2),transparent_30%),linear-gradient(125deg,#41463E,#30342E_50%,#21241F)] p-5 text-white shadow-xl sm:p-7">
+      <section className="relative overflow-hidden rounded-3xl border border-[#CCEB8E]/35 bg-[radial-gradient(circle_at_88%_8%,rgba(204,235,142,.2),transparent_30%),linear-gradient(125deg,#21261C,#191C15_50%,#11130E)] p-5 text-white shadow-xl sm:p-7">
         <div className="absolute -bottom-20 -right-10 size-64 rounded-full border-[34px] border-white/[.04]" />
         <div className="relative flex flex-col justify-between gap-5 xl:flex-row xl:items-center">
           <div className="max-w-3xl">
@@ -344,7 +344,7 @@ export const RolesPermissionsManager: React.FC<Props> = ({
         <div className={`${CARD} overflow-hidden`}>
           <div className="hidden overflow-x-auto md:block">
             <table className="w-full text-left text-sm">
-              <thead className="bg-[#2C2F2A] text-[10px] font-extrabold uppercase tracking-wider text-[#EEEFED]">
+              <thead className="bg-[#161A13] text-[10px] font-extrabold uppercase tracking-wider text-[#EEEFED]">
                 <tr>
                   <th className="px-4 py-3">Role</th>
                   <th className="px-4 py-3 text-right">Users</th>
@@ -372,7 +372,7 @@ export const RolesPermissionsManager: React.FC<Props> = ({
                           {role.type === 'system' ? 'SYSTEM' : 'CUSTOM'}
                         </Badge>
                         {role.personalForUserId && (
-                          <Badge className="border-[#c9b7ad] bg-[#f6f1ee] text-slate-700" title="Belongs to one employee only">
+                          <Badge className="border-[#c9b7ad] bg-[#F4F9EB] text-slate-700" title="Belongs to one employee only">
                             PERSONAL
                           </Badge>
                         )}
@@ -392,7 +392,7 @@ export const RolesPermissionsManager: React.FC<Props> = ({
                         }}
                         disabled={role.userCount === 0}
                         aria-expanded={expandedRoleId === role.id}
-                        className="inline-flex items-center gap-1 font-extrabold text-[#464B43] disabled:text-slate-400"
+                        className="inline-flex items-center gap-1 font-extrabold text-[#24291E] disabled:text-slate-400"
                         title={role.userCount === 0 ? 'Nobody holds this role' : 'Show the people on this role'}
                       >
                         {role.userCount}
@@ -401,7 +401,7 @@ export const RolesPermissionsManager: React.FC<Props> = ({
                         )}
                       </button>
                     </td>
-                    <td className="px-4 py-3 text-right font-extrabold text-[#464B43]">{enabledCount(role)}</td>
+                    <td className="px-4 py-3 text-right font-extrabold text-[#24291E]">{enabledCount(role)}</td>
                     <td className="px-4 py-3">
                       <Badge className={role.status === 'active' ? 'border-emerald-200 bg-emerald-50 text-emerald-800' : 'border-slate-200 bg-slate-50 text-slate-500'}>
                         {role.status}
@@ -537,15 +537,15 @@ function RoleMemberList({
   }
 
   return (
-    <div className="rounded-2xl border border-[#d7e6e2] bg-[linear-gradient(115deg,#fbfcfc,#FCFEF7)] p-4 shadow-[0_8px_24px_rgba(47,51,45,.05)]">
+    <div className="rounded-2xl border border-[#d7e6e2] bg-[linear-gradient(115deg,#fbfcfc,#FCFEF7)] p-4 shadow-[0_8px_24px_rgba(24,28,20,.05)]">
       <div className="flex flex-col gap-2 border-b border-[#E6E8E4] pb-3 sm:flex-row sm:items-start sm:justify-between">
         <div>
-          <p className="flex items-center gap-1.5 text-[10px] font-extrabold uppercase tracking-wider text-[#464B43]">
+          <p className="flex items-center gap-1.5 text-[10px] font-extrabold uppercase tracking-wider text-[#24291E]">
             <Users className="size-3.5" /> Assigned people · shared role
           </p>
           <p className="mt-1 text-sm font-extrabold text-slate-900">People using {role.name}</p>
         </div>
-        <span className="w-fit rounded-full border border-[#c6dad6] bg-white px-2.5 py-1 text-[10px] font-extrabold text-[#464B43]">{members.length} assigned</span>
+        <span className="w-fit rounded-full border border-[#c6dad6] bg-white px-2.5 py-1 text-[10px] font-extrabold text-[#24291E]">{members.length} assigned</span>
       </div>
       <p className="mt-3 text-[11px] font-medium leading-relaxed text-slate-600">
         Role defaults stay shared. View or edit an employee’s own effective permissions without changing their fixed role.
@@ -710,7 +710,7 @@ function PermissionEditor({
 
   return (
     <div className="space-y-5 pb-24">
-      <section className="relative overflow-hidden rounded-3xl border border-[#CCEB8E]/35 bg-[linear-gradient(125deg,#41463E,#30342E_50%,#21241F)] p-5 text-white shadow-xl sm:p-6">
+      <section className="relative overflow-hidden rounded-3xl border border-[#CCEB8E]/35 bg-[linear-gradient(125deg,#21261C,#191C15_50%,#11130E)] p-5 text-white shadow-xl sm:p-6">
         <div className="relative flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
           <div>
             <button type="button" onClick={onBack} className="text-xs font-bold text-[#CCEB8E]">← All roles</button>
@@ -821,8 +821,8 @@ function PermissionEditor({
           >
             <p className="text-[10px] font-extrabold uppercase tracking-wider text-slate-500">{row.label}</p>
             <p className="mt-1 text-sm font-black text-slate-900">{row.on}/{row.total}</p>
-            <div className="mt-2 h-1.5 rounded-full bg-[#f6f1ee]">
-              <div className="h-full rounded-full bg-[#464B43]" style={{ width: `${row.total ? (row.on / row.total) * 100 : 0}%` }} />
+            <div className="mt-2 h-1.5 rounded-full bg-[#F4F9EB]">
+              <div className="h-full rounded-full bg-[#24291E]" style={{ width: `${row.total ? (row.on / row.total) * 100 : 0}%` }} />
             </div>
           </button>
         ))}
@@ -892,7 +892,7 @@ function PermissionEditor({
                             <td className="py-3 pr-3">
                               <p className="font-bold text-slate-800">{perm.label}</p>
                               {isEmployeeOverride && <p className={`mt-0.5 text-[10px] font-bold ${employeeOverride!.defaultKeys.has(perm.key) ? 'text-emerald-700' : 'text-slate-400'}`}>{employeeOverride!.defaultKeys.has(perm.key) ? 'Role default: allowed' : 'Role default: not allowed'}</p>}
-                              {perm.sensitive && <p className="text-[10px] font-extrabold uppercase tracking-wider text-[#464B43]">Sensitive</p>}
+                              {perm.sensitive && <p className="text-[10px] font-extrabold uppercase tracking-wider text-[#24291E]">Sensitive</p>}
                             </td>
                             <td className="py-3 pr-3">
                               <Switch on={!!g.enabled} disabled={isLocked(mod.id, perm.key)} onClick={() => toggle(perm.key)} />

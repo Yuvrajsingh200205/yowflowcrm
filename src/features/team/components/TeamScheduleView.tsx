@@ -103,7 +103,7 @@ export const TeamScheduleView: React.FC<Props> = ({ team, attendance, projects, 
               type="checkbox"
               checked={onlyWorking}
               onChange={(e) => setOnlyWorking(e.target.checked)}
-              className="size-3.5 rounded border-slate-300 text-[#464B43] focus:ring-[#50574D]"
+              className="size-3.5 rounded border-slate-300 text-[#24291E] focus:ring-[#293022]"
             />
             Working days only
           </label>
@@ -128,9 +128,9 @@ export const TeamScheduleView: React.FC<Props> = ({ team, attendance, projects, 
             <section key={dateKey} className={`${CARD} overflow-hidden`}>
               <header className={`flex items-center justify-between gap-3 px-5 py-3 border-b border-slate-100 ${dateKey === today ? 'bg-rose-50/60' : 'bg-slate-50/60'}`}>
                 <h3 className="text-xs font-extrabold uppercase tracking-wider text-slate-800 flex items-center gap-2">
-                  <CalendarClock className={`w-4 h-4 ${dateKey === today ? 'text-[#464B43]' : 'text-slate-400'}`} />
+                  <CalendarClock className={`w-4 h-4 ${dateKey === today ? 'text-[#24291E]' : 'text-slate-400'}`} />
                   {formatLongDate(dateKey)}
-                  {dateKey === today && <Badge className="bg-rose-100 text-[#373B35] border-rose-200">Today</Badge>}
+                  {dateKey === today && <Badge className="bg-rose-100 text-[#1C2018] border-rose-200">Today</Badge>}
                 </h3>
                 <span className="text-[11px] font-bold text-slate-500">
                   {entries.filter((e) => e.status.kind === 'on_shoot').length} on shoot · {entries.length} scheduled
@@ -146,7 +146,7 @@ export const TeamScheduleView: React.FC<Props> = ({ team, attendance, projects, 
                       <button type="button" onClick={() => onOpenProfile(member)} className="flex items-center gap-2.5 min-w-[190px] text-left cursor-pointer group">
                         <Avatar member={member} size="sm" />
                         <div className="min-w-0">
-                          <p className="text-xs font-extrabold text-slate-900 truncate group-hover:text-[#464B43] transition">{member.name}</p>
+                          <p className="text-xs font-extrabold text-slate-900 truncate group-hover:text-[#24291E] transition">{member.name}</p>
                           <p className="text-[10px] font-bold text-slate-400 truncate">{status.shoot?.role || member.role}</p>
                         </div>
                       </button>

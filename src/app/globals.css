@@ -1,6 +1,6 @@
 @import "tailwindcss";
 
-:root {
+:root, [data-theme='light'] {
   /* ── Yowflow design tokens (light) ───────────────────────────────────────
      Ink + lime. Semantic names first; legacy names stay so un-migrated
      screens inherit the palette. Never use raw hex in new components. */
@@ -313,7 +313,7 @@
 * { box-sizing: border-box; }
 html { scroll-behavior: smooth; }
 html, body { margin: 0; min-height: 100%; background: var(--background); color: var(--text-primary); }
-[data-theme='dark'] { background: var(--background); color: var(--text-primary); }
+[data-theme='dark'], [data-theme='light'] { background: var(--background); color: var(--text-primary); }
 body { font-family: var(--font-sans); font-feature-settings: 'cv11', 'ss01'; -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; }
 .tabular { font-variant-numeric: tabular-nums; }
 

@@ -55,7 +55,7 @@ export const FreelancerAttendanceView: React.FC<FreelancerAttendanceViewProps> =
       {/* Top Header Controls */}
       <div className="flex flex-col sm:flex-row items-center justify-between gap-4 bg-white p-4 rounded-2xl border border-slate-200 shadow-xs">
         <div className="flex items-center gap-3">
-          <div className="w-10 h-10 rounded-xl bg-[#464B43] flex items-center justify-center font-bold text-white shadow-xs">
+          <div className="w-10 h-10 rounded-xl bg-[#24291E] flex items-center justify-center font-bold text-white shadow-xs">
             <Clock className="w-5 h-5 text-white" />
           </div>
           <div>
@@ -66,7 +66,7 @@ export const FreelancerAttendanceView: React.FC<FreelancerAttendanceViewProps> =
 
         <button
           onClick={() => setShowLogModal(true)}
-          className="px-4 py-2 bg-[#464B43] hover:bg-[#373B35] text-white text-xs font-bold rounded-xl transition shadow-xs flex items-center gap-1.5"
+          className="px-4 py-2 bg-[#24291E] hover:bg-[#1C2018] text-white text-xs font-bold rounded-xl transition shadow-xs flex items-center gap-1.5"
         >
           <Plus className="w-4 h-4 stroke-[3]" />
           <span>+ Log Shoot Attendance</span>
@@ -93,7 +93,7 @@ export const FreelancerAttendanceView: React.FC<FreelancerAttendanceViewProps> =
           {filteredFreelancers.map((fl) => (
             <div key={fl.id} className="p-3.5 bg-slate-50 rounded-xl border border-slate-200 flex items-center justify-between">
               <div className="flex items-center gap-2.5">
-                <img src={fl.profilePhoto || 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=300'} alt={fl.name} className="w-9 h-9 rounded-full object-cover border border-[#50574D]" />
+                <img src={fl.profilePhoto || 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=300'} alt={fl.name} className="w-9 h-9 rounded-full object-cover border border-[#293022]" />
                 <div>
                   <span className="font-extrabold text-xs text-slate-900 block">{fl.name}</span>
                   <span className="text-[10px] text-slate-500">{fl.subCategory}</span>
@@ -263,7 +263,7 @@ export const FreelancerAttendanceView: React.FC<FreelancerAttendanceViewProps> =
                 </button>
                 <button
                   type="submit"
-                  className="px-4 py-2 bg-[#464B43] text-white text-xs font-bold rounded-lg"
+                  className="px-4 py-2 bg-[#24291E] text-white text-xs font-bold rounded-lg"
                 >
                   Save Log
                 </button>

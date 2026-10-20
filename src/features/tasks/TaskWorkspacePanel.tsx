@@ -37,9 +37,9 @@ export function TaskWorkspacePanel({ tasks, title, description, showAssignee = f
     <section className={`flex flex-col overflow-hidden rounded-3xl border border-[#e9deda] bg-white shadow-sm ${panelClassName}`}>
       <div className="shrink-0 flex flex-wrap items-start justify-between gap-4 border-b border-[#f0e9e5] bg-[linear-gradient(115deg,#fbfcfc,#fff)] px-5 py-4">
         <div className="flex gap-3">
-          <div className="flex size-10 shrink-0 items-center justify-center rounded-2xl bg-[#464B43] text-white"><ClipboardList className="size-5" /></div>
+          <div className="flex size-10 shrink-0 items-center justify-center rounded-2xl bg-[#24291E] text-white"><ClipboardList className="size-5" /></div>
           <div>
-            <p className="text-xs font-extrabold uppercase tracking-[.14em] text-[#464B43]">Live task workspace</p>
+            <p className="text-xs font-extrabold uppercase tracking-[.14em] text-[#24291E]">Live task workspace</p>
             <h2 className="text-lg font-black text-slate-900">{title}</h2>
             <p className="mt-0.5 text-sm text-slate-500">{description}</p>
           </div>
@@ -78,7 +78,7 @@ export function TaskWorkspacePanel({ tasks, title, description, showAssignee = f
                   {STATUS_OPTIONS.map((option) => <option key={option.value} value={option.value}>{option.label}</option>)}
                 </select>
               ) : (
-                <span className="rounded-full bg-[#F5F6F4] px-3 py-1.5 text-xs font-extrabold capitalize text-[#464B43]">{task.status.replaceAll('_', ' ')}</span>
+                <span className="rounded-full bg-[#F5F6F4] px-3 py-1.5 text-xs font-extrabold capitalize text-[#24291E]">{task.status.replaceAll('_', ' ')}</span>
               )}
             </article>
           ))}

@@ -201,7 +201,7 @@ export const FreelancerTeamManager: React.FC<FreelancerTeamManagerProps> = (prop
 
   return (
     <div className="space-y-6 pb-12">
-      <section className="relative overflow-hidden rounded-3xl border border-[#CCEB8E]/35 bg-[radial-gradient(circle_at_88%_8%,rgba(204,235,142,.2),transparent_30%),linear-gradient(125deg,#41463E,#30342E_50%,#21241F)] p-5 text-white shadow-xl sm:p-7">
+      <section className="relative overflow-hidden rounded-3xl border border-[#CCEB8E]/35 bg-[radial-gradient(circle_at_88%_8%,rgba(204,235,142,.2),transparent_30%),linear-gradient(125deg,#21261C,#191C15_50%,#11130E)] p-5 text-white shadow-xl sm:p-7">
         <div className="absolute -bottom-20 -right-10 size-64 rounded-full border-[34px] border-white/[.04]" />
         <div className="relative flex flex-col justify-between gap-5 xl:flex-row xl:items-center">
           <div className="max-w-3xl">
@@ -235,7 +235,7 @@ export const FreelancerTeamManager: React.FC<FreelancerTeamManagerProps> = (prop
       </section>
 
       <section className={`${CARD} p-3 sm:p-4`}>
-        <nav className="flex items-center gap-1 overflow-x-auto rounded-2xl border border-[#e2d9d3] bg-[#f6f1ee] p-1.5" aria-label="Freelancer sections">
+        <nav className="flex items-center gap-1 overflow-x-auto rounded-2xl border border-[#e2d9d3] bg-[#F4F9EB] p-1.5" aria-label="Freelancer sections">
           {TABS.map(({ id, label, icon: Icon }) => (
             <button
               key={id}

@@ -369,8 +369,8 @@ export const TeamMemberFormModal: React.FC<Props> = ({
       <form onSubmit={handleSubmit} className="p-5 space-y-6">
         {/* ---------------- Basic information ---------------- */}
         <fieldset className="space-y-3">
-          <legend className="flex items-center gap-1.5 text-sm font-black uppercase tracking-[.1em] text-[#373B35]">
-            <IdCard className="w-4 h-4 text-[#464B43]" /> Basic information
+          <legend className="flex items-center gap-1.5 text-sm font-black uppercase tracking-[.1em] text-[#1C2018]">
+            <IdCard className="w-4 h-4 text-[#24291E]" /> Basic information
           </legend>
 
           <div className="flex flex-col sm:flex-row gap-4 items-start">
@@ -437,7 +437,7 @@ export const TeamMemberFormModal: React.FC<Props> = ({
                     <button
                       type="button"
                       onClick={() => setIsPasswordVisible((visible) => !visible)}
-                      className="absolute right-2 top-1/2 -translate-y-1/2 rounded-lg p-2 text-slate-500 transition hover:bg-rose-50 hover:text-[#464B43]"
+                      className="absolute right-2 top-1/2 -translate-y-1/2 rounded-lg p-2 text-slate-500 transition hover:bg-rose-50 hover:text-[#24291E]"
                       aria-label={isPasswordVisible ? 'Hide password' : 'Show password'}
                       title={isPasswordVisible ? 'Hide password' : 'Show password'}
                     >
@@ -477,8 +477,8 @@ export const TeamMemberFormModal: React.FC<Props> = ({
 
         {/* ---------------- Professional ---------------- */}
         <fieldset className="space-y-3 border-t border-slate-100 pt-5">
-          <legend className="flex items-center gap-1.5 text-sm font-black uppercase tracking-[.1em] text-[#373B35]">
-            <Building2 className="w-4 h-4 text-[#464B43]" /> Professional information
+          <legend className="flex items-center gap-1.5 text-sm font-black uppercase tracking-[.1em] text-[#1C2018]">
+            <Building2 className="w-4 h-4 text-[#24291E]" /> Professional information
           </legend>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
@@ -589,8 +589,8 @@ export const TeamMemberFormModal: React.FC<Props> = ({
 
         {/* ---------------- Attendance settings ---------------- */}
         <fieldset className="space-y-3 border-t border-slate-100 pt-5">
-          <legend className="flex items-center gap-1.5 text-sm font-black uppercase tracking-[.1em] text-[#373B35]">
-            <CalendarDays className="w-4 h-4 text-[#464B43]" /> Attendance settings
+          <legend className="flex items-center gap-1.5 text-sm font-black uppercase tracking-[.1em] text-[#1C2018]">
+            <CalendarDays className="w-4 h-4 text-[#24291E]" /> Attendance settings
           </legend>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
@@ -635,7 +635,7 @@ export const TeamMemberFormModal: React.FC<Props> = ({
               type="checkbox"
               checked={form.attendanceRequired}
               onChange={(e) => set('attendanceRequired', e.target.checked)}
-              className="size-4 rounded border-slate-300 text-[#464B43] focus:ring-[#50574D]"
+              className="size-4 rounded border-slate-300 text-[#24291E] focus:ring-[#293022]"
             />
             Daily attendance required
             <span className="font-medium text-slate-500">— turn off for crew tracked only through shoot assignments</span>
@@ -669,19 +669,19 @@ export const TeamMemberFormModal: React.FC<Props> = ({
 
         {/* ---------------- Permitted software (existing guard system) ---------------- */}
         <fieldset className="space-y-3 border-t border-slate-100 pt-5">
-          <legend className="flex items-center gap-1.5 text-sm font-black uppercase tracking-[.1em] text-[#373B35]">
-            <ShieldCheck className="w-4 h-4 text-[#464B43]" /> Permitted software ({form.softwares.length})
+          <legend className="flex items-center gap-1.5 text-sm font-black uppercase tracking-[.1em] text-[#1C2018]">
+            <ShieldCheck className="w-4 h-4 text-[#24291E]" /> Permitted software ({form.softwares.length})
           </legend>
 
           {form.softwares.length > 0 && (
             <div className="flex flex-wrap gap-1.5">
               {form.softwares.map((sw) => (
-                <span key={sw} className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-[11px] font-bold bg-rose-50 text-[#30342E] border border-rose-200">
+                <span key={sw} className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-[11px] font-bold bg-rose-50 text-[#191C15] border border-rose-200">
                   <span className="truncate max-w-[180px]">{sw}</span>
                   <button
                     type="button"
                     onClick={() => set('softwares', form.softwares.filter((s) => s !== sw))}
-                    className="w-4 h-4 rounded-full bg-rose-100 hover:bg-red-500 hover:text-white text-[#464B43] flex items-center justify-center transition cursor-pointer"
+                    className="w-4 h-4 rounded-full bg-rose-100 hover:bg-red-500 hover:text-white text-[#24291E] flex items-center justify-center transition cursor-pointer"
                     aria-label={`Remove ${sw}`}
                   >
                     <X className="w-3 h-3" />
@@ -717,7 +717,7 @@ export const TeamMemberFormModal: React.FC<Props> = ({
                   key={opt}
                   type="button"
                   onClick={() => addSoftware(opt)}
-                  className="text-[10px] font-semibold bg-slate-100 hover:bg-rose-50 hover:text-[#373B35] hover:border-rose-300 text-slate-600 px-1.5 py-0.5 rounded-md border border-slate-200 transition cursor-pointer"
+                  className="text-[10px] font-semibold bg-slate-100 hover:bg-rose-50 hover:text-[#1C2018] hover:border-rose-300 text-slate-600 px-1.5 py-0.5 rounded-md border border-slate-200 transition cursor-pointer"
                 >
                   + {opt.split('(')[0].trim()}
                 </button>

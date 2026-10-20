@@ -17,7 +17,7 @@ import { BRAND } from '@/config/brand';
  * making everything brighter.
  *
  * All styling lives in the .ed-nav layer in globals.css, using the brand
- * palette (#20231F / #272A25 / #ABDE45 / #535A50 / #F5F0EA). Motion is CSS
+ * palette (#11130E / #141711 / #ABDE45 / #2B3124 / #F5F0EA). Motion is CSS
  * only — the public surface ships no animation library.
  */
 
@@ -34,7 +34,7 @@ function ApertureMark() {
     >
       {/* Ring, plus the faintest maroon body so the mark reads as an object
           rather than as line art floating on the glass. */}
-      <circle cx="17" cy="17" r="15.25" fill="#272A25" fillOpacity="0.6" />
+      <circle cx="17" cy="17" r="15.25" fill="#141711" fillOpacity="0.6" />
       <circle cx="17" cy="17" r="15.25" stroke="#ABDE45" strokeOpacity="0.5" strokeWidth="1" />
       {/* The iris is a single hexagon. Six crossing blades turned to visual
           noise at 34px; one clean opening still reads unmistakably as a lens. */}

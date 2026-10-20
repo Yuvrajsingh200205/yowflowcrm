@@ -604,7 +604,7 @@ export const LeadsManagement: React.FC<LeadsManagementProps> = ({ currentUser, t
             {isOwner && (
               <button
                 onClick={handleOpenTargetModal}
-                className="flex shrink-0 cursor-pointer items-center gap-2 rounded-xl border border-[#DBF1AE]/50 bg-[#f3dfc8] px-4 py-2.5 text-sm font-extrabold text-[#353933] shadow-md transition hover:-translate-y-0.5 hover:bg-white"
+                className="flex shrink-0 cursor-pointer items-center gap-2 rounded-xl border border-[#DBF1AE]/50 bg-[#f3dfc8] px-4 py-2.5 text-sm font-extrabold text-[#1B1F17] shadow-md transition hover:-translate-y-0.5 hover:bg-white"
               >
                 <Edit3 className="size-4" />
                 <span>Set / Edit Targets</span>
@@ -1075,7 +1075,7 @@ export const LeadsManagement: React.FC<LeadsManagementProps> = ({ currentUser, t
             <div className="hidden h-fit overflow-hidden border-y border-[#d8ccc5] bg-white xl:block">
               <table className="w-full table-fixed border-collapse text-left text-sm">
                 <thead>
-                  <tr className="border-b border-[#4A5047] bg-[#2C2F2A] text-xs font-extrabold uppercase tracking-wider text-[#EEEFED]">
+                  <tr className="border-b border-[#262C20] bg-[#161A13] text-xs font-extrabold uppercase tracking-wider text-[#EEEFED]">
                     <th className="w-[23%] border-r border-white/15 px-3 py-3">Client & Inquiry</th>
                     <th className="w-[15%] border-r border-white/15 px-3 py-3">Contact Details</th>
                     <th className="w-[19%] border-r border-white/15 px-3 py-3">Event Type / Requirement</th>

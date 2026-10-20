@@ -11,13 +11,13 @@ export function LeadHistoryModal({ lead, onClose }: LeadHistoryModalProps) {
   return (
     <LeadModalShell icon={History} eyebrow={`Lead #${lead.id.slice(-4)}`} title="Lead Activity Timeline" description={<>Complete activity history for <strong>{lead.clientName}</strong> · Created by {lead.createdBy || 'Studio Owner'}</>} onClose={onClose} maxWidth="max-w-2xl">
       {logs.length === 0 ? (
-        <div className="grid min-h-40 place-items-center rounded-3xl border-2 border-dashed border-[#D3D6D1] bg-[#faf7f5] p-6 text-center"><div><History className="mx-auto size-8 text-[#60675C]" /><p className="mt-3 text-base font-bold text-[#554b4f]">No activity recorded yet</p></div></div>
+        <div className="grid min-h-40 place-items-center rounded-3xl border-2 border-dashed border-[#D3D6D1] bg-[#F9FCF3] p-6 text-center"><div><History className="mx-auto size-8 text-[#313929]" /><p className="mt-3 text-base font-bold text-[#554b4f]">No activity recorded yet</p></div></div>
       ) : (
         <div className="relative ml-2 space-y-4 border-l-2 border-[#C9CEC7] py-1 pl-6">
-          {logs.map((log) => <article key={log.id} className="relative rounded-2xl border border-[#e2d8d4] bg-[#faf7f5] p-4"><span className="absolute -left-[31px] top-5 size-3 rounded-full bg-[#484D45] ring-4 ring-white" /><div className="flex flex-col gap-1 sm:flex-row sm:items-center sm:justify-between"><time className="text-sm font-bold text-[#807579]">{log.timestamp}</time><span className="text-sm font-extrabold text-[#3B4039]">by {log.performedBy}</span></div><p className="mt-2 text-base font-bold leading-relaxed text-[#3b3336]">{log.description}</p></article>)}
+          {logs.map((log) => <article key={log.id} className="relative rounded-2xl border border-[#e2d8d4] bg-[#F9FCF3] p-4"><span className="absolute -left-[31px] top-5 size-3 rounded-full bg-[#252A1F] ring-4 ring-white" /><div className="flex flex-col gap-1 sm:flex-row sm:items-center sm:justify-between"><time className="text-sm font-bold text-[#807579]">{log.timestamp}</time><span className="text-sm font-extrabold text-[#1F2319]">by {log.performedBy}</span></div><p className="mt-2 text-base font-bold leading-relaxed text-[#3b3336]">{log.description}</p></article>)}
         </div>
       )}
-      <div className="flex justify-end border-t border-[#e7dedb] pt-4"><button type="button" onClick={onClose} className="min-h-11 rounded-xl bg-[#393D37] px-5 text-sm font-extrabold text-white transition hover:bg-[#2D302B]">Close Timeline</button></div>
+      <div className="flex justify-end border-t border-[#e7dedb] pt-4"><button type="button" onClick={onClose} className="min-h-11 rounded-xl bg-[#1D2218] px-5 text-sm font-extrabold text-white transition hover:bg-[#171A13]">Close Timeline</button></div>
     </LeadModalShell>
   );
 }
@@ -29,8 +29,8 @@ export function LeadNoteModal({ lead, value, onValueChange, onClose, onSubmit }:
   return (
     <LeadModalShell icon={FileText} eyebrow={`Lead #${lead.id.slice(-4)}`} title="Add Lead Note" description={<>Record an important follow-up for <strong>{lead.clientName}</strong>.</>} onClose={onClose} maxWidth="max-w-xl">
       <form onSubmit={onSubmit} className="space-y-5">
-        <label className="block text-base font-extrabold text-[#41383c]">Note / important remark<textarea rows={6} required placeholder="e.g. Client requested a 3-day wedding package and called today for budget negotiation." value={value} onChange={(event) => onValueChange(event.target.value)} className="mt-2 w-full resize-y rounded-2xl border border-[#d9ceca] bg-[#fbf9f7] p-4 text-base font-medium leading-relaxed text-[#352e31] outline-none transition placeholder:text-[#aaa1a4] focus:border-[#565D52] focus:ring-4 focus:ring-[#565D52]/10" /></label>
-        <div className="flex flex-col-reverse gap-2 border-t border-[#e7dedb] pt-4 sm:flex-row sm:justify-end"><button type="button" onClick={onClose} className="min-h-11 rounded-xl border border-[#d8ceca] bg-white px-5 text-sm font-extrabold text-[#5d5256] hover:bg-[#f7f2ef]">Cancel</button><button type="submit" className="inline-flex min-h-11 items-center justify-center gap-2 rounded-xl bg-[#393D37] px-5 text-sm font-black text-white shadow-lg shadow-[#393D37]/15 transition hover:bg-[#2D302B]"><Check className="size-4" />Save Note</button></div>
+        <label className="block text-base font-extrabold text-[#41383c]">Note / important remark<textarea rows={6} required placeholder="e.g. Client requested a 3-day wedding package and called today for budget negotiation." value={value} onChange={(event) => onValueChange(event.target.value)} className="mt-2 w-full resize-y rounded-2xl border border-[#d9ceca] bg-[#fbf9f7] p-4 text-base font-medium leading-relaxed text-[#352e31] outline-none transition placeholder:text-[#aaa1a4] focus:border-[#2C3325] focus:ring-4 focus:ring-[#2C3325]/10" /></label>
+        <div className="flex flex-col-reverse gap-2 border-t border-[#e7dedb] pt-4 sm:flex-row sm:justify-end"><button type="button" onClick={onClose} className="min-h-11 rounded-xl border border-[#d8ceca] bg-white px-5 text-sm font-extrabold text-[#5d5256] hover:bg-[#F5FAEC]">Cancel</button><button type="submit" className="inline-flex min-h-11 items-center justify-center gap-2 rounded-xl bg-[#1D2218] px-5 text-sm font-black text-white shadow-lg shadow-[#1D2218]/15 transition hover:bg-[#171A13]"><Check className="size-4" />Save Note</button></div>
       </form>
     </LeadModalShell>
   );
@@ -47,7 +47,7 @@ export function LeadBookingModal({ lead, finalAmount, advanceAmount, onFinalAmou
           <AmountField label="Finalized deal amount" description="Total agreed package amount." value={finalAmount} onChange={onFinalAmountChange} required autoFocus />
           <div className="border-t border-emerald-200 pt-5"><AmountField label="Advance amount received" description="Deposit collected at booking time." value={advanceAmount} onChange={onAdvanceAmountChange} /></div>
         </div>
-        <div className="flex flex-col-reverse gap-2 border-t border-[#e7dedb] pt-4 sm:flex-row sm:justify-end"><button type="button" onClick={onClose} className="min-h-11 rounded-xl border border-[#d8ceca] px-5 text-sm font-extrabold text-[#5d5256] hover:bg-[#f7f2ef]">Cancel</button><button type="submit" className="inline-flex min-h-11 items-center justify-center gap-2 rounded-xl bg-[#477a67] px-5 text-sm font-black text-white shadow-lg shadow-emerald-900/10 transition hover:bg-[#376553]"><CheckCircle2 className="size-4" />Confirm Booked Deal</button></div>
+        <div className="flex flex-col-reverse gap-2 border-t border-[#e7dedb] pt-4 sm:flex-row sm:justify-end"><button type="button" onClick={onClose} className="min-h-11 rounded-xl border border-[#d8ceca] px-5 text-sm font-extrabold text-[#5d5256] hover:bg-[#F5FAEC]">Cancel</button><button type="submit" className="inline-flex min-h-11 items-center justify-center gap-2 rounded-xl bg-[#477a67] px-5 text-sm font-black text-white shadow-lg shadow-emerald-900/10 transition hover:bg-[#376553]"><CheckCircle2 className="size-4" />Confirm Booked Deal</button></div>
       </form>
     </LeadModalShell>
   );

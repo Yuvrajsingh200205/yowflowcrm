@@ -49,7 +49,7 @@ const statusTone = (status: ProjectStatus) => {
   if (status === 'completed') return 'border-violet-200 bg-violet-50 text-violet-800';
   if (status === 'urgent') return 'border-red-200 bg-red-50 text-red-700';
   if (status === 'pending' || status === 'new_project') return 'border-amber-200 bg-amber-50 text-amber-800';
-  return 'border-rose-200 bg-rose-50 text-[#373B35]';
+  return 'border-rose-200 bg-rose-50 text-[#1C2018]';
 };
 
 const initials = (name?: string) =>
@@ -146,7 +146,7 @@ export const ClientsDirectoryView: React.FC<ClientsDirectoryViewProps> = ({
 
   return (
     <div className="space-y-6 pb-12">
-      <section className="relative overflow-hidden rounded-3xl border border-[#CCEB8E]/35 bg-[radial-gradient(circle_at_88%_20%,rgba(204,235,142,.24),transparent_25%),radial-gradient(circle_at_8%_130%,rgba(149,158,145,.34),transparent_38%),linear-gradient(125deg,#41463E,#30342E_48%,#21241F)] p-5 text-white shadow-[0_18px_42px_rgba(32,35,31,.17)] sm:p-7 lg:p-8">
+      <section className="relative overflow-hidden rounded-3xl border border-[#CCEB8E]/35 bg-[radial-gradient(circle_at_88%_20%,rgba(204,235,142,.24),transparent_25%),radial-gradient(circle_at_8%_130%,rgba(149,158,145,.34),transparent_38%),linear-gradient(125deg,#21261C,#191C15_48%,#11130E)] p-5 text-white shadow-[0_18px_42px_rgba(17,19,14,.17)] sm:p-7 lg:p-8">
         <div className="pointer-events-none absolute -right-16 -top-24 size-72 rounded-full border border-white/10 shadow-[0_0_0_56px_rgba(255,255,255,.025),0_0_0_112px_rgba(255,255,255,.018)]" />
         <div className="relative flex flex-col justify-between gap-5 xl:flex-row xl:items-center">
           <div className="max-w-3xl">
@@ -189,7 +189,7 @@ export const ClientsDirectoryView: React.FC<ClientsDirectoryViewProps> = ({
       <div className="grid grid-cols-1 gap-4 xl:grid-cols-3">
         <section className={`${CARD} p-4 sm:p-5 xl:col-span-2`}>
           <div className="relative">
-            <Search className="pointer-events-none absolute left-3 top-3.5 size-4 text-[#50574D]" />
+            <Search className="pointer-events-none absolute left-3 top-3.5 size-4 text-[#293022]" />
             <input
               className={`${FIELD} pl-10`}
               value={search}
@@ -210,7 +210,7 @@ export const ClientsDirectoryView: React.FC<ClientsDirectoryViewProps> = ({
                   onClick={() => setFilter(chip.id)}
                   className={`flex min-w-40 shrink-0 items-center gap-3 rounded-2xl border p-3 text-left ${
                     active
-                      ? 'border-[#4F554C] bg-[#373B35] text-white shadow-md'
+                      ? 'border-[#292F22] bg-[#1C2018] text-white shadow-md'
                       : chip.danger
                         ? 'border-red-200 bg-red-50 text-red-700'
                         : 'border-slate-200 bg-[#FBFDF6] text-slate-700 hover:border-rose-300'
@@ -234,7 +234,7 @@ export const ClientsDirectoryView: React.FC<ClientsDirectoryViewProps> = ({
         <section className={`${CARD} p-5`}>
           <div className="flex items-center justify-between gap-2">
             <h3 className="text-xs font-extrabold uppercase tracking-wider text-slate-700">Upcoming clients</h3>
-            <button type="button" onClick={() => setFilter('upcoming')} className="text-xs font-bold text-[#464B43]">
+            <button type="button" onClick={() => setFilter('upcoming')} className="text-xs font-bold text-[#24291E]">
               View all
             </button>
           </div>
@@ -255,7 +255,7 @@ export const ClientsDirectoryView: React.FC<ClientsDirectoryViewProps> = ({
                       {shoot?.title} · {shoot?.location || shoot?.venue || project.venueLocation || 'Venue pending'}
                     </span>
                   </span>
-                  <span className="shrink-0 rounded-full bg-[#464B43] px-2.5 py-1 text-[10px] font-extrabold text-white">
+                  <span className="shrink-0 rounded-full bg-[#24291E] px-2.5 py-1 text-[10px] font-extrabold text-white">
                     {formatDateDDMMYYYY(shoot?.date)}
                   </span>
                 </button>
@@ -321,11 +321,11 @@ export const ClientsDirectoryView: React.FC<ClientsDirectoryViewProps> = ({
                 <button type="button" onClick={() => onOpenClient(project)} className="block w-full p-5 text-left">
                   <div className="flex items-start justify-between gap-3">
                     <div className="flex min-w-0 items-start gap-3">
-                      <span className="grid size-12 shrink-0 place-items-center rounded-2xl bg-[#E6E8E4] text-xs font-black text-[#373B35]">
+                      <span className="grid size-12 shrink-0 place-items-center rounded-2xl bg-[#E6E8E4] text-xs font-black text-[#1C2018]">
                         {initials(project.clientWeddingTitle)}
                       </span>
                       <div className="min-w-0">
-                        <p className="text-[10px] font-black uppercase tracking-[.14em] text-[#50574D]">
+                        <p className="text-[10px] font-black uppercase tracking-[.14em] text-[#293022]">
                           Client {String(index + 1).padStart(2, '0')} · {project.primaryServiceType || 'Wedding'}
                         </p>
                         <h3 className="mt-0.5 truncate text-lg font-black text-slate-900 group-hover:text-rose-800">
@@ -338,14 +338,14 @@ export const ClientsDirectoryView: React.FC<ClientsDirectoryViewProps> = ({
 
                   <div className="mt-4 grid grid-cols-2 gap-2 text-xs">
                     <div className="flex min-w-0 gap-2 rounded-xl bg-[#FBFDF6] p-2.5">
-                      <Phone className="mt-0.5 size-4 shrink-0 text-[#50574D]" />
+                      <Phone className="mt-0.5 size-4 shrink-0 text-[#293022]" />
                       <div className="min-w-0">
                         <p className="text-[9px] font-black uppercase tracking-wider text-slate-400">Contact</p>
                         <p className="truncate font-semibold text-slate-700">{project.clientContactMobile || 'Not added'}</p>
                       </div>
                     </div>
                     <div className="flex min-w-0 gap-2 rounded-xl bg-[#FBFDF6] p-2.5">
-                      <CalendarDays className="mt-0.5 size-4 shrink-0 text-[#50574D]" />
+                      <CalendarDays className="mt-0.5 size-4 shrink-0 text-[#293022]" />
                       <div className="min-w-0">
                         <p className="text-[9px] font-black uppercase tracking-wider text-slate-400">Wedding</p>
                         <p className="truncate font-semibold text-slate-700">
@@ -354,7 +354,7 @@ export const ClientsDirectoryView: React.FC<ClientsDirectoryViewProps> = ({
                       </div>
                     </div>
                     <div className="col-span-2 flex min-w-0 gap-2 rounded-xl bg-[#FBFDF6] p-2.5">
-                      <MapPin className="mt-0.5 size-4 shrink-0 text-[#50574D]" />
+                      <MapPin className="mt-0.5 size-4 shrink-0 text-[#293022]" />
                       <div className="min-w-0">
                         <p className="text-[9px] font-black uppercase tracking-wider text-slate-400">Venue</p>
                         <p className="truncate font-semibold text-slate-700">{project.venueLocation || 'Venue pending'}</p>
@@ -380,7 +380,7 @@ export const ClientsDirectoryView: React.FC<ClientsDirectoryViewProps> = ({
                     </div>
                     <div className="mt-2 h-2 rounded-full bg-slate-200">
                       <div
-                        className="h-full rounded-full bg-gradient-to-r from-[#4F554C] to-[#b99a5e]"
+                        className="h-full rounded-full bg-gradient-to-r from-[#292F22] to-[#b99a5e]"
                         style={{ width: `${work.completionPercent}%` }}
                       />
                     </div>
@@ -434,7 +434,7 @@ export const ClientsDirectoryView: React.FC<ClientsDirectoryViewProps> = ({
                       title="Upload and manage this couple's gallery photos"
                       className={BTN_GHOST}
                     >
-                      <ImagePlus className="size-3.5 text-[#464B43]" /> Photos
+                      <ImagePlus className="size-3.5 text-[#24291E]" /> Photos
                     </button>
                   </div>
                   {nextShoot && (

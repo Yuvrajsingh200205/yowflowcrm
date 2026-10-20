@@ -112,7 +112,7 @@ export const FreelancerPaymentsView: React.FC<FreelancerPaymentsViewProps> = ({
             <span className="text-[10px] font-bold uppercase text-slate-400 tracking-wider">Total Agreed Shoot Value</span>
             <h3 className="text-xl font-black text-slate-900 font-mono mt-0.5">₹{totalAgreedSum.toLocaleString('en-IN')}</h3>
           </div>
-          <div className="w-10 h-10 rounded-xl bg-rose-50 border border-rose-200 flex items-center justify-center text-[#464B43]">
+          <div className="w-10 h-10 rounded-xl bg-rose-50 border border-rose-200 flex items-center justify-center text-[#24291E]">
             <DollarSign className="w-5 h-5" />
           </div>
         </div>
@@ -147,7 +147,7 @@ export const FreelancerPaymentsView: React.FC<FreelancerPaymentsViewProps> = ({
             placeholder="Search freelancer name, project, transaction ref ID..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="w-full pl-9 pr-4 py-2 text-xs rounded-xl border border-slate-200 bg-white focus:outline-hidden focus:ring-2 focus:ring-[#50574D]"
+            className="w-full pl-9 pr-4 py-2 text-xs rounded-xl border border-slate-200 bg-white focus:outline-hidden focus:ring-2 focus:ring-[#293022]"
           />
         </div>
 
@@ -167,7 +167,7 @@ export const FreelancerPaymentsView: React.FC<FreelancerPaymentsViewProps> = ({
           {onSavePayment && (
           <button
             onClick={() => setShowPaymentModal(true)}
-            className="flex items-center gap-1.5 whitespace-nowrap rounded-xl border border-[#7d4e53]/20 bg-[#464B43] px-4 py-2 text-xs font-extrabold text-white shadow-xs transition hover:bg-[#373B35] focus-visible:ring-2 focus-visible:ring-[#50574D]/35"
+            className="flex items-center gap-1.5 whitespace-nowrap rounded-xl border border-[#7d4e53]/20 bg-[#24291E] px-4 py-2 text-xs font-extrabold text-white shadow-xs transition hover:bg-[#1C2018] focus-visible:ring-2 focus-visible:ring-[#293022]/35"
           >
             <Plus className="w-4 h-4 stroke-[3]" />
             <span>Record Freelancer Payment</span>
@@ -202,7 +202,7 @@ export const FreelancerPaymentsView: React.FC<FreelancerPaymentsViewProps> = ({
                 filteredPayments.map((payment) => (
                   <tr key={payment.id} className="hover:bg-slate-50 transition">
                     <td className="p-3.5 font-extrabold text-slate-900 flex items-center gap-2">
-                      <div className="w-7 h-7 rounded-full bg-rose-50 text-[#373B35] font-bold text-xs flex items-center justify-center">
+                      <div className="w-7 h-7 rounded-full bg-rose-50 text-[#1C2018] font-bold text-xs flex items-center justify-center">
                         {payment.freelancerName[0]}
                       </div>
                       <span>{payment.freelancerName}</span>
@@ -211,7 +211,7 @@ export const FreelancerPaymentsView: React.FC<FreelancerPaymentsViewProps> = ({
                     <td className="p-3.5 font-bold text-slate-800">{payment.projectName || 'General Advance'}</td>
 
                     <td className="p-3.5">
-                      <span className="px-2 py-0.5 bg-rose-50 text-[#30342E] text-[10px] font-black rounded uppercase">
+                      <span className="px-2 py-0.5 bg-rose-50 text-[#191C15] text-[10px] font-black rounded uppercase">
                         {(payment.paymentType || 'Advance').replace('_', ' ')}
                       </span>
                     </td>
@@ -235,7 +235,7 @@ export const FreelancerPaymentsView: React.FC<FreelancerPaymentsViewProps> = ({
                           href={payment.receiptUrl}
                           target="_blank"
                           rel="noreferrer"
-                          className="p-1.5 text-[#464B43] hover:bg-rose-50 rounded inline-block"
+                          className="p-1.5 text-[#24291E] hover:bg-rose-50 rounded inline-block"
                           title="View Receipt Slip"
                         >
                           <ExternalLink className="w-4 h-4" />

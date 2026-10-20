@@ -10,7 +10,7 @@ import { getFreelancerProfileCompletion } from '../profileCompletion';
 import { PortalCard, PortalState } from './FreelancerPortalShell';
 import { BRAND } from '@/config/brand';
 
-const btn = 'inline-flex min-h-11 items-center justify-center rounded-xl bg-[#4F554C] px-4 py-2 text-sm font-black text-white transition hover:bg-[#42473F] disabled:opacity-60';
+const btn = 'inline-flex min-h-11 items-center justify-center rounded-xl bg-[#292F22] px-4 py-2 text-sm font-black text-white transition hover:bg-[#22271C] disabled:opacity-60';
 const muted = 'text-sm font-semibold leading-6 text-[#686164]';
 
 function usePortalData<T>(load: () => Promise<T>) {
@@ -41,7 +41,7 @@ function PageChrome({ title, kicker, children }: { title: string; kicker?: strin
   return (
     <div className="space-y-5">
       <div>
-        {kicker ? <p className="text-xs font-extrabold uppercase tracking-[.16em] text-[#4F554C]">{kicker}</p> : null}
+        {kicker ? <p className="text-xs font-extrabold uppercase tracking-[.16em] text-[#292F22]">{kicker}</p> : null}
         <h1 className="text-2xl font-black sm:text-3xl">{title}</h1>
       </div>
       {children}
@@ -50,7 +50,7 @@ function PageChrome({ title, kicker, children }: { title: string; kicker?: strin
 }
 
 function LoadingState() {
-  return <PortalState title="Loading portal" text="Fetching the latest operational records." action={<Loader2 className="mx-auto size-5 animate-spin text-[#4F554C]" />} />;
+  return <PortalState title="Loading portal" text="Fetching the latest operational records." action={<Loader2 className="mx-auto size-5 animate-spin text-[#292F22]" />} />;
 }
 
 function ErrorState({ text, retry }: { text: string; retry: () => void }) {
@@ -70,7 +70,7 @@ function fmtTime(value?: string | null) {
 }
 
 function Pill({ children }: { children: React.ReactNode }) {
-  return <span className="inline-flex rounded-full bg-[#F0EDE9] px-2.5 py-1 text-xs font-black text-[#31342F]">{children}</span>;
+  return <span className="inline-flex rounded-full bg-[#F0EDE9] px-2.5 py-1 text-xs font-black text-[#191D15]">{children}</span>;
 }
 
 function ShootCard({ shoot }: { shoot: PortalShootSummary }) {
@@ -78,7 +78,7 @@ function ShootCard({ shoot }: { shoot: PortalShootSummary }) {
     <PortalCard>
       <div className="flex flex-wrap items-start justify-between gap-3">
         <div>
-          <Link href={`/freelancer/shoots/${shoot.id}`} className="font-black text-[#302C2E] hover:text-[#4F554C]">{shoot.title}</Link>
+          <Link href={`/freelancer/shoots/${shoot.id}`} className="font-black text-[#302C2E] hover:text-[#292F22]">{shoot.title}</Link>
           <p className={muted}>{shoot.project?.name ?? 'Project'} · {fmtDate(shoot.shootDate)}</p>
         </div>
         <Pill>{shoot.assignment?.role?.replaceAll('_', ' ') ?? shoot.status}</Pill>
@@ -113,8 +113,8 @@ function TaskCard({ task, onUpdated }: { task: PortalTaskSummary; onUpdated?: (t
         <span>Due: {fmtDate(task.dueDate)}</span>
       </div>
       <div className="mt-4 flex flex-wrap gap-2">
-        <button disabled={saving} onClick={() => update('IN_PROGRESS')} className="rounded-xl border border-[#DFD9D2] bg-white px-3 py-2 text-xs font-black text-[#31342F] disabled:opacity-60">Start</button>
-        <button disabled={saving} onClick={() => update('IN_REVIEW')} className="rounded-xl border border-[#DFD9D2] bg-white px-3 py-2 text-xs font-black text-[#31342F] disabled:opacity-60">Review</button>
+        <button disabled={saving} onClick={() => update('IN_PROGRESS')} className="rounded-xl border border-[#DFD9D2] bg-white px-3 py-2 text-xs font-black text-[#191D15] disabled:opacity-60">Start</button>
+        <button disabled={saving} onClick={() => update('IN_REVIEW')} className="rounded-xl border border-[#DFD9D2] bg-white px-3 py-2 text-xs font-black text-[#191D15] disabled:opacity-60">Review</button>
         <button disabled={saving} onClick={() => update('COMPLETED')} className="rounded-xl bg-[#527A68] px-3 py-2 text-xs font-black text-white disabled:opacity-60">Done</button>
       </div>
     </PortalCard>
@@ -136,20 +136,20 @@ export function OperationalDashboardPage() {
       </div>
       <div className="grid gap-4 lg:grid-cols-2">
         <PortalCard>
-          <div className="mb-3 flex items-center justify-between"><h2 className="font-black">Today's work</h2><CalendarDays className="size-4 text-[#4F554C]" /></div>
+          <div className="mb-3 flex items-center justify-between"><h2 className="font-black">Today's work</h2><CalendarDays className="size-4 text-[#292F22]" /></div>
           {data.todaysWork.shoots.length || data.todaysWork.tasks.length ? <div className="space-y-3">{data.todaysWork.shoots.map((shoot) => <ShootCard key={shoot.id} shoot={shoot} />)}{data.todaysWork.tasks.map((task) => <p key={task.id} className={muted}>{task.title}</p>)}</div> : <p className={muted}>No shoots or tasks scheduled for today.</p>}
         </PortalCard>
         <PortalCard>
-          <div className="mb-3 flex items-center justify-between"><h2 className="font-black">Notifications</h2><Bell className="size-4 text-[#4F554C]" /></div>
+          <div className="mb-3 flex items-center justify-between"><h2 className="font-black">Notifications</h2><Bell className="size-4 text-[#292F22]" /></div>
           {data.notifications.length ? <div className="space-y-3">{data.notifications.map((item) => <p key={item.id} className={muted}><span className="font-black text-[#302C2E]">{item.title}</span><br />{item.message}</p>)}</div> : <p className={muted}>No portal notifications yet.</p>}
         </PortalCard>
       </div>
       <section className="space-y-3">
-        <div className="flex items-center justify-between"><h2 className="font-black">Upcoming shoots</h2><Link className="text-sm font-black text-[#4F554C]" href="/freelancer/shoots">View all</Link></div>
+        <div className="flex items-center justify-between"><h2 className="font-black">Upcoming shoots</h2><Link className="text-sm font-black text-[#292F22]" href="/freelancer/shoots">View all</Link></div>
         {data.upcomingShoots.length ? data.upcomingShoots.map((shoot) => <ShootCard key={shoot.id} shoot={shoot} />) : <EmptyState title="No upcoming shoots" text="Assigned shoots will appear here after the studio schedules you." />}
       </section>
       <section className="space-y-3">
-        <div className="flex items-center justify-between"><h2 className="font-black">Open tasks</h2><Link className="text-sm font-black text-[#4F554C]" href="/freelancer/tasks">View all</Link></div>
+        <div className="flex items-center justify-between"><h2 className="font-black">Open tasks</h2><Link className="text-sm font-black text-[#292F22]" href="/freelancer/tasks">View all</Link></div>
         {data.tasks.length ? data.tasks.map((task) => <TaskCard key={task.id} task={task} />) : <EmptyState title="No open tasks" text="Operational tasks linked to your assigned work will appear here." />}
       </section>
     </PageChrome>
@@ -160,7 +160,7 @@ export function ProjectsPage() {
   const { data, loading, error, reload } = usePortalData<PortalList<PortalProjectSummary & { shoots?: Array<{ id: string; title: string; shootDate: string; status: string }> }>>(() => freelancerPortalApi.projects('?limit=20'));
   if (loading) return <LoadingState />;
   if (error || !data) return <ErrorState text={error || 'No project data available.'} retry={reload} />;
-  return <PageChrome title="My projects">{data.items.length ? data.items.map((project) => <PortalCard key={project.id}><Link href={`/freelancer/projects/${project.id}`} className="font-black hover:text-[#4F554C]">{project.name}</Link><p className={muted}>{project.type} · {fmtDate(project.weddingDate)} · {project.venueCity || 'City pending'}</p><div className="mt-3 flex flex-wrap gap-2"><Pill>{project.status}</Pill><Pill>{project.shoots?.length ?? 0} assigned shoots</Pill></div></PortalCard>) : <EmptyState title="No projects yet" text="Projects appear only when you are connected or assigned to operational work." />}</PageChrome>;
+  return <PageChrome title="My projects">{data.items.length ? data.items.map((project) => <PortalCard key={project.id}><Link href={`/freelancer/projects/${project.id}`} className="font-black hover:text-[#292F22]">{project.name}</Link><p className={muted}>{project.type} · {fmtDate(project.weddingDate)} · {project.venueCity || 'City pending'}</p><div className="mt-3 flex flex-wrap gap-2"><Pill>{project.status}</Pill><Pill>{project.shoots?.length ?? 0} assigned shoots</Pill></div></PortalCard>) : <EmptyState title="No projects yet" text="Projects appear only when you are connected or assigned to operational work." />}</PageChrome>;
 }
 
 export function ProjectDetailPage({ projectId }: { projectId: string }) {
@@ -176,7 +176,7 @@ export function ShootsPage() {
   useEffect(() => { void reload(); }, [view]);
   if (loading && !data) return <LoadingState />;
   if (error || !data) return <ErrorState text={error || 'No shoot data available.'} retry={reload} />;
-  return <PageChrome title="My shoots"><div className="flex flex-wrap gap-2">{['upcoming', 'today', 'completed', 'all'].map((item) => <button key={item} onClick={() => setView(item)} className={`rounded-xl px-3 py-2 text-xs font-black ${view === item ? 'bg-[#4F554C] text-white' : 'border border-[#DFD9D2] bg-white text-[#31342F]'}`}>{item}</button>)}</div>{data.items.length ? data.items.map((shoot) => <ShootCard key={shoot.id} shoot={shoot} />) : <EmptyState title="No shoots" text="Only shoots assigned to you through ShootAssignment are shown here." />}</PageChrome>;
+  return <PageChrome title="My shoots"><div className="flex flex-wrap gap-2">{['upcoming', 'today', 'completed', 'all'].map((item) => <button key={item} onClick={() => setView(item)} className={`rounded-xl px-3 py-2 text-xs font-black ${view === item ? 'bg-[#292F22] text-white' : 'border border-[#DFD9D2] bg-white text-[#191D15]'}`}>{item}</button>)}</div>{data.items.length ? data.items.map((shoot) => <ShootCard key={shoot.id} shoot={shoot} />) : <EmptyState title="No shoots" text="Only shoots assigned to you through ShootAssignment are shown here." />}</PageChrome>;
 }
 
 export function ShootDetailPage({ shootId }: { shootId: string }) {
@@ -205,7 +205,7 @@ export function NotificationsPage() {
   const { data, loading, error, reload } = usePortalData<PortalList<PortalNotification>>(() => freelancerPortalApi.notifications('?limit=30'));
   if (loading) return <LoadingState />;
   if (error || !data) return <ErrorState text={error || 'No notifications available.'} retry={reload} />;
-  return <PageChrome title="Notifications">{data.items.length ? data.items.map((item) => <PortalCard key={item.id}><div className="flex items-start gap-3"><span className="grid size-10 shrink-0 place-items-center rounded-xl bg-[#4F554C]/10 text-[#4F554C]">{item.isRead ? <CheckCircle2 className="size-4" /> : <Bell className="size-4" />}</span><div><p className="font-black">{item.title}</p><p className={muted}>{item.message}</p><p className="mt-1 text-xs font-bold text-[#686164]">{fmtDate(item.createdAt)}</p></div></div></PortalCard>) : <EmptyState title="No notifications" text="Freelancer-relevant notifications will appear here when the CRM creates them for your linked identity." />}</PageChrome>;
+  return <PageChrome title="Notifications">{data.items.length ? data.items.map((item) => <PortalCard key={item.id}><div className="flex items-start gap-3"><span className="grid size-10 shrink-0 place-items-center rounded-xl bg-[#292F22]/10 text-[#292F22]">{item.isRead ? <CheckCircle2 className="size-4" /> : <Bell className="size-4" />}</span><div><p className="font-black">{item.title}</p><p className={muted}>{item.message}</p><p className="mt-1 text-xs font-bold text-[#686164]">{fmtDate(item.createdAt)}</p></div></div></PortalCard>) : <EmptyState title="No notifications" text="Freelancer-relevant notifications will appear here when the CRM creates them for your linked identity." />}</PageChrome>;
 }
 
 export function VendorSearchPage() {
@@ -228,7 +228,7 @@ export function VendorSearchPage() {
 
   return (
     <div className="space-y-6">
-      <section className="overflow-hidden rounded-2xl bg-linear-to-r from-[#1F211E] to-[#272A26] p-6 text-white shadow-sm">
+      <section className="overflow-hidden rounded-2xl bg-linear-to-r from-[#10120D] to-[#141711] p-6 text-white shadow-sm">
         <p className="text-xs font-black uppercase tracking-[.14em] text-[#B6E25D]">{BRAND.name}</p>
         <h1 className="mt-3 text-4xl font-black tracking-tight">Find Vendor</h1>
         <p className="mt-2 max-w-2xl text-base font-medium leading-6 text-white/65">Search vendors from your freelancer network.</p>
@@ -237,9 +237,9 @@ export function VendorSearchPage() {
       <PortalCard>
         <form onSubmit={submit} className="grid gap-3 lg:grid-cols-[1fr_220px_220px_auto]">
           <label>
-            <span className="text-xs font-black uppercase tracking-[.14em] text-[#373B35]">Search</span>
-            <span className="mt-2 flex min-h-12 items-center gap-2 rounded-xl border border-[#DFD9D2] bg-white px-3 focus-within:border-[#4F554C]">
-              <Search className="size-4 shrink-0 text-[#4F554C]" />
+            <span className="text-xs font-black uppercase tracking-[.14em] text-[#1C2018]">Search</span>
+            <span className="mt-2 flex min-h-12 items-center gap-2 rounded-xl border border-[#DFD9D2] bg-white px-3 focus-within:border-[#292F22]">
+              <Search className="size-4 shrink-0 text-[#292F22]" />
               <input
                 value={query}
                 onChange={(event) => setQuery(event.target.value)}
@@ -249,9 +249,9 @@ export function VendorSearchPage() {
             </span>
           </label>
           <label>
-            <span className="text-xs font-black uppercase tracking-[.14em] text-[#373B35]">Location</span>
-            <span className="mt-2 flex min-h-12 items-center gap-2 rounded-xl border border-[#DFD9D2] bg-white px-3 focus-within:border-[#4F554C]">
-              <MapPin className="size-4 shrink-0 text-[#4F554C]" />
+            <span className="text-xs font-black uppercase tracking-[.14em] text-[#1C2018]">Location</span>
+            <span className="mt-2 flex min-h-12 items-center gap-2 rounded-xl border border-[#DFD9D2] bg-white px-3 focus-within:border-[#292F22]">
+              <MapPin className="size-4 shrink-0 text-[#292F22]" />
               <input
                 value={location}
                 onChange={(event) => setLocation(event.target.value)}
@@ -261,9 +261,9 @@ export function VendorSearchPage() {
             </span>
           </label>
           <label>
-            <span className="text-xs font-black uppercase tracking-[.14em] text-[#373B35]">Category</span>
-            <span className="mt-2 flex min-h-12 items-center gap-2 rounded-xl border border-[#DFD9D2] bg-white px-3 focus-within:border-[#4F554C]">
-              <SlidersHorizontal className="size-4 shrink-0 text-[#4F554C]" />
+            <span className="text-xs font-black uppercase tracking-[.14em] text-[#1C2018]">Category</span>
+            <span className="mt-2 flex min-h-12 items-center gap-2 rounded-xl border border-[#DFD9D2] bg-white px-3 focus-within:border-[#292F22]">
+              <SlidersHorizontal className="size-4 shrink-0 text-[#292F22]" />
               <select
                 value={category}
                 onChange={(event) => setCategory(event.target.value)}
@@ -281,7 +281,7 @@ export function VendorSearchPage() {
           </label>
           <div className="flex items-end gap-2">
             <button type="submit" className={`${btn} w-full lg:w-auto`}><Search className="mr-2 size-4" />Search</button>
-            {(query || location || category !== 'all' || searched) ? <button type="button" onClick={reset} className="min-h-11 rounded-xl border border-[#DFD9D2] bg-white px-4 text-sm font-black text-[#31342F]">Clear</button> : null}
+            {(query || location || category !== 'all' || searched) ? <button type="button" onClick={reset} className="min-h-11 rounded-xl border border-[#DFD9D2] bg-white px-4 text-sm font-black text-[#191D15]">Clear</button> : null}
           </div>
         </form>
       </PortalCard>

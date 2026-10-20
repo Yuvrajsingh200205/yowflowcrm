@@ -87,7 +87,7 @@ export const ClientRequestsSection: React.FC<ClientRequestsSectionProps> = ({
 
         <button
           onClick={() => setShowCreateModal(true)}
-          className="px-5 py-3 rounded-xl bg-[#373B35] hover:bg-[#464B43] text-white font-medium text-xs sm:text-sm flex items-center justify-center gap-2 shadow-md transition-all hover:scale-[1.02] flex-shrink-0"
+          className="px-5 py-3 rounded-xl bg-[#1C2018] hover:bg-[#24291E] text-white font-medium text-xs sm:text-sm flex items-center justify-center gap-2 shadow-md transition-all hover:scale-[1.02] flex-shrink-0"
         >
           <Plus className="w-4 h-4" />
           Submit New Request
@@ -265,7 +265,7 @@ export const ClientRequestsSection: React.FC<ClientRequestsSectionProps> = ({
                 </button>
                 <button
                   type="submit"
-                  className="px-5 py-2.5 bg-[#373B35] hover:bg-[#464B43] text-white text-xs font-semibold rounded-xl shadow-md"
+                  className="px-5 py-2.5 bg-[#1C2018] hover:bg-[#24291E] text-white text-xs font-semibold rounded-xl shadow-md"
                 >
                   Submit Request
                 </button>

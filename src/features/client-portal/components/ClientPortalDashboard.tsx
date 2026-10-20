@@ -211,7 +211,7 @@ export const ClientPortalDashboard: React.FC<ClientPortalDashboardProps> = ({
     <div className="min-h-screen bg-[#fffdfb] text-slate-900 flex flex-col font-sans selection:bg-amber-100 selection:text-amber-900">
       {/* Top Luxury Client Navbar */}
       <header className="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-[#e2d9d3] shadow-xs">
-        <div className="h-1 bg-[linear-gradient(90deg,#CCEB8E_0%,#464B43_48%,#373B35_100%)]" />
+        <div className="h-1 bg-[linear-gradient(90deg,#CCEB8E_0%,#24291E_48%,#1C2018_100%)]" />
         <div className="mx-auto flex w-full max-w-[1800px] items-center justify-between gap-3 px-3 sm:px-5 lg:px-6 xl:px-10 py-3 sm:py-3.5">
         <div className="flex min-w-0 items-center gap-2 sm:gap-6">
           <button 
@@ -222,7 +222,7 @@ export const ClientPortalDashboard: React.FC<ClientPortalDashboardProps> = ({
           </button>
 
           <div className="flex min-w-0 items-center gap-2 cursor-pointer" onClick={() => setActiveTab('home')}>
-            <div className="w-8 h-8 shrink-0 rounded-full bg-[linear-gradient(145deg,#464B43,#373B35)] flex items-center justify-center text-white font-serif font-bold text-sm shadow-sm">
+            <div className="w-8 h-8 shrink-0 rounded-full bg-[linear-gradient(145deg,#24291E,#1C2018)] flex items-center justify-center text-white font-serif font-bold text-sm shadow-sm">
               W
             </div>
             <div className="min-w-0">
@@ -325,7 +325,7 @@ export const ClientPortalDashboard: React.FC<ClientPortalDashboardProps> = ({
                   }}
                   className={`w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl text-xs font-medium transition-all ${
                     isActive 
-                      ? 'bg-[#373B35] text-white font-semibold shadow-xs' 
+                      ? 'bg-[#1C2018] text-white font-semibold shadow-xs' 
                       : item.highlight 
                         ? 'text-amber-800 hover:bg-amber-50/80 font-semibold' 
                         : 'text-slate-600 hover:bg-slate-100 hover:text-slate-900'
@@ -346,7 +346,7 @@ export const ClientPortalDashboard: React.FC<ClientPortalDashboardProps> = ({
           </nav>
 
           {/* Quick Relationship Manager Card */}
-          <div className="bg-gradient-to-br from-[#373B35] to-[#252824] rounded-2xl p-4 text-white space-y-3 shadow-sm border border-[#464B43]/50">
+          <div className="bg-gradient-to-br from-[#1C2018] to-[#131610] rounded-2xl p-4 text-white space-y-3 shadow-sm border border-[#24291E]/50">
             <div className="flex items-center gap-2.5">
               <div className="w-8 h-8 shrink-0 rounded-full bg-amber-500/20 border border-amber-500/40 flex items-center justify-center text-amber-300 text-xs font-bold">
                 {(studio?.name || 'Studio').slice(0, 2).toUpperCase()}
@@ -393,7 +393,7 @@ export const ClientPortalDashboard: React.FC<ClientPortalDashboardProps> = ({
                         setIsMobileMenuOpen(false);
                       }}
                       className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-xs font-medium ${
-                        activeTab === item.id ? 'bg-[#373B35] text-white font-semibold' : 'text-slate-700 hover:bg-slate-100'
+                        activeTab === item.id ? 'bg-[#1C2018] text-white font-semibold' : 'text-slate-700 hover:bg-slate-100'
                       }`}
                     >
                       <item.icon className="w-4 h-4" />
@@ -422,14 +422,14 @@ export const ClientPortalDashboard: React.FC<ClientPortalDashboardProps> = ({
           {activeTab === 'home' && (
             <div className="space-y-8 animate-in fade-in duration-300">
               {/* Cinematic Hero Card */}
-              <div className="relative rounded-3xl overflow-hidden shadow-xl text-white bg-[#181917] min-h-[360px] flex flex-col justify-end p-6 sm:p-10 border border-[#252824]">
+              <div className="relative rounded-3xl overflow-hidden shadow-xl text-white bg-[#0C0E0A] min-h-[360px] flex flex-col justify-end p-6 sm:p-10 border border-[#131610]">
                 <img 
                   src={currentClient.coverPhotoUrl} 
                   alt="Wedding Cover" 
                   referrerPolicy="no-referrer"
                   className="absolute inset-0 w-full h-full object-cover opacity-60 mix-blend-overlay scale-105 transition-transform duration-1000"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#181917] via-[#181917]/40 to-transparent" />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#0C0E0A] via-[#0C0E0A]/40 to-transparent" />
 
                 <div className="relative z-10 space-y-3 max-w-2xl">
                   <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-500/20 text-amber-300 text-xs font-medium border border-amber-500/30">
@@ -599,17 +599,17 @@ export const ClientPortalDashboard: React.FC<ClientPortalDashboardProps> = ({
                       onClick={() => handleSelectEventFolder(event.id)}
                       className="group bg-white rounded-2xl overflow-hidden border border-[#e2d9d3] shadow-xs hover:shadow-md transition-all cursor-pointer space-y-3"
                     >
-                      <div className="aspect-[16/10] w-full overflow-hidden bg-[#373B35] relative">
+                      <div className="aspect-[16/10] w-full overflow-hidden bg-[#1C2018] relative">
                         <img 
                           src={event.coverImage} 
                           alt={event.name} 
                           referrerPolicy="no-referrer"
                           className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                         />
-                        <span className="absolute top-3 left-3 px-2.5 py-1 rounded-full bg-[#181917]/80 backdrop-blur text-white text-[11px] font-medium border border-white/20">
+                        <span className="absolute top-3 left-3 px-2.5 py-1 rounded-full bg-[#0C0E0A]/80 backdrop-blur text-white text-[11px] font-medium border border-white/20">
                           {event.status}
                         </span>
-                        <span className="absolute bottom-3 right-3 px-2.5 py-1 rounded-full bg-[#181917]/80 backdrop-blur text-amber-300 text-[11px] font-medium">
+                        <span className="absolute bottom-3 right-3 px-2.5 py-1 rounded-full bg-[#0C0E0A]/80 backdrop-blur text-amber-300 text-[11px] font-medium">
                           {event.photosCount} Photos • {event.videosCount} Films
                         </span>
                       </div>
@@ -652,7 +652,7 @@ export const ClientPortalDashboard: React.FC<ClientPortalDashboardProps> = ({
                       setSelectedSubFolderFilter(null);
                     }}
                     className={`px-3.5 py-1.5 rounded-full text-xs font-medium transition-colors ${
-                      selectedEventFilter === null ? 'bg-[#373B35] text-white' : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
+                      selectedEventFilter === null ? 'bg-[#1C2018] text-white' : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
                     }`}
                   >
                     All Events ({visibleMedia.length})
@@ -712,7 +712,7 @@ export const ClientPortalDashboard: React.FC<ClientPortalDashboardProps> = ({
                         onClick={() => setSelectedSubFolderFilter(null)}
                         className={`p-3 rounded-xl border text-left transition-all flex flex-col justify-between ${
                           selectedSubFolderFilter === null
-                            ? 'bg-[#373B35] text-white border-[#373B35] shadow-xs'
+                            ? 'bg-[#1C2018] text-white border-[#1C2018] shadow-xs'
                             : 'bg-white text-slate-800 border-slate-200 hover:border-amber-400'
                         }`}
                       >
@@ -776,7 +776,7 @@ export const ClientPortalDashboard: React.FC<ClientPortalDashboardProps> = ({
                     className="group relative rounded-2xl overflow-hidden bg-slate-100 border border-[#e2d9d3] shadow-xs hover:shadow-md transition-all cursor-pointer"
                     onClick={() => openViewerForItems(arr, idx)}
                   >
-                    <div className="aspect-[4/3] w-full overflow-hidden bg-[#373B35] relative">
+                    <div className="aspect-[4/3] w-full overflow-hidden bg-[#1C2018] relative">
                       <img 
                         src={item.thumbnailUrl} 
                         alt={item.title} 
@@ -785,7 +785,7 @@ export const ClientPortalDashboard: React.FC<ClientPortalDashboardProps> = ({
                       />
                       {item.mediaType === 'video' && (
                         <div className="absolute inset-0 bg-black/30 flex items-center justify-center text-white">
-                          <div className="p-3 rounded-full bg-[#181917]/70 backdrop-blur">
+                          <div className="p-3 rounded-full bg-[#0C0E0A]/70 backdrop-blur">
                             <Play className="w-5 h-5 fill-current text-[#CCEB8E]" />
                           </div>
                         </div>
@@ -800,7 +800,7 @@ export const ClientPortalDashboard: React.FC<ClientPortalDashboardProps> = ({
                           handleToggleFavorite(item);
                         }}
                         className={`p-1.5 rounded-full backdrop-blur transition-all ${
-                          item.isFavorite ? 'bg-rose-500 text-white' : 'bg-[#181917]/60 text-slate-300 hover:text-white opacity-0 group-hover:opacity-100'
+                          item.isFavorite ? 'bg-rose-500 text-white' : 'bg-[#0C0E0A]/60 text-slate-300 hover:text-white opacity-0 group-hover:opacity-100'
                         }`}
                       >
                         <Heart className={`w-3.5 h-3.5 ${item.isFavorite ? 'fill-current' : ''}`} />
@@ -812,7 +812,7 @@ export const ClientPortalDashboard: React.FC<ClientPortalDashboardProps> = ({
                           handleToggleAlbumSelect(item);
                         }}
                         className={`p-1.5 rounded-full backdrop-blur transition-all ${
-                          item.isSelectedForAlbum ? 'bg-emerald-600 text-white' : 'bg-[#181917]/60 text-slate-300 hover:text-white opacity-0 group-hover:opacity-100'
+                          item.isSelectedForAlbum ? 'bg-emerald-600 text-white' : 'bg-[#0C0E0A]/60 text-slate-300 hover:text-white opacity-0 group-hover:opacity-100'
                         }`}
                         title="Add to Album"
                       >
@@ -906,7 +906,7 @@ export const ClientPortalDashboard: React.FC<ClientPortalDashboardProps> = ({
                         onClick={() => setSelectedSubFolderFilter(null)}
                         className={`p-3 rounded-xl border text-left transition-all flex flex-col justify-between ${
                           selectedSubFolderFilter === null
-                            ? 'bg-[#373B35] text-white border-[#373B35] shadow-xs'
+                            ? 'bg-[#1C2018] text-white border-[#1C2018] shadow-xs'
                             : 'bg-white text-slate-800 border-slate-200 hover:border-amber-400'
                         }`}
                       >
@@ -965,7 +965,7 @@ export const ClientPortalDashboard: React.FC<ClientPortalDashboardProps> = ({
                     className="group relative rounded-2xl overflow-hidden bg-slate-100 border border-[#e2d9d3] shadow-xs hover:shadow-md transition-all cursor-pointer"
                     onClick={() => openViewerForItems(arr, idx)}
                   >
-                    <div className="aspect-[4/3] w-full overflow-hidden bg-[#373B35]">
+                    <div className="aspect-[4/3] w-full overflow-hidden bg-[#1C2018]">
                       <img 
                         src={item.thumbnailUrl} 
                         alt={item.title} 
@@ -982,7 +982,7 @@ export const ClientPortalDashboard: React.FC<ClientPortalDashboardProps> = ({
                           handleToggleFavorite(item);
                         }}
                         className={`p-1.5 rounded-full backdrop-blur transition-all ${
-                          item.isFavorite ? 'bg-rose-500 text-white' : 'bg-[#181917]/60 text-slate-300 hover:text-white opacity-0 group-hover:opacity-100'
+                          item.isFavorite ? 'bg-rose-500 text-white' : 'bg-[#0C0E0A]/60 text-slate-300 hover:text-white opacity-0 group-hover:opacity-100'
                         }`}
                       >
                         <Heart className={`w-3.5 h-3.5 ${item.isFavorite ? 'fill-current' : ''}`} />
@@ -994,7 +994,7 @@ export const ClientPortalDashboard: React.FC<ClientPortalDashboardProps> = ({
                           handleToggleAlbumSelect(item);
                         }}
                         className={`p-1.5 rounded-full backdrop-blur transition-all ${
-                          item.isSelectedForAlbum ? 'bg-emerald-600 text-white' : 'bg-[#181917]/60 text-slate-300 hover:text-white opacity-0 group-hover:opacity-100'
+                          item.isSelectedForAlbum ? 'bg-emerald-600 text-white' : 'bg-[#0C0E0A]/60 text-slate-300 hover:text-white opacity-0 group-hover:opacity-100'
                         }`}
                         title="Add to Album"
                       >
@@ -1047,7 +1047,7 @@ export const ClientPortalDashboard: React.FC<ClientPortalDashboardProps> = ({
                     className="bg-white rounded-2xl overflow-hidden border border-[#e2d9d3] shadow-xs hover:shadow-md transition-all cursor-pointer space-y-3 group"
                     onClick={() => openViewerForItems(videosList, idx)}
                   >
-                    <div className="aspect-video w-full overflow-hidden bg-[#181917] relative">
+                    <div className="aspect-video w-full overflow-hidden bg-[#0C0E0A] relative">
                       <img 
                         src={vid.thumbnailUrl} 
                         alt={vid.title} 
@@ -1059,7 +1059,7 @@ export const ClientPortalDashboard: React.FC<ClientPortalDashboardProps> = ({
                           <Play className="w-6 h-6 fill-current" />
                         </div>
                       </div>
-                      <span className="absolute bottom-3 right-3 px-2 py-1 rounded bg-[#181917]/80 text-white font-mono text-xs">
+                      <span className="absolute bottom-3 right-3 px-2 py-1 rounded bg-[#0C0E0A]/80 text-white font-mono text-xs">
                         {vid.duration || '03:45'}
                       </span>
                     </div>
@@ -1213,7 +1213,7 @@ export const ClientPortalDashboard: React.FC<ClientPortalDashboardProps> = ({
                 <button
                   onClick={() => setActiveTab('photos')}
                   disabled={totalPhotosCount === 0}
-                  className="px-6 py-3 bg-[#373B35] hover:bg-[#464B43] disabled:cursor-not-allowed disabled:opacity-50 text-white font-semibold text-xs rounded-xl shadow-md transition-all inline-flex items-center gap-2"
+                  className="px-6 py-3 bg-[#1C2018] hover:bg-[#24291E] disabled:cursor-not-allowed disabled:opacity-50 text-white font-semibold text-xs rounded-xl shadow-md transition-all inline-flex items-center gap-2"
                 >
                   <Download className="w-4 h-4" />
                   {totalPhotosCount === 0 ? 'Nothing to download yet' : 'Open your photographs'}
@@ -1259,7 +1259,7 @@ export const ClientPortalDashboard: React.FC<ClientPortalDashboardProps> = ({
                       studio?.email ? 'hover:bg-slate-100' : 'pointer-events-none opacity-60'
                     }`}
                   >
-                    <div className="p-3 bg-[#373B35] text-white rounded-xl shrink-0">
+                    <div className="p-3 bg-[#1C2018] text-white rounded-xl shrink-0">
                       <Mail className="w-5 h-5" />
                     </div>
                     <div className="min-w-0">

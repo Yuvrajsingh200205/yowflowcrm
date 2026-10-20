@@ -102,7 +102,7 @@ const AVATAR_STYLES = [
   'bg-emerald-100 text-emerald-700 border-emerald-200',
   'bg-purple-100 text-purple-700 border-purple-200',
   'bg-amber-100 text-amber-700 border-amber-200',
-  'bg-rose-100 text-[#373B35] border-rose-200',
+  'bg-rose-100 text-[#1C2018] border-rose-200',
 ];
 
 /** Stable avatar tint derived from the member id, so it never shifts on re-sort. */

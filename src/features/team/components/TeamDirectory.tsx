@@ -93,7 +93,7 @@ function PayStructure({ member }: { member: TeamMember }) {
 
   return (
     <div>
-      <p className="font-mono text-sm font-extrabold text-[#373B35]">{formatCurrency(amount)}</p>
+      <p className="font-mono text-sm font-extrabold text-[#1C2018]">{formatCurrency(amount)}</p>
       <p className="text-[10px] font-bold uppercase tracking-wide text-slate-500">
         {isMonthly ? 'Monthly salary' : 'Daily rate'}
       </p>
@@ -172,7 +172,7 @@ function MemberActions({
     <div className="flex w-full flex-wrap items-center gap-1.5 sm:w-auto sm:justify-end">
       {onOpenProfile && (
       <button type="button" onClick={() => onOpenProfile(member)} className={`${btn} border border-[#ded5cf] bg-white text-slate-700 hover:border-rose-300 hover:bg-[#FBFDF6]`}>
-        <Users className="size-3.5 text-[#464B43]" /> View
+        <Users className="size-3.5 text-[#24291E]" /> View
       </button>
       )}
       {onEditMember && (
@@ -186,7 +186,7 @@ function MemberActions({
         type="button"
         onClick={toggle}
         aria-expanded={open}
-        className={`${btn} bg-gradient-to-r from-[#464B43] to-[#373B35] text-white shadow-sm hover:opacity-90`}
+        className={`${btn} bg-gradient-to-r from-[#24291E] to-[#1C2018] text-white shadow-sm hover:opacity-90`}
       >
         More <ChevronDown className={`size-3.5 transition ${open ? 'rotate-180' : ''}`} />
       </button>
@@ -202,7 +202,7 @@ function MemberActions({
               key={label}
               type="button"
               onClick={() => { setOpen(false); run(); }}
-              className={`flex w-full cursor-pointer items-center gap-2.5 px-3 py-2.5 text-left text-xs font-bold transition ${tone || 'text-slate-700 hover:bg-rose-50 hover:text-[#373B35]'}`}
+              className={`flex w-full cursor-pointer items-center gap-2.5 px-3 py-2.5 text-left text-xs font-bold transition ${tone || 'text-slate-700 hover:bg-rose-50 hover:text-[#1C2018]'}`}
             >
               <Icon className="size-4 shrink-0" /> {label}
             </button>
@@ -343,12 +343,12 @@ export const TeamDirectory: React.FC<Props> = ({
 
       <div className={`${CARD} space-y-3 p-3 sm:p-4`}>
         <div className="flex items-center gap-2 text-sm font-extrabold text-slate-700">
-          <Filter className="size-4 text-[#464B43]" />
+          <Filter className="size-4 text-[#24291E]" />
           Search & Filter Team
         </div>
         <div className="flex flex-col gap-3 lg:flex-row lg:items-center">
           <div className="relative min-w-[220px] flex-1">
-            <Search className="absolute left-3 top-1/2 size-5 -translate-y-1/2 text-[#50574D]" />
+            <Search className="absolute left-3 top-1/2 size-5 -translate-y-1/2 text-[#293022]" />
             <input
               className={`${FIELD} pl-10`}
               placeholder="Search by name, employee ID, phone or role…"
@@ -372,13 +372,13 @@ export const TeamDirectory: React.FC<Props> = ({
             <button
               type="button"
               onClick={() => setShowFilters((v) => !v)}
-              className={`${BTN_GHOST} ${activeFilterCount ? 'border-rose-300 text-[#373B35] bg-rose-50' : ''}`}
+              className={`${BTN_GHOST} ${activeFilterCount ? 'border-rose-300 text-[#1C2018] bg-rose-50' : ''}`}
               aria-expanded={showFilters}
             >
               <Filter className="w-3.5 h-3.5" />
               Filters
               {activeFilterCount > 0 && (
-                <span className="ml-0.5 px-1.5 rounded-full bg-[#464B43] text-white text-[10px] font-black">{activeFilterCount}</span>
+                <span className="ml-0.5 px-1.5 rounded-full bg-[#24291E] text-white text-[10px] font-black">{activeFilterCount}</span>
               )}
               <ChevronDown className={`w-3.5 h-3.5 transition ${showFilters ? 'rotate-180' : ''}`} />
             </button>
@@ -540,8 +540,8 @@ export const TeamDirectory: React.FC<Props> = ({
                 >
                   <Avatar member={member} size="lg" />
                   <div className="min-w-0 flex-1">
-                    <h4 className="font-extrabold text-slate-900 text-sm truncate group-hover:text-[#464B43] transition">{member.name}</h4>
-                    <p className="text-xs font-bold text-[#464B43] truncate">{member.role}</p>
+                    <h4 className="font-extrabold text-slate-900 text-sm truncate group-hover:text-[#24291E] transition">{member.name}</h4>
+                    <p className="text-xs font-bold text-[#24291E] truncate">{member.role}</p>
                     <p className="text-[10px] font-mono font-bold text-slate-400">{getEmployeeCode(member)}</p>
                   </div>
                   <Badge className={statusBadge.className}>{statusBadge.label}</Badge>
@@ -599,7 +599,7 @@ export const TeamDirectory: React.FC<Props> = ({
           <div className="overflow-x-auto">
             <table className="w-full border-collapse text-left text-sm">
               <thead>
-                <tr className="border-b border-[#4A5047] bg-[#2C2F2A] text-xs font-extrabold uppercase tracking-wider text-[#EEEFED]">
+                <tr className="border-b border-[#262C20] bg-[#161A13] text-xs font-extrabold uppercase tracking-wider text-[#EEEFED]">
                   <th className="p-3.5">Member</th>
                   <th className="hidden p-3.5 xl:table-cell">Role / Department</th>
                   <th className="hidden p-3.5 2xl:table-cell">Employment</th>
@@ -622,8 +622,8 @@ export const TeamDirectory: React.FC<Props> = ({
                         <button type="button" onClick={() => onOpenProfile?.(member)} disabled={!onOpenProfile} className={`group flex items-center gap-2.5 text-left ${onOpenProfile ? 'cursor-pointer' : 'cursor-default'}`}>
                           <Avatar member={member} size="md" />
                           <div className="min-w-0">
-                            <p className="truncate font-extrabold text-slate-900 transition group-hover:text-[#464B43]">{member.name}</p>
-                            <p className="truncate text-[11px] font-semibold text-[#464B43] xl:hidden">{member.role}</p>
+                            <p className="truncate font-extrabold text-slate-900 transition group-hover:text-[#24291E]">{member.name}</p>
+                            <p className="truncate text-[11px] font-semibold text-[#24291E] xl:hidden">{member.role}</p>
                             <p className="font-mono text-[10px] font-bold text-slate-400">{getEmployeeCode(member)}</p>
                           </div>
                         </button>
@@ -633,7 +633,7 @@ export const TeamDirectory: React.FC<Props> = ({
                         <p className="text-[11px] font-semibold text-slate-500">{getMemberDepartment(member)}</p>
                       </td>
                       <td className="hidden p-3.5 2xl:table-cell">
-                        <Badge className="border-[#ded5cf] bg-[#f6f1ee] text-slate-700">{getEmploymentType(member)}</Badge>
+                        <Badge className="border-[#ded5cf] bg-[#F4F9EB] text-slate-700">{getEmploymentType(member)}</Badge>
                       </td>
                       {canViewContact && <td className="hidden p-3.5 2xl:table-cell">
                         <p className="font-mono text-xs text-slate-700">{phone || '—'}</p>

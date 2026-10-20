@@ -19,7 +19,7 @@ const heroRails = [
 
 export function HeroSection() {
   return (
-    <section className="ed-hero-scene ed-ink relative isolate min-h-[100svh] overflow-hidden bg-[#0F100E]">
+    <section className="ed-hero-scene ed-ink relative isolate min-h-[100svh] overflow-hidden bg-[#080906]">
       <Image
         src="/images/hero-aperture.svg"
         alt="Bride under a floral stone arch at sunset with wedding photographs, a camera and burgundy silk."
@@ -29,7 +29,7 @@ export function HeroSection() {
         className="absolute inset-0 -z-30 object-cover object-[54%_50%]"
       />
       <div className="absolute inset-0 -z-20 bg-[linear-gradient(90deg,rgba(13,14,13,0.76)_0%,rgba(10,21,19,0.36)_34%,rgba(10,21,19,0.05)_62%,rgba(10,21,19,0.24)_100%)]" />
-      <div className="absolute inset-x-0 bottom-0 -z-10 h-[27vh] bg-[linear-gradient(180deg,transparent_0%,rgba(13,14,13,0.72)_36%,rgba(14,15,13,0.98)_100%)]" />
+      <div className="absolute inset-x-0 bottom-0 -z-10 h-[27vh] bg-[linear-gradient(180deg,transparent_0%,rgba(13,14,13,0.72)_36%,rgba(7,8,6,0.98)_100%)]" />
 
       <div className="relative z-10 flex min-h-[100svh] flex-col px-[clamp(1.25rem,5vw,7.5rem)] pb-7 pt-[calc(var(--nav-h)+1.5rem)] lg:pb-8 lg:pt-[calc(var(--nav-h)+2.25rem)]">
         <div className="grid flex-1 items-center gap-10 lg:grid-cols-[minmax(31rem,0.52fr)_1fr]">
@@ -56,7 +56,7 @@ export function HeroSection() {
             <div className="mt-8 flex flex-wrap items-center gap-6">
               <Link
                 href="/contact"
-                className="inline-flex h-14 min-w-[16.5rem] items-center justify-center gap-4 rounded-full border border-[rgba(196,232,123,0.28)] bg-[linear-gradient(180deg,#91998D_0%,#596055_100%)] px-8 text-base font-bold text-white shadow-[0_18px_44px_rgba(83,90,79,0.42),inset_0_1px_0_rgba(255,255,255,0.2)] transition-transform hover:-translate-y-0.5"
+                className="inline-flex h-14 min-w-[16.5rem] items-center justify-center gap-4 rounded-full border border-[rgba(196,232,123,0.28)] bg-[linear-gradient(180deg,#91998D_0%,#2E3426_100%)] px-8 text-base font-bold text-white shadow-[0_18px_44px_rgba(43,49,35,0.42),inset_0_1px_0_rgba(255,255,255,0.2)] transition-transform hover:-translate-y-0.5"
               >
                 Get Started Today
                 <ArrowRight className="h-5 w-5" aria-hidden="true" />

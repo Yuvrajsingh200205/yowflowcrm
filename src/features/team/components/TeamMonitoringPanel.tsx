@@ -81,7 +81,7 @@ const MemberSoftwareManager: React.FC<MemberSoftwareManagerProps> = ({
         <label className="text-[11px] font-bold text-slate-800 flex items-center gap-1">
           Permitted Softwares ({permitted.length}):
         </label>
-        <span className="text-[10px] font-bold text-[#464B43] bg-rose-50 px-2 py-0.5 rounded border border-rose-100">
+        <span className="text-[10px] font-bold text-[#24291E] bg-rose-50 px-2 py-0.5 rounded border border-rose-100">
           Manual Tagging
         </span>
       </div>
@@ -92,13 +92,13 @@ const MemberSoftwareManager: React.FC<MemberSoftwareManagerProps> = ({
           {permitted.map((sw) => (
             <span
               key={sw}
-              className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-xs font-bold bg-rose-50 text-[#30342E] border border-rose-200 shadow-2xs"
+              className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-xs font-bold bg-rose-50 text-[#191C15] border border-rose-200 shadow-2xs"
             >
               <span className="truncate max-w-[150px]">{sw}</span>
               <button
                 type="button"
                 onClick={() => onRemoveSoftware(member, sw)}
-                className="w-4 h-4 rounded-full bg-rose-100 hover:bg-red-500 hover:text-white text-[#464B43] flex items-center justify-center transition"
+                className="w-4 h-4 rounded-full bg-rose-100 hover:bg-red-500 hover:text-white text-[#24291E] flex items-center justify-center transition"
                 title={`Remove ${sw}`}
               >
                 <X className="w-3 h-3" />
@@ -119,11 +119,11 @@ const MemberSoftwareManager: React.FC<MemberSoftwareManagerProps> = ({
           placeholder="Add software (e.g. Premiere Pro)..."
           value={customInput}
           onChange={(e) => setCustomInput(e.target.value)}
-          className="flex-1 px-2.5 py-1.5 bg-white border border-slate-300 rounded-lg text-xs font-medium text-slate-900 focus:ring-2 focus:ring-[#50574D] focus:outline-hidden placeholder:text-slate-400"
+          className="flex-1 px-2.5 py-1.5 bg-white border border-slate-300 rounded-lg text-xs font-medium text-slate-900 focus:ring-2 focus:ring-[#293022] focus:outline-hidden placeholder:text-slate-400"
         />
         <button
           type="submit"
-          className="px-3 py-1.5 rounded-lg bg-[#464B43] hover:bg-[#373B35] text-white font-bold text-xs flex items-center gap-1 transition shadow-2xs shrink-0"
+          className="px-3 py-1.5 rounded-lg bg-[#24291E] hover:bg-[#1C2018] text-white font-bold text-xs flex items-center gap-1 transition shadow-2xs shrink-0"
         >
           <Plus className="w-3.5 h-3.5" />
           <span>Add</span>
@@ -142,7 +142,7 @@ const MemberSoftwareManager: React.FC<MemberSoftwareManagerProps> = ({
               key={preset}
               type="button"
               onClick={() => onAddSoftware(member, preset)}
-              className="text-[10px] font-semibold bg-slate-100 hover:bg-rose-50 hover:text-[#373B35] hover:border-rose-300 text-slate-600 px-1.5 py-0.5 rounded-md border border-slate-200 transition"
+              className="text-[10px] font-semibold bg-slate-100 hover:bg-rose-50 hover:text-[#1C2018] hover:border-rose-300 text-slate-600 px-1.5 py-0.5 rounded-md border border-slate-200 transition"
             >
               + {preset}
             </button>
@@ -351,7 +351,7 @@ export const TeamMonitoringPanel: React.FC<TeamMonitoringPanelProps> = ({
                     setUnlockPin(e.target.value);
                     setUnlockError('');
                   }}
-                  className="w-full bg-slate-50 border border-slate-300 rounded-xl p-2.5 text-center font-mono font-bold text-sm text-slate-900 tracking-widest focus:bg-white focus:border-[#50574D] focus:ring-1 focus:ring-[#50574D]"
+                  className="w-full bg-slate-50 border border-slate-300 rounded-xl p-2.5 text-center font-mono font-bold text-sm text-slate-900 tracking-widest focus:bg-white focus:border-[#293022] focus:ring-1 focus:ring-[#293022]"
                   autoFocus
                 />
                 {unlockError && (
@@ -373,7 +373,7 @@ export const TeamMonitoringPanel: React.FC<TeamMonitoringPanelProps> = ({
                 </button>
                 <button
                   type="submit"
-                  className="w-1/2 py-2.5 rounded-xl bg-[#464B43] hover:bg-[#373B35] text-white font-bold text-xs uppercase tracking-wider shadow-sm flex items-center justify-center gap-1"
+                  className="w-1/2 py-2.5 rounded-xl bg-[#24291E] hover:bg-[#1C2018] text-white font-bold text-xs uppercase tracking-wider shadow-sm flex items-center justify-center gap-1"
                 >
                   <Unlock className="w-3.5 h-3.5" /> Re-Login
                 </button>
@@ -444,7 +444,7 @@ export const TeamMonitoringPanel: React.FC<TeamMonitoringPanelProps> = ({
       <>
         <div className="flex items-center justify-between bg-rose-50/90 border border-rose-200 px-4 py-2.5 rounded-2xl text-xs shadow-2xs">
           <div className="flex items-center gap-2">
-            <GripVertical className="w-5 h-5 text-[#464B43] flex-shrink-0 animate-pulse" />
+            <GripVertical className="w-5 h-5 text-[#24291E] flex-shrink-0 animate-pulse" />
             <div>
               <span className="font-extrabold text-slate-900">
                 Drag & drop to reorder cards
@@ -463,7 +463,7 @@ export const TeamMonitoringPanel: React.FC<TeamMonitoringPanelProps> = ({
               Cancel Pick
             </button>
           )}
-          <span className="text-[10px] font-black text-[#373B35] bg-rose-100 px-2.5 py-0.5 rounded-full uppercase tracking-wider">
+          <span className="text-[10px] font-black text-[#1C2018] bg-rose-100 px-2.5 py-0.5 rounded-full uppercase tracking-wider">
             Total {team.length} Cards
           </span>
         </div>
@@ -509,9 +509,9 @@ export const TeamMonitoringPanel: React.FC<TeamMonitoringPanelProps> = ({
                 }}
                 className={`bg-white rounded-2xl border transition-all shadow-sm overflow-hidden flex flex-col justify-between p-4 space-y-3 relative group cursor-grab active:cursor-grabbing ${
                   isDragging
-                    ? 'opacity-40 scale-[0.97] border-[#464B43] border-dashed bg-rose-50/50'
+                    ? 'opacity-40 scale-[0.97] border-[#24291E] border-dashed bg-rose-50/50'
                     : isDragOver
-                    ? 'border-2 border-[#464B43] bg-rose-50/70 ring-4 ring-rose-200 scale-[1.02] shadow-xl z-20'
+                    ? 'border-2 border-[#24291E] bg-rose-50/70 ring-4 ring-rose-200 scale-[1.02] shadow-xl z-20'
                     : isPicked
                     ? 'border-2 border-amber-500 bg-amber-50/60 ring-4 ring-amber-300 shadow-md'
                     : isLocked
@@ -524,9 +524,9 @@ export const TeamMonitoringPanel: React.FC<TeamMonitoringPanelProps> = ({
                 {/* Card Order Position Control Header */}
                 <div className="flex items-center justify-between bg-slate-50 border border-slate-200/90 px-3 py-1.5 rounded-xl text-xs font-bold text-slate-700">
                   <div className="flex items-center gap-2">
-                    <div className="flex items-center gap-1 cursor-grab active:cursor-grabbing text-slate-400 hover:text-[#464B43] transition" title="Drag to reorder card">
+                    <div className="flex items-center gap-1 cursor-grab active:cursor-grabbing text-slate-400 hover:text-[#24291E] transition" title="Drag to reorder card">
                       <GripVertical className="w-4 h-4" />
-                      <span className="font-mono text-[#373B35] font-extrabold text-[11px]">#{idx + 1}</span>
+                      <span className="font-mono text-[#1C2018] font-extrabold text-[11px]">#{idx + 1}</span>
                     </div>
                     {isPicked ? (
                       <span className="text-[10px] font-extrabold text-amber-700 bg-amber-100 px-2 py-0.5 rounded uppercase">Picked</span>
@@ -555,7 +555,7 @@ export const TeamMonitoringPanel: React.FC<TeamMonitoringPanelProps> = ({
                             handleReorderIndices(pickedMemberIdx, idx);
                             setPickedMemberIdx(null);
                           }}
-                          className="px-2.5 py-0.5 text-[10px] font-extrabold text-white bg-[#464B43] hover:bg-[#373B35] rounded border border-[#373B35] uppercase shadow-xs animate-bounce"
+                          className="px-2.5 py-0.5 text-[10px] font-extrabold text-white bg-[#24291E] hover:bg-[#1C2018] rounded border border-[#1C2018] uppercase shadow-xs animate-bounce"
                         >
                           Drop here
                         </button>
@@ -568,7 +568,7 @@ export const TeamMonitoringPanel: React.FC<TeamMonitoringPanelProps> = ({
                             e.stopPropagation();
                             setPickedMemberIdx(idx);
                           }}
-                          className="px-2 py-0.5 text-[10px] font-extrabold bg-rose-50 hover:bg-[#464B43] hover:text-white text-[#373B35] rounded border border-rose-200 uppercase transition"
+                          className="px-2 py-0.5 text-[10px] font-extrabold bg-rose-50 hover:bg-[#24291E] hover:text-white text-[#1C2018] rounded border border-rose-200 uppercase transition"
                           title="Pick this card to place elsewhere"
                         >
                           Pick
@@ -583,7 +583,7 @@ export const TeamMonitoringPanel: React.FC<TeamMonitoringPanelProps> = ({
                           className={`px-1.5 py-0.5 text-[10px] font-extrabold rounded border transition uppercase ${
                             idx === 0
                               ? 'opacity-30 cursor-not-allowed bg-slate-100 text-slate-400 border-slate-200'
-                              : 'bg-white hover:bg-[#464B43] hover:text-white text-slate-700 border-slate-300 cursor-pointer'
+                              : 'bg-white hover:bg-[#24291E] hover:text-white text-slate-700 border-slate-300 cursor-pointer'
                           }`}
                           title="Move to Top (Sabse Upar)"
                         >
@@ -599,7 +599,7 @@ export const TeamMonitoringPanel: React.FC<TeamMonitoringPanelProps> = ({
                           className={`p-1 rounded border transition ${
                             idx === 0
                               ? 'opacity-30 cursor-not-allowed bg-slate-100 text-slate-400 border-slate-200'
-                              : 'bg-white hover:bg-[#464B43] hover:text-white text-slate-700 border-slate-300 cursor-pointer shadow-2xs'
+                              : 'bg-white hover:bg-[#24291E] hover:text-white text-slate-700 border-slate-300 cursor-pointer shadow-2xs'
                           }`}
                           title="Move Left / Up"
                         >
@@ -615,7 +615,7 @@ export const TeamMonitoringPanel: React.FC<TeamMonitoringPanelProps> = ({
                           className={`p-1 rounded border transition ${
                             idx === team.length - 1
                               ? 'opacity-30 cursor-not-allowed bg-slate-100 text-slate-400 border-slate-200'
-                              : 'bg-white hover:bg-[#464B43] hover:text-white text-slate-700 border-slate-300 cursor-pointer shadow-2xs'
+                              : 'bg-white hover:bg-[#24291E] hover:text-white text-slate-700 border-slate-300 cursor-pointer shadow-2xs'
                           }`}
                           title="Move Right / Down"
                         >
@@ -637,11 +637,11 @@ export const TeamMonitoringPanel: React.FC<TeamMonitoringPanelProps> = ({
                     </div>
 
                     <div>
-                      <h3 className="font-extrabold text-slate-900 text-base leading-snug group-hover:text-[#464B43] transition flex items-center gap-1.5">
+                      <h3 className="font-extrabold text-slate-900 text-base leading-snug group-hover:text-[#24291E] transition flex items-center gap-1.5">
                         <span>{t.name}</span>
-                        <ExternalLink className="w-3.5 h-3.5 opacity-0 group-hover:opacity-100 text-[#464B43] transition" />
+                        <ExternalLink className="w-3.5 h-3.5 opacity-0 group-hover:opacity-100 text-[#24291E] transition" />
                       </h3>
-                      <p className="text-xs font-bold text-[#464B43] mt-0.5">
+                      <p className="text-xs font-bold text-[#24291E] mt-0.5">
                         {t.role}
                       </p>
                     </div>
@@ -656,7 +656,7 @@ export const TeamMonitoringPanel: React.FC<TeamMonitoringPanelProps> = ({
                         e.stopPropagation();
                         onEditMember(t);
                       }}
-                      className="px-2.5 py-1 rounded-xl bg-rose-50 hover:bg-[#464B43] hover:text-white text-[#373B35] font-extrabold text-[11px] flex items-center gap-1 border border-rose-200 transition shadow-2xs cursor-pointer"
+                      className="px-2.5 py-1 rounded-xl bg-rose-50 hover:bg-[#24291E] hover:text-white text-[#1C2018] font-extrabold text-[11px] flex items-center gap-1 border border-rose-200 transition shadow-2xs cursor-pointer"
                       title={`Edit ${t.name}'s Details & Salary`}
                     >
                       <Pencil className="w-3.5 h-3.5" />
@@ -751,11 +751,11 @@ export const TeamMonitoringPanel: React.FC<TeamMonitoringPanelProps> = ({
                     <div className="flex items-center justify-between">
                       <div>
                         <span className="text-slate-400 font-bold uppercase tracking-wider text-[9px] flex items-center gap-1">
-                          <Clock className="w-3 h-3 text-[#464B43]" /> SHIFT & SCHEDULE
+                          <Clock className="w-3 h-3 text-[#24291E]" /> SHIFT & SCHEDULE
                         </span>
                         <span className="text-[10px] font-bold text-slate-700">Duty Hours</span>
                       </div>
-                      <div className="flex items-center gap-1.5 font-mono text-[11px] font-bold bg-rose-50 border border-rose-200 text-[#21241F] px-2.5 py-1 rounded-lg">
+                      <div className="flex items-center gap-1.5 font-mono text-[11px] font-bold bg-rose-50 border border-rose-200 text-[#11130E] px-2.5 py-1 rounded-lg">
                         <span className="text-emerald-700">In: {t.inTime || '09:30 AM'}</span>
                         <span className="text-slate-300">|</span>
                         <span className="text-red-700">Out: {t.outTime || '07:30 PM'}</span>
@@ -778,7 +778,7 @@ export const TeamMonitoringPanel: React.FC<TeamMonitoringPanelProps> = ({
                       <span className="text-slate-400 font-bold uppercase tracking-wider text-[9px] block">
                         PAY STRUCTURE
                       </span>
-                      <span className="text-[10px] font-black uppercase text-[#373B35]">
+                      <span className="text-[10px] font-black uppercase text-[#1C2018]">
                         {t.payType === 'monthly' ? 'MONTHLY SALARY' : 'DAILY RATE'}
                       </span>
                     </div>
@@ -821,7 +821,7 @@ export const TeamMonitoringPanel: React.FC<TeamMonitoringPanelProps> = ({
                 <button
                   type="button"
                   onClick={() => onOpenMember(t)}
-                  className="w-full py-2.5 px-3 rounded-xl bg-[#464B43] hover:bg-[#373B35] text-white font-extrabold text-xs flex items-center justify-center gap-2 transition shadow-xs uppercase tracking-wider cursor-pointer"
+                  className="w-full py-2.5 px-3 rounded-xl bg-[#24291E] hover:bg-[#1C2018] text-white font-extrabold text-xs flex items-center justify-center gap-2 transition shadow-xs uppercase tracking-wider cursor-pointer"
                 >
                   <Sparkles className="w-4 h-4 text-[#dfeae7]" />
                   <span>View {t.name}'s Dashboard</span>
@@ -891,7 +891,7 @@ export const TeamMonitoringPanel: React.FC<TeamMonitoringPanelProps> = ({
               2-3 Permitted Softwares & Monthly Salary Guard System
             </h3>
           </div>
-          <span className="text-[11px] font-bold bg-[#151714] text-[#D9DCD8] border border-[#373B35] px-2.5 py-0.5 rounded-full">
+          <span className="text-[11px] font-bold bg-[#0B0C09] text-[#D9DCD8] border border-[#1C2018] px-2.5 py-0.5 rounded-full">
             2-3 Software Limit per Employee
           </span>
         </div>

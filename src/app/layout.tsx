@@ -2,7 +2,6 @@ import type { Metadata, Viewport } from 'next';
 import { AuthSessionProvider } from '@/components/auth/AuthSessionProvider';
 import './globals.css';
 import { displayFont, monoFont, sansFont } from '@/lib/fonts';
-import { themeInitScript } from '@/components/ui/Theme';
 import { ToastProvider } from '@/components/ui/Toast';
 import { TooltipProvider } from '@/components/ui/Tooltip';
 import { BRAND } from '@/config/brand';
@@ -22,10 +21,7 @@ export const viewport: Viewport = {
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="en" data-scroll-behavior="smooth" suppressHydrationWarning className={`${displayFont.variable} ${sansFont.variable} ${monoFont.variable}`}>
-      <head>
-        <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
-      </head>
-      <body>
+      <body data-theme="light">
         <TooltipProvider>
           <ToastProvider>
             <AuthSessionProvider>{children}</AuthSessionProvider>

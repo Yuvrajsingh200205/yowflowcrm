@@ -36,7 +36,7 @@ export const BRAND = {
   },
   colors: {
     /** Mirrors the CSS tokens in globals.css; used for meta theme-color and PDFs. */
-    primary: '#464B43',
+    primary: '#24291E',
     accent: '#ABDE44',
   },
 } as const;

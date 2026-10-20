@@ -9,18 +9,24 @@ import { Button } from './Button';
 type Mode = 'light' | 'dark' | 'system';
 const KEY = `${BRAND.cookiePrefix}-theme`;
 
-/** Inline script (render in <head>) that applies the stored theme before paint: no flash. */
-export const themeInitScript = `try{var m=localStorage.getItem('${KEY}');var d=m==='dark'||((!m||m==='system')&&matchMedia('(prefers-color-scheme: dark)').matches);document.documentElement.dataset.theme=d?'dark':'light'}catch(e){}`;
-
 function apply(mode: Mode) {
   const dark = mode === 'dark' || (mode === 'system' && matchMedia('(prefers-color-scheme: dark)').matches);
-  document.documentElement.dataset.theme = dark ? 'dark' : 'light';
+  document.body.dataset.theme = dark ? 'dark' : 'light';
 }
 
+/**
+ * Switches the theme for the current page by setting <body data-theme>. Screens
+ * that are not dark-ready simply never render this toggle, and it restores
+ * light on unmount so dark can never leak into the app shell.
+ */
 export function ThemeToggle() {
   const [mode, setMode] = React.useState<Mode>('system');
   React.useEffect(() => {
-    try { setMode((localStorage.getItem(KEY) as Mode) || 'system'); } catch { /* storage unavailable */ }
+    let stored: Mode = 'system';
+    try { stored = (localStorage.getItem(KEY) as Mode) || 'system'; } catch { /* storage unavailable */ }
+    setMode(stored);
+    apply(stored);
+    return () => { document.body.dataset.theme = 'light'; };
   }, []);
   React.useEffect(() => {
     if (mode !== 'system') return;

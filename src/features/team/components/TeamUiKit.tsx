@@ -46,23 +46,23 @@ export function RoleIcon({ role, className = 'size-3.5' }: { role?: string; clas
 
 export const CARD = 'rounded-2xl border border-[#e2d9d3] bg-white shadow-[0_8px_24px_rgba(48,44,46,.05)]';
 export const FIELD =
-  'w-full rounded-xl border border-[#ded5cf] bg-[#FBFDF6] px-3 py-2.5 text-sm font-semibold text-slate-900 outline-none transition placeholder:font-medium placeholder:text-slate-400 focus:border-[#50574D] focus:bg-white focus:ring-4 focus:ring-rose-100';
-export const LABEL = 'mb-1 block text-[10px] font-extrabold uppercase tracking-[.1em] text-[#373B35]';
+  'w-full rounded-xl border border-[#ded5cf] bg-[#FBFDF6] px-3 py-2.5 text-sm font-semibold text-slate-900 outline-none transition placeholder:font-medium placeholder:text-slate-400 focus:border-[#293022] focus:bg-white focus:ring-4 focus:ring-rose-100';
+export const LABEL = 'mb-1 block text-[10px] font-extrabold uppercase tracking-[.1em] text-[#1C2018]';
 
 export const BTN_PRIMARY =
-  'inline-flex cursor-pointer items-center justify-center gap-1.5 rounded-xl bg-gradient-to-r from-[#464B43] to-[#373B35] px-4 py-2.5 text-xs font-extrabold text-white shadow-[0_8px_20px_rgba(55,59,53,.25)] transition hover:-translate-y-0.5 hover:shadow-lg disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:translate-y-0';
+  'inline-flex cursor-pointer items-center justify-center gap-1.5 rounded-xl bg-gradient-to-r from-[#24291E] to-[#1C2018] px-4 py-2.5 text-xs font-extrabold text-white shadow-[0_8px_20px_rgba(28,32,24,.25)] transition hover:-translate-y-0.5 hover:shadow-lg disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:translate-y-0';
 export const BTN_GHOST =
   'inline-flex cursor-pointer items-center justify-center gap-1.5 rounded-xl border border-[#ded5cf] bg-white px-3 py-2 text-xs font-bold text-slate-700 transition hover:border-rose-300 hover:bg-[#FBFDF6] disabled:cursor-not-allowed disabled:opacity-50';
 export const BTN_DANGER =
   'inline-flex cursor-pointer items-center justify-center gap-1.5 rounded-xl border border-red-200 bg-red-50 px-3 py-2 text-xs font-bold text-red-700 transition hover:bg-red-100';
 export const BTN_CREAM =
-  'group relative inline-flex cursor-pointer items-center justify-center gap-2 overflow-hidden rounded-2xl border border-white/60 bg-gradient-to-r from-[#f9eee7] to-[#edcfc3] px-4 py-2.5 text-sm font-extrabold text-[#373B35] shadow-[0_8px_20px_rgba(10,20,17,.18)] transition hover:-translate-y-0.5 hover:shadow-xl';
+  'group relative inline-flex cursor-pointer items-center justify-center gap-2 overflow-hidden rounded-2xl border border-white/60 bg-gradient-to-r from-[#F3F9E7] to-[#DFEDC3] px-4 py-2.5 text-sm font-extrabold text-[#1C2018] shadow-[0_8px_20px_rgba(10,20,17,.18)] transition hover:-translate-y-0.5 hover:shadow-xl';
 
-export const TOGGLE_WRAP = 'flex items-center rounded-xl border border-[#e2d9d3] bg-[#f6f1ee] p-1';
-export const TOGGLE_ACTIVE = 'border border-[#DBF1AE]/80 bg-white text-[#373B35] shadow-sm';
-export const TOGGLE_IDLE = 'border border-transparent text-slate-600 hover:text-[#373B35]';
-export const ACCENT = 'text-[#464B43]';
-export const LINK = 'cursor-pointer font-bold text-[#464B43] underline hover:text-[#373B35]';
+export const TOGGLE_WRAP = 'flex items-center rounded-xl border border-[#e2d9d3] bg-[#F4F9EB] p-1';
+export const TOGGLE_ACTIVE = 'border border-[#DBF1AE]/80 bg-white text-[#1C2018] shadow-sm';
+export const TOGGLE_IDLE = 'border border-transparent text-slate-600 hover:text-[#1C2018]';
+export const ACCENT = 'text-[#24291E]';
+export const LINK = 'cursor-pointer font-bold text-[#24291E] underline hover:text-[#1C2018]';
 
 interface KpiCardProps {
   label: string;
@@ -113,7 +113,7 @@ export const KpiCard: React.FC<KpiCardProps> = ({ label, value, hint, icon: Icon
 };
 
 export const Badge: React.FC<{ className?: string; children: React.ReactNode; title?: string }> = ({
-  className = 'border-[#ded5cf] bg-[#f6f1ee] text-slate-700',
+  className = 'border-[#ded5cf] bg-[#F4F9EB] text-slate-700',
   children,
   title,
 }) => (
@@ -171,7 +171,7 @@ export const SectionCard: React.FC<{
     <header className="flex flex-col justify-between gap-3 border-b border-[#eee7e2] px-5 py-4 sm:flex-row sm:items-center">
       <div>
         <h3 className="flex items-center gap-2 text-sm font-extrabold uppercase tracking-tight text-slate-900">
-          {Icon && <Icon className="h-4 w-4 text-[#464B43]" />}
+          {Icon && <Icon className="h-4 w-4 text-[#24291E]" />}
           <span>{title}</span>
         </h3>
         {subtitle && <p className="mt-0.5 text-[11px] font-medium text-slate-500">{subtitle}</p>}
@@ -190,7 +190,7 @@ export const EmptyState: React.FC<{
 }> = ({ icon: Icon, title, message, action }) => (
   <div className="space-y-3 px-6 py-10 text-center">
     {Icon && (
-      <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-2xl bg-rose-50 text-[#464B43]">
+      <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-2xl bg-rose-50 text-[#24291E]">
         <Icon className="h-6 w-6" />
       </div>
     )}
@@ -207,7 +207,7 @@ export const TableSkeleton: React.FC<{ rows?: number; columns?: number }> = ({ r
     {Array.from({ length: rows }).map((_, r) => (
       <div key={r} className="flex items-center gap-3">
         {Array.from({ length: columns }).map((__, c) => (
-          <div key={c} className={`h-8 rounded-lg bg-[#f6f1ee] ${c === 0 ? 'w-48' : 'flex-1'}`} />
+          <div key={c} className={`h-8 rounded-lg bg-[#F4F9EB] ${c === 0 ? 'w-48' : 'flex-1'}`} />
         ))}
       </div>
     ))}
@@ -219,10 +219,10 @@ export const CardSkeleton: React.FC<{ count?: number }> = ({ count = 6 }) => (
     {Array.from({ length: count }).map((_, i) => (
       <div key={i} className={`${CARD} space-y-3 p-4`}>
         <div className="flex items-center gap-3">
-          <div className="h-10 w-10 rounded-full bg-[#f6f1ee]" />
+          <div className="h-10 w-10 rounded-full bg-[#F4F9EB]" />
           <div className="flex-1 space-y-2">
-            <div className="h-3 w-1/2 rounded bg-[#f6f1ee]" />
-            <div className="h-2.5 w-1/3 rounded bg-[#f6f1ee]" />
+            <div className="h-3 w-1/2 rounded bg-[#F4F9EB]" />
+            <div className="h-2.5 w-1/3 rounded bg-[#F4F9EB]" />
           </div>
         </div>
         <div className="h-16 rounded-xl bg-[#FBFDF6]" />
@@ -240,12 +240,12 @@ export const ModalHero: React.FC<{
   labelledBy?: string;
   actions?: React.ReactNode;
 }> = ({ icon: Icon, eyebrow, title, description, onClose, labelledBy, actions }) => (
-  <header className="relative shrink-0 overflow-hidden bg-[radial-gradient(circle_at_86%_10%,rgba(236,190,169,.24),transparent_32%),linear-gradient(125deg,#41463E,#30342E_52%,#21241F)] px-5 py-5 text-white sm:px-7 sm:py-6">
+  <header className="relative shrink-0 overflow-hidden bg-[radial-gradient(circle_at_86%_10%,rgba(214,236,169,.24),transparent_32%),linear-gradient(125deg,#21261C,#191C15_52%,#11130E)] px-5 py-5 text-white sm:px-7 sm:py-6">
     <div className="absolute -bottom-14 -right-8 size-44 rounded-full border-[24px] border-white/5" />
     <div className="relative flex items-start justify-between gap-4">
       <div className="flex min-w-0 items-center gap-4">
         <span className="grid size-14 shrink-0 place-items-center rounded-2xl border border-white/30 bg-white/15 shadow-inner">
-          <Icon className="size-7 text-[#f6d9ca]" />
+          <Icon className="size-7 text-[#E7F6CA]" />
         </span>
         <div className="min-w-0">
           <p className="flex items-center gap-1.5 text-xs font-extrabold uppercase tracking-[.18em] text-[#D9DCD8]">
@@ -283,12 +283,12 @@ export const Drawer: React.FC<{
   if (!isOpen || typeof document === 'undefined') return null;
   return createPortal(
     <div className="fixed inset-0 z-[80] flex justify-end">
-      <div className="absolute inset-0 bg-[#151714]/60 backdrop-blur-sm" onClick={onClose} aria-hidden="true" />
+      <div className="absolute inset-0 bg-[#0B0C09]/60 backdrop-blur-sm" onClick={onClose} aria-hidden="true" />
       <div
         role="dialog"
         aria-modal="true"
         aria-labelledby={labelledBy}
-        className={`relative z-10 flex h-full w-full ${widthClass} flex-col bg-[#FBFDF6] shadow-[0_30px_90px_rgba(14,15,13,.42)]`}
+        className={`relative z-10 flex h-full w-full ${widthClass} flex-col bg-[#FBFDF6] shadow-[0_30px_90px_rgba(7,8,6,.42)]`}
       >
         {children}
       </div>
@@ -306,13 +306,13 @@ export const Modal: React.FC<{
 }> = ({ isOpen, onClose, labelledBy, children, widthClass = 'max-w-2xl' }) => {
   if (!isOpen || typeof document === 'undefined') return null;
   return createPortal(
-    <div className="fixed inset-0 z-[80] flex items-center justify-center bg-[#151714]/75 p-3 backdrop-blur-sm sm:p-6">
+    <div className="fixed inset-0 z-[80] flex items-center justify-center bg-[#0B0C09]/75 p-3 backdrop-blur-sm sm:p-6">
       <div className="absolute inset-0" onClick={onClose} aria-hidden="true" />
       <div
         role="dialog"
         aria-modal="true"
         aria-labelledby={labelledBy}
-        className={`relative z-10 max-h-[92vh] w-full ${widthClass} overflow-y-auto rounded-[2rem] border border-white/50 bg-white shadow-[0_30px_90px_rgba(14,15,13,.42)]`}
+        className={`relative z-10 max-h-[92vh] w-full ${widthClass} overflow-y-auto rounded-[2rem] border border-white/50 bg-white shadow-[0_30px_90px_rgba(7,8,6,.42)]`}
       >
         {children}
       </div>

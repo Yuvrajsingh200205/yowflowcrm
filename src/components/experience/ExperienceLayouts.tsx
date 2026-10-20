@@ -28,7 +28,7 @@ const CLIENT_NAV: NavItem[] = [
 function Brand({ label = `${BRAND.name}` }: { label?: string }) {
   return (
     <Link href="/" className="flex items-center gap-2 text-sm font-black tracking-tight text-[#302C2E]">
-      <span className="grid size-9 place-items-center rounded-xl bg-[#31342F] text-[#CCEB8E] shadow-sm">
+      <span className="grid size-9 place-items-center rounded-xl bg-[#191D15] text-[#CCEB8E] shadow-sm">
         <Camera className="size-4" />
       </span>
       <span>{label}</span>
@@ -43,14 +43,14 @@ function TopNav({ nav, action }: { nav: NavItem[]; action?: ReactNode }) {
         <Brand />
         <nav className="hidden items-center gap-1 md:flex">
           {nav.map((item) => (
-            <Link key={item.href} href={item.href} className="rounded-xl px-3 py-2 text-xs font-bold text-[#686164] transition hover:bg-white hover:text-[#31342F]">
+            <Link key={item.href} href={item.href} className="rounded-xl px-3 py-2 text-xs font-bold text-[#686164] transition hover:bg-white hover:text-[#191D15]">
               {item.label}
             </Link>
           ))}
         </nav>
         <div className="flex items-center gap-2">
           {action}
-          <button type="button" className="grid size-10 place-items-center rounded-xl border border-[#DFD9D2] bg-white text-[#31342F] md:hidden" aria-label="Open navigation">
+          <button type="button" className="grid size-10 place-items-center rounded-xl border border-[#DFD9D2] bg-white text-[#191D15] md:hidden" aria-label="Open navigation">
             <Menu className="size-4" />
           </button>
         </div>
@@ -72,7 +72,7 @@ function Shell({ nav, action, children }: { nav: NavItem[]; action?: ReactNode; 
 
 export function PublicLayout({ children }: { children: ReactNode }) {
   return (
-    <Shell nav={PUBLIC_NAV} action={<Link href="/login" className="rounded-xl bg-[#4F554C] px-4 py-2 text-xs font-extrabold text-white shadow-sm transition hover:bg-[#42473F]">Admin Login</Link>}>
+    <Shell nav={PUBLIC_NAV} action={<Link href="/login" className="rounded-xl bg-[#292F22] px-4 py-2 text-xs font-extrabold text-white shadow-sm transition hover:bg-[#22271C]">Admin Login</Link>}>
       {children}
     </Shell>
   );
@@ -80,7 +80,7 @@ export function PublicLayout({ children }: { children: ReactNode }) {
 
 export function FreelancerLayout({ children }: { children: ReactNode }) {
   return (
-    <Shell nav={FREELANCER_NAV} action={<Link href="/login?returnTo=/freelancer/dashboard" className="rounded-xl border border-[#DFD9D2] bg-white px-4 py-2 text-xs font-extrabold text-[#31342F]">Freelancer Login</Link>}>
+    <Shell nav={FREELANCER_NAV} action={<Link href="/login?returnTo=/freelancer/dashboard" className="rounded-xl border border-[#DFD9D2] bg-white px-4 py-2 text-xs font-extrabold text-[#191D15]">Freelancer Login</Link>}>
       {children}
     </Shell>
   );
@@ -88,7 +88,7 @@ export function FreelancerLayout({ children }: { children: ReactNode }) {
 
 export function ClientLayout({ children }: { children: ReactNode }) {
   return (
-    <Shell nav={CLIENT_NAV} action={<Link href="/client/login" className="rounded-xl border border-[#DFD9D2] bg-white px-4 py-2 text-xs font-extrabold text-[#31342F]">Client Login</Link>}>
+    <Shell nav={CLIENT_NAV} action={<Link href="/client/login" className="rounded-xl border border-[#DFD9D2] bg-white px-4 py-2 text-xs font-extrabold text-[#191D15]">Client Login</Link>}>
       {children}
     </Shell>
   );
@@ -113,7 +113,7 @@ export function FoundationPage({
   return (
     <section className="grid min-h-[60vh] place-items-center">
       <div className="max-w-3xl text-center">
-        <span className="inline-flex items-center gap-2 rounded-full border border-[#DFD9D2] bg-white px-3 py-1 text-[11px] font-extrabold uppercase tracking-[.14em] text-[#4F554C]">
+        <span className="inline-flex items-center gap-2 rounded-full border border-[#DFD9D2] bg-white px-3 py-1 text-[11px] font-extrabold uppercase tracking-[.14em] text-[#292F22]">
           <Icon className="size-3.5" />
           {eyebrow}
         </span>
@@ -135,7 +135,7 @@ export function AdminRedirectNotice() {
   return (
     <section className="grid min-h-screen place-items-center bg-[#F7FCEE] px-4 text-center text-[#302C2E]">
       <div>
-        <LayoutDashboard className="mx-auto size-10 text-[#4F554C]" />
+        <LayoutDashboard className="mx-auto size-10 text-[#292F22]" />
         <p className="mt-3 text-sm font-bold">Opening the existing CRM workspace…</p>
       </div>
     </section>

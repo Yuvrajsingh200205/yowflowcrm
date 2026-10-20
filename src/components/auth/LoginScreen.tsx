@@ -63,7 +63,7 @@ export const LoginScreen: React.FC<LoginScreenProps> = ({ onLogin, onClose }) =>
   };
 
   return (
-    <main className="fixed inset-0 z-60 min-h-dvh overflow-x-hidden overflow-y-auto bg-[#151714] bg-[radial-gradient(circle_at_12%_10%,#353A33_0,transparent_29%),radial-gradient(circle_at_85%_90%,#2C302A_0,transparent_26%)] text-[#20231F] lg:h-dvh lg:overflow-hidden lg:px-[3vw] lg:pb-2 lg:pt-4">
+    <main className="fixed inset-0 z-60 min-h-dvh overflow-x-hidden overflow-y-auto bg-[#0B0C09] bg-[radial-gradient(circle_at_12%_10%,#1C2017_0,transparent_29%),radial-gradient(circle_at_85%_90%,#171A13_0,transparent_26%)] text-[#11130E] lg:h-dvh lg:overflow-hidden lg:px-[3vw] lg:pb-2 lg:pt-4">
       <Link
         href="/"
         aria-label="Go to home page"
@@ -72,7 +72,7 @@ export const LoginScreen: React.FC<LoginScreenProps> = ({ onLogin, onClose }) =>
       >
         <ArrowLeft className="size-5.5" />
       </Link>
-      <div className="mx-auto grid min-h-dvh w-full overflow-hidden bg-[#f4e8e2] shadow-[0_35px_100px_rgba(5,5,5,.48)] lg:h-[calc(100dvh-54px)] lg:min-h-0 lg:max-w-360 lg:grid-cols-[46%_54%] lg:rounded-[30px] lg:border lg:border-[rgba(255,226,210,.6)] xl:grid-cols-[48%_52%]">
+      <div className="mx-auto grid min-h-dvh w-full overflow-hidden bg-[#EFF6E0] shadow-[0_35px_100px_rgba(5,5,5,.48)] lg:h-[calc(100dvh-54px)] lg:min-h-0 lg:max-w-360 lg:grid-cols-[46%_54%] lg:rounded-[30px] lg:border lg:border-[rgba(239,252,213,.6)] xl:grid-cols-[48%_52%]">
         <LoginHero />
         <LoginFormCard
           identifier={identifier} password={password} rememberMe={rememberMe}
@@ -90,7 +90,7 @@ export const LoginScreen: React.FC<LoginScreenProps> = ({ onLogin, onClose }) =>
           onSubmit={handleLogin}
           isSubmitting={isSubmitting}
         />
-        {onClose && <button type="button" onClick={onClose} aria-label="Close login" className="fixed right-4 top-4 z-70 rounded-full p-2 text-[#4C5349] hover:bg-white/40"><X className="size-5" /></button>}
+        {onClose && <button type="button" onClick={onClose} aria-label="Close login" className="fixed right-4 top-4 z-70 rounded-full p-2 text-[#272D21] hover:bg-white/40"><X className="size-5" /></button>}
       </div>
       <footer className="hidden h-9 items-center justify-center gap-2.5 pt-2 text-xs font-extrabold uppercase tracking-[.12em] text-[#CACEC8] lg:flex">
         {BRAND.name} © 2026 <span>·</span> <Heart className="size-3 fill-[#9CA398] text-[#9CA398]" /> Made with passion
