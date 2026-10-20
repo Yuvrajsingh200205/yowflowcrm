@@ -1548,13 +1548,13 @@ export const ProjectDetailModal: React.FC<ProjectDetailModalProps> = ({
   return (
     <div className={variant === 'page' ? 'w-full' : 'fixed inset-0 z-50 flex items-center justify-center overflow-hidden bg-slate-900/60 p-2 backdrop-blur-xs sm:p-4'}>
       <div className={variant === 'page'
-        ? 'project-detail-shell flex min-h-[calc(100vh-9rem)] w-full flex-col overflow-hidden rounded-2xl border border-[#dfd9d2] bg-white shadow-[0_12px_35px_rgba(48,31,38,.08)]'
+        ? 'project-detail-shell flex min-h-[calc(100vh-9rem)] w-full flex-col overflow-hidden rounded-2xl border border-[#dfd9d2] bg-white shadow-[0_12px_35px_rgba(22,35,32,.08)]'
         : 'project-detail-shell my-auto flex h-[92vh] max-h-[92vh] w-full max-w-5xl flex-col overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-2xl md:w-[92vw] lg:w-[1024px]'}>
         
         {/* Header */}
         <div className="shrink-0 border-b border-[#e7dcd6] bg-[linear-gradient(120deg,#fffdfb,#faf5f3)] px-4 py-4 sm:px-6">
           <div className="mb-4 flex items-center justify-between border-b border-[#eee5e0] pb-3">
-            <button onClick={onClose} className="flex items-center gap-2 rounded-xl border border-[#ded5cf] bg-white px-4 py-2.5 text-sm font-extrabold text-[#6d2f45] shadow-sm transition hover:-translate-x-0.5 hover:bg-rose-50" title="Back to projects"><ArrowLeft className="size-5"/><span>{variant === 'page' ? 'Back to Projects' : 'Close Project'}</span></button>
+            <button onClick={onClose} className="flex items-center gap-2 rounded-xl border border-[#ded5cf] bg-white px-4 py-2.5 text-sm font-extrabold text-[#254b42] shadow-sm transition hover:-translate-x-0.5 hover:bg-rose-50" title="Back to projects"><ArrowLeft className="size-5"/><span>{variant === 'page' ? 'Back to Projects' : 'Close Project'}</span></button>
             <span className="hidden items-center gap-2 text-xs font-bold text-slate-400 sm:flex"><FolderKanban className="size-4"/>Project Workspace</span>
           </div>
           <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
@@ -1579,14 +1579,14 @@ export const ProjectDetailModal: React.FC<ProjectDetailModalProps> = ({
               </div>
             </div>
             <h2 className="mt-3 truncate text-2xl font-black tracking-tight text-slate-900 sm:text-3xl">{project.clientWeddingTitle}</h2>
-            <div className="mt-2 flex flex-wrap items-center gap-x-5 gap-y-2 text-sm font-semibold text-slate-600"><span className="flex items-center gap-2"><Phone className="size-4 text-[#9b4865]" />{project.clientContactMobile || 'Contact not added'}</span><span className="flex items-center gap-2"><MapPin className="size-4 text-[#9b4865]" />{project.venueLocation || 'Venue not added'}</span>{project.primaryServiceType === 'Other' && project.customServiceType && <span className="flex items-center gap-2"><Briefcase className="size-4 text-[#9b4865]" />{project.customServiceType}</span>}{project.quotationLink && <a href={project.quotationLink} target="_blank" rel="noreferrer" className="flex items-center gap-2 text-[#8f3655] hover:underline"><Link2 className="size-4" />Quotation</a>}</div>
+            <div className="mt-2 flex flex-wrap items-center gap-x-5 gap-y-2 text-sm font-semibold text-slate-600"><span className="flex items-center gap-2"><Phone className="size-4 text-[#366e61]" />{project.clientContactMobile || 'Contact not added'}</span><span className="flex items-center gap-2"><MapPin className="size-4 text-[#366e61]" />{project.venueLocation || 'Venue not added'}</span>{project.primaryServiceType === 'Other' && project.customServiceType && <span className="flex items-center gap-2"><Briefcase className="size-4 text-[#366e61]" />{project.customServiceType}</span>}{project.quotationLink && <a href={project.quotationLink} target="_blank" rel="noreferrer" className="flex items-center gap-2 text-[#2f5f54] hover:underline"><Link2 className="size-4" />Quotation</a>}</div>
           </div>
 
           <div className="flex flex-wrap items-center gap-2">
             {canInvoice && (
               <button
                 onClick={() => onGenerateInvoice(project)}
-                className="flex items-center gap-2 rounded-xl border border-rose-200 bg-white px-4 py-2.5 text-sm font-extrabold text-[#6d2f45] shadow-sm transition hover:bg-rose-50"
+                className="flex items-center gap-2 rounded-xl border border-rose-200 bg-white px-4 py-2.5 text-sm font-extrabold text-[#254b42] shadow-sm transition hover:bg-rose-50"
               >
                 <FileText className="size-5" />
                 <span>Create Invoice / Receipt</span>
@@ -2243,7 +2243,7 @@ export const ProjectDetailModal: React.FC<ProjectDetailModalProps> = ({
                         setNotesDraft(project.specialNotesMusicPreferences || '');
                         setEditingNotes(true);
                       }}
-                      className="inline-flex items-center gap-1.5 rounded-lg border border-slate-200 bg-white px-2.5 py-1.5 text-[10px] font-black uppercase tracking-wider text-[#8D5265] hover:bg-rose-50"
+                      className="inline-flex items-center gap-1.5 rounded-lg border border-slate-200 bg-white px-2.5 py-1.5 text-[10px] font-black uppercase tracking-wider text-[#3B665C] hover:bg-rose-50"
                     >
                       <Pencil className="size-3.5" />
                       Edit
@@ -2256,7 +2256,7 @@ export const ProjectDetailModal: React.FC<ProjectDetailModalProps> = ({
                       value={notesDraft}
                       onChange={(event) => setNotesDraft(event.target.value)}
                       rows={4}
-                      className="w-full rounded border border-slate-200 bg-slate-50 p-3 text-xs font-semibold leading-relaxed text-slate-700 outline-hidden focus:border-[#8D5265] focus:ring-2 focus:ring-[#8D5265]/15"
+                      className="w-full rounded border border-slate-200 bg-slate-50 p-3 text-xs font-semibold leading-relaxed text-slate-700 outline-hidden focus:border-[#3B665C] focus:ring-2 focus:ring-[#3B665C]/15"
                       placeholder="Project notes, client preferences, music choices..."
                     />
                     <div className="flex justify-end gap-2">
@@ -2276,7 +2276,7 @@ export const ProjectDetailModal: React.FC<ProjectDetailModalProps> = ({
                           onUpdateProject({ ...project, specialNotesMusicPreferences: notesDraft.trim() });
                           setEditingNotes(false);
                         }}
-                        className="inline-flex items-center gap-1.5 rounded-lg bg-[#8D5265] px-3 py-2 text-xs font-black text-white shadow-sm hover:bg-[#73384d]"
+                        className="inline-flex items-center gap-1.5 rounded-lg bg-[#3B665C] px-3 py-2 text-xs font-black text-white shadow-sm hover:bg-[#295249]"
                       >
                         <Save className="size-3.5" />
                         Save Notes
@@ -4232,9 +4232,9 @@ export const ProjectDetailModal: React.FC<ProjectDetailModalProps> = ({
 
       {/* Modal to Add/Edit Payment Schedule Item */}
       {showAddScheduleModal && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-[#24171c]/75 p-4 backdrop-blur-sm sm:p-8">
-          <div role="dialog" aria-modal="true" className="flex max-h-[90vh] w-full max-w-xl flex-col overflow-hidden rounded-[2rem] border border-white/50 bg-[#fffdfb] shadow-[0_30px_90px_rgba(26,13,19,.42)]">
-            <header className="relative shrink-0 overflow-hidden bg-[radial-gradient(circle_at_86%_10%,rgba(236,190,169,.24),transparent_32%),linear-gradient(125deg,#704758,#55333f_52%,#38262d)] px-6 py-6 text-white sm:px-8">
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-[#111a18]/75 p-4 backdrop-blur-sm sm:p-8">
+          <div role="dialog" aria-modal="true" className="flex max-h-[90vh] w-full max-w-xl flex-col overflow-hidden rounded-[2rem] border border-white/50 bg-[#fffdfb] shadow-[0_30px_90px_rgba(9,19,17,.42)]">
+            <header className="relative shrink-0 overflow-hidden bg-[radial-gradient(circle_at_86%_10%,rgba(236,190,169,.24),transparent_32%),linear-gradient(125deg,#33514A,#55333f_52%,#1b2825)] px-6 py-6 text-white sm:px-8">
               <div className="absolute -bottom-14 -right-8 size-44 rounded-full border-[24px] border-white/5" />
               <div className="relative flex items-start justify-between gap-4">
                 <div className="flex min-w-0 items-center gap-4">
@@ -4242,7 +4242,7 @@ export const ProjectDetailModal: React.FC<ProjectDetailModalProps> = ({
                     <CalendarCheck className="size-6 text-[#f6d9ca]" />
                   </span>
                   <div className="min-w-0">
-                    <p className="flex items-center gap-1.5 text-[10px] font-extrabold uppercase tracking-[.18em] text-[#ecc8d3]">
+                    <p className="flex items-center gap-1.5 text-[10px] font-extrabold uppercase tracking-[.18em] text-[#d2e2de]">
                       <Sparkles className="size-3" />
                       Payment Schedule
                     </p>
@@ -4267,16 +4267,16 @@ export const ProjectDetailModal: React.FC<ProjectDetailModalProps> = ({
 
             <form onSubmit={handleSaveScheduleItem} className="flex min-h-0 flex-1 flex-col">
               <div className="min-h-0 flex-1 space-y-6 overflow-y-auto px-6 py-6 sm:px-8 sm:py-7">
-                <div className="grid grid-cols-2 gap-4 rounded-2xl border border-[#ddc89c]/40 bg-[linear-gradient(125deg,#704758,#55333f_52%,#38262d)] px-5 py-4 text-white">
+                <div className="grid grid-cols-2 gap-4 rounded-2xl border border-[#ddc89c]/40 bg-[linear-gradient(125deg,#33514A,#55333f_52%,#1b2825)] px-5 py-4 text-white">
                   <div>
-                    <p className="text-[10px] font-extrabold uppercase tracking-[.14em] text-[#ecc8d3]">Total Package Amount</p>
+                    <p className="text-[10px] font-extrabold uppercase tracking-[.14em] text-[#d2e2de]">Total Package Amount</p>
                     <p className="mt-2 font-mono text-xl font-black text-[#ddc89c]">
                       ₹{(project.totalBudget || 0).toLocaleString('en-IN')}
                     </p>
                   </div>
                   {project.totalBudget > 0 && (
                     <div className="text-right">
-                      <p className="text-[10px] font-extrabold uppercase tracking-[.14em] text-[#ecc8d3]">This Milestone</p>
+                      <p className="text-[10px] font-extrabold uppercase tracking-[.14em] text-[#d2e2de]">This Milestone</p>
                       <p className="mt-2 text-lg font-extrabold text-white">
                         {schedAmount > 0 ? `${((schedAmount / project.totalBudget) * 100).toFixed(1)}% of Total` : '0% of Total'}
                       </p>

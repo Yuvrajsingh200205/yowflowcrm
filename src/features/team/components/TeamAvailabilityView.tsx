@@ -121,7 +121,7 @@ export const TeamAvailabilityView: React.FC<Props> = ({
             <section key={role} className={`${CARD} overflow-hidden`}>
               <header className="flex items-center justify-between gap-2 px-4 py-2.5 border-b border-slate-100 bg-slate-50/60">
                 <h3 className="text-xs font-extrabold uppercase tracking-wider text-slate-800 truncate">
-                  <RoleIcon role={role} className="mr-1 inline size-3.5 text-[#8f3655]" />{role}
+                  <RoleIcon role={role} className="mr-1 inline size-3.5 text-[#2f5f54]" />{role}
                 </h3>
                 <span className="text-[10px] font-bold text-emerald-700">
                   {members.filter((m) => m.availability.status === 'Available').length} free
@@ -134,7 +134,7 @@ export const TeamAvailabilityView: React.FC<Props> = ({
                     <div className="flex items-center gap-2.5">
                       <button type="button" onClick={() => onOpenProfile(member)} className="flex items-center gap-2 min-w-0 flex-1 text-left cursor-pointer group">
                         <Avatar member={member} size="sm" />
-                        <span className="text-xs font-extrabold text-slate-900 truncate group-hover:text-[#8f3655] transition">{member.name}</span>
+                        <span className="text-xs font-extrabold text-slate-900 truncate group-hover:text-[#2f5f54] transition">{member.name}</span>
                       </button>
                       <Badge className={availability.badgeClass}>{availability.status}</Badge>
                     </div>
@@ -157,7 +157,7 @@ export const TeamAvailabilityView: React.FC<Props> = ({
                       </select>
                       )}
                       {onAssignShoot && availability.status !== 'On Leave' && (
-                        <button type="button" onClick={() => onAssignShoot(member)} className="text-[10px] font-bold text-[#8f3655] hover:text-[#6d2f45] underline cursor-pointer">
+                        <button type="button" onClick={() => onAssignShoot(member)} className="text-[10px] font-bold text-[#2f5f54] hover:text-[#254b42] underline cursor-pointer">
                           Assign shoot
                         </button>
                       )}

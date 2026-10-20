@@ -90,7 +90,7 @@ export function FinancialFilterBar({
             <button
               type="button"
               onClick={handleApply}
-              className="h-10 rounded-xl bg-[#5a2a3b] hover:bg-[#48202f] px-5 text-xs font-extrabold text-white transition-all shadow-xs active:scale-95 cursor-pointer"
+              className="h-10 rounded-xl bg-[#1f4038] hover:bg-[#19322c] px-5 text-xs font-extrabold text-white transition-all shadow-xs active:scale-95 cursor-pointer"
             >
               Apply
             </button>

@@ -54,13 +54,17 @@ Legend: [x] done · [~] in progress · [ ] todo
 - [x] Neutral seed org + `.env.example` (BRAND_*). [ ] Realistic fake dataset → Phase 6
 - [x] Docs (webhook URL etc.) use placeholders
 - [ ] Rotation checklist in `docs/SECURITY_ROTATION.md`
-## Phase 2 — Brand identity  [~]
+## Phase 2 — Brand identity  [x]
 - [x] Name **Frameloom**, tagline, value prop, SVG mark + wordmark, favicon (`app/icon.svg`)
 - [ ] OG image (PNG) → Phase 5; trademark/domain check on "Frameloom" is on the owner
-## Phase 3 — Design system  [ ]
-- [ ] Tokens (color light/dark, type, space, radius, shadow, motion)
-- [ ] Components with all states + `/design-system` docs page
-- [ ] Shell: app layout, sidebar, topbar, Cmd+K
+## Phase 3 — Design system  [~]
+- [x] Tokens: colour (light + dark, semantic), type (Fraunces / Inter / JetBrains Mono), radius, elevation, motion, z-index (`globals.css`)
+- [x] Legacy palette migrated (plum → deep green) via `scripts/codemod_palette.py`; legacy Tailwind remaps feed from the same tokens
+- [x] Components (`src/components/ui`): Button, Field/Input/Textarea/Select/Checkbox, Badge, Card, Dialog + Drawer, Tabs, Dropdown, Tooltip, Toast, Table (sortable), Pagination, Skeleton, Empty/Error states, Line/Bar charts, Logo, ThemeToggle
+- [x] `/design-system` docs page; verified at 375 / 1440, light + dark, no console errors, no horizontal overflow
+- [ ] App shell: sidebar, topbar, notifications, Cmd+K command palette
+- [ ] Combobox / DatePicker / FileUpload / Stepper (add as pages need them)
+- [ ] Legacy screens still on hand-coloured Tailwind: dark mode is shell-and-new-pages only until rebuilt (Phase 4)
 ## Phase 4 — Pages  [ ]
 - [ ] A. Marketing (landing, pricing, features, about, contact, privacy, terms, 404)
 - [ ] B. Auth (login, signup, forgot/reset, verify email)

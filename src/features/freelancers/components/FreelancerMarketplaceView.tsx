@@ -154,7 +154,7 @@ export function FreelancerMarketplaceView({ mode, projects }: Props) {
                 <article key={connection.id} className={`${CARD} flex flex-col gap-3 p-4 md:flex-row md:items-center md:justify-between`}>
                   <div>
                     <p className="font-black text-slate-900">{connection.freelancer?.fullName || 'Freelancer'}</p>
-                    <p className="text-xs font-bold text-[#8D5265]">{roleLabel(connection.freelancer?.primarySkill)} · {connection.freelancer?.city || 'Location not set'}</p>
+                    <p className="text-xs font-bold text-[#3B665C]">{roleLabel(connection.freelancer?.primarySkill)} · {connection.freelancer?.city || 'Location not set'}</p>
                     <p className="mt-1 text-xs font-medium text-slate-500">{connection.project?.name ? `Project: ${connection.project.name}` : 'No project selected yet'} · {connection.status}</p>
                     <p className="mt-1 text-xs font-medium text-slate-500">Interested on {new Date(connection.createdAt).toLocaleDateString()}</p>
                   </div>
@@ -192,13 +192,13 @@ function FreelancerCard({ freelancer, interested, busy, onView, onInterested }: 
   return (
     <article className={`${CARD} p-4`}>
       <div className="flex items-start gap-3">
-        <span className="grid size-12 shrink-0 place-items-center rounded-xl bg-[#f0dce3] text-sm font-black text-[#6d2f45]">{freelancer.displayName.slice(0, 2).toUpperCase()}</span>
+        <span className="grid size-12 shrink-0 place-items-center rounded-xl bg-[#e0ece9] text-sm font-black text-[#254b42]">{freelancer.displayName.slice(0, 2).toUpperCase()}</span>
         <div className="min-w-0 flex-1">
           <p className="truncate font-black text-slate-900">{freelancer.displayName}</p>
-          <p className="text-xs font-bold text-[#8D5265]">{roleLabel(freelancer.specialization)}</p>
+          <p className="text-xs font-bold text-[#3B665C]">{roleLabel(freelancer.specialization)}</p>
           <p className="mt-1 flex flex-wrap items-center gap-2 text-xs font-medium text-slate-500"><MapPin className="size-3" />{freelancer.city || 'Location not set'}<span>{freelancer.experienceYears ?? 0} years</span></p>
           <div className="mt-2 flex flex-wrap gap-1">{freelancer.skills.slice(0, 4).map((skill) => <span key={skill} className="rounded-full border border-[#e8ded8] bg-[#fbfaf8] px-2 py-1 text-[11px] font-bold text-slate-600">{skill}</span>)}</div>
-          <p className="mt-2 text-xs font-bold text-slate-600"><CalendarDays className="mr-1 inline size-3.5 text-[#8D5265]" />{freelancer.availability ? `${freelancer.availability.status.replaceAll('_', ' ')} · ${new Date(freelancer.availability.date).toLocaleDateString()}` : 'No upcoming availability record'}</p>
+          <p className="mt-2 text-xs font-bold text-slate-600"><CalendarDays className="mr-1 inline size-3.5 text-[#3B665C]" />{freelancer.availability ? `${freelancer.availability.status.replaceAll('_', ' ')} · ${new Date(freelancer.availability.date).toLocaleDateString()}` : 'No upcoming availability record'}</p>
         </div>
       </div>
       <div className="mt-4 flex flex-wrap justify-end gap-2">
@@ -250,10 +250,10 @@ function ProfileDrawer({ freelancer, busy, onClose, onInterested }: { freelancer
   const availabilityRows = availability.length ? availability : freelancer.availability ? [freelancer.availability as FreelancerAvailabilityRecord] : [];
 
   return (
-    <div className="fixed inset-0 z-[90] flex justify-end bg-[#24171c]/60 p-3 backdrop-blur-sm">
+    <div className="fixed inset-0 z-[90] flex justify-end bg-[#111a18]/60 p-3 backdrop-blur-sm">
       <aside className="h-full w-full max-w-2xl overflow-y-auto rounded-2xl bg-white p-5 shadow-2xl">
         <div className="flex items-start justify-between gap-3">
-          <div><h3 className="text-2xl font-black text-slate-900">{name}</h3><p className="text-sm font-bold text-[#8D5265]">{roleLabel(skill)} · {city || 'Location not set'}</p></div>
+          <div><h3 className="text-2xl font-black text-slate-900">{name}</h3><p className="text-sm font-bold text-[#3B665C]">{roleLabel(skill)} · {city || 'Location not set'}</p></div>
           <button className={BTN_GHOST} onClick={onClose} aria-label="Close profile"><X className="size-4" /></button>
         </div>
         {loading ? <div className="mt-8 flex items-center gap-2 text-sm font-bold text-slate-500"><Loader2 className="size-4 animate-spin" /> Loading full profile...</div> : (
@@ -276,7 +276,7 @@ function ProfileDrawer({ freelancer, busy, onClose, onInterested }: { freelancer
 }
 
 function InfoLine({ icon, label, value }: { icon: React.ReactNode; label: string; value: string }) {
-  return <div className="flex items-start gap-2 text-sm"><span className="mt-0.5 text-[#8D5265]">{icon}</span><div><p className="text-[11px] font-black uppercase tracking-wide text-slate-500">{label}</p><p className="font-bold text-slate-800">{value}</p></div></div>;
+  return <div className="flex items-start gap-2 text-sm"><span className="mt-0.5 text-[#3B665C]">{icon}</span><div><p className="text-[11px] font-black uppercase tracking-wide text-slate-500">{label}</p><p className="font-bold text-slate-800">{value}</p></div></div>;
 }
 
 function ConnectDialog({ connection, projects, onClose, onConnected }: { connection: FreelancerConnection; projects: Project[]; onClose: () => void; onConnected: (connection: FreelancerConnection) => void }) {
@@ -301,7 +301,7 @@ function ConnectDialog({ connection, projects, onClose, onConnected }: { connect
     }
   };
   return (
-    <div className="fixed inset-0 z-[95] grid place-items-center bg-[#24171c]/60 p-4 backdrop-blur-sm">
+    <div className="fixed inset-0 z-[95] grid place-items-center bg-[#111a18]/60 p-4 backdrop-blur-sm">
       <section className="w-full max-w-lg rounded-2xl bg-white p-5 shadow-2xl">
         <h3 className="text-lg font-black text-slate-900">{requestingApproval ? 'Send Approval Request' : 'Connect Freelancer'}</h3>
         <p className="text-sm font-medium text-slate-500">{connection.freelancer?.fullName}</p>

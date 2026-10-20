@@ -140,16 +140,16 @@ export const RoleWorkspaceHub: React.FC<Props> = (props) => {
 
   return (
     <div className="space-y-6 pb-8">
-      <section className="relative overflow-hidden rounded-3xl border border-[#ddc89c]/35 bg-[radial-gradient(circle_at_88%_8%,rgba(221,200,156,.2),transparent_30%),linear-gradient(125deg,#704758,#55333f_50%,#38262d)] p-5 text-white shadow-xl sm:p-7">
+      <section className="relative overflow-hidden rounded-3xl border border-[#ddc89c]/35 bg-[radial-gradient(circle_at_88%_8%,rgba(221,200,156,.2),transparent_30%),linear-gradient(125deg,#33514A,#55333f_50%,#1b2825)] p-5 text-white shadow-xl sm:p-7">
         <div className="absolute -bottom-20 -right-10 size-64 rounded-full border-[34px] border-white/[.04]" />
         <div className="relative">
-          <span className="inline-flex items-center rounded-full border border-white/20 bg-white/10 px-3 py-1 text-xs font-extrabold uppercase tracking-[.14em] text-[#f0dce3]">
+          <span className="inline-flex items-center rounded-full border border-white/20 bg-white/10 px-3 py-1 text-xs font-extrabold uppercase tracking-[.14em] text-[#e0ece9]">
             {copy.eyebrow}
           </span>
           <h1 className="mt-3 text-2xl font-black sm:text-3xl">
             {kind === 'client' ? `Welcome, ${user?.name || 'Guest'}` : copy.title}
           </h1>
-          <p className="mt-2 max-w-2xl text-sm font-medium text-[#eadfe2]">{copy.blurb}</p>
+          <p className="mt-2 max-w-2xl text-sm font-medium text-[#dfeae7]">{copy.blurb}</p>
           <p className="mt-2 text-xs font-bold text-[#ddc89c]">Access from Admin · {role?.name || 'Employee'} · records follow your scope</p>
         </div>
       </section>
@@ -173,7 +173,7 @@ export const RoleWorkspaceHub: React.FC<Props> = (props) => {
             <div className="grid grid-cols-2 gap-3 sm:grid-cols-4 xl:grid-cols-8">
               {shortcuts.map((item) => (
                 <button key={item.label} type="button" onClick={() => setActiveTab?.(item.tab)} className={`${CARD} p-3 text-left hover:border-rose-200`}>
-                  <item.icon className="mb-2 size-4 text-[#8f3655]" />
+                  <item.icon className="mb-2 size-4 text-[#2f5f54]" />
                   <p className="text-xs font-extrabold text-slate-800">{item.label}</p>
                 </button>
               ))}
@@ -392,7 +392,7 @@ function PipelineCard({ projects, onOpen }: { projects: Project[]; onOpen?: (p: 
             <p className="mt-1 text-xl font-black">{b.items.length}</p>
             <div className="mt-2 space-y-1">
               {b.items.slice(0, 2).map((p) => (
-                <button key={p.id} type="button" onClick={() => onOpen?.(p)} className="block w-full truncate text-left text-[11px] font-bold text-[#8f3655]">
+                <button key={p.id} type="button" onClick={() => onOpen?.(p)} className="block w-full truncate text-left text-[11px] font-bold text-[#2f5f54]">
                   {p.clientWeddingTitle}
                 </button>
               ))}
@@ -516,7 +516,7 @@ function ShootBoard({
             <button key={`${project.id}-${shoot.id}`} type="button" onClick={() => onOpen?.(project)} className="rounded-2xl border border-[#eee7e2] bg-[#fbfaf8] p-4 text-left">
               <p className="text-sm font-extrabold">{shoot.title}</p>
               <p className="mt-1 text-xs text-slate-500">{project.clientWeddingTitle}</p>
-              <p className="mt-2 text-[11px] font-bold text-[#8f3655]">{shoot.date} · {shoot.time || shoot.startTime || 'Time TBC'}</p>
+              <p className="mt-2 text-[11px] font-bold text-[#2f5f54]">{shoot.date} · {shoot.time || shoot.startTime || 'Time TBC'}</p>
               <p className="mt-1 text-[11px] text-slate-500">{shoot.location || shoot.venue || project.venueLocation}</p>
               <p className="mt-1 text-[11px] text-slate-400">Crew · {[shoot.leadPhotographer, shoot.cinematographer].filter(Boolean).join(' · ') || 'Assigned'}</p>
             </button>
@@ -568,7 +568,7 @@ function ClientHome({
   return (
     <div className="grid gap-4 lg:grid-cols-3">
       <section className={`${CARD} p-5 lg:col-span-2`}>
-        <p className="text-[10px] font-extrabold uppercase tracking-wider text-[#8f3655]">Your wedding</p>
+        <p className="text-[10px] font-extrabold uppercase tracking-wider text-[#2f5f54]">Your wedding</p>
         <h2 className="mt-1 text-2xl font-black">{wedding.clientWeddingTitle}</h2>
         <p className="mt-2 text-sm text-slate-600">{wedding.venueLocation || 'Venue to be confirmed'} · {wedding.weddingFunctionDates || 'Date TBC'}</p>
         <div className="mt-4 grid grid-cols-2 gap-3">

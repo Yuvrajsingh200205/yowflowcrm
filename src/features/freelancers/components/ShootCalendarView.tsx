@@ -72,7 +72,7 @@ export const ShootCalendarView: React.FC<ShootCalendarViewProps> = ({
       {/* Calendar Header Bar */}
       <div className="flex flex-col sm:flex-row items-center justify-between gap-4 bg-white p-4 rounded-2xl border border-slate-200 shadow-xs">
         <div className="flex items-center gap-3">
-          <div className="w-10 h-10 rounded-xl bg-[#8f3655] flex items-center justify-center font-bold text-white shadow-xs">
+          <div className="w-10 h-10 rounded-xl bg-[#2f5f54] flex items-center justify-center font-bold text-white shadow-xs">
             <CalendarIcon className="w-5 h-5 text-white" />
           </div>
           <div>
@@ -103,7 +103,7 @@ export const ShootCalendarView: React.FC<ShootCalendarViewProps> = ({
                 key={v}
                 type="button"
                 onClick={() => setCalView(v)}
-                className={`rounded-lg px-2.5 py-1 text-[10px] font-extrabold capitalize ${calView === v ? 'bg-white text-[#6d2f45] shadow-sm' : 'text-slate-600'}`}
+                className={`rounded-lg px-2.5 py-1 text-[10px] font-extrabold capitalize ${calView === v ? 'bg-white text-[#254b42] shadow-sm' : 'text-slate-600'}`}
               >
                 {v}
               </button>
@@ -153,16 +153,16 @@ export const ShootCalendarView: React.FC<ShootCalendarViewProps> = ({
                   onClick={() => setSelectedDateStr(dateStr)}
                   className={`min-h-20 p-1.5 rounded-xl border text-left cursor-pointer transition flex flex-col justify-between ${
                     isSelected
-                      ? 'bg-rose-50 border-[#8f3655] ring-2 ring-rose-200'
+                      ? 'bg-rose-50 border-[#2f5f54] ring-2 ring-rose-200'
                       : dayAssignments.length > 0
-                      ? 'bg-white border-rose-200 hover:border-[#c48a9a] shadow-2xs'
+                      ? 'bg-white border-rose-200 hover:border-[#8ac4b6] shadow-2xs'
                       : 'bg-white border-slate-200 hover:border-slate-300'
                   }`}
                 >
                   <div className="flex items-center justify-between">
                     <span
                       className={`text-xs font-bold w-6 h-6 rounded-full flex items-center justify-center ${
-                        isSelected ? 'bg-[#8f3655] text-white font-extrabold' : 'text-slate-800'
+                        isSelected ? 'bg-[#2f5f54] text-white font-extrabold' : 'text-slate-800'
                       }`}
                     >
                       {dayNum}
@@ -183,7 +183,7 @@ export const ShootCalendarView: React.FC<ShootCalendarViewProps> = ({
                           a.assignmentStatus === 'completed'
                             ? 'bg-emerald-100 text-emerald-800'
                             : a.assignmentStatus === 'confirmed'
-                            ? 'bg-rose-50 text-[#55333f]'
+                            ? 'bg-rose-50 text-[#253d37]'
                             : 'bg-amber-100 text-amber-800'
                         }`}
                       >
@@ -191,7 +191,7 @@ export const ShootCalendarView: React.FC<ShootCalendarViewProps> = ({
                       </div>
                     ))}
                     {dayAssignments.length > 2 && (
-                      <span className="text-[9px] font-bold text-[#8f3655] block pl-1">
+                      <span className="text-[9px] font-bold text-[#2f5f54] block pl-1">
                         +{dayAssignments.length - 2} more
                       </span>
                     )}
@@ -206,10 +206,10 @@ export const ShootCalendarView: React.FC<ShootCalendarViewProps> = ({
         <div className="bg-white p-5 rounded-2xl border border-slate-200 shadow-xs space-y-4">
           <div className="border-b border-slate-100 pb-3 flex items-center justify-between">
             <div>
-              <span className="text-[10px] font-bold uppercase text-[#8f3655] tracking-wider">Selected Date</span>
+              <span className="text-[10px] font-bold uppercase text-[#2f5f54] tracking-wider">Selected Date</span>
               <h3 className="text-base font-black text-slate-900">{selectedDateStr}</h3>
             </div>
-            <span className="px-2.5 py-1 bg-rose-50 text-[#6d2f45] text-xs font-bold rounded-lg border border-rose-200">
+            <span className="px-2.5 py-1 bg-rose-50 text-[#254b42] text-xs font-bold rounded-lg border border-rose-200">
               {dateAssignments.length} Shoots
             </span>
           </div>
@@ -219,7 +219,7 @@ export const ShootCalendarView: React.FC<ShootCalendarViewProps> = ({
               <p className="text-sm font-extrabold text-slate-800">No shoots on this date</p>
               <p className="mt-1 text-xs font-medium text-slate-500">Assign a freelancer to an existing client shoot for this day.</p>
               {onAssignShoot && (
-                <button type="button" onClick={onAssignShoot} className="mt-3 text-xs font-extrabold text-[#8f3655]">
+                <button type="button" onClick={onAssignShoot} className="mt-3 text-xs font-extrabold text-[#2f5f54]">
                   Assign Shoot
                 </button>
               )}
@@ -230,35 +230,35 @@ export const ShootCalendarView: React.FC<ShootCalendarViewProps> = ({
                 <div key={assignment.id} className="p-4 bg-slate-50 rounded-xl border border-slate-200 space-y-2">
                   <div className="flex justify-between items-start">
                     <div>
-                      <span className="text-[10px] font-bold uppercase text-[#8f3655] block">{assignment.eventName}</span>
+                      <span className="text-[10px] font-bold uppercase text-[#2f5f54] block">{assignment.eventName}</span>
                       <h4 className="font-black text-xs text-slate-900">
                         {assignment.clientName || projects.find((p) => p.id === assignment.projectId)?.clientWeddingTitle || assignment.projectName}
                       </h4>
                       <p className="text-[11px] text-slate-500">{assignment.eventName} · {assignment.role || assignment.subCategory}</p>
                     </div>
 
-                    <span className="px-2 py-0.5 bg-rose-50 text-[#55333f] text-[10px] font-bold rounded uppercase">
+                    <span className="px-2 py-0.5 bg-rose-50 text-[#253d37] text-[10px] font-bold rounded uppercase">
                       {assignment.assignmentStatus}
                     </span>
                   </div>
 
                   <div className="space-y-1 text-xs text-slate-600 pt-1">
                     <p className="flex items-center gap-1.5">
-                      <User className="w-3.5 h-3.5 text-[#8f3655]" />
+                      <User className="w-3.5 h-3.5 text-[#2f5f54]" />
                       <strong>{assignment.freelancerName}</strong> ({assignment.subCategory})
                     </p>
                     <p className="flex items-center gap-1.5">
-                      <Clock className="w-3.5 h-3.5 text-[#8f3655]" />
+                      <Clock className="w-3.5 h-3.5 text-[#2f5f54]" />
                       <span>{assignment.startTime} - {assignment.endTime}</span>
                     </p>
                     <p className="flex items-center gap-1.5">
-                      <MapPin className="w-3.5 h-3.5 text-[#8f3655]" />
+                      <MapPin className="w-3.5 h-3.5 text-[#2f5f54]" />
                       <span>{assignment.venue}</span>
                     </p>
                   </div>
 
                   <div className="flex items-center justify-between text-xs pt-2 border-t border-slate-200">
-                    <span className="font-extrabold text-[#6d2f45] font-mono">
+                    <span className="font-extrabold text-[#254b42] font-mono">
                       ₹{assignment.totalAgreedAmount.toLocaleString('en-IN')}
                     </span>
                     <span className="text-[10px] font-bold text-slate-500">

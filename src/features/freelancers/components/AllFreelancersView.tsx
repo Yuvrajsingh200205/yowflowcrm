@@ -225,7 +225,7 @@ export const AllFreelancersView: React.FC<AllFreelancersViewProps> = ({
             return (
               <article key={freelancer.id} className={`${CARD} flex flex-col p-5`}>
                 <button type="button" onClick={() => onOpenProfile(freelancer)} className="flex items-start gap-3 text-left">
-                  <span className="grid size-14 shrink-0 place-items-center overflow-hidden rounded-2xl bg-[#f0dce3] text-sm font-black text-[#6d2f45]">
+                  <span className="grid size-14 shrink-0 place-items-center overflow-hidden rounded-2xl bg-[#e0ece9] text-sm font-black text-[#254b42]">
                     {freelancer.profilePhoto ? (
                       // eslint-disable-next-line @next/next/no-img-element
                       <img src={freelancer.profilePhoto} alt="" className="size-14 object-cover" />
@@ -241,7 +241,7 @@ export const AllFreelancersView: React.FC<AllFreelancersViewProps> = ({
                       {isApproved(freelancer) && <Badge className="border-emerald-200 bg-emerald-50 text-emerald-800">Approved</Badge>}
                     </span>
                     <span className="mt-0.5 block text-[11px] font-bold text-slate-400">{freelancer.freelancerId}</span>
-                    <span className="mt-0.5 block text-xs font-bold text-[#8f3655]">{freelancer.subCategory || freelancer.mainCategory}</span>
+                    <span className="mt-0.5 block text-xs font-bold text-[#2f5f54]">{freelancer.subCategory || freelancer.mainCategory}</span>
                     <span className="mt-1 flex flex-wrap items-center gap-2 text-[11px] font-medium text-slate-500">
                       <span className="inline-flex items-center gap-1"><MapPin className="size-3" />{freelancer.city || '—'}</span>
                       <span>{freelancer.experienceYears || 0} yrs</span>

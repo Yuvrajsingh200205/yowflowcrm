@@ -11,7 +11,7 @@ export function DashboardKpiGrid(props: Props) {
   const showKpi = props.showKpi !== false;
   if (!showRevenue && !showKpi) return null;
   const cards = [
-    ['All Projects', props.allProjectsCount, `${props.runningProjectsCount} Currently Running`, props.onProjects, 'to-[#faf4f6]'],
+    ['All Projects', props.allProjectsCount, `${props.runningProjectsCount} Currently Running`, props.onProjects, 'to-[#f5f9f8]'],
     ['Ready to Deliver', props.readyToDeliverCount, 'Films & Albums Ready', props.onCompleted, 'to-[#f3f7fa]'],
     ['Delivered', props.deliveredProjectsCount, 'Completed Archive', props.onProjects, 'to-[#f2f8f5]'],
     ['Pending', props.pendingProjectsCount, 'Awaiting Shoots/Edits', props.onProjects, 'to-[#fcf7ed]'],

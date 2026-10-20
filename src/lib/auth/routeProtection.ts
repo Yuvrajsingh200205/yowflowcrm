@@ -12,6 +12,7 @@ const PUBLIC_PREFIXES = [
   // password before returning a single photograph.
   '/share',
   '/login',
+  '/design-system',
   '/pricing',
   '/features',
   '/studios',

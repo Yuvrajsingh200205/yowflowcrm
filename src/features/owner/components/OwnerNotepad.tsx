@@ -137,7 +137,7 @@ export function OwnerNotepad() {
           <button type="button" onClick={toggleHidden} className="flex items-center gap-2 rounded-xl bg-slate-100 px-3 py-2.5 text-sm font-bold text-slate-700 hover:bg-slate-200">
             <EyeOff className="size-5" />Hide
           </button>
-          <button type="button" onClick={() => void createNote()} className="flex items-center gap-2 rounded-xl bg-[#8f3655] px-4 py-2.5 text-sm font-bold text-white hover:bg-[#762944]">
+          <button type="button" onClick={() => void createNote()} className="flex items-center gap-2 rounded-xl bg-[#2f5f54] px-4 py-2.5 text-sm font-bold text-white hover:bg-[#264D44]">
             <SquarePen className="size-5" />New Note
           </button>
         </div>
@@ -163,7 +163,7 @@ export function OwnerNotepad() {
                 setDraggedIndex(null);
               }}
               onClick={() => openNote(note)}
-              className={`flex cursor-pointer items-start gap-2 rounded-xl border p-3.5 transition ${activeId === note.id ? 'border-[#8f3655] bg-[#8f3655] text-white' : 'border-slate-200 bg-white text-slate-900 hover:border-rose-200'}`}
+              className={`flex cursor-pointer items-start gap-2 rounded-xl border p-3.5 transition ${activeId === note.id ? 'border-[#2f5f54] bg-[#2f5f54] text-white' : 'border-slate-200 bg-white text-slate-900 hover:border-rose-200'}`}
             >
               <GripVertical className="mt-0.5 size-5 shrink-0 opacity-60" />
               <div className="min-w-0 flex-1">
@@ -189,7 +189,7 @@ export function OwnerNotepad() {
             <>
               <div className="flex gap-2">
                 <input value={title} onChange={(event) => { dirty.current = true; setTitle(event.target.value); }} placeholder="Note title" className="min-w-0 flex-1 rounded-xl border border-slate-300 bg-white px-3 py-2.5 text-lg font-black text-slate-900 outline-none focus:ring-2 focus:ring-rose-500" />
-                <button type="button" onClick={saveNow} className="flex items-center gap-2 rounded-xl bg-[#8f3655] px-4 py-2.5 text-sm font-bold text-white hover:bg-[#762944]">
+                <button type="button" onClick={saveNow} className="flex items-center gap-2 rounded-xl bg-[#2f5f54] px-4 py-2.5 text-sm font-bold text-white hover:bg-[#264D44]">
                   <Save className="size-5" />Save
                 </button>
               </div>

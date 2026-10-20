@@ -39,14 +39,14 @@ export function FreelancerPortalShell({ children }: { children: React.ReactNode 
   };
 
   return (
-    <div className="min-h-screen bg-[#F7F6F3] text-[#221219] md:grid md:grid-cols-[320px_1fr]">
-      <aside className="fixed inset-y-0 left-0 z-40 hidden w-80 flex-col overflow-hidden bg-[#2A1620] text-white md:flex">
+    <div className="min-h-screen bg-[#F7F6F3] text-[#0D1816] md:grid md:grid-cols-[320px_1fr]">
+      <aside className="fixed inset-y-0 left-0 z-40 hidden w-80 flex-col overflow-hidden bg-[#101E1B] text-white md:flex">
         <div className="flex h-full min-h-0 flex-col p-4 lg:p-5">
           <Link href="/freelancer/dashboard" className="shrink-0 font-[var(--font-display)] text-2xl font-black leading-tight text-[#D8BE93] lg:text-3xl">Wedding<br />Photo Planet</Link>
           <p className="mt-3 shrink-0 border-b border-[#C9A876]/35 pb-4 text-[10px] font-black uppercase tracking-[.18em] text-white/45 lg:mt-4 lg:pb-5 lg:text-[11px]">Freelancer Panel</p>
           <div className="mt-4 shrink-0 rounded-2xl bg-white/8 p-3 lg:mt-5 lg:p-4">
             <div className="flex items-center gap-3">
-              <span className="grid size-12 place-items-center rounded-full bg-[#C9A876] text-lg font-black text-[#2A1620] lg:size-14">F</span>
+              <span className="grid size-12 place-items-center rounded-full bg-[#C9A876] text-lg font-black text-[#101E1B] lg:size-14">F</span>
               <div><p className="text-base font-black">Freelancer</p><p className="text-sm text-white/50">Active Panel</p></div>
             </div>
           </div>
@@ -68,13 +68,13 @@ export function FreelancerPortalShell({ children }: { children: React.ReactNode 
       </aside>
       <div className="md:col-start-2">
         <header className="sticky top-0 z-30 flex min-h-16 items-center justify-between border-b border-[#EDE8E2] bg-[#F7F6F3]/95 px-4 backdrop-blur-xl md:px-7">
-          <button className="grid size-11 place-items-center rounded-xl border border-[#EDE8E2] bg-white text-[#5A2F3E] md:hidden" aria-label="Open navigation"><Menu className="size-5" /></button>
+          <button className="grid size-11 place-items-center rounded-xl border border-[#EDE8E2] bg-white text-[#22413A] md:hidden" aria-label="Open navigation"><Menu className="size-5" /></button>
           <div>
             <p className="text-[10px] font-black uppercase tracking-[.16em] text-[#C9A876]">Freelancer Panel</p>
             <h1 className="text-lg font-black">{BRAND.name}</h1>
           </div>
           <div className="flex items-center gap-2">
-            <Link href="/freelancer/find-vendor" className="hidden min-h-10 items-center gap-2 rounded-full border border-[#EDE8E2] bg-white px-4 text-sm font-bold sm:inline-flex"><Search className="size-4 text-[#8D5265]" />Find Vendor</Link>
+            <Link href="/freelancer/find-vendor" className="hidden min-h-10 items-center gap-2 rounded-full border border-[#EDE8E2] bg-white px-4 text-sm font-bold sm:inline-flex"><Search className="size-4 text-[#3B665C]" />Find Vendor</Link>
             <Link href="/freelancer/notifications" className="grid size-11 place-items-center rounded-full border border-[#EDE8E2] bg-white" aria-label="Notifications"><Bell className="size-4" /></Link>
           </div>
         </header>
@@ -84,7 +84,7 @@ export function FreelancerPortalShell({ children }: { children: React.ReactNode 
         {nav.slice(0, 5).map(({ href, label, icon: Icon }) => {
           const active = pathname === href;
           return (
-            <Link key={`${href}-${label}`} href={href} className={`grid min-h-16 place-items-center text-[10px] font-extrabold ${active ? 'text-[#8D5265]' : 'text-[#686164]'}`}>
+            <Link key={`${href}-${label}`} href={href} className={`grid min-h-16 place-items-center text-[10px] font-extrabold ${active ? 'text-[#3B665C]' : 'text-[#686164]'}`}>
               <Icon className="size-4" />
               <span>{label}</span>
             </Link>

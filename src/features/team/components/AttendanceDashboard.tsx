@@ -254,7 +254,7 @@ export const AttendanceDashboard: React.FC<Props> = ({
           <div>
             <p className="text-[11px] font-extrabold uppercase tracking-wider text-slate-500 mb-2">
               Attendance for {formatLongDate(dateKey)}
-              {dateKey === today && <span className="ml-2 text-[#8f3655]">· Today</span>}
+              {dateKey === today && <span className="ml-2 text-[#2f5f54]">· Today</span>}
             </p>
             <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3">
               <KpiCard label="Present" value={summary.present} icon={CheckCircle2} tone="emerald" hint="Office + WFH + shoot" />
@@ -270,7 +270,7 @@ export const AttendanceDashboard: React.FC<Props> = ({
           <section className={`${CARD} p-5 space-y-3`}>
             <header className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
               <h3 className="text-sm font-extrabold text-slate-900 uppercase tracking-tight flex items-center gap-2">
-                <Users className="w-4 h-4 text-[#8f3655]" /> Team attendance
+                <Users className="w-4 h-4 text-[#2f5f54]" /> Team attendance
               </h3>
               <p className="text-[11px] font-bold text-slate-500">
                 {filteredRows.length} of {activeTeam.length} members · {summary.onShoot} on shoot
@@ -312,7 +312,7 @@ export const AttendanceDashboard: React.FC<Props> = ({
                           <TD>
                             <button type="button" onClick={() => onOpenProfile(member)} className="flex items-center gap-2.5 text-left cursor-pointer group">
                               <Avatar member={member} size="sm" />
-                              <span className="font-extrabold text-slate-900 group-hover:text-[#8f3655] transition">{member.name}</span>
+                              <span className="font-extrabold text-slate-900 group-hover:text-[#2f5f54] transition">{member.name}</span>
                             </button>
                           </TD>
                           <TD className="text-slate-600 font-semibold">{member.role}</TD>

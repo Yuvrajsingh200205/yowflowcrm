@@ -64,7 +64,7 @@ export default function ClientsPage() {
           sizes="100vw"
           className="object-cover object-[50%_28%]"
         />
-        <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(20,12,15,0.78),rgba(20,12,15,0.2))]" />
+        <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(9,14,13,0.78),rgba(9,14,13,0.2))]" />
         <Container className="relative flex min-h-[26rem] items-end py-14">
           <p className="ed-display max-w-[16ch] text-[clamp(2rem,4vw,3.2rem)] leading-[1.05] text-[#F7F1E8]">
             The photographs are the point. <em>The waiting should not be.</em>

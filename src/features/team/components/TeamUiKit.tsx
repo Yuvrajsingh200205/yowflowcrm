@@ -46,23 +46,23 @@ export function RoleIcon({ role, className = 'size-3.5' }: { role?: string; clas
 
 export const CARD = 'rounded-2xl border border-[#e2d9d3] bg-white shadow-[0_8px_24px_rgba(48,44,46,.05)]';
 export const FIELD =
-  'w-full rounded-xl border border-[#ded5cf] bg-[#fbfaf8] px-3 py-2.5 text-sm font-semibold text-slate-900 outline-none transition placeholder:font-medium placeholder:text-slate-400 focus:border-[#9b4865] focus:bg-white focus:ring-4 focus:ring-rose-100';
-export const LABEL = 'mb-1 block text-[10px] font-extrabold uppercase tracking-[.1em] text-[#6d2f45]';
+  'w-full rounded-xl border border-[#ded5cf] bg-[#fbfaf8] px-3 py-2.5 text-sm font-semibold text-slate-900 outline-none transition placeholder:font-medium placeholder:text-slate-400 focus:border-[#366e61] focus:bg-white focus:ring-4 focus:ring-rose-100';
+export const LABEL = 'mb-1 block text-[10px] font-extrabold uppercase tracking-[.1em] text-[#254b42]';
 
 export const BTN_PRIMARY =
-  'inline-flex cursor-pointer items-center justify-center gap-1.5 rounded-xl bg-gradient-to-r from-[#8f3655] to-[#6d2f45] px-4 py-2.5 text-xs font-extrabold text-white shadow-[0_8px_20px_rgba(109,47,69,.25)] transition hover:-translate-y-0.5 hover:shadow-lg disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:translate-y-0';
+  'inline-flex cursor-pointer items-center justify-center gap-1.5 rounded-xl bg-gradient-to-r from-[#2f5f54] to-[#254b42] px-4 py-2.5 text-xs font-extrabold text-white shadow-[0_8px_20px_rgba(37,75,66,.25)] transition hover:-translate-y-0.5 hover:shadow-lg disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:translate-y-0';
 export const BTN_GHOST =
   'inline-flex cursor-pointer items-center justify-center gap-1.5 rounded-xl border border-[#ded5cf] bg-white px-3 py-2 text-xs font-bold text-slate-700 transition hover:border-rose-300 hover:bg-[#fbfaf8] disabled:cursor-not-allowed disabled:opacity-50';
 export const BTN_DANGER =
   'inline-flex cursor-pointer items-center justify-center gap-1.5 rounded-xl border border-red-200 bg-red-50 px-3 py-2 text-xs font-bold text-red-700 transition hover:bg-red-100';
 export const BTN_CREAM =
-  'group relative inline-flex cursor-pointer items-center justify-center gap-2 overflow-hidden rounded-2xl border border-white/60 bg-gradient-to-r from-[#f9eee7] to-[#edcfc3] px-4 py-2.5 text-sm font-extrabold text-[#6d2f45] shadow-[0_8px_20px_rgba(28,13,19,.18)] transition hover:-translate-y-0.5 hover:shadow-xl';
+  'group relative inline-flex cursor-pointer items-center justify-center gap-2 overflow-hidden rounded-2xl border border-white/60 bg-gradient-to-r from-[#f9eee7] to-[#edcfc3] px-4 py-2.5 text-sm font-extrabold text-[#254b42] shadow-[0_8px_20px_rgba(10,20,17,.18)] transition hover:-translate-y-0.5 hover:shadow-xl';
 
 export const TOGGLE_WRAP = 'flex items-center rounded-xl border border-[#e2d9d3] bg-[#f6f1ee] p-1';
-export const TOGGLE_ACTIVE = 'border border-[#efd9b0]/80 bg-white text-[#6d2f45] shadow-sm';
-export const TOGGLE_IDLE = 'border border-transparent text-slate-600 hover:text-[#6d2f45]';
-export const ACCENT = 'text-[#8f3655]';
-export const LINK = 'cursor-pointer font-bold text-[#8f3655] underline hover:text-[#6d2f45]';
+export const TOGGLE_ACTIVE = 'border border-[#efd9b0]/80 bg-white text-[#254b42] shadow-sm';
+export const TOGGLE_IDLE = 'border border-transparent text-slate-600 hover:text-[#254b42]';
+export const ACCENT = 'text-[#2f5f54]';
+export const LINK = 'cursor-pointer font-bold text-[#2f5f54] underline hover:text-[#254b42]';
 
 interface KpiCardProps {
   label: string;
@@ -171,7 +171,7 @@ export const SectionCard: React.FC<{
     <header className="flex flex-col justify-between gap-3 border-b border-[#eee7e2] px-5 py-4 sm:flex-row sm:items-center">
       <div>
         <h3 className="flex items-center gap-2 text-sm font-extrabold uppercase tracking-tight text-slate-900">
-          {Icon && <Icon className="h-4 w-4 text-[#8f3655]" />}
+          {Icon && <Icon className="h-4 w-4 text-[#2f5f54]" />}
           <span>{title}</span>
         </h3>
         {subtitle && <p className="mt-0.5 text-[11px] font-medium text-slate-500">{subtitle}</p>}
@@ -190,7 +190,7 @@ export const EmptyState: React.FC<{
 }> = ({ icon: Icon, title, message, action }) => (
   <div className="space-y-3 px-6 py-10 text-center">
     {Icon && (
-      <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-2xl bg-rose-50 text-[#8f3655]">
+      <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-2xl bg-rose-50 text-[#2f5f54]">
         <Icon className="h-6 w-6" />
       </div>
     )}
@@ -240,7 +240,7 @@ export const ModalHero: React.FC<{
   labelledBy?: string;
   actions?: React.ReactNode;
 }> = ({ icon: Icon, eyebrow, title, description, onClose, labelledBy, actions }) => (
-  <header className="relative shrink-0 overflow-hidden bg-[radial-gradient(circle_at_86%_10%,rgba(236,190,169,.24),transparent_32%),linear-gradient(125deg,#704758,#55333f_52%,#38262d)] px-5 py-5 text-white sm:px-7 sm:py-6">
+  <header className="relative shrink-0 overflow-hidden bg-[radial-gradient(circle_at_86%_10%,rgba(236,190,169,.24),transparent_32%),linear-gradient(125deg,#33514A,#55333f_52%,#1b2825)] px-5 py-5 text-white sm:px-7 sm:py-6">
     <div className="absolute -bottom-14 -right-8 size-44 rounded-full border-[24px] border-white/5" />
     <div className="relative flex items-start justify-between gap-4">
       <div className="flex min-w-0 items-center gap-4">
@@ -248,14 +248,14 @@ export const ModalHero: React.FC<{
           <Icon className="size-7 text-[#f6d9ca]" />
         </span>
         <div className="min-w-0">
-          <p className="flex items-center gap-1.5 text-xs font-extrabold uppercase tracking-[.18em] text-[#ecc8d3]">
+          <p className="flex items-center gap-1.5 text-xs font-extrabold uppercase tracking-[.18em] text-[#d2e2de]">
             <Sparkles className="size-3.5" />
             {eyebrow}
           </p>
           <h2 id={labelledBy} className="mt-1 text-xl font-black tracking-tight sm:text-2xl">
             {title}
           </h2>
-          {description && <div className="mt-1 text-sm font-medium leading-relaxed text-[#eadfe2]">{description}</div>}
+          {description && <div className="mt-1 text-sm font-medium leading-relaxed text-[#dfeae7]">{description}</div>}
         </div>
       </div>
       <div className="flex shrink-0 items-center gap-2">
@@ -283,12 +283,12 @@ export const Drawer: React.FC<{
   if (!isOpen || typeof document === 'undefined') return null;
   return createPortal(
     <div className="fixed inset-0 z-[80] flex justify-end">
-      <div className="absolute inset-0 bg-[#24171c]/60 backdrop-blur-sm" onClick={onClose} aria-hidden="true" />
+      <div className="absolute inset-0 bg-[#111a18]/60 backdrop-blur-sm" onClick={onClose} aria-hidden="true" />
       <div
         role="dialog"
         aria-modal="true"
         aria-labelledby={labelledBy}
-        className={`relative z-10 flex h-full w-full ${widthClass} flex-col bg-[#fbfaf8] shadow-[0_30px_90px_rgba(26,13,19,.42)]`}
+        className={`relative z-10 flex h-full w-full ${widthClass} flex-col bg-[#fbfaf8] shadow-[0_30px_90px_rgba(9,19,17,.42)]`}
       >
         {children}
       </div>
@@ -306,13 +306,13 @@ export const Modal: React.FC<{
 }> = ({ isOpen, onClose, labelledBy, children, widthClass = 'max-w-2xl' }) => {
   if (!isOpen || typeof document === 'undefined') return null;
   return createPortal(
-    <div className="fixed inset-0 z-[80] flex items-center justify-center bg-[#24171c]/75 p-3 backdrop-blur-sm sm:p-6">
+    <div className="fixed inset-0 z-[80] flex items-center justify-center bg-[#111a18]/75 p-3 backdrop-blur-sm sm:p-6">
       <div className="absolute inset-0" onClick={onClose} aria-hidden="true" />
       <div
         role="dialog"
         aria-modal="true"
         aria-labelledby={labelledBy}
-        className={`relative z-10 max-h-[92vh] w-full ${widthClass} overflow-y-auto rounded-[2rem] border border-white/50 bg-white shadow-[0_30px_90px_rgba(26,13,19,.42)]`}
+        className={`relative z-10 max-h-[92vh] w-full ${widthClass} overflow-y-auto rounded-[2rem] border border-white/50 bg-white shadow-[0_30px_90px_rgba(9,19,17,.42)]`}
       >
         {children}
       </div>

@@ -376,7 +376,7 @@ const ApplyLeaveModal: React.FC<{
 
         <div className="rounded-xl bg-slate-50 border border-slate-200 px-3 py-2 text-[11px] font-bold text-slate-700 flex items-center justify-between">
           <span>Total days</span>
-          <span className="font-mono text-[#6d2f45]">{days}</span>
+          <span className="font-mono text-[#254b42]">{days}</span>
         </div>
 
         {clashing.length > 0 && (

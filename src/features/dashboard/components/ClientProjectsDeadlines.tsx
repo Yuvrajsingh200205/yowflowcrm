@@ -19,7 +19,7 @@ const STATUS_BADGE_CLASS: Record<string, string> = {
 export function ClientProjectsDeadlines({ projects, isEditor, onSelect, onViewAll }: Props) {
   return (
     <section className="dashboard-panel dashboard-panel--projects flex h-[34rem] flex-col overflow-hidden rounded-2xl border border-[#dfd9d2] border-t-3 border-t-[#b99a5e] bg-white shadow-[0_10px_30px_rgba(48,44,46,.07)]">
-      <div className="flex items-center justify-between border-b border-[#ece6e1] bg-linear-to-r from-[#f8f1f3] via-[#fbf7f1] to-white p-4 sm:p-5">
+      <div className="flex items-center justify-between border-b border-[#ece6e1] bg-linear-to-r from-[#f2f7f6] via-[#fbf7f1] to-white p-4 sm:p-5">
         <h3 className="flex items-center gap-2 text-sm font-extrabold uppercase tracking-wide text-slate-800">
           <Briefcase className="size-4 text-rose-700" />
           Client Projects &amp; Delivery Deadlines

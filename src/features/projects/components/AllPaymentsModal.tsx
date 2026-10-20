@@ -183,7 +183,7 @@ export const AllPaymentsModal: React.FC<AllPaymentsModalProps> = ({
       onClick={variant === 'modal' ? onClose : undefined}
     >
       <div 
-        className={variant === 'page' ? 'relative flex min-h-[calc(100vh-9rem)] w-full flex-col overflow-hidden rounded-2xl border border-[#dfd9d2] bg-slate-100 shadow-[0_12px_35px_rgba(48,31,38,.08)]' : 'relative my-auto flex max-h-[92vh] w-full max-w-5xl flex-col overflow-hidden rounded-2xl border border-slate-200 bg-slate-100 shadow-2xl'}
+        className={variant === 'page' ? 'relative flex min-h-[calc(100vh-9rem)] w-full flex-col overflow-hidden rounded-2xl border border-[#dfd9d2] bg-slate-100 shadow-[0_12px_35px_rgba(22,35,32,.08)]' : 'relative my-auto flex max-h-[92vh] w-full max-w-5xl flex-col overflow-hidden rounded-2xl border border-slate-200 bg-slate-100 shadow-2xl'}
         onClick={(e) => e.stopPropagation()}
       >
         {/* Top Header */}

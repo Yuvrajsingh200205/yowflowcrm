@@ -253,7 +253,7 @@ export const FreelancerDashboardView: React.FC<FreelancerDashboardViewProps> = (
           { label: 'Editors & Other', value: othersCount, icon: Layers, category: 'Editor' },
         ].map((item) => (
           <button key={item.label} type="button" onClick={() => onFilterCategory ? onFilterCategory(item.category) : onTabChange('all_freelancers')} className={`${CARD} p-4 text-left transition hover:border-rose-200`}>
-            <item.icon className="mb-2 size-4 text-[#8f3655]" />
+            <item.icon className="mb-2 size-4 text-[#2f5f54]" />
             <p className="text-[10px] font-extrabold uppercase tracking-wider text-slate-500">{item.label}</p>
             <p className="mt-1 text-xl font-black text-slate-900">{item.value}</p>
           </button>
@@ -274,10 +274,10 @@ export const FreelancerDashboardView: React.FC<FreelancerDashboardViewProps> = (
                   <button type="button" key={cat.id} className="w-full space-y-1 text-left" onClick={() => onFilterCategory?.(cat.name)}>
                     <div className="flex justify-between text-xs">
                       <span className="font-bold text-slate-800">{cat.name}</span>
-                      <span className="font-extrabold text-[#8f3655]">{count}</span>
+                      <span className="font-extrabold text-[#2f5f54]">{count}</span>
                     </div>
                     <div className="h-2 overflow-hidden rounded-full bg-[#f6f1ee]">
-                      <div className="h-full rounded-full bg-[#8f3655]" style={{ width: `${percentage}%` }} />
+                      <div className="h-full rounded-full bg-[#2f5f54]" style={{ width: `${percentage}%` }} />
                     </div>
                   </button>
                 );
@@ -306,7 +306,7 @@ export const FreelancerDashboardView: React.FC<FreelancerDashboardViewProps> = (
                 </p>
               )}
             </div>
-            <button type="button" onClick={() => onTabChange('calendar')} className="text-xs font-bold text-[#8f3655]">
+            <button type="button" onClick={() => onTabChange('calendar')} className="text-xs font-bold text-[#2f5f54]">
               Open calendar
             </button>
           </div>
@@ -333,7 +333,7 @@ export const FreelancerDashboardView: React.FC<FreelancerDashboardViewProps> = (
                         <p className="truncate text-sm font-extrabold text-slate-900">{item.projectName}</p>
                         <p className="mt-0.5 text-[11px] font-semibold text-slate-500">{item.clientName} · {item.projectStatus.replaceAll('_', ' ')}</p>
                         <div className="mt-2 flex flex-wrap items-center gap-x-2 gap-y-1 text-xs">
-                          <span className="font-black uppercase tracking-wider text-[#8f3655]">{item.shootTitle}</span>
+                          <span className="font-black uppercase tracking-wider text-[#2f5f54]">{item.shootTitle}</span>
                           <span className="font-semibold text-slate-500">
                             {item.shootDate}
                             {item.startTime ? ` · ${item.startTime}` : ''}
@@ -411,7 +411,7 @@ export const FreelancerDashboardView: React.FC<FreelancerDashboardViewProps> = (
         <section className={`${CARD} p-5`}>
           <div className="flex items-center justify-between">
             <h3 className="text-xs font-extrabold uppercase tracking-wider text-slate-700">Top freelancer roster</h3>
-            <button type="button" onClick={() => onTabChange('all_freelancers')} className="text-xs font-bold text-[#8f3655]">
+            <button type="button" onClick={() => onTabChange('all_freelancers')} className="text-xs font-bold text-[#2f5f54]">
               View all
             </button>
           </div>
@@ -445,7 +445,7 @@ export const FreelancerDashboardView: React.FC<FreelancerDashboardViewProps> = (
                   const ledger = freelancerLedger(f.id, assignments, payments);
                   return (
                     <button key={f.id} type="button" onClick={() => onOpenProfile(f)} className="flex w-full items-center gap-3 rounded-xl border border-[#eee7e2] bg-[#fbfaf8] p-3 text-left hover:border-rose-200">
-                      <span className="grid size-10 place-items-center overflow-hidden rounded-full bg-[#f0dce3] text-xs font-black text-[#6d2f45]">
+                      <span className="grid size-10 place-items-center overflow-hidden rounded-full bg-[#e0ece9] text-xs font-black text-[#254b42]">
                         {f.profilePhoto ? <img src={f.profilePhoto} alt="" className="size-10 object-cover" /> : f.name.slice(0, 2).toUpperCase()}
                       </span>
                       <span className="min-w-0 flex-1">

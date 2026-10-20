@@ -3,7 +3,7 @@ import { ShieldAlert } from 'lucide-react';
 export function AccessDenied() {
   return (
     <div className="mx-auto my-12 max-w-xl rounded-3xl border border-[#eee7e2] bg-white p-8 text-center shadow-xl sm:p-12">
-      <div className="mx-auto flex size-16 items-center justify-center rounded-2xl bg-rose-50 text-[#8f3655]">
+      <div className="mx-auto flex size-16 items-center justify-center rounded-2xl bg-rose-50 text-[#2f5f54]">
         <ShieldAlert className="size-8" />
       </div>
       <h3 className="mt-5 text-2xl font-black text-slate-900">You don&apos;t have permission to access this section.</h3>

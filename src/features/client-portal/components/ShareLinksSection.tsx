@@ -79,7 +79,7 @@ export const ShareLinksSection: React.FC<ShareLinksSectionProps> = ({ projectId,
       const dataUrl = await QRCode.toDataURL(fullUrl(link.token), {
         width: 480,
         margin: 2,
-        color: { dark: '#6d2f45', light: '#ffffff' },
+        color: { dark: '#254b42', light: '#ffffff' },
       });
       setQrFor({ link, dataUrl });
     } catch {
@@ -147,7 +147,7 @@ export const ShareLinksSection: React.FC<ShareLinksSectionProps> = ({ projectId,
       ) : links.length === 0 ? (
         <div className="rounded-2xl border border-dashed border-[#e2d9d3] bg-white px-6 py-12 text-center">
           <Link2 className="mx-auto size-6 text-slate-300" />
-          <p className="mt-2 text-sm font-extrabold text-[#321f27]">No share links yet</p>
+          <p className="mt-2 text-sm font-extrabold text-[#162421]">No share links yet</p>
           <p className="mx-auto mt-1 max-w-sm text-xs font-medium text-slate-500">
             Create one to let family view your photographs without signing in.
           </p>
@@ -160,7 +160,7 @@ export const ShareLinksSection: React.FC<ShareLinksSectionProps> = ({ projectId,
               <article key={link.id} className={`${CARD} p-4 sm:p-5 space-y-3 ${revoked ? 'opacity-60' : ''}`}>
                 <div className="flex items-start justify-between gap-2">
                   <div className="min-w-0">
-                    <h3 className="truncate text-sm font-extrabold text-[#321f27]">{link.title}</h3>
+                    <h3 className="truncate text-sm font-extrabold text-[#162421]">{link.title}</h3>
                     <p className="text-[11px] font-bold text-slate-500">
                       {ACCESS_LABELS[link.accessType]}
                       {link.passwordProtected && ' • Password protected'}
@@ -221,7 +221,7 @@ export const ShareLinksSection: React.FC<ShareLinksSectionProps> = ({ projectId,
             className="w-full max-w-md max-h-[90vh] space-y-4 overflow-y-auto rounded-3xl border border-[#e2d9d3] bg-white p-5 shadow-2xl sm:p-7"
           >
             <div className="flex items-start justify-between gap-2">
-              <h3 className="text-lg font-extrabold text-[#321f27]">Create share link</h3>
+              <h3 className="text-lg font-extrabold text-[#162421]">Create share link</h3>
               <button type="button" onClick={() => setShowCreate(false)} className="rounded-lg p-1 text-slate-400 hover:bg-slate-100">
                 <X className="size-5" />
               </button>
@@ -302,7 +302,7 @@ export const ShareLinksSection: React.FC<ShareLinksSectionProps> = ({ projectId,
       {qrFor && (
         <div className="fixed inset-0 z-50 grid place-items-center bg-black/60 p-3 backdrop-blur-xs sm:p-6" onClick={() => setQrFor(null)}>
           <div onClick={(e) => e.stopPropagation()} className="w-full max-w-xs space-y-4 rounded-3xl border border-[#e2d9d3] bg-white p-6 text-center shadow-2xl">
-            <h3 className="truncate text-sm font-extrabold text-[#321f27]">{qrFor.link.title}</h3>
+            <h3 className="truncate text-sm font-extrabold text-[#162421]">{qrFor.link.title}</h3>
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img src={qrFor.dataUrl} alt={`QR code for ${qrFor.link.title}`} className="mx-auto w-full max-w-[14rem] rounded-xl border border-[#e2d9d3]" />
             <p className="break-all text-[10px] text-slate-500">{fullUrl(qrFor.link.token)}</p>

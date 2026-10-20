@@ -37,27 +37,27 @@ export function LeadQuotationModal(props: LeadQuotationModalProps) {
       <section className="space-y-3">
         <div className="flex items-center justify-between gap-3">
           <div>
-            <h3 className="text-sm font-black uppercase tracking-[.12em] text-[#4b303a]">Attached quotation files</h3>
+            <h3 className="text-sm font-black uppercase tracking-[.12em] text-[#233631]">Attached quotation files</h3>
             <p className="mt-1 text-sm text-[#766b6f]">Review, download or remove saved client quotations.</p>
           </div>
-          <span className="rounded-full bg-[#f3e8ec] px-3 py-1 text-sm font-black text-[#71364c]">{files.length}</span>
+          <span className="rounded-full bg-[#eaf1f0] px-3 py-1 text-sm font-black text-[#285147]">{files.length}</span>
         </div>
 
         {files.length === 0 ? (
-          <div className="grid min-h-36 place-items-center rounded-3xl border-2 border-dashed border-[#dacdd0] bg-[#faf7f5] p-6 text-center">
-            <div><FileText className="mx-auto size-8 text-[#a56a80]" /><p className="mt-3 text-base font-bold text-[#554b4f]">No quotation files attached yet</p><p className="mt-1 text-sm text-[#83787c]">Upload a PDF, Word, Excel or image quotation below.</p></div>
+          <div className="grid min-h-36 place-items-center rounded-3xl border-2 border-dashed border-[#cddad7] bg-[#faf7f5] p-6 text-center">
+            <div><FileText className="mx-auto size-8 text-[#497a6e]" /><p className="mt-3 text-base font-bold text-[#554b4f]">No quotation files attached yet</p><p className="mt-1 text-sm text-[#83787c]">Upload a PDF, Word, Excel or image quotation below.</p></div>
           </div>
         ) : (
           <div className="space-y-3">
             {files.map((file) => (
               <article key={file.id} className="flex flex-col gap-3 rounded-2xl border border-[#e0d4d2] bg-[#fbf8f6] p-4 sm:flex-row sm:items-center sm:justify-between">
                 <div className="flex min-w-0 items-center gap-3">
-                  <span className="grid size-11 shrink-0 place-items-center rounded-xl bg-[#6d354a] text-xs font-black uppercase text-white">{file.fileType || 'PDF'}</span>
-                  <div className="min-w-0"><p className="truncate text-base font-extrabold text-[#352c30]">{file.fileName}</p><p className="mt-1 text-sm text-[#786e72]">{file.fileSize || '1.5 MB'} · Uploaded by <strong>{file.uploadedBy}</strong> on {file.uploadedDate}</p>{file.notes && <p className="mt-1 text-sm italic text-[#7d4057]">“{file.notes}”</p>}</div>
+                  <span className="grid size-11 shrink-0 place-items-center rounded-xl bg-[#264e45] text-xs font-black uppercase text-white">{file.fileType || 'PDF'}</span>
+                  <div className="min-w-0"><p className="truncate text-base font-extrabold text-[#352c30]">{file.fileName}</p><p className="mt-1 text-sm text-[#786e72]">{file.fileSize || '1.5 MB'} · Uploaded by <strong>{file.uploadedBy}</strong> on {file.uploadedDate}</p>{file.notes && <p className="mt-1 text-sm italic text-[#2e5a50]">“{file.notes}”</p>}</div>
                 </div>
                 <div className="flex shrink-0 items-center gap-2">
-                  <button type="button" onClick={() => onPreview(file, lead)} className="inline-flex min-h-10 items-center gap-2 rounded-xl bg-[#6d354a] px-3 text-sm font-extrabold text-white transition hover:bg-[#57283a]"><Eye className="size-4" />View</button>
-                  {file.fileUrl ? <a href={file.fileUrl} download={file.fileName} aria-label="Download quotation" className="grid size-10 place-items-center rounded-xl border border-[#d9ceca] bg-white text-[#5f4f55] transition hover:border-[#a56a80] hover:text-[#71364c]"><Download className="size-4" /></a> : <button type="button" onClick={() => alert(`Simulated Download for ${file.fileName}`)} aria-label="Download quotation" className="grid size-10 place-items-center rounded-xl border border-[#d9ceca] bg-white text-[#5f4f55]"><Download className="size-4" /></button>}
+                  <button type="button" onClick={() => onPreview(file, lead)} className="inline-flex min-h-10 items-center gap-2 rounded-xl bg-[#264e45] px-3 text-sm font-extrabold text-white transition hover:bg-[#1e3d36]"><Eye className="size-4" />View</button>
+                  {file.fileUrl ? <a href={file.fileUrl} download={file.fileName} aria-label="Download quotation" className="grid size-10 place-items-center rounded-xl border border-[#d9ceca] bg-white text-[#5f4f55] transition hover:border-[#497a6e] hover:text-[#285147]"><Download className="size-4" /></a> : <button type="button" onClick={() => alert(`Simulated Download for ${file.fileName}`)} aria-label="Download quotation" className="grid size-10 place-items-center rounded-xl border border-[#d9ceca] bg-white text-[#5f4f55]"><Download className="size-4" /></button>}
                   {(isOwner || file.uploadedBy === userName) && <button type="button" onClick={() => onDelete(lead.id, file.id, file.fileName)} aria-label="Delete quotation" className="grid size-10 place-items-center rounded-xl border border-red-200 bg-red-50 text-red-600 transition hover:bg-red-100"><Trash2 className="size-4" /></button>}
                 </div>
               </article>
@@ -67,14 +67,14 @@ export function LeadQuotationModal(props: LeadQuotationModalProps) {
       </section>
 
       <form onSubmit={onSubmit} className="space-y-4 rounded-3xl border border-[#e0d4d2] bg-[#f6f1ee] p-4 sm:p-5">
-        <div><h3 className="flex items-center gap-2 text-base font-black text-[#3a2d32]"><Upload className="size-5 text-[#477a67]" />Upload new quotation</h3><p className="mt-1 text-sm text-[#786e72]">Add the client-facing quotation and an optional internal note.</p></div>
-        <label className="block text-sm font-extrabold text-[#4c4145]">Select quotation file <span className="mt-1 block text-xs font-medium text-[#84797d]">PDF, Word, Excel or image</span><input type="file" onChange={onFileChange} accept=".pdf,.doc,.docx,.xls,.xlsx,.png,.jpg,.jpeg" className="mt-2 w-full text-sm text-[#61565a] file:mr-3 file:rounded-xl file:border-0 file:bg-[#6d354a] file:px-4 file:py-2.5 file:text-sm file:font-extrabold file:text-white hover:file:bg-[#57283a]" /></label>
-        <label className="block text-sm font-extrabold text-[#4c4145]">File name / reference name<input type="text" required placeholder="e.g. ClientName_Wedding_Quotation_v1.pdf" value={fileName} onChange={(event) => onFileNameChange(event.target.value)} className="mt-2 min-h-12 w-full rounded-xl border border-[#d9ceca] bg-white px-4 text-base font-semibold text-[#342d30] outline-none transition placeholder:text-[#aaa1a4] focus:border-[#9b5871] focus:ring-4 focus:ring-[#9b5871]/10" /></label>
+        <div><h3 className="flex items-center gap-2 text-base font-black text-[#202a28]"><Upload className="size-5 text-[#477a67]" />Upload new quotation</h3><p className="mt-1 text-sm text-[#786e72]">Add the client-facing quotation and an optional internal note.</p></div>
+        <label className="block text-sm font-extrabold text-[#4c4145]">Select quotation file <span className="mt-1 block text-xs font-medium text-[#84797d]">PDF, Word, Excel or image</span><input type="file" onChange={onFileChange} accept=".pdf,.doc,.docx,.xls,.xlsx,.png,.jpg,.jpeg" className="mt-2 w-full text-sm text-[#61565a] file:mr-3 file:rounded-xl file:border-0 file:bg-[#264e45] file:px-4 file:py-2.5 file:text-sm file:font-extrabold file:text-white hover:file:bg-[#1e3d36]" /></label>
+        <label className="block text-sm font-extrabold text-[#4c4145]">File name / reference name<input type="text" required placeholder="e.g. ClientName_Wedding_Quotation_v1.pdf" value={fileName} onChange={(event) => onFileNameChange(event.target.value)} className="mt-2 min-h-12 w-full rounded-xl border border-[#d9ceca] bg-white px-4 text-base font-semibold text-[#342d30] outline-none transition placeholder:text-[#aaa1a4] focus:border-[#3f7064] focus:ring-4 focus:ring-[#3f7064]/10" /></label>
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-          <label className="text-sm font-extrabold text-[#4c4145]">Format type<div className="relative mt-2"><select value={fileType} onChange={(event) => onFileTypeChange(event.target.value)} className="min-h-12 w-full appearance-none rounded-xl border border-[#d9ceca] bg-white px-4 pr-10 text-base font-semibold text-[#342d30] outline-none focus:border-[#9b5871]"><option value="pdf">PDF Document</option><option value="excel">Excel Spreadsheet (.xlsx)</option><option value="word">Word File (.docx)</option><option value="image">Image / JPG Quote</option></select><ChevronDown className="pointer-events-none absolute right-3 top-1/2 size-5 -translate-y-1/2 text-[#704153]" /></div></label>
-          <label className="text-sm font-extrabold text-[#4c4145]">Quotation notes / discount<input type="text" placeholder="e.g. Includes 10% booking discount" value={notes} onChange={(event) => onNotesChange(event.target.value)} className="mt-2 min-h-12 w-full rounded-xl border border-[#d9ceca] bg-white px-4 text-base font-semibold outline-none placeholder:text-[#aaa1a4] focus:border-[#9b5871]" /></label>
+          <label className="text-sm font-extrabold text-[#4c4145]">Format type<div className="relative mt-2"><select value={fileType} onChange={(event) => onFileTypeChange(event.target.value)} className="min-h-12 w-full appearance-none rounded-xl border border-[#d9ceca] bg-white px-4 pr-10 text-base font-semibold text-[#342d30] outline-none focus:border-[#3f7064]"><option value="pdf">PDF Document</option><option value="excel">Excel Spreadsheet (.xlsx)</option><option value="word">Word File (.docx)</option><option value="image">Image / JPG Quote</option></select><ChevronDown className="pointer-events-none absolute right-3 top-1/2 size-5 -translate-y-1/2 text-[#2F5149]" /></div></label>
+          <label className="text-sm font-extrabold text-[#4c4145]">Quotation notes / discount<input type="text" placeholder="e.g. Includes 10% booking discount" value={notes} onChange={(event) => onNotesChange(event.target.value)} className="mt-2 min-h-12 w-full rounded-xl border border-[#d9ceca] bg-white px-4 text-base font-semibold outline-none placeholder:text-[#aaa1a4] focus:border-[#3f7064]" /></label>
         </div>
-        <div className="flex justify-end border-t border-[#e2d8d4] pt-4"><button type="submit" className="inline-flex min-h-11 items-center gap-2 rounded-xl bg-[#6d354a] px-5 text-sm font-black text-white shadow-lg shadow-[#6d354a]/15 transition hover:-translate-y-0.5 hover:bg-[#57283a]"><Upload className="size-4" />Save Quotation File</button></div>
+        <div className="flex justify-end border-t border-[#e2d8d4] pt-4"><button type="submit" className="inline-flex min-h-11 items-center gap-2 rounded-xl bg-[#264e45] px-5 text-sm font-black text-white shadow-lg shadow-[#264e45]/15 transition hover:-translate-y-0.5 hover:bg-[#1e3d36]"><Upload className="size-4" />Save Quotation File</button></div>
       </form>
     </LeadModalShell>
   );

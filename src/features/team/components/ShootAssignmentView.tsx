@@ -153,11 +153,11 @@ export const ShootAssignmentView: React.FC<Props> = ({
     <div className="space-y-5">
       {focusMember && (
         <div className="rounded-2xl border border-rose-200 bg-rose-50 px-4 py-3 flex items-center justify-between gap-3">
-          <p className="text-xs font-bold text-[#55333f] flex items-center gap-2">
+          <p className="text-xs font-bold text-[#253d37] flex items-center gap-2">
             <UserPlus className="w-4 h-4" />
             Assigning <strong>{focusMember.name}</strong> ({focusMember.role}) — open a shoot below and add them to a crew slot.
           </p>
-          <button type="button" onClick={onClearFocusMember} className="p-1 rounded-lg text-[#9b4865] hover:bg-rose-100 cursor-pointer" aria-label="Clear focus member">
+          <button type="button" onClick={onClearFocusMember} className="p-1 rounded-lg text-[#366e61] hover:bg-rose-100 cursor-pointer" aria-label="Clear focus member">
             <X className="w-4 h-4" />
           </button>
         </div>
@@ -181,7 +181,7 @@ export const ShootAssignmentView: React.FC<Props> = ({
               type="button"
               onClick={() => setFilter(f)}
               className={`cursor-pointer rounded-lg px-3 py-1.5 text-xs font-bold capitalize transition ${
-                filter === f ? 'border border-[#efd9b0]/80 bg-white text-[#6d2f45] shadow-sm' : 'text-slate-600 hover:text-[#6d2f45]'
+                filter === f ? 'border border-[#efd9b0]/80 bg-white text-[#254b42] shadow-sm' : 'text-slate-600 hover:text-[#254b42]'
               }`}
               aria-pressed={filter === f}
             >
@@ -220,7 +220,7 @@ export const ShootAssignmentView: React.FC<Props> = ({
                     <h3 className="text-sm font-extrabold text-slate-900 truncate flex items-center gap-2">
                       {shoot.title || 'Shoot'}
                       {isCancelled && <Badge className="bg-red-100 text-red-700 border-red-200">Cancelled</Badge>}
-                      {dateKey === today && <Badge className="bg-rose-100 text-[#6d2f45] border-rose-200">Today</Badge>}
+                      {dateKey === today && <Badge className="bg-rose-100 text-[#254b42] border-rose-200">Today</Badge>}
                     </h3>
                     <p className="text-[11px] font-semibold text-slate-500 truncate">{project.clientWeddingTitle}</p>
                   </div>
@@ -254,14 +254,14 @@ export const ShootAssignmentView: React.FC<Props> = ({
                                 }`}
                               >
                                 {member ? <Avatar member={member} size="sm" /> : (
-                                  <span className="grid size-8 place-items-center rounded-full bg-rose-50 text-[#8f3655]"><RoleIcon role={c.role} className="size-4" /></span>
+                                  <span className="grid size-8 place-items-center rounded-full bg-rose-50 text-[#2f5f54]"><RoleIcon role={c.role} className="size-4" /></span>
                                 )}
                                 <div className="min-w-0">
                                   <button
                                     type="button"
                                     onClick={() => member && onOpenProfile(member)}
                                     disabled={!member}
-                                    className={`text-xs font-extrabold text-slate-900 truncate max-w-[140px] block text-left ${member ? 'hover:text-[#8f3655] cursor-pointer' : 'cursor-default'}`}
+                                    className={`text-xs font-extrabold text-slate-900 truncate max-w-[140px] block text-left ${member ? 'hover:text-[#2f5f54] cursor-pointer' : 'cursor-default'}`}
                                   >
                                     {c.name || 'Unnamed'}
                                   </button>
@@ -307,13 +307,13 @@ export const ShootAssignmentView: React.FC<Props> = ({
                               className={`rounded-xl border border-slate-200 bg-white p-2.5 text-left ${canAssign ? 'hover:border-rose-300 hover:shadow-sm cursor-pointer' : 'opacity-70 cursor-default'} transition`}
                             >
                               <p className="flex items-center gap-1 truncate text-[10px] font-extrabold uppercase tracking-wider text-slate-500">
-                                <RoleIcon role={role} className="size-3.5 text-[#8f3655]" /> {role}
+                                <RoleIcon role={role} className="size-3.5 text-[#2f5f54]" /> {role}
                               </p>
                               <p className={`text-xs font-black mt-0.5 ${filled.length ? 'text-emerald-700' : 'text-slate-400'}`}>
                                 {filled.length ? `${filled.length} assigned` : 'Select…'}
                               </p>
                               {canAssign && (
-                              <p className="text-[10px] font-bold text-[#8f3655] mt-1 inline-flex items-center gap-0.5">
+                              <p className="text-[10px] font-bold text-[#2f5f54] mt-1 inline-flex items-center gap-0.5">
                                 <Plus className="w-3 h-3" /> Add crew
                               </p>
                               )}
@@ -411,7 +411,7 @@ const CrewPickerModal: React.FC<{
       <header className="flex items-center justify-between gap-3 border-b border-slate-100 px-5 py-4">
         <div>
           <h3 id={titleId} className="text-base font-black text-slate-900 flex items-center gap-2">
-            <Users className="w-5 h-5 text-[#8f3655]" /> Assign {role}
+            <Users className="w-5 h-5 text-[#2f5f54]" /> Assign {role}
           </h3>
           <p className="text-[11px] font-semibold text-slate-500">
             {shoot.title} · {project.clientWeddingTitle} · {formatLongDate(dateKey)}
@@ -441,7 +441,7 @@ const CrewPickerModal: React.FC<{
                 <div className="min-w-0 flex-1">
                   <p className="text-xs font-extrabold text-slate-900 truncate">
                     {member.name}
-                    {roleMatch && <Badge className="ml-1.5 bg-rose-100 text-[#6d2f45] border-rose-200">Role match</Badge>}
+                    {roleMatch && <Badge className="ml-1.5 bg-rose-100 text-[#254b42] border-rose-200">Role match</Badge>}
                   </p>
                   <p className="text-[10px] font-bold text-slate-400 truncate">{member.role}</p>
                   <p className="text-[10px] font-semibold text-slate-500 truncate">{availability.reason}</p>

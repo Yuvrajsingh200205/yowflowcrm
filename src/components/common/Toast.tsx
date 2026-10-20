@@ -100,7 +100,7 @@ export function ToastProvider({ children }: { children: React.ReactNode }) {
             {(() => {
               const Icon = toastIcon(t.message, t.variant);
               return (
-                <span className={`grid size-8 shrink-0 place-items-center rounded-xl ${t.variant === 'error' ? 'bg-red-500/20 text-red-300' : 'bg-white/10 text-[#f1c8d5]'}`}>
+                <span className={`grid size-8 shrink-0 place-items-center rounded-xl ${t.variant === 'error' ? 'bg-red-500/20 text-red-300' : 'bg-white/10 text-[#d5e4e1]'}`}>
                   <Icon className="size-4" />
                 </span>
               );

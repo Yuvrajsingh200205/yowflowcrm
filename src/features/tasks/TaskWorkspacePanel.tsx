@@ -35,11 +35,11 @@ export function TaskWorkspacePanel({ tasks, title, description, showAssignee = f
 
   return (
     <section className={`flex flex-col overflow-hidden rounded-3xl border border-[#e9deda] bg-white shadow-sm ${panelClassName}`}>
-      <div className="shrink-0 flex flex-wrap items-start justify-between gap-4 border-b border-[#f0e9e5] bg-[linear-gradient(115deg,#fff8fa,#fff)] px-5 py-4">
+      <div className="shrink-0 flex flex-wrap items-start justify-between gap-4 border-b border-[#f0e9e5] bg-[linear-gradient(115deg,#fbfcfc,#fff)] px-5 py-4">
         <div className="flex gap-3">
-          <div className="flex size-10 shrink-0 items-center justify-center rounded-2xl bg-[#8f3655] text-white"><ClipboardList className="size-5" /></div>
+          <div className="flex size-10 shrink-0 items-center justify-center rounded-2xl bg-[#2f5f54] text-white"><ClipboardList className="size-5" /></div>
           <div>
-            <p className="text-xs font-extrabold uppercase tracking-[.14em] text-[#8f3655]">Live task workspace</p>
+            <p className="text-xs font-extrabold uppercase tracking-[.14em] text-[#2f5f54]">Live task workspace</p>
             <h2 className="text-lg font-black text-slate-900">{title}</h2>
             <p className="mt-0.5 text-sm text-slate-500">{description}</p>
           </div>
@@ -52,7 +52,7 @@ export function TaskWorkspacePanel({ tasks, title, description, showAssignee = f
 
       {tasks.length === 0 ? (
         <div className={`min-h-0 flex-1 px-5 text-center ${compactEmpty ? 'py-6' : 'py-9'} ${contentClassName}`}>
-          <CheckCircle2 className="mx-auto size-7 text-[#b8a4ac]" />
+          <CheckCircle2 className="mx-auto size-7 text-[#a4b8b3]" />
           <p className="mt-2 text-sm font-bold text-slate-700">No tasks assigned yet.</p>
           <p className="mt-1 text-xs text-slate-500">New assignments will appear here as soon as they are created.</p>
         </div>
@@ -78,7 +78,7 @@ export function TaskWorkspacePanel({ tasks, title, description, showAssignee = f
                   {STATUS_OPTIONS.map((option) => <option key={option.value} value={option.value}>{option.label}</option>)}
                 </select>
               ) : (
-                <span className="rounded-full bg-[#f8f2f4] px-3 py-1.5 text-xs font-extrabold capitalize text-[#8f3655]">{task.status.replaceAll('_', ' ')}</span>
+                <span className="rounded-full bg-[#f3f7f6] px-3 py-1.5 text-xs font-extrabold capitalize text-[#2f5f54]">{task.status.replaceAll('_', ' ')}</span>
               )}
             </article>
           ))}

@@ -7,9 +7,9 @@ import { AlertCircle, CheckCircle2, KeyRound, Loader2, Mail, ShieldCheck } from 
 import { ApiError } from '@/lib/api/client';
 import { freelancerPortalApi, OnboardingValidation } from '@/lib/api/freelancerPortal';
 
-const field = 'mt-1 h-12 w-full rounded-lg border border-[#ddd5cf] bg-white px-3 text-sm font-semibold text-slate-900 outline-none transition focus:border-[#8D5265] focus:ring-2 focus:ring-[#8D5265]/20';
-const primary = 'inline-flex min-h-11 items-center justify-center gap-2 rounded-lg bg-[#6d2f45] px-4 py-2 text-sm font-black text-white shadow-sm transition hover:bg-[#59303f] disabled:cursor-not-allowed disabled:opacity-60';
-const secondary = 'inline-flex min-h-11 items-center justify-center gap-2 rounded-lg border border-[#ddd5cf] bg-white px-4 py-2 text-sm font-black text-[#5A2F3E] transition hover:bg-[#faf5f3]';
+const field = 'mt-1 h-12 w-full rounded-lg border border-[#ddd5cf] bg-white px-3 text-sm font-semibold text-slate-900 outline-none transition focus:border-[#3B665C] focus:ring-2 focus:ring-[#3B665C]/20';
+const primary = 'inline-flex min-h-11 items-center justify-center gap-2 rounded-lg bg-[#254b42] px-4 py-2 text-sm font-black text-white shadow-sm transition hover:bg-[#234039] disabled:cursor-not-allowed disabled:opacity-60';
+const secondary = 'inline-flex min-h-11 items-center justify-center gap-2 rounded-lg border border-[#ddd5cf] bg-white px-4 py-2 text-sm font-black text-[#22413A] transition hover:bg-[#faf5f3]';
 
 function messageFor(status: OnboardingValidation['status'] | 'missing') {
   if (status === 'expired') return { title: 'This invitation has expired.', text: 'Contact the studio team and ask them to send a fresh onboarding invitation.', action: 'Contact the studio' };
@@ -81,7 +81,7 @@ export function OnboardingPageClient() {
   if (loading) {
     return (
       <main className="grid min-h-screen place-items-center bg-[#fbfaf8] px-5">
-        <div className="text-center text-sm font-bold text-slate-600"><Loader2 className="mx-auto mb-3 size-5 animate-spin text-[#8D5265]" />Checking invitation...</div>
+        <div className="text-center text-sm font-bold text-slate-600"><Loader2 className="mx-auto mb-3 size-5 animate-spin text-[#3B665C]" />Checking invitation...</div>
       </main>
     );
   }
@@ -109,7 +109,7 @@ export function OnboardingPageClient() {
           <div className="flex items-start gap-3">
             <span className="grid size-11 shrink-0 place-items-center rounded-lg bg-emerald-50 text-emerald-700"><ShieldCheck className="size-5" /></span>
             <div>
-              <p className="text-xs font-black uppercase tracking-[.14em] text-[#8D5265]">Freelancer onboarding</p>
+              <p className="text-xs font-black uppercase tracking-[.14em] text-[#3B665C]">Freelancer onboarding</p>
               <h1 className="mt-1 text-2xl font-black tracking-tight text-slate-900">Welcome, {state.freelancer?.displayName}</h1>
               <p className="mt-2 text-sm font-medium leading-6 text-slate-600">Create your portal password. After this, you will sign in through the freelancer login page.</p>
             </div>

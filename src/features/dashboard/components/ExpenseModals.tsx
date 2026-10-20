@@ -8,7 +8,7 @@ export function ExpenseModals({ open: showAddExpenseModal, variant = 'modal', se
   {/* Modal: Log / Edit Office Expense */}
   {showAddExpenseModal && (
     <div className={variant === 'page' ? 'w-full' : 'fixed inset-0 z-50 flex items-center justify-center bg-slate-900/50 p-4 backdrop-blur-xs'}>
-      <div className={variant === 'page' ? 'mx-auto min-h-[calc(100vh-9rem)] w-full max-w-4xl space-y-5 rounded-2xl border border-[#dfd9d2] bg-white p-5 shadow-[0_12px_35px_rgba(48,31,38,.08)] sm:p-7' : 'w-full max-w-md space-y-4 rounded-2xl border border-slate-200 bg-white p-5 shadow-xl animate-in fade-in zoom-in-95 duration-200'}>
+      <div className={variant === 'page' ? 'mx-auto min-h-[calc(100vh-9rem)] w-full max-w-4xl space-y-5 rounded-2xl border border-[#dfd9d2] bg-white p-5 shadow-[0_12px_35px_rgba(22,35,32,.08)] sm:p-7' : 'w-full max-w-md space-y-4 rounded-2xl border border-slate-200 bg-white p-5 shadow-xl animate-in fade-in zoom-in-95 duration-200'}>
         <div className="flex items-center justify-between border-b border-slate-100 pb-3">
           <h4 className="font-extrabold text-slate-900 text-sm flex items-center gap-2">
             <Receipt className="w-4 h-4 text-rose-600" />

@@ -580,7 +580,7 @@ export const LeadsManagement: React.FC<LeadsManagementProps> = ({ currentUser, t
 
       {/* YEARLY & MONTHLY TARGETING & GOALS WIDGET (Visible to Owner & Managers only) */}
       {isOwner && activeSubTab === 'list' && (
-        <div className="space-y-4 rounded-3xl border border-[#ddc89c]/30 bg-[linear-gradient(135deg,#422a34,#302329_55%,#241b1f)] p-5 text-white shadow-xl md:p-6">
+        <div className="space-y-4 rounded-3xl border border-[#ddc89c]/30 bg-[linear-gradient(135deg,#1e302b,#302329_55%,#131a18)] p-5 text-white shadow-xl md:p-6">
           <div className="flex flex-col items-start justify-between gap-3 border-b border-rose-300/15 pb-3.5 sm:flex-row sm:items-center">
             <div className="flex items-center gap-2.5">
               <div className="rounded-2xl border border-[#efd9b0]/25 bg-[#efd9b0]/10 p-2.5 text-[#efd9b0]">
@@ -595,7 +595,7 @@ export const LeadsManagement: React.FC<LeadsManagementProps> = ({ currentUser, t
                     </span>
                   </h3>
                 </div>
-                <p className="mt-0.5 text-sm font-medium text-[#d9cdd1]">
+                <p className="mt-0.5 text-sm font-medium text-[#cdd9d6]">
                   Owner defined yearly ({targets.targetYear}) and monthly ({currentMonthName}) inquiry & conversion goals.
                 </p>
               </div>
@@ -604,7 +604,7 @@ export const LeadsManagement: React.FC<LeadsManagementProps> = ({ currentUser, t
             {isOwner && (
               <button
                 onClick={handleOpenTargetModal}
-                className="flex shrink-0 cursor-pointer items-center gap-2 rounded-xl border border-[#efd9b0]/50 bg-[#f3dfc8] px-4 py-2.5 text-sm font-extrabold text-[#633346] shadow-md transition hover:-translate-y-0.5 hover:bg-white"
+                className="flex shrink-0 cursor-pointer items-center gap-2 rounded-xl border border-[#efd9b0]/50 bg-[#f3dfc8] px-4 py-2.5 text-sm font-extrabold text-[#25473F] shadow-md transition hover:-translate-y-0.5 hover:bg-white"
               >
                 <Edit3 className="size-4" />
                 <span>Set / Edit Targets</span>
@@ -1075,7 +1075,7 @@ export const LeadsManagement: React.FC<LeadsManagementProps> = ({ currentUser, t
             <div className="hidden h-fit overflow-hidden border-y border-[#d8ccc5] bg-white xl:block">
               <table className="w-full table-fixed border-collapse text-left text-sm">
                 <thead>
-                  <tr className="border-b border-[#7e5363] bg-[#4b303a] text-xs font-extrabold uppercase tracking-wider text-[#f4e8ec]">
+                  <tr className="border-b border-[#3c5b53] bg-[#233631] text-xs font-extrabold uppercase tracking-wider text-[#eaf2f0]">
                     <th className="w-[23%] border-r border-white/15 px-3 py-3">Client & Inquiry</th>
                     <th className="w-[15%] border-r border-white/15 px-3 py-3">Contact Details</th>
                     <th className="w-[19%] border-r border-white/15 px-3 py-3">Event Type / Requirement</th>
@@ -1105,7 +1105,7 @@ export const LeadsManagement: React.FC<LeadsManagementProps> = ({ currentUser, t
 
                       return (
                         <React.Fragment key={lead.id}>
-                          <tr className="group align-top border-b border-[#e1d9d4] transition hover:bg-[#fff9fa]">
+                          <tr className="group align-top border-b border-[#e1d9d4] transition hover:bg-[#fbfdfc]">
                             {/* Client Name & ID */}
                             <td className="border-r border-[#eee8e4] p-3.5 font-black text-slate-900 align-top">
                               <div className="flex items-center gap-2 py-0.5">

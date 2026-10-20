@@ -39,13 +39,13 @@ export function PersonalTodoPanel({ title = 'Personal To-Do' }: { title?: string
 
   return (
     <section className="overflow-hidden rounded-3xl border border-[#e9deda] bg-white shadow-sm">
-      <div className="flex flex-wrap items-start justify-between gap-3 border-b border-[#f0e9e5] bg-[linear-gradient(115deg,#fff8fa,#fff)] px-5 py-4">
+      <div className="flex flex-wrap items-start justify-between gap-3 border-b border-[#f0e9e5] bg-[linear-gradient(115deg,#fbfcfc,#fff)] px-5 py-4">
         <div className="flex gap-3">
-          <div className="flex size-10 shrink-0 items-center justify-center rounded-2xl bg-[#8f3655] text-white">
+          <div className="flex size-10 shrink-0 items-center justify-center rounded-2xl bg-[#2f5f54] text-white">
             <ListTodo className="size-5" />
           </div>
           <div>
-            <p className="text-xs font-extrabold uppercase tracking-[.14em] text-[#8f3655]">Only you can see this</p>
+            <p className="text-xs font-extrabold uppercase tracking-[.14em] text-[#2f5f54]">Only you can see this</p>
             <h2 className="text-lg font-black text-slate-900">{title}</h2>
             <p className="mt-0.5 text-sm text-slate-500">Assign work to yourself. These items stay private.</p>
           </div>
@@ -69,7 +69,7 @@ export function PersonalTodoPanel({ title = 'Personal To-Do' }: { title?: string
           value={text}
           onChange={(event) => setText(event.target.value)}
           placeholder="Add a personal task…"
-          className="w-full rounded-xl border border-[#ded5cf] bg-white px-3 py-2.5 text-sm font-bold outline-none focus:ring-2 focus:ring-[#8f3655]/30"
+          className="w-full rounded-xl border border-[#ded5cf] bg-white px-3 py-2.5 text-sm font-bold outline-none focus:ring-2 focus:ring-[#2f5f54]/30"
         />
         <div className="flex flex-wrap gap-2">
           <select
@@ -90,7 +90,7 @@ export function PersonalTodoPanel({ title = 'Personal To-Do' }: { title?: string
           <button
             type="submit"
             disabled={pending || !text.trim()}
-            className="inline-flex items-center gap-1.5 rounded-xl bg-[#8f3655] px-3 py-2 text-xs font-extrabold text-white disabled:opacity-60"
+            className="inline-flex items-center gap-1.5 rounded-xl bg-[#2f5f54] px-3 py-2 text-xs font-extrabold text-white disabled:opacity-60"
           >
             <Plus className="size-3.5" /> Add
           </button>

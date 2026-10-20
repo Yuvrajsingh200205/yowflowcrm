@@ -209,7 +209,7 @@ export const ClientPaymentsSection: React.FC<ClientPaymentsSectionProps> = ({
                   {!isReceived ? (
                     <button
                       onClick={() => setSelectedPaymentModal(stage)}
-                      className="px-4 py-2 bg-[#6d2f45] hover:bg-[#8f3655] text-white text-xs font-medium rounded-xl flex items-center gap-1.5 shadow-sm transition-all hover:scale-[1.02]"
+                      className="px-4 py-2 bg-[#254b42] hover:bg-[#2f5f54] text-white text-xs font-medium rounded-xl flex items-center gap-1.5 shadow-sm transition-all hover:scale-[1.02]"
                     >
                       <CreditCard className="w-3.5 h-3.5" />
                       Pay Online
@@ -314,7 +314,7 @@ export const ClientPaymentsSection: React.FC<ClientPaymentsSectionProps> = ({
 
               <div className="p-3.5 rounded-xl border border-slate-200 hover:border-amber-500 bg-slate-50/50 cursor-pointer flex items-center justify-between gap-2">
                 <div className="flex min-w-0 items-center gap-3">
-                  <CreditCard className="w-8 h-8 p-1.5 rounded-lg bg-[#6d2f45] text-white" />
+                  <CreditCard className="w-8 h-8 p-1.5 rounded-lg bg-[#254b42] text-white" />
                   <div>
                     <div className="text-xs font-semibold text-slate-900">Credit / Debit Card</div>
                     <div className="text-[11px] text-slate-500">Visa, Mastercard, RuPay, Amex</div>
@@ -346,7 +346,7 @@ export const ClientPaymentsSection: React.FC<ClientPaymentsSectionProps> = ({
               <button
                 type="button"
                 onClick={() => handleSimulateOnlinePayment(selectedPaymentModal)}
-                className="flex-1 py-2.5 rounded-xl bg-[#6d2f45] hover:bg-[#8f3655] text-white text-xs font-semibold shadow-md transition-all"
+                className="flex-1 py-2.5 rounded-xl bg-[#254b42] hover:bg-[#2f5f54] text-white text-xs font-semibold shadow-md transition-all"
               >
                 Confirm & Settle ₹{selectedPaymentModal.amount.toLocaleString('en-IN')}
               </button>

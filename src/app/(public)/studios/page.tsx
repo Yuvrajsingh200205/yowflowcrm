@@ -34,7 +34,7 @@ export default function StudiosPage() {
           sizes="100vw"
           className="object-cover object-[70%_40%] opacity-40"
         />
-        <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(20,12,15,0.94)_0%,rgba(20,12,15,0.78)_48%,rgba(20,12,15,0.35)_100%)]" />
+        <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(9,14,13,0.94)_0%,rgba(9,14,13,0.78)_48%,rgba(9,14,13,0.35)_100%)]" />
         <Container className="relative pb-20 pt-[clamp(8rem,14vw,11rem)]">
           <p className="ed-label text-[var(--ed-brass-lt)]">For studios</p>
           <Display as="h1" step="ed-d1" className="mt-6 max-w-[13ch] text-[#F7F1E8]">
