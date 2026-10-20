@@ -89,7 +89,7 @@ export const FreelancerApplicationsView: React.FC<FreelancerApplicationsViewProp
                 {rejecting?.id === f.id && (
                   <div className="mt-3 space-y-2">
                     <textarea
-                      className="w-full rounded-xl border border-[#ded5cf] bg-[#fbfaf8] p-3 text-sm"
+                      className="w-full rounded-xl border border-[#ded5cf] bg-[#FBFDF6] p-3 text-sm"
                       placeholder="Internal rejection note (admin only)"
                       value={note}
                       onChange={(e) => setNote(e.target.value)}

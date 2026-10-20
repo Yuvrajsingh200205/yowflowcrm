@@ -55,10 +55,10 @@ Legend: [x] done · [~] in progress · [ ] todo
 - [x] Docs (webhook URL etc.) use placeholders
 - [ ] Rotation checklist in `docs/SECURITY_ROTATION.md`
 ## Phase 2 — Brand identity  [x]
-- [x] Name **Frameloom**, tagline, value prop, SVG mark + wordmark, favicon (`app/icon.svg`)
-- [ ] OG image (PNG) → Phase 5; trademark/domain check on "Frameloom" is on the owner
+- [x] Name **Yowflow**, tagline, value prop, SVG mark + wordmark, favicon (`app/icon.svg`)
+- [ ] OG image (PNG) → Phase 5; trademark/domain check on "Yowflow" is on the owner
 ## Phase 3 — Design system  [~]
-- [x] Tokens: colour (light + dark, semantic), type (Fraunces / Inter / JetBrains Mono), radius, elevation, motion, z-index (`globals.css`)
+- [x] Tokens: colour (light + dark, semantic; **ink + lime**, dark-first signature look), type (Space Grotesk / Inter / JetBrains Mono), radius, elevation, motion, z-index (`globals.css`)
 - [x] Legacy palette migrated (plum → deep green) via `scripts/codemod_palette.py`; legacy Tailwind remaps feed from the same tokens
 - [x] Components (`src/components/ui`): Button, Field/Input/Textarea/Select/Checkbox, Badge, Card, Dialog + Drawer, Tabs, Dropdown, Tooltip, Toast, Table (sortable), Pagination, Skeleton, Empty/Error states, Line/Bar charts, Logo, ThemeToggle
 - [x] `/design-system` docs page; verified at 375 / 1440, light + dark, no console errors, no horizontal overflow
@@ -79,3 +79,8 @@ Legend: [x] done · [~] in progress · [ ] todo
 - [ ] Unit, API, Playwright e2e, screenshots 375/768/1440, lint/type/build/Lighthouse, `TEST_REPORT.md`
 ## Phase 8 — Docs & handover  [ ]
 - [ ] README, DEPLOYMENT, demo account, feature list, CHANGELOG
+
+## Owner decisions (21 Oct)
+- Product name is **Yowflow**; logo supplied (`public/brand`, `src/app/icon.png`). Cookie prefix `yf`.
+- Previous deep-green/gold theme rejected → ink + lime, matching the logo. Dark is the signature look; light is supported. Legacy screens stay light until rebuilt.
+- Work continues autonomously through all phases; no per-step permission prompts.

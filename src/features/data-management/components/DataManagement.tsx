@@ -192,12 +192,12 @@ export const DataManagement: React.FC<DataManagementProps> = ({ projects = [], o
   return (
     <div className="space-y-5 pb-8 w-full">
       
-      <section className="relative overflow-hidden rounded-3xl border border-[#ddc89c]/35 bg-[radial-gradient(circle_at_88%_8%,rgba(221,200,156,.2),transparent_30%),linear-gradient(125deg,#33514A,#55333f_50%,#1b2825)] p-5 text-white shadow-xl sm:p-7"><div className="absolute -bottom-20 -right-10 size-64 rounded-full border-[34px] border-white/[.04]" /><div className="relative flex flex-col justify-between gap-5 xl:flex-row xl:items-center"><div className="max-w-3xl"><span className="flex w-fit items-center gap-1.5 rounded-full border border-white/20 bg-white/10 px-3 py-1 text-xs font-extrabold uppercase tracking-[.14em] text-[#e0ece9]"><ShieldCheck className="size-4 text-emerald-300" />Storage control centre</span><h1 className="mt-3 flex items-center gap-3 text-2xl font-black tracking-tight sm:text-3xl"><span className="grid size-11 place-items-center rounded-2xl bg-white/10"><Database className="size-6 text-[#d5e4e1]" /></span>Data Management</h1><p className="mt-2 text-sm font-medium leading-relaxed text-[#dfeae7] sm:text-base">Track every RAW-data handover from memory card to primary drive, mirror drive, and cloud backup.</p></div><div className="rounded-2xl border border-white/20 bg-black/10 px-4 py-3 text-sm"><p className="text-[10px] font-black uppercase tracking-[.14em] text-rose-200">Project storage used</p><p className="mt-1 flex items-baseline gap-1 text-2xl font-black">{totalTB}<span className="text-sm text-[#dfeae7]">TB</span></p><p className="text-xs font-medium text-[#dfeae7]">{formatStorage(totalProjectCapacityGB)} total across projects</p></div></div></section>
+      <section className="relative overflow-hidden rounded-3xl border border-[#CCEB8E]/35 bg-[radial-gradient(circle_at_88%_8%,rgba(204,235,142,.2),transparent_30%),linear-gradient(125deg,#41463E,#55333f_50%,#21241F)] p-5 text-white shadow-xl sm:p-7"><div className="absolute -bottom-20 -right-10 size-64 rounded-full border-[34px] border-white/[.04]" /><div className="relative flex flex-col justify-between gap-5 xl:flex-row xl:items-center"><div className="max-w-3xl"><span className="flex w-fit items-center gap-1.5 rounded-full border border-white/20 bg-white/10 px-3 py-1 text-xs font-extrabold uppercase tracking-[.14em] text-[#E6E8E4]"><ShieldCheck className="size-4 text-emerald-300" />Storage control centre</span><h1 className="mt-3 flex items-center gap-3 text-2xl font-black tracking-tight sm:text-3xl"><span className="grid size-11 place-items-center rounded-2xl bg-white/10"><Database className="size-6 text-[#DCDFDA]" /></span>Data Management</h1><p className="mt-2 text-sm font-medium leading-relaxed text-[#dfeae7] sm:text-base">Track every RAW-data handover from memory card to primary drive, mirror drive, and cloud backup.</p></div><div className="rounded-2xl border border-white/20 bg-black/10 px-4 py-3 text-sm"><p className="text-[10px] font-black uppercase tracking-[.14em] text-rose-200">Project storage used</p><p className="mt-1 flex items-baseline gap-1 text-2xl font-black">{totalTB}<span className="text-sm text-[#dfeae7]">TB</span></p><p className="text-xs font-medium text-[#dfeae7]">{formatStorage(totalProjectCapacityGB)} total across projects</p></div></div></section>
 
       <section className="grid grid-cols-2 gap-3 sm:grid-cols-6">{[
         { label: 'All Shoots / Projects', value: `${projects.length}`, hint: `${totalTB} TB (${totalGB.toLocaleString()} GB)`, icon: Database, tone: 'text-slate-700 bg-white border-[#e2d9d3]', key: 'all' },
         { label: 'Data Received', value: `${dataReceivedCount}`, hint: 'Cards offloaded & HD-1', icon: Upload, tone: 'text-indigo-800 bg-indigo-50 border-indigo-200', key: 'data_received' },
-        { label: 'Pending Data', value: `${pendingDataCount}`, hint: 'Awaiting card offload', icon: AlertTriangle, tone: 'text-[#2f5f54] bg-rose-50 border-rose-200', key: 'pending_data' },
+        { label: 'Pending Data', value: `${pendingDataCount}`, hint: 'Awaiting card offload', icon: AlertTriangle, tone: 'text-[#464B43] bg-rose-50 border-rose-200', key: 'pending_data' },
         { label: 'Backup Pending', value: `${backupPendingCount}`, hint: 'Needs HD-2 mirror copy', icon: Clock, tone: 'text-amber-800 bg-amber-50 border-amber-200', key: 'backup_pending' },
         { label: 'Cloud Synced', value: `${cloudDoneCount}`, hint: 'Off-site backup complete', icon: Cloud, tone: 'text-emerald-800 bg-emerald-50 border-emerald-200', key: 'cloud_synced' },
         { label: 'Available Space', value: formatStorage(availableStorageGb), hint: `${availableStorageGb.toLocaleString()} GB remaining across projects`, icon: HardDrive, tone: 'text-cyan-800 bg-cyan-50 border-cyan-200', key: 'available_space' },
@@ -207,7 +207,7 @@ export const DataManagement: React.FC<DataManagementProps> = ({ projects = [], o
           type="button"
           onClick={() => setBackupFilter(key as typeof backupFilter)}
           className={`rounded-2xl border p-3.5 text-left transition shadow-[0_8px_24px_rgba(48,44,46,.04)] cursor-pointer hover:opacity-90 ${tone} ${
-            backupFilter === key ? 'ring-2 ring-[#2f5f54] shadow-md' : ''
+            backupFilter === key ? 'ring-2 ring-[#464B43] shadow-md' : ''
           }`}
         >
           <div className="flex items-start justify-between gap-2">
@@ -225,14 +225,14 @@ export const DataManagement: React.FC<DataManagementProps> = ({ projects = [], o
         <div className="flex flex-wrap items-start justify-between gap-3">
           <div>
             <h2 className="flex items-center gap-2 text-base font-black text-slate-800">
-              <ShieldCheck className="size-5 text-[#2f5f54]" />
+              <ShieldCheck className="size-5 text-[#464B43]" />
               Wedding shoot data workflow
             </h2>
             <p className="mt-1 text-sm text-slate-500">
               Every shoot should follow this simple 4-step safety process before editing starts.
             </p>
           </div>
-          <span className="rounded-full bg-rose-50 px-3 py-1.5 text-xs font-bold text-[#2f5f54]">
+          <span className="rounded-full bg-rose-50 px-3 py-1.5 text-xs font-bold text-[#464B43]">
             Click a project below to update it
           </span>
         </div>
@@ -243,8 +243,8 @@ export const DataManagement: React.FC<DataManagementProps> = ({ projects = [], o
             { icon: AlertTriangle, title: '3. Pending Data', text: 'Shoots pending data offload or uncollected memory cards.' },
             { icon: HardDrive, title: '4. Backup Pending', text: 'Verify and create secondary mirror drive copy (HD-2) for safety.' },
           ].map(({ icon: Icon, title, text }) => (
-            <div key={title} className="flex gap-3 rounded-2xl border border-[#e2d9d3] bg-[#fbfaf8] p-3.5">
-              <span className="grid size-10 shrink-0 place-items-center rounded-xl bg-rose-100 text-[#2f5f54]">
+            <div key={title} className="flex gap-3 rounded-2xl border border-[#e2d9d3] bg-[#FBFDF6] p-3.5">
+              <span className="grid size-10 shrink-0 place-items-center rounded-xl bg-rose-100 text-[#464B43]">
                 <Icon className="size-5" />
               </span>
               <div>
@@ -256,13 +256,13 @@ export const DataManagement: React.FC<DataManagementProps> = ({ projects = [], o
         </div>
       </section>
 
-      <section className="rounded-2xl border border-[#e2d9d3] bg-white p-3 shadow-[0_8px_24px_rgba(48,44,46,.05)] sm:p-4"><div className="mb-3 flex items-center gap-2 text-sm font-extrabold text-slate-700"><SlidersHorizontal className="size-4 text-[#2f5f54]" />Find project data</div><p className="mb-3 text-xs font-medium text-slate-500">Edits are kept locally. Use the Save Changes button in each project log to send them to the server.</p><div className="grid grid-cols-1 gap-3 sm:grid-cols-2"><label className="relative"><Search className="absolute left-3 top-1/2 size-5 -translate-y-1/2 text-[#366e61]" /><input value={searchQuery} onChange={(event) => setSearchQuery(event.target.value)} placeholder="Search client or project…" className="w-full rounded-xl border border-[#ded5cf] bg-[#fbfaf8] py-2.5 pl-10 pr-3 text-sm font-semibold text-slate-900 outline-none placeholder:text-slate-400 focus:border-[#366e61] focus:ring-4 focus:ring-rose-100" /></label><label className="relative"><ShieldCheck className="pointer-events-none absolute left-3 top-1/2 size-5 -translate-y-1/2 text-[#366e61]" /><select value={backupFilter} onChange={(event) => setBackupFilter(event.target.value as typeof backupFilter)} className="w-full appearance-none rounded-xl border border-[#ded5cf] bg-[#fbfaf8] py-2.5 pl-10 pr-3 text-sm font-bold text-slate-700 outline-none focus:border-[#366e61] focus:ring-4 focus:ring-rose-100"><option value="all">All Shoots / Projects ({projects.length})</option><option value="data_received">Data Received ({dataReceivedCount})</option><option value="pending_data">Pending Data ({pendingDataCount})</option><option value="backup_pending">Backup Pending ({backupPendingCount})</option><option value="cloud_synced">Cloud Synced ({cloudDoneCount})</option></select></label></div></section>
+      <section className="rounded-2xl border border-[#e2d9d3] bg-white p-3 shadow-[0_8px_24px_rgba(48,44,46,.05)] sm:p-4"><div className="mb-3 flex items-center gap-2 text-sm font-extrabold text-slate-700"><SlidersHorizontal className="size-4 text-[#464B43]" />Find project data</div><p className="mb-3 text-xs font-medium text-slate-500">Edits are kept locally. Use the Save Changes button in each project log to send them to the server.</p><div className="grid grid-cols-1 gap-3 sm:grid-cols-2"><label className="relative"><Search className="absolute left-3 top-1/2 size-5 -translate-y-1/2 text-[#50574D]" /><input value={searchQuery} onChange={(event) => setSearchQuery(event.target.value)} placeholder="Search client or project…" className="w-full rounded-xl border border-[#ded5cf] bg-[#FBFDF6] py-2.5 pl-10 pr-3 text-sm font-semibold text-slate-900 outline-none placeholder:text-slate-400 focus:border-[#50574D] focus:ring-4 focus:ring-rose-100" /></label><label className="relative"><ShieldCheck className="pointer-events-none absolute left-3 top-1/2 size-5 -translate-y-1/2 text-[#50574D]" /><select value={backupFilter} onChange={(event) => setBackupFilter(event.target.value as typeof backupFilter)} className="w-full appearance-none rounded-xl border border-[#ded5cf] bg-[#FBFDF6] py-2.5 pl-10 pr-3 text-sm font-bold text-slate-700 outline-none focus:border-[#50574D] focus:ring-4 focus:ring-rose-100"><option value="all">All Shoots / Projects ({projects.length})</option><option value="data_received">Data Received ({dataReceivedCount})</option><option value="pending_data">Pending Data ({pendingDataCount})</option><option value="backup_pending">Backup Pending ({backupPendingCount})</option><option value="cloud_synced">Cloud Synced ({cloudDoneCount})</option></select></label></div></section>
 
       {/* Projects Storage Table */}
       <div className="bg-white rounded-xl border border-slate-200 shadow-xs overflow-hidden">
-        <div className="flex flex-wrap items-center justify-between gap-2 border-b border-[#eee7e2] bg-[#fbfaf8] p-4">
-          <div><p className="flex items-center gap-2 text-sm font-extrabold text-slate-800"><HardDrive className="size-4 text-[#2f5f54]" />Project data ledger</p><p className="mt-0.5 text-xs text-slate-500">Open a project to update each event’s crew-data handover.</p></div>
-          <span className="rounded-full border border-rose-200 bg-white px-3 py-1 text-xs font-bold text-[#2f5f54]">{visibleProjects.length} shown</span>
+        <div className="flex flex-wrap items-center justify-between gap-2 border-b border-[#eee7e2] bg-[#FBFDF6] p-4">
+          <div><p className="flex items-center gap-2 text-sm font-extrabold text-slate-800"><HardDrive className="size-4 text-[#464B43]" />Project data ledger</p><p className="mt-0.5 text-xs text-slate-500">Open a project to update each event’s crew-data handover.</p></div>
+          <span className="rounded-full border border-rose-200 bg-white px-3 py-1 text-xs font-bold text-[#464B43]">{visibleProjects.length} shown</span>
         </div>
 
         <div className="overflow-x-auto">
@@ -357,23 +357,23 @@ export const DataManagement: React.FC<DataManagementProps> = ({ projects = [], o
 
                       {/* HDD 1 */}
                       <td className="px-5 py-4">
-                        <span className="inline-block max-w-[200px] truncate rounded-xl border border-[#ded5cf] bg-[#fbfaf8] px-3 py-2 font-mono text-xs font-semibold text-slate-800" title={effectiveHD1 || 'Pending Shoot'}>
+                        <span className="inline-block max-w-[200px] truncate rounded-xl border border-[#ded5cf] bg-[#FBFDF6] px-3 py-2 font-mono text-xs font-semibold text-slate-800" title={effectiveHD1 || 'Pending Shoot'}>
                           {effectiveHD1 || 'Pending Shoot'}
                         </span>
                       </td>
 
                       {/* HDD 2 */}
                       <td className="px-5 py-4">
-                        <span className="inline-block max-w-[200px] truncate rounded-xl border border-[#ded5cf] bg-[#fbfaf8] px-3 py-2 font-mono text-xs font-semibold text-slate-800" title={effectiveHD2 || 'Pending Shoot'}>
+                        <span className="inline-block max-w-[200px] truncate rounded-xl border border-[#ded5cf] bg-[#FBFDF6] px-3 py-2 font-mono text-xs font-semibold text-slate-800" title={effectiveHD2 || 'Pending Shoot'}>
                           {effectiveHD2 || 'Pending Shoot'}
                         </span>
                       </td>
 
-                      <td className="px-5 py-4 font-mono text-base font-black text-[#2f5f54]">
+                      <td className="px-5 py-4 font-mono text-base font-black text-[#464B43]">
                         <div>{formatStorage(projectTotalStorageGB)}</div>
                       </td>
 
-                      <td className="px-5 py-4 font-mono text-base font-black text-[#2f5f54]">
+                      <td className="px-5 py-4 font-mono text-base font-black text-[#464B43]">
                         <div>{formatStorage(projectUsedGB)}</div>
                       </td>
 
@@ -404,7 +404,7 @@ export const DataManagement: React.FC<DataManagementProps> = ({ projects = [], o
                             <div className="w-40 space-y-1">
                               <div className="flex items-center justify-between text-xs font-bold text-slate-500">
                                 <span>Received</span>
-                                <span className="font-extrabold text-[#2f5f54]">{crewDoneRate}%</span>
+                                <span className="font-extrabold text-[#464B43]">{crewDoneRate}%</span>
                               </div>
                               <div className="h-2 w-full overflow-hidden rounded-full bg-slate-200">
                                 <div
@@ -425,17 +425,17 @@ export const DataManagement: React.FC<DataManagementProps> = ({ projects = [], o
                           <div className="space-y-5 rounded-2xl border border-[#e2d9d3] bg-white p-5 shadow-sm">
                             <div className="flex items-center justify-between border-b border-slate-100 pb-2">
                               <h4 className="flex items-center gap-2 text-sm font-black uppercase tracking-[.08em] text-slate-900">
-                                <HardDrive className="size-5 text-[#2f5f54]" />
+                                <HardDrive className="size-5 text-[#464B43]" />
                                 <span>Events & Shooter Data Received Log — {p.clientWeddingTitle}</span>
                               </h4>
                               <div className="flex items-center gap-3">
                                 <span className="rounded-full border border-cyan-200 bg-cyan-50 px-2.5 py-1 text-xs font-black text-cyan-800">Available: {formatStorage(projectAvailableGB)}</span>
                                 <span className="text-xs font-bold text-slate-500">{p.shoots?.length || 0} Event(s) Configured</span>
-                                <button type="button" disabled={!draftProjects[p.id]} onClick={() => saveDraftChanges(p.id)} className="rounded-lg bg-[#2f5f54] px-3 py-1.5 text-xs font-black text-white shadow-sm transition hover:bg-[#264E44] disabled:cursor-not-allowed disabled:opacity-45">Save Changes</button>
+                                <button type="button" disabled={!draftProjects[p.id]} onClick={() => saveDraftChanges(p.id)} className="rounded-lg bg-[#464B43] px-3 py-1.5 text-xs font-black text-white shadow-sm transition hover:bg-[#393D37] disabled:cursor-not-allowed disabled:opacity-45">Save Changes</button>
                               </div>
                             </div>
 
-                            <div className="grid gap-3 rounded-2xl border border-[#e2d9d3] bg-[#fbfaf8] p-3 sm:grid-cols-2 xl:grid-cols-4">
+                            <div className="grid gap-3 rounded-2xl border border-[#e2d9d3] bg-[#FBFDF6] p-3 sm:grid-cols-2 xl:grid-cols-4">
                               <label className="text-xs font-extrabold text-slate-700">Total Storage Capacity
                                 <div className="mt-1 flex gap-1">
                                   <input
@@ -444,7 +444,7 @@ export const DataManagement: React.FC<DataManagementProps> = ({ projects = [], o
                                     step="any"
                                     value={storageValue(projectTotalStorageGB, unitFor(`capacity-${p.id}`))}
                                     onChange={(event) => handleUpdateProjectCapacity(p.id, event.target.value, unitFor(`capacity-${p.id}`))}
-                                    className="w-full rounded-lg border border-slate-200 bg-white px-2 py-1.5 font-bold text-slate-900 outline-none focus:border-[#2f5f54]"
+                                    className="w-full rounded-lg border border-slate-200 bg-white px-2 py-1.5 font-bold text-slate-900 outline-none focus:border-[#464B43]"
                                   />
                                   <select
                                     aria-label={`${p.clientWeddingTitle} capacity unit`}
@@ -464,7 +464,7 @@ export const DataManagement: React.FC<DataManagementProps> = ({ projects = [], o
                                     step="any"
                                     value={storageValue(projectUsedGB, unitFor(`used-${p.id}`))}
                                     onChange={(event) => handleUpdateProjectUsedStorage(p.id, event.target.value, unitFor(`used-${p.id}`))}
-                                    className="w-full rounded-lg border border-slate-200 bg-white px-2 py-1.5 font-bold text-slate-900 outline-none focus:border-[#2f5f54]"
+                                    className="w-full rounded-lg border border-slate-200 bg-white px-2 py-1.5 font-bold text-slate-900 outline-none focus:border-[#464B43]"
                                   />
                                   <select
                                     aria-label={`${p.clientWeddingTitle} used storage unit`}
@@ -506,11 +506,11 @@ export const DataManagement: React.FC<DataManagementProps> = ({ projects = [], o
                                     className={`rounded-2xl border p-3 text-left transition ${
                                       isCompleted
                                         ? 'border-emerald-300 bg-emerald-50 text-emerald-900'
-                                        : 'border-[#e2d9d3] bg-[#fbfaf8] text-slate-700 hover:border-rose-300 hover:bg-rose-50'
+                                        : 'border-[#e2d9d3] bg-[#FBFDF6] text-slate-700 hover:border-rose-300 hover:bg-rose-50'
                                     }`}
                                   >
                                     <div className="flex items-center justify-between gap-2">
-                                      <Icon className={`size-5 ${isCompleted ? 'text-emerald-700' : 'text-[#2f5f54]'}`} />
+                                      <Icon className={`size-5 ${isCompleted ? 'text-emerald-700' : 'text-[#464B43]'}`} />
                                       {isCompleted ? <CheckCircle2 className="size-4 text-emerald-700" /> : <Clock className="size-4 text-amber-600" />}
                                     </div>
                                     <p className="mt-2 text-sm font-extrabold">{label}</p>
@@ -531,14 +531,14 @@ export const DataManagement: React.FC<DataManagementProps> = ({ projects = [], o
                                   const mainCrew = (s.crewAssignments || []).filter((c) => !c?.role?.toLowerCase().includes('assistant'));
                                   const eventTotalGB = mainCrew.reduce((acc, c) => acc + (c?.dataSizeGB || 0), 0);
                                   return (
-                                    <div key={s.id} className="space-y-3 rounded-2xl border border-[#e2d9d3] bg-[#fbfaf8] p-4">
+                                    <div key={s.id} className="space-y-3 rounded-2xl border border-[#e2d9d3] bg-[#FBFDF6] p-4">
                                       <div className="flex items-center justify-between text-sm font-bold text-slate-800">
-                                        <span className="flex items-center gap-1.5"><CalendarDays className="size-4 text-[#2f5f54]" />{s.title || 'Wedding Event'} ({s.date})</span>
+                                        <span className="flex items-center gap-1.5"><CalendarDays className="size-4 text-[#464B43]" />{s.title || 'Wedding Event'} ({s.date})</span>
                                         <div className="flex items-center gap-2">
                                           <span className="rounded-full border border-indigo-200 bg-indigo-100 px-3 py-1 text-xs font-black text-indigo-900">
                                             Event total: {eventTotalGB >= 1000 ? `${parseFloat((eventTotalGB / 1000).toFixed(2))} TB` : `${eventTotalGB} GB`}
                                           </span>
-                                          <span className="flex items-center gap-1 text-xs font-semibold text-[#2f5f54]"><MapPin className="size-3.5" />{s.venue}</span>
+                                          <span className="flex items-center gap-1 text-xs font-semibold text-[#464B43]"><MapPin className="size-3.5" />{s.venue}</span>
                                         </div>
                                       </div>
 

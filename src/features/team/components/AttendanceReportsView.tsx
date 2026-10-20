@@ -387,8 +387,8 @@ export const AttendanceReportsView: React.FC<Props> = ({ team, attendance, proje
               onClick={() => setReportType(value)}
               className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl border text-xs font-bold transition cursor-pointer ${
                 reportType === value
-                  ? 'border-[#2f5f54] bg-gradient-to-r from-[#2f5f54] to-[#254b42] text-white shadow-sm'
-                  : 'border-[#ded5cf] bg-white text-slate-600 hover:border-rose-300 hover:text-[#254b42]'
+                  ? 'border-[#464B43] bg-gradient-to-r from-[#464B43] to-[#373B35] text-white shadow-sm'
+                  : 'border-[#ded5cf] bg-white text-slate-600 hover:border-rose-300 hover:text-[#373B35]'
               }`}
               aria-pressed={reportType === value}
             >
@@ -446,7 +446,7 @@ export const AttendanceReportsView: React.FC<Props> = ({ team, attendance, proje
               { label: 'Last 7 days', days: 7 },
               { label: 'Last 30 days', days: 30 },
             ].map((p) => (
-              <button key={p.days} type="button" onClick={() => setQuickRange(p.days)} className="px-2 py-0.5 rounded-lg bg-slate-100 hover:bg-rose-50 hover:text-[#254b42] text-slate-700 text-[10px] font-bold transition cursor-pointer">
+              <button key={p.days} type="button" onClick={() => setQuickRange(p.days)} className="px-2 py-0.5 rounded-lg bg-slate-100 hover:bg-rose-50 hover:text-[#373B35] text-slate-700 text-[10px] font-bold transition cursor-pointer">
                 {p.label}
               </button>
             ))}
@@ -456,7 +456,7 @@ export const AttendanceReportsView: React.FC<Props> = ({ team, attendance, proje
                 setStartDate(monthStart);
                 setEndDate(today);
               }}
-              className="px-2 py-0.5 rounded-lg bg-slate-100 hover:bg-rose-50 hover:text-[#254b42] text-slate-700 text-[10px] font-bold transition cursor-pointer"
+              className="px-2 py-0.5 rounded-lg bg-slate-100 hover:bg-rose-50 hover:text-[#373B35] text-slate-700 text-[10px] font-bold transition cursor-pointer"
             >
               This month
             </button>
@@ -492,7 +492,7 @@ export const AttendanceReportsView: React.FC<Props> = ({ team, attendance, proje
               {formatDayLabel(startDate)} → {formatDayLabel(endDate)} · {table.rows.length} row{table.rows.length === 1 ? '' : 's'}
             </p>
           </div>
-          <Badge className="bg-rose-50 text-[#254b42] border-rose-200">
+          <Badge className="bg-rose-50 text-[#373B35] border-rose-200">
             {memberFilter === ALL ? `${team.length} members` : team.find((m) => m.id === memberFilter)?.name}
           </Badge>
         </header>

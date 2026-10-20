@@ -1,8 +1,7 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1000" preserveAspectRatio="xMidYMid slice" role="img" aria-hidden="true">
 <defs>
-<linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#1F3A34"/><stop offset="1" stop-color="#0E1B18"/></linearGradient>
-<radialGradient id="glow" cx="0.7" cy="0.35" r="0.6"><stop offset="0" stop-color="#C8A15A" stop-opacity="0.55"/><stop offset="1" stop-color="#C8A15A" stop-opacity="0"/></radialGradient>
+<radialGradient id="glow" cx="0.69" cy="0.36" r="0.55"><stop offset="0" stop-color="#B4F03C" stop-opacity="0.38"/><stop offset="0.5" stop-color="#6FA81B" stop-opacity="0.12"/><stop offset="1" stop-color="#060806" stop-opacity="0"/></radialGradient>
+<linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#0B100A"/><stop offset="1" stop-color="#030403"/></linearGradient>
 </defs>
-<rect width="1600" height="1000" fill="url(#g)"/><rect width="1600" height="1000" fill="url(#glow)"/>
-<circle cx="1100" cy="360" r="120" fill="none" stroke="#F4EFE6" stroke-opacity="0.5" stroke-width="1.2"/><circle cx="1100" cy="360" r="200" fill="none" stroke="#F4EFE6" stroke-opacity="0.38" stroke-width="1.2"/><circle cx="1100" cy="360" r="290" fill="none" stroke="#F4EFE6" stroke-opacity="0.28" stroke-width="1.2"/><circle cx="1100" cy="360" r="400" fill="none" stroke="#F4EFE6" stroke-opacity="0.2" stroke-width="1.2"/><circle cx="1100" cy="360" r="530" fill="none" stroke="#F4EFE6" stroke-opacity="0.13" stroke-width="1.2"/><circle cx="1100" cy="360" r="690" fill="none" stroke="#F4EFE6" stroke-opacity="0.08" stroke-width="1.2"/>
+<rect width="1600" height="1000" fill="url(#bg)"/><rect width="1600" height="1000" fill="url(#glow)"/><circle cx="1100" cy="360" r="120" fill="none" stroke="#B4F03C" stroke-opacity="0.45" stroke-width="1.2"/><circle cx="1100" cy="360" r="200" fill="none" stroke="#B4F03C" stroke-opacity="0.32" stroke-width="1.2"/><circle cx="1100" cy="360" r="290" fill="none" stroke="#B4F03C" stroke-opacity="0.22" stroke-width="1.2"/><circle cx="1100" cy="360" r="400" fill="none" stroke="#B4F03C" stroke-opacity="0.15" stroke-width="1.2"/><circle cx="1100" cy="360" r="530" fill="none" stroke="#B4F03C" stroke-opacity="0.09" stroke-width="1.2"/><circle cx="1100" cy="360" r="690" fill="none" stroke="#B4F03C" stroke-opacity="0.05" stroke-width="1.2"/>
 </svg>

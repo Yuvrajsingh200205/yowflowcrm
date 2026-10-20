@@ -154,7 +154,7 @@ export function FreelancerMarketplaceView({ mode, projects }: Props) {
                 <article key={connection.id} className={`${CARD} flex flex-col gap-3 p-4 md:flex-row md:items-center md:justify-between`}>
                   <div>
                     <p className="font-black text-slate-900">{connection.freelancer?.fullName || 'Freelancer'}</p>
-                    <p className="text-xs font-bold text-[#3B665C]">{roleLabel(connection.freelancer?.primarySkill)} · {connection.freelancer?.city || 'Location not set'}</p>
+                    <p className="text-xs font-bold text-[#4F554C]">{roleLabel(connection.freelancer?.primarySkill)} · {connection.freelancer?.city || 'Location not set'}</p>
                     <p className="mt-1 text-xs font-medium text-slate-500">{connection.project?.name ? `Project: ${connection.project.name}` : 'No project selected yet'} · {connection.status}</p>
                     <p className="mt-1 text-xs font-medium text-slate-500">Interested on {new Date(connection.createdAt).toLocaleDateString()}</p>
                   </div>
@@ -192,13 +192,13 @@ function FreelancerCard({ freelancer, interested, busy, onView, onInterested }: 
   return (
     <article className={`${CARD} p-4`}>
       <div className="flex items-start gap-3">
-        <span className="grid size-12 shrink-0 place-items-center rounded-xl bg-[#e0ece9] text-sm font-black text-[#254b42]">{freelancer.displayName.slice(0, 2).toUpperCase()}</span>
+        <span className="grid size-12 shrink-0 place-items-center rounded-xl bg-[#E6E8E4] text-sm font-black text-[#373B35]">{freelancer.displayName.slice(0, 2).toUpperCase()}</span>
         <div className="min-w-0 flex-1">
           <p className="truncate font-black text-slate-900">{freelancer.displayName}</p>
-          <p className="text-xs font-bold text-[#3B665C]">{roleLabel(freelancer.specialization)}</p>
+          <p className="text-xs font-bold text-[#4F554C]">{roleLabel(freelancer.specialization)}</p>
           <p className="mt-1 flex flex-wrap items-center gap-2 text-xs font-medium text-slate-500"><MapPin className="size-3" />{freelancer.city || 'Location not set'}<span>{freelancer.experienceYears ?? 0} years</span></p>
-          <div className="mt-2 flex flex-wrap gap-1">{freelancer.skills.slice(0, 4).map((skill) => <span key={skill} className="rounded-full border border-[#e8ded8] bg-[#fbfaf8] px-2 py-1 text-[11px] font-bold text-slate-600">{skill}</span>)}</div>
-          <p className="mt-2 text-xs font-bold text-slate-600"><CalendarDays className="mr-1 inline size-3.5 text-[#3B665C]" />{freelancer.availability ? `${freelancer.availability.status.replaceAll('_', ' ')} · ${new Date(freelancer.availability.date).toLocaleDateString()}` : 'No upcoming availability record'}</p>
+          <div className="mt-2 flex flex-wrap gap-1">{freelancer.skills.slice(0, 4).map((skill) => <span key={skill} className="rounded-full border border-[#e8ded8] bg-[#FBFDF6] px-2 py-1 text-[11px] font-bold text-slate-600">{skill}</span>)}</div>
+          <p className="mt-2 text-xs font-bold text-slate-600"><CalendarDays className="mr-1 inline size-3.5 text-[#4F554C]" />{freelancer.availability ? `${freelancer.availability.status.replaceAll('_', ' ')} · ${new Date(freelancer.availability.date).toLocaleDateString()}` : 'No upcoming availability record'}</p>
         </div>
       </div>
       <div className="mt-4 flex flex-wrap justify-end gap-2">
@@ -250,21 +250,21 @@ function ProfileDrawer({ freelancer, busy, onClose, onInterested }: { freelancer
   const availabilityRows = availability.length ? availability : freelancer.availability ? [freelancer.availability as FreelancerAvailabilityRecord] : [];
 
   return (
-    <div className="fixed inset-0 z-[90] flex justify-end bg-[#111a18]/60 p-3 backdrop-blur-sm">
+    <div className="fixed inset-0 z-[90] flex justify-end bg-[#151714]/60 p-3 backdrop-blur-sm">
       <aside className="h-full w-full max-w-2xl overflow-y-auto rounded-2xl bg-white p-5 shadow-2xl">
         <div className="flex items-start justify-between gap-3">
-          <div><h3 className="text-2xl font-black text-slate-900">{name}</h3><p className="text-sm font-bold text-[#3B665C]">{roleLabel(skill)} · {city || 'Location not set'}</p></div>
+          <div><h3 className="text-2xl font-black text-slate-900">{name}</h3><p className="text-sm font-bold text-[#4F554C]">{roleLabel(skill)} · {city || 'Location not set'}</p></div>
           <button className={BTN_GHOST} onClick={onClose} aria-label="Close profile"><X className="size-4" /></button>
         </div>
         {loading ? <div className="mt-8 flex items-center gap-2 text-sm font-bold text-slate-500"><Loader2 className="size-4 animate-spin" /> Loading full profile...</div> : (
           <div className="mt-5 grid gap-4">
-            <section className="grid gap-3 rounded-2xl border border-[#eee7e2] bg-[#fbfaf8] p-4 sm:grid-cols-2">
+            <section className="grid gap-3 rounded-2xl border border-[#eee7e2] bg-[#FBFDF6] p-4 sm:grid-cols-2">
               <InfoLine icon={<Phone className="size-4" />} label="Phone" value={profile?.phone || 'Not provided'} />
               <InfoLine icon={<Mail className="size-4" />} label="Email" value={profile?.email || 'Not provided'} />
               <InfoLine icon={<MapPin className="size-4" />} label="City" value={city || 'Not provided'} />
               <InfoLine icon={<IndianRupee className="size-4" />} label="Rate" value={rate ? `₹${rate.toLocaleString('en-IN')} · ${profile?.rateType?.replaceAll('_', ' ')}` : 'Not provided'} />
             </section>
-            <section><h4 className="text-xs font-black uppercase tracking-wide text-slate-500">Professional</h4><p className="mt-2 text-sm font-medium leading-6 text-slate-700">{profile?.experienceYears ?? freelancer.experienceYears ?? 0} years experience. Skills: {(profile?.skills?.length ? profile.skills : freelancer.skills).join(', ') || 'Not provided'}.</p>{profile?.equipmentNotes ? <p className="mt-2 whitespace-pre-wrap text-sm font-medium leading-6 text-slate-700">{profile.equipmentNotes}</p> : null}{profile?.notes ? <p className="mt-2 whitespace-pre-wrap rounded-xl bg-[#fbfaf8] p-3 text-sm font-medium leading-6 text-slate-700">{profile.notes}</p> : null}</section>
+            <section><h4 className="text-xs font-black uppercase tracking-wide text-slate-500">Professional</h4><p className="mt-2 text-sm font-medium leading-6 text-slate-700">{profile?.experienceYears ?? freelancer.experienceYears ?? 0} years experience. Skills: {(profile?.skills?.length ? profile.skills : freelancer.skills).join(', ') || 'Not provided'}.</p>{profile?.equipmentNotes ? <p className="mt-2 whitespace-pre-wrap text-sm font-medium leading-6 text-slate-700">{profile.equipmentNotes}</p> : null}{profile?.notes ? <p className="mt-2 whitespace-pre-wrap rounded-xl bg-[#FBFDF6] p-3 text-sm font-medium leading-6 text-slate-700">{profile.notes}</p> : null}</section>
             <section><h4 className="text-xs font-black uppercase tracking-wide text-slate-500">Portfolio</h4><div className="mt-2 grid gap-2">{publishedPortfolio.length ? publishedPortfolio.map((item) => <div key={item.id} className="rounded-xl border border-[#eee7e2] p-3 text-sm font-bold text-slate-700">{item.title}<span className="ml-2 text-xs font-medium text-slate-400">{item.category || item.fileObject?.originalName}</span>{item.description ? <p className="mt-1 text-xs font-medium text-slate-500">{item.description}</p> : null}</div>) : <p className="text-sm font-medium text-slate-500">No published portfolio preview.</p>}</div></section>
             <section><h4 className="text-xs font-black uppercase tracking-wide text-slate-500">Availability</h4><div className="mt-2 grid gap-2">{availabilityRows.length ? availabilityRows.map((item) => <div key={item.id} className="rounded-xl border border-[#eee7e2] p-3 text-sm font-bold text-slate-700">{item.status.replaceAll('_', ' ')} · {new Date(item.date).toLocaleDateString()} {item.notes ? <span className="font-medium text-slate-500">· {item.notes}</span> : null}</div>) : <p className="text-sm font-medium text-slate-500">No relevant availability record.</p>}</div></section>
           </div>
@@ -276,7 +276,7 @@ function ProfileDrawer({ freelancer, busy, onClose, onInterested }: { freelancer
 }
 
 function InfoLine({ icon, label, value }: { icon: React.ReactNode; label: string; value: string }) {
-  return <div className="flex items-start gap-2 text-sm"><span className="mt-0.5 text-[#3B665C]">{icon}</span><div><p className="text-[11px] font-black uppercase tracking-wide text-slate-500">{label}</p><p className="font-bold text-slate-800">{value}</p></div></div>;
+  return <div className="flex items-start gap-2 text-sm"><span className="mt-0.5 text-[#4F554C]">{icon}</span><div><p className="text-[11px] font-black uppercase tracking-wide text-slate-500">{label}</p><p className="font-bold text-slate-800">{value}</p></div></div>;
 }
 
 function ConnectDialog({ connection, projects, onClose, onConnected }: { connection: FreelancerConnection; projects: Project[]; onClose: () => void; onConnected: (connection: FreelancerConnection) => void }) {
@@ -301,11 +301,11 @@ function ConnectDialog({ connection, projects, onClose, onConnected }: { connect
     }
   };
   return (
-    <div className="fixed inset-0 z-[95] grid place-items-center bg-[#111a18]/60 p-4 backdrop-blur-sm">
+    <div className="fixed inset-0 z-[95] grid place-items-center bg-[#151714]/60 p-4 backdrop-blur-sm">
       <section className="w-full max-w-lg rounded-2xl bg-white p-5 shadow-2xl">
         <h3 className="text-lg font-black text-slate-900">{requestingApproval ? 'Send Approval Request' : 'Connect Freelancer'}</h3>
         <p className="text-sm font-medium text-slate-500">{connection.freelancer?.fullName}</p>
-        <p className="mt-2 rounded-xl bg-[#fbfaf8] px-3 py-2 text-xs font-bold text-slate-600">
+        <p className="mt-2 rounded-xl bg-[#FBFDF6] px-3 py-2 text-xs font-bold text-slate-600">
           {requestingApproval ? 'This will appear in the freelancer panel for approval. Assignment will be locked until they accept.' : 'Freelancer has accepted. You can now connect them to this project or shoot.'}
         </p>
         <div className="mt-4 grid gap-3">

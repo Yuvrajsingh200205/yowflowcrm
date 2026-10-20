@@ -140,17 +140,17 @@ export const RoleWorkspaceHub: React.FC<Props> = (props) => {
 
   return (
     <div className="space-y-6 pb-8">
-      <section className="relative overflow-hidden rounded-3xl border border-[#ddc89c]/35 bg-[radial-gradient(circle_at_88%_8%,rgba(221,200,156,.2),transparent_30%),linear-gradient(125deg,#33514A,#55333f_50%,#1b2825)] p-5 text-white shadow-xl sm:p-7">
+      <section className="relative overflow-hidden rounded-3xl border border-[#CCEB8E]/35 bg-[radial-gradient(circle_at_88%_8%,rgba(204,235,142,.2),transparent_30%),linear-gradient(125deg,#41463E,#55333f_50%,#21241F)] p-5 text-white shadow-xl sm:p-7">
         <div className="absolute -bottom-20 -right-10 size-64 rounded-full border-[34px] border-white/[.04]" />
         <div className="relative">
-          <span className="inline-flex items-center rounded-full border border-white/20 bg-white/10 px-3 py-1 text-xs font-extrabold uppercase tracking-[.14em] text-[#e0ece9]">
+          <span className="inline-flex items-center rounded-full border border-white/20 bg-white/10 px-3 py-1 text-xs font-extrabold uppercase tracking-[.14em] text-[#E6E8E4]">
             {copy.eyebrow}
           </span>
           <h1 className="mt-3 text-2xl font-black sm:text-3xl">
             {kind === 'client' ? `Welcome, ${user?.name || 'Guest'}` : copy.title}
           </h1>
           <p className="mt-2 max-w-2xl text-sm font-medium text-[#dfeae7]">{copy.blurb}</p>
-          <p className="mt-2 text-xs font-bold text-[#ddc89c]">Access from Admin · {role?.name || 'Employee'} · records follow your scope</p>
+          <p className="mt-2 text-xs font-bold text-[#CCEB8E]">Access from Admin · {role?.name || 'Employee'} · records follow your scope</p>
         </div>
       </section>
 
@@ -173,7 +173,7 @@ export const RoleWorkspaceHub: React.FC<Props> = (props) => {
             <div className="grid grid-cols-2 gap-3 sm:grid-cols-4 xl:grid-cols-8">
               {shortcuts.map((item) => (
                 <button key={item.label} type="button" onClick={() => setActiveTab?.(item.tab)} className={`${CARD} p-3 text-left hover:border-rose-200`}>
-                  <item.icon className="mb-2 size-4 text-[#2f5f54]" />
+                  <item.icon className="mb-2 size-4 text-[#464B43]" />
                   <p className="text-xs font-extrabold text-slate-800">{item.label}</p>
                 </button>
               ))}
@@ -218,7 +218,7 @@ export const RoleWorkspaceHub: React.FC<Props> = (props) => {
                       ['On Leave', crew.leave],
                       ['Freelance', crew.freelancer],
                     ].map(([label, n]) => (
-                      <div key={String(label)} className="rounded-2xl bg-[#fbfaf8] p-2 text-center">
+                      <div key={String(label)} className="rounded-2xl bg-[#FBFDF6] p-2 text-center">
                         <p className="text-lg font-black">{n}</p>
                         <p className="text-[9px] font-extrabold uppercase text-slate-400">{label}</p>
                       </div>
@@ -307,7 +307,7 @@ export const RoleWorkspaceHub: React.FC<Props> = (props) => {
                     ['Won', 'booked'],
                     ['Lost', 'lost'],
                   ].map(([label, status]) => (
-                    <div key={status} className="rounded-2xl bg-[#fbfaf8] p-3">
+                    <div key={status} className="rounded-2xl bg-[#FBFDF6] p-3">
                       <p className="text-[10px] font-extrabold uppercase text-slate-400">{label}</p>
                       <p className="mt-1 text-xl font-black">{leads.filter((l) => l.status === status).length}</p>
                     </div>
@@ -387,12 +387,12 @@ function PipelineCard({ projects, onOpen }: { projects: Project[]; onOpen?: (p: 
       <h3 className="text-xs font-extrabold uppercase tracking-wider text-slate-600">Wedding pipeline</h3>
       <div className="mt-4 grid gap-3 md:grid-cols-5">
         {buckets.map((b) => (
-          <div key={b.label} className="rounded-2xl bg-[#fbfaf8] p-3">
+          <div key={b.label} className="rounded-2xl bg-[#FBFDF6] p-3">
             <p className="text-[10px] font-extrabold uppercase text-slate-400">{b.label}</p>
             <p className="mt-1 text-xl font-black">{b.items.length}</p>
             <div className="mt-2 space-y-1">
               {b.items.slice(0, 2).map((p) => (
-                <button key={p.id} type="button" onClick={() => onOpen?.(p)} className="block w-full truncate text-left text-[11px] font-bold text-[#2f5f54]">
+                <button key={p.id} type="button" onClick={() => onOpen?.(p)} className="block w-full truncate text-left text-[11px] font-bold text-[#464B43]">
                   {p.clientWeddingTitle}
                 </button>
               ))}
@@ -421,7 +421,7 @@ function ScheduleCard({
       ) : (
         <div className="mt-3 space-y-2">
           {rows.slice(0, 6).map(({ project, shoot }) => (
-            <button key={`${project.id}-${shoot.id}`} type="button" onClick={() => onOpen?.(project)} className="flex w-full items-center justify-between rounded-2xl border border-[#eee7e2] bg-[#fbfaf8] px-3 py-2.5 text-left">
+            <button key={`${project.id}-${shoot.id}`} type="button" onClick={() => onOpen?.(project)} className="flex w-full items-center justify-between rounded-2xl border border-[#eee7e2] bg-[#FBFDF6] px-3 py-2.5 text-left">
               <span>
                 <span className="block text-xs font-extrabold text-slate-900">{shoot.title}</span>
                 <span className="text-[11px] text-slate-500">{project.clientWeddingTitle} · {shoot.location || shoot.venue || project.venueLocation} · {shoot.time || shoot.startTime || 'TBC'}</span>
@@ -486,7 +486,7 @@ function PayCard({ rows }: { rows: FreelancerPayment[] }) {
       <h3 className="text-xs font-extrabold uppercase tracking-wider text-slate-600">My payments</h3>
       <div className="mt-3 space-y-2">
         {rows.slice(0, 5).map((row) => (
-          <div key={row.id} className="flex items-center justify-between rounded-2xl bg-[#fbfaf8] px-3 py-2">
+          <div key={row.id} className="flex items-center justify-between rounded-2xl bg-[#FBFDF6] px-3 py-2">
             <p className="text-xs font-bold">{row.projectName || row.paymentType || 'Payout'} · {row.paymentDate}</p>
             <Badge>{row.ledgerStatus || (paymentPending(row) ? 'pending' : 'paid')}</Badge>
           </div>
@@ -513,10 +513,10 @@ function ShootBoard({
       ) : (
         <div className="mt-3 grid gap-3 md:grid-cols-2">
           {rows.slice(0, 6).map(({ project, shoot }) => (
-            <button key={`${project.id}-${shoot.id}`} type="button" onClick={() => onOpen?.(project)} className="rounded-2xl border border-[#eee7e2] bg-[#fbfaf8] p-4 text-left">
+            <button key={`${project.id}-${shoot.id}`} type="button" onClick={() => onOpen?.(project)} className="rounded-2xl border border-[#eee7e2] bg-[#FBFDF6] p-4 text-left">
               <p className="text-sm font-extrabold">{shoot.title}</p>
               <p className="mt-1 text-xs text-slate-500">{project.clientWeddingTitle}</p>
-              <p className="mt-2 text-[11px] font-bold text-[#2f5f54]">{shoot.date} · {shoot.time || shoot.startTime || 'Time TBC'}</p>
+              <p className="mt-2 text-[11px] font-bold text-[#464B43]">{shoot.date} · {shoot.time || shoot.startTime || 'Time TBC'}</p>
               <p className="mt-1 text-[11px] text-slate-500">{shoot.location || shoot.venue || project.venueLocation}</p>
               <p className="mt-1 text-[11px] text-slate-400">Crew · {[shoot.leadPhotographer, shoot.cinematographer].filter(Boolean).join(' · ') || 'Assigned'}</p>
             </button>
@@ -536,7 +536,7 @@ function EditPipeline({ tasks, video }: { tasks: TeamTask[]; video?: boolean }) 
         {stages.map((stage) => {
           const items = tasks.filter((t) => t.status === stage);
           return (
-            <div key={stage} className="rounded-2xl bg-[#fbfaf8] p-3">
+            <div key={stage} className="rounded-2xl bg-[#FBFDF6] p-3">
               <p className="text-[10px] font-extrabold uppercase text-slate-400">{stage.replaceAll('_', ' ')}</p>
               <p className="mt-1 text-xl font-black">{items.length}</p>
               {items.slice(0, 3).map((t) => (
@@ -568,16 +568,16 @@ function ClientHome({
   return (
     <div className="grid gap-4 lg:grid-cols-3">
       <section className={`${CARD} p-5 lg:col-span-2`}>
-        <p className="text-[10px] font-extrabold uppercase tracking-wider text-[#2f5f54]">Your wedding</p>
+        <p className="text-[10px] font-extrabold uppercase tracking-wider text-[#464B43]">Your wedding</p>
         <h2 className="mt-1 text-2xl font-black">{wedding.clientWeddingTitle}</h2>
         <p className="mt-2 text-sm text-slate-600">{wedding.venueLocation || 'Venue to be confirmed'} · {wedding.weddingFunctionDates || 'Date TBC'}</p>
         <div className="mt-4 grid grid-cols-2 gap-3">
-          <div className="rounded-2xl bg-[#fbfaf8] p-3">
+          <div className="rounded-2xl bg-[#FBFDF6] p-3">
             <p className="text-[10px] font-extrabold uppercase text-slate-400">Next event</p>
             <p className="mt-1 text-sm font-black">{next ? `${next.title} · ${next.date}` : 'We will update you soon'}</p>
           </div>
-          <PermissionGuard permission="finance.view_payments" fallback={<div className="rounded-2xl bg-[#fbfaf8] p-3"><p className="text-[10px] font-extrabold uppercase text-slate-400">Payments</p><p className="mt-1 text-sm font-black">Shared by studio</p></div>}>
-            <div className="rounded-2xl bg-[#fbfaf8] p-3">
+          <PermissionGuard permission="finance.view_payments" fallback={<div className="rounded-2xl bg-[#FBFDF6] p-3"><p className="text-[10px] font-extrabold uppercase text-slate-400">Payments</p><p className="mt-1 text-sm font-black">Shared by studio</p></div>}>
+            <div className="rounded-2xl bg-[#FBFDF6] p-3">
               <p className="text-[10px] font-extrabold uppercase text-slate-400">Balance</p>
               <p className="mt-1 text-sm font-black">{money(wedding.balanceDue)}</p>
               <p className="text-[10px] text-slate-500">Paid {money(wedding.advanceReceived)} of {money(wedding.totalBudget)}</p>
@@ -587,7 +587,7 @@ function ClientHome({
         <h3 className="mt-5 text-xs font-extrabold uppercase tracking-wider text-slate-600">Events</h3>
         <div className="mt-2 space-y-2">
           {events.length === 0 ? <p className="text-sm text-slate-500">Events will appear after the studio publishes them.</p> : events.map((shoot) => (
-            <div key={shoot.id} className="flex items-center justify-between rounded-2xl bg-[#fbfaf8] px-3 py-2">
+            <div key={shoot.id} className="flex items-center justify-between rounded-2xl bg-[#FBFDF6] px-3 py-2">
               <div>
                 <p className="text-xs font-extrabold">{shoot.title}</p>
                 <p className="text-[11px] text-slate-500">{shoot.date} · {shoot.venue || shoot.location || wedding.venueLocation}</p>

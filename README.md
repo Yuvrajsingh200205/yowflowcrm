@@ -1,8 +1,8 @@
-# Frameloom — Frontend
+# Yowflow — Frontend
 
-Next.js (App Router) frontend for **Frameloom**, a studio-operations platform for photo and video studios: leads, projects, shoots, freelancers, invoices and client galleries in one workspace.
+Next.js (App Router) frontend for **Yowflow**, a studio-operations platform for photo and video studios: leads, projects, shoots, freelancers, invoices and client galleries in one workspace.
 
-It talks to the Frameloom backend (`yowflow_backend`) over HTTP and proxies `/api/v1` through Next rewrites so auth cookies stay first-party.
+It talks to the Yowflow backend (`yowflow_backend`) over HTTP and proxies `/api/v1` through Next rewrites so auth cookies stay first-party.
 
 ## White-label
 

@@ -41,9 +41,9 @@ export function MyAttendanceCard({ userId, canView }: { userId: string; canView:
       {loading ? <p className="mt-4 text-xs font-medium text-slate-500">Loading attendance…</p> : message ? <p className="mt-4 text-xs font-medium text-red-600">{message}</p> : (
         <>
           <div className="mt-3 grid grid-cols-3 gap-2 text-xs">
-            <div className="rounded-xl bg-[#fbfaf8] p-2"><p className="text-[10px] font-bold uppercase text-slate-400">Check in</p><p className="mt-1 font-extrabold text-slate-800">{time(record?.checkIn ?? null)}</p></div>
-            <div className="rounded-xl bg-[#fbfaf8] p-2"><p className="text-[10px] font-bold uppercase text-slate-400">Check out</p><p className="mt-1 font-extrabold text-slate-800">{time(record?.checkOut ?? null)}</p></div>
-            <div className="rounded-xl bg-[#fbfaf8] p-2"><p className="text-[10px] font-bold uppercase text-slate-400">Hours</p><p className="mt-1 font-extrabold text-slate-800">{record?.checkOut ? duration(record.workingMinutes) : '—'}</p></div>
+            <div className="rounded-xl bg-[#FBFDF6] p-2"><p className="text-[10px] font-bold uppercase text-slate-400">Check in</p><p className="mt-1 font-extrabold text-slate-800">{time(record?.checkIn ?? null)}</p></div>
+            <div className="rounded-xl bg-[#FBFDF6] p-2"><p className="text-[10px] font-bold uppercase text-slate-400">Check out</p><p className="mt-1 font-extrabold text-slate-800">{time(record?.checkOut ?? null)}</p></div>
+            <div className="rounded-xl bg-[#FBFDF6] p-2"><p className="text-[10px] font-bold uppercase text-slate-400">Hours</p><p className="mt-1 font-extrabold text-slate-800">{record?.checkOut ? duration(record.workingMinutes) : '—'}</p></div>
           </div>
           <div className="mt-auto flex gap-2 pt-3">
             {!record?.checkIn ? <button type="button" disabled={pending} onClick={() => void checkIn()} className={BTN_PRIMARY}><LogIn className="size-3.5" /> {pending ? 'Checking in…' : 'Check In'}</button> : !record.checkOut ? <button type="button" disabled={pending} onClick={() => void checkOut()} className={BTN_PRIMARY}><LogOut className="size-3.5" /> {pending ? 'Checking out…' : 'Check Out'}</button> : <span className={`${BTN_GHOST} pointer-events-none`}><Clock3 className="size-3.5" /> Attendance complete</span>}

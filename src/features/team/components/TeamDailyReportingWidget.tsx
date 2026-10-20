@@ -267,8 +267,8 @@ export const TeamDailyReportingWidget: React.FC<TeamDailyReportingWidgetProps> =
       {/* Title Header */}
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-3 border-b border-slate-100 pb-4">
         <div>
-          <div className="flex items-center gap-2 text-[#2f5f54] text-xs font-black uppercase tracking-wider mb-0.5">
-            <Sparkles className="w-4 h-4 text-[#2f5f54]" />
+          <div className="flex items-center gap-2 text-[#464B43] text-xs font-black uppercase tracking-wider mb-0.5">
+            <Sparkles className="w-4 h-4 text-[#464B43]" />
             <span>Daily Member Activity & Reporting</span>
           </div>
           <h2 className="text-xl font-black text-slate-900 tracking-tight flex items-center gap-2">
@@ -282,19 +282,19 @@ export const TeamDailyReportingWidget: React.FC<TeamDailyReportingWidgetProps> =
         {/* Date Filter & Preset Controls */}
         <div className="flex items-center gap-2 flex-wrap self-start md:self-auto">
           <div className="flex items-center gap-1.5 bg-slate-50 border border-slate-200 rounded-xl px-3 py-1.5 shadow-2xs">
-            <Calendar className="w-4 h-4 text-[#2f5f54]" />
+            <Calendar className="w-4 h-4 text-[#464B43]" />
             <span className="text-xs font-bold text-slate-700 uppercase">Date:</span>
             <input
               type="date"
               value={selectedDate}
               onChange={(e) => setSelectedDate(e.target.value)}
-              className="bg-white border border-slate-300 rounded-lg px-2 py-0.5 text-xs font-mono font-bold text-slate-900 focus:outline-[#2f5f54] shadow-2xs cursor-pointer"
+              className="bg-white border border-slate-300 rounded-lg px-2 py-0.5 text-xs font-mono font-bold text-slate-900 focus:outline-[#464B43] shadow-2xs cursor-pointer"
             />
             {selectedDate !== new Date().toISOString().split('T')[0] && (
               <button
                 type="button"
                 onClick={() => setSelectedDate(new Date().toISOString().split('T')[0])}
-                className="text-[10px] font-bold text-[#2f5f54] hover:underline px-1 bg-rose-50 rounded"
+                className="text-[10px] font-bold text-[#464B43] hover:underline px-1 bg-rose-50 rounded"
               >
                 Today
               </button>
@@ -330,9 +330,9 @@ export const TeamDailyReportingWidget: React.FC<TeamDailyReportingWidgetProps> =
         </div>
 
         <div className="bg-rose-50/80 p-3 rounded-xl border border-rose-200 space-y-0.5 col-span-2 sm:col-span-1">
-          <p className="text-[10px] font-extrabold text-[#253d37] uppercase tracking-wider">Staff With Pending Work</p>
-          <p className="text-lg font-black text-[#254b42]">{summaryMetrics.membersWithPendingCount} Members</p>
-          <p className="text-[10px] text-[#2f5f54] font-medium">Require Follow-up</p>
+          <p className="text-[10px] font-extrabold text-[#30342E] uppercase tracking-wider">Staff With Pending Work</p>
+          <p className="text-lg font-black text-[#373B35]">{summaryMetrics.membersWithPendingCount} Members</p>
+          <p className="text-[10px] text-[#464B43] font-medium">Require Follow-up</p>
         </div>
       </div>
 
@@ -347,7 +347,7 @@ export const TeamDailyReportingWidget: React.FC<TeamDailyReportingWidgetProps> =
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             placeholder="Search member name or role..."
-            className="w-full bg-white border border-slate-300 rounded-lg pl-9 pr-3 py-1.5 text-xs font-semibold text-slate-900 focus:outline-[#2f5f54] shadow-2xs"
+            className="w-full bg-white border border-slate-300 rounded-lg pl-9 pr-3 py-1.5 text-xs font-semibold text-slate-900 focus:outline-[#464B43] shadow-2xs"
           />
         </div>
 
@@ -416,14 +416,14 @@ export const TeamDailyReportingWidget: React.FC<TeamDailyReportingWidgetProps> =
                 {/* Member Header Banner */}
                 <div className="p-3.5 bg-slate-50/80 border-b border-slate-200 flex flex-col md:flex-row md:items-center justify-between gap-3">
                   <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 rounded-full bg-[#2f5f54] text-white font-black text-sm flex items-center justify-center shadow-xs flex-shrink-0">
+                    <div className="w-10 h-10 rounded-full bg-[#464B43] text-white font-black text-sm flex items-center justify-center shadow-xs flex-shrink-0">
                       {member.name.substring(0, 2).toUpperCase()}
                     </div>
 
                     <div className="space-y-0.5">
                       <div className="flex items-center gap-2 flex-wrap">
                         <h3 className="text-sm font-extrabold text-slate-900">{member.name}</h3>
-                        <span className="px-2 py-0.5 text-[10px] font-black rounded-md bg-rose-100 text-[#254b42] border border-rose-200 uppercase tracking-wide">
+                        <span className="px-2 py-0.5 text-[10px] font-black rounded-md bg-rose-100 text-[#373B35] border border-rose-200 uppercase tracking-wide">
                           {member.role}
                         </span>
 
@@ -442,7 +442,7 @@ export const TeamDailyReportingWidget: React.FC<TeamDailyReportingWidgetProps> =
                         {/* Software status if available */}
                         {member.currentSoftware && (
                           <span className="px-2 py-0.5 text-[10px] font-semibold bg-white text-slate-700 border border-slate-200 rounded flex items-center gap-1">
-                            <Monitor className="w-3 h-3 text-[#366e61]" />
+                            <Monitor className="w-3 h-3 text-[#50574D]" />
                             {member.currentSoftware}
                           </span>
                         )}
@@ -475,7 +475,7 @@ export const TeamDailyReportingWidget: React.FC<TeamDailyReportingWidgetProps> =
                     <button
                       type="button"
                       onClick={() => handleOpenAssignTask(member)}
-                      className="px-2.5 py-1.5 rounded-lg bg-[#2f5f54] hover:bg-[#254b42] text-white font-bold text-xs shadow-2xs transition flex items-center gap-1 cursor-pointer"
+                      className="px-2.5 py-1.5 rounded-lg bg-[#464B43] hover:bg-[#373B35] text-white font-bold text-xs shadow-2xs transition flex items-center gap-1 cursor-pointer"
                       title="Assign new task to this member"
                     >
                       <Plus className="w-3.5 h-3.5" />
@@ -538,7 +538,7 @@ export const TeamDailyReportingWidget: React.FC<TeamDailyReportingWidgetProps> =
                                     {task.title}
                                   </span>
                                   {task.domainName && (
-                                    <span className="px-1.5 py-0.2 text-[9px] font-bold bg-rose-50 text-[#254b42] border border-rose-200 rounded">
+                                    <span className="px-1.5 py-0.2 text-[9px] font-bold bg-rose-50 text-[#373B35] border border-rose-200 rounded">
                                       {task.domainName}
                                     </span>
                                   )}
@@ -563,7 +563,7 @@ export const TeamDailyReportingWidget: React.FC<TeamDailyReportingWidgetProps> =
                                 <button
                                   type="button"
                                   onClick={() => handleOpenEditTask(task)}
-                                  className="p-1 text-slate-500 hover:text-[#2f5f54] cursor-pointer"
+                                  className="p-1 text-slate-500 hover:text-[#464B43] cursor-pointer"
                                   title="Edit Task"
                                 >
                                   <Edit3 className="w-3 h-3" />
@@ -607,7 +607,7 @@ export const TeamDailyReportingWidget: React.FC<TeamDailyReportingWidgetProps> =
                                     {task.priority}
                                   </span>
                                   {task.domainName && (
-                                    <span className="px-1.5 py-0.2 text-[9px] font-bold bg-rose-50 text-[#254b42] border border-rose-200 rounded">
+                                    <span className="px-1.5 py-0.2 text-[9px] font-bold bg-rose-50 text-[#373B35] border border-rose-200 rounded">
                                       {task.domainName}
                                     </span>
                                   )}
@@ -635,7 +635,7 @@ export const TeamDailyReportingWidget: React.FC<TeamDailyReportingWidgetProps> =
                                 <button
                                   type="button"
                                   onClick={() => handleOpenEditTask(task)}
-                                  className="p-1 rounded bg-slate-100 hover:bg-rose-100 text-slate-600 hover:text-[#254b42] cursor-pointer"
+                                  className="p-1 rounded bg-slate-100 hover:bg-rose-100 text-slate-600 hover:text-[#373B35] cursor-pointer"
                                   title="Edit Task Details"
                                 >
                                   <Edit3 className="w-3.5 h-3.5" />
@@ -672,7 +672,7 @@ export const TeamDailyReportingWidget: React.FC<TeamDailyReportingWidgetProps> =
           <div className="bg-white rounded-2xl max-w-lg w-full p-5 space-y-4 shadow-2xl border border-slate-200">
             <div className="flex items-center justify-between border-b border-slate-100 pb-3">
               <h3 className="text-base font-extrabold text-slate-900 flex items-center gap-2">
-                <Plus className="w-5 h-5 text-[#2f5f54]" />
+                <Plus className="w-5 h-5 text-[#464B43]" />
                 <span>{editingTaskItem ? 'Edit Task' : `Assign New Task to ${assigningTaskMember.name}`}</span>
               </h3>
               <button
@@ -696,7 +696,7 @@ export const TeamDailyReportingWidget: React.FC<TeamDailyReportingWidgetProps> =
                   value={taskTitleInput}
                   onChange={(e) => setTaskTitleInput(e.target.value)}
                   placeholder="e.g. Edit Haldi Teaser Reel, Website SEO, Lead Followup..."
-                  className="w-full bg-slate-50 border border-slate-300 rounded-xl px-3 py-2 text-xs font-semibold text-slate-900 focus:outline-[#2f5f54]"
+                  className="w-full bg-slate-50 border border-slate-300 rounded-xl px-3 py-2 text-xs font-semibold text-slate-900 focus:outline-[#464B43]"
                 />
               </div>
 
@@ -705,7 +705,7 @@ export const TeamDailyReportingWidget: React.FC<TeamDailyReportingWidgetProps> =
                 <select
                   value={taskCategoryInput}
                   onChange={(e) => setTaskCategoryInput(e.target.value as any)}
-                  className="w-full bg-slate-50 border border-slate-300 rounded-xl px-3 py-2 text-xs font-bold text-slate-900 focus:outline-[#2f5f54] cursor-pointer"
+                  className="w-full bg-slate-50 border border-slate-300 rounded-xl px-3 py-2 text-xs font-bold text-slate-900 focus:outline-[#464B43] cursor-pointer"
                 >
                   <option value="sales_target">Monthly Booking Target & Revenue Goal</option>
                   <option value="sales_lead">Sales & Client Followups</option>
@@ -719,11 +719,11 @@ export const TeamDailyReportingWidget: React.FC<TeamDailyReportingWidgetProps> =
               {/* Sales Team Targets Section */}
               <div className="p-3.5 bg-rose-50/80 rounded-2xl border border-rose-200/90 space-y-3">
                 <div className="flex items-center justify-between">
-                  <label className="text-xs font-black text-[#1b2825] flex items-center gap-1.5">
-                    <Target className="w-4 h-4 text-[#2f5f54] shrink-0" />
+                  <label className="text-xs font-black text-[#21241F] flex items-center gap-1.5">
+                    <Target className="w-4 h-4 text-[#464B43] shrink-0" />
                     <span>Sales Targets & Monthly Goals</span>
                   </label>
-                  <span className="text-[10px] font-extrabold text-[#254b42] bg-rose-100/90 px-2.5 py-0.5 rounded-full border border-rose-200">
+                  <span className="text-[10px] font-extrabold text-[#373B35] bg-rose-100/90 px-2.5 py-0.5 rounded-full border border-rose-200">
                     Sales KPI Target
                   </span>
                 </div>
@@ -738,7 +738,7 @@ export const TeamDailyReportingWidget: React.FC<TeamDailyReportingWidgetProps> =
                       setTaskTargetRevenueInput('500000');
                       setTaskTargetLeadsCountInput('25');
                     }}
-                    className="text-[10px] font-bold px-2 py-0.5 rounded-md bg-white hover:bg-rose-100 text-[#254b42] border border-rose-200 cursor-pointer shadow-2xs transition"
+                    className="text-[10px] font-bold px-2 py-0.5 rounded-md bg-white hover:bg-rose-100 text-[#373B35] border border-rose-200 cursor-pointer shadow-2xs transition"
                   >
                     5 Deals (₹5 Lakh)
                   </button>
@@ -747,7 +747,7 @@ export const TeamDailyReportingWidget: React.FC<TeamDailyReportingWidgetProps> =
                     onClick={() => {
                       setTaskTargetLeadsCountInput('20');
                     }}
-                    className="text-[10px] font-bold px-2 py-0.5 rounded-md bg-white hover:bg-rose-100 text-[#254b42] border border-rose-200 cursor-pointer shadow-2xs transition"
+                    className="text-[10px] font-bold px-2 py-0.5 rounded-md bg-white hover:bg-rose-100 text-[#373B35] border border-rose-200 cursor-pointer shadow-2xs transition"
                   >
                     20 Hot Lead Calls
                   </button>
@@ -758,7 +758,7 @@ export const TeamDailyReportingWidget: React.FC<TeamDailyReportingWidgetProps> =
                       setTaskTargetRevenueInput('1000000');
                       setTaskTargetLeadsCountInput('40');
                     }}
-                    className="text-[10px] font-bold px-2 py-0.5 rounded-md bg-white hover:bg-rose-100 text-[#254b42] border border-rose-200 cursor-pointer shadow-2xs transition"
+                    className="text-[10px] font-bold px-2 py-0.5 rounded-md bg-white hover:bg-rose-100 text-[#373B35] border border-rose-200 cursor-pointer shadow-2xs transition"
                   >
                     ₹10 Lakh Goal
                   </button>
@@ -766,33 +766,33 @@ export const TeamDailyReportingWidget: React.FC<TeamDailyReportingWidgetProps> =
 
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5">
                   <div className="flex flex-col justify-end">
-                    <label className="text-[10px] font-extrabold uppercase text-[#253d37] mb-1 leading-tight min-h-[28px] flex items-end">Monthly Booking Target</label>
+                    <label className="text-[10px] font-extrabold uppercase text-[#30342E] mb-1 leading-tight min-h-[28px] flex items-end">Monthly Booking Target</label>
                     <input
                       type="number"
                       value={taskBookingTargetInput}
                       onChange={(e) => setTaskBookingTargetInput(e.target.value)}
                       placeholder="e.g. 5 Deals"
-                      className="w-full bg-white border border-rose-200 rounded-xl px-2.5 py-1.5 text-xs font-black text-[#1b2825] focus:outline-[#2f5f54]"
+                      className="w-full bg-white border border-rose-200 rounded-xl px-2.5 py-1.5 text-xs font-black text-[#21241F] focus:outline-[#464B43]"
                     />
                   </div>
                   <div className="flex flex-col justify-end">
-                    <label className="text-[10px] font-extrabold uppercase text-[#253d37] mb-1 leading-tight min-h-[28px] flex items-end">Target Revenue (₹)</label>
+                    <label className="text-[10px] font-extrabold uppercase text-[#30342E] mb-1 leading-tight min-h-[28px] flex items-end">Target Revenue (₹)</label>
                     <input
                       type="number"
                       value={taskTargetRevenueInput}
                       onChange={(e) => setTaskTargetRevenueInput(e.target.value)}
                       placeholder="e.g. 500000"
-                      className="w-full bg-white border border-rose-200 rounded-xl px-2.5 py-1.5 text-xs font-black text-[#1b2825] focus:outline-[#2f5f54]"
+                      className="w-full bg-white border border-rose-200 rounded-xl px-2.5 py-1.5 text-xs font-black text-[#21241F] focus:outline-[#464B43]"
                     />
                   </div>
                   <div className="flex flex-col justify-end">
-                    <label className="text-[10px] font-extrabold uppercase text-[#253d37] mb-1 leading-tight min-h-[28px] flex items-end">Calls / Leads Target</label>
+                    <label className="text-[10px] font-extrabold uppercase text-[#30342E] mb-1 leading-tight min-h-[28px] flex items-end">Calls / Leads Target</label>
                     <input
                       type="number"
                       value={taskTargetLeadsCountInput}
                       onChange={(e) => setTaskTargetLeadsCountInput(e.target.value)}
                       placeholder="e.g. 20 Calls"
-                      className="w-full bg-white border border-rose-200 rounded-xl px-2.5 py-1.5 text-xs font-black text-[#1b2825] focus:outline-[#2f5f54]"
+                      className="w-full bg-white border border-rose-200 rounded-xl px-2.5 py-1.5 text-xs font-black text-[#21241F] focus:outline-[#464B43]"
                     />
                   </div>
                 </div>
@@ -804,7 +804,7 @@ export const TeamDailyReportingWidget: React.FC<TeamDailyReportingWidgetProps> =
                   <select
                     value={taskPriorityInput}
                     onChange={(e) => setTaskPriorityInput(e.target.value as any)}
-                    className="w-full bg-slate-50 border border-slate-300 rounded-xl px-3 py-2 text-xs font-bold text-slate-900 focus:outline-[#2f5f54] cursor-pointer"
+                    className="w-full bg-slate-50 border border-slate-300 rounded-xl px-3 py-2 text-xs font-bold text-slate-900 focus:outline-[#464B43] cursor-pointer"
                   >
                     <option value="high">High Priority</option>
                     <option value="medium">Medium</option>
@@ -818,7 +818,7 @@ export const TeamDailyReportingWidget: React.FC<TeamDailyReportingWidgetProps> =
                     type="date"
                     value={taskDueDateInput}
                     onChange={(e) => setTaskDueDateInput(e.target.value)}
-                    className="w-full bg-slate-50 border border-slate-300 rounded-xl px-3 py-2 text-xs font-mono font-bold text-slate-900 focus:outline-[#2f5f54] cursor-pointer"
+                    className="w-full bg-slate-50 border border-slate-300 rounded-xl px-3 py-2 text-xs font-mono font-bold text-slate-900 focus:outline-[#464B43] cursor-pointer"
                   />
                 </div>
               </div>
@@ -830,7 +830,7 @@ export const TeamDailyReportingWidget: React.FC<TeamDailyReportingWidgetProps> =
                   value={taskNotesInput}
                   onChange={(e) => setTaskNotesInput(e.target.value)}
                   placeholder="Additional work notes or links..."
-                  className="w-full bg-slate-50 border border-slate-300 rounded-xl px-3 py-2 text-xs font-medium text-slate-900 focus:outline-[#2f5f54]"
+                  className="w-full bg-slate-50 border border-slate-300 rounded-xl px-3 py-2 text-xs font-medium text-slate-900 focus:outline-[#464B43]"
                 />
               </div>
 
@@ -847,7 +847,7 @@ export const TeamDailyReportingWidget: React.FC<TeamDailyReportingWidgetProps> =
                 </button>
                 <button
                   type="submit"
-                  className="px-5 py-2 rounded-xl bg-[#2f5f54] hover:bg-[#254b42] text-white font-bold text-xs shadow-xs cursor-pointer"
+                  className="px-5 py-2 rounded-xl bg-[#464B43] hover:bg-[#373B35] text-white font-bold text-xs shadow-xs cursor-pointer"
                 >
                   {editingTaskItem ? 'Save Changes' : 'Assign Task'}
                 </button>

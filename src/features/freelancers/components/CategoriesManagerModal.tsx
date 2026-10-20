@@ -96,9 +96,9 @@ export const CategoriesManagerModal: React.FC<CategoriesManagerModalProps> = ({
   };
 
   return (
-    <div className="fixed inset-0 z-[80] bg-[#111a18]/75 backdrop-blur-xs flex items-center justify-center p-4 overflow-y-auto">
-      <div className="bg-white rounded-[2rem] shadow-[0_30px_90px_rgba(9,19,17,.42)] border border-white/50 w-full max-w-3xl overflow-hidden my-8">
-        <div className="bg-[linear-gradient(125deg,#33514A,#55333f_52%,#1b2825)] text-white p-5 flex items-center justify-between">
+    <div className="fixed inset-0 z-[80] bg-[#151714]/75 backdrop-blur-xs flex items-center justify-center p-4 overflow-y-auto">
+      <div className="bg-white rounded-[2rem] shadow-[0_30px_90px_rgba(14,15,13,.42)] border border-white/50 w-full max-w-3xl overflow-hidden my-8">
+        <div className="bg-[linear-gradient(125deg,#41463E,#55333f_52%,#21241F)] text-white p-5 flex items-center justify-between">
           <div className="flex items-center gap-3">
             <div className="w-10 h-10 rounded-xl bg-white/15 flex items-center justify-center font-bold text-white">
               <Tag className="w-5 h-5 text-white" />
@@ -120,7 +120,7 @@ export const CategoriesManagerModal: React.FC<CategoriesManagerModalProps> = ({
           {/* Add New Category Form */}
           <form onSubmit={handleAddCategory} className="bg-slate-50 border border-slate-200 rounded-xl p-4 space-y-3">
             <h3 className="text-xs font-bold uppercase tracking-wider text-slate-700 flex items-center gap-1.5">
-              <Plus className="w-4 h-4 text-[#2f5f54]" />
+              <Plus className="w-4 h-4 text-[#464B43]" />
               <span>Add New Freelancer Category</span>
             </h3>
 
@@ -134,7 +134,7 @@ export const CategoriesManagerModal: React.FC<CategoriesManagerModalProps> = ({
                   placeholder="e.g. Drone Operator, Sound Engineer"
                   value={newCatName}
                   onChange={(e) => setNewCatName(e.target.value)}
-                  className="w-full px-3 py-2 text-xs rounded-lg border border-slate-300 focus:outline-hidden focus:ring-2 focus:ring-[#366e61] bg-white"
+                  className="w-full px-3 py-2 text-xs rounded-lg border border-slate-300 focus:outline-hidden focus:ring-2 focus:ring-[#50574D] bg-white"
                   required
                 />
               </div>
@@ -148,7 +148,7 @@ export const CategoriesManagerModal: React.FC<CategoriesManagerModalProps> = ({
                   placeholder="e.g. Candid, Traditional, Operator"
                   value={newSubCats}
                   onChange={(e) => setNewSubCats(e.target.value)}
-                  className="w-full px-3 py-2 text-xs rounded-lg border border-slate-300 focus:outline-hidden focus:ring-2 focus:ring-[#366e61] bg-white"
+                  className="w-full px-3 py-2 text-xs rounded-lg border border-slate-300 focus:outline-hidden focus:ring-2 focus:ring-[#50574D] bg-white"
                 />
               </div>
             </div>
@@ -162,14 +162,14 @@ export const CategoriesManagerModal: React.FC<CategoriesManagerModalProps> = ({
                 placeholder="Brief description of requirements..."
                 value={newDesc}
                 onChange={(e) => setNewDesc(e.target.value)}
-                className="w-full px-3 py-2 text-xs rounded-lg border border-slate-300 focus:outline-hidden focus:ring-2 focus:ring-[#366e61] bg-white"
+                className="w-full px-3 py-2 text-xs rounded-lg border border-slate-300 focus:outline-hidden focus:ring-2 focus:ring-[#50574D] bg-white"
               />
             </div>
 
             <div className="flex justify-end">
               <button
                 type="submit"
-                className="px-4 py-2 bg-[#2f5f54] hover:bg-[#254b42] text-white text-xs font-bold rounded-lg transition shadow-xs flex items-center gap-1.5"
+                className="px-4 py-2 bg-[#464B43] hover:bg-[#373B35] text-white text-xs font-bold rounded-lg transition shadow-xs flex items-center gap-1.5"
               >
                 <Plus className="w-3.5 h-3.5" />
                 <span>Add Category</span>
@@ -236,7 +236,7 @@ export const CategoriesManagerModal: React.FC<CategoriesManagerModalProps> = ({
                         </button>
                         <button
                           onClick={() => handleSaveEdit(cat.id)}
-                          className="px-3 py-1 bg-[#2f5f54] text-white text-xs font-bold rounded"
+                          className="px-3 py-1 bg-[#464B43] text-white text-xs font-bold rounded"
                         >
                           Save Changes
                         </button>
@@ -274,7 +274,7 @@ export const CategoriesManagerModal: React.FC<CategoriesManagerModalProps> = ({
                           <button
                             onClick={() => handleStartEdit(cat)}
                             title="Edit Category"
-                            className="p-1.5 text-slate-600 hover:text-[#2f5f54] hover:bg-rose-50 rounded transition"
+                            className="p-1.5 text-slate-600 hover:text-[#464B43] hover:bg-rose-50 rounded transition"
                           >
                             <Edit2 className="w-4 h-4" />
                           </button>
@@ -298,7 +298,7 @@ export const CategoriesManagerModal: React.FC<CategoriesManagerModalProps> = ({
                         {cat.subCategories.map((sub, idx) => (
                           <span
                             key={idx}
-                            className="px-2 py-0.5 bg-rose-50 text-[#254b42] border border-rose-200 rounded-md text-[11px] font-semibold"
+                            className="px-2 py-0.5 bg-rose-50 text-[#373B35] border border-rose-200 rounded-md text-[11px] font-semibold"
                           >
                             {sub}
                           </span>

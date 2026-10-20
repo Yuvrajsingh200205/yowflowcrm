@@ -245,7 +245,7 @@ export const TeamFreelancersView: React.FC<Props> = ({
                       >
                         <Avatar member={{ id: row.key, name: row.name, profilePhoto: row.member?.profilePhoto }} size="sm" />
                         <div className="min-w-0">
-                          <p className="font-extrabold text-slate-900 truncate group-hover:text-[#2f5f54] transition">{row.name}</p>
+                          <p className="font-extrabold text-slate-900 truncate group-hover:text-[#464B43] transition">{row.name}</p>
                           <p className="text-[9px] font-bold uppercase tracking-wider text-slate-400">
                             {row.source === 'roster' ? 'Roster freelancer' : 'External'}
                           </p>
@@ -288,7 +288,7 @@ export const TeamFreelancersView: React.FC<Props> = ({
         <section className={`${CARD} p-5 space-y-3`}>
           <header>
             <h3 className="text-sm font-extrabold text-slate-900 uppercase tracking-tight flex items-center gap-2">
-              <IndianRupee className="w-4 h-4 text-[#2f5f54]" /> Shoot-wise settlements
+              <IndianRupee className="w-4 h-4 text-[#464B43]" /> Shoot-wise settlements
             </h3>
             <p className="text-[11px] text-slate-500 font-medium">Agreed vs paid vs pending, per freelancer assignment.</p>
           </header>

@@ -97,13 +97,13 @@ export function FreelancerLanding() {
             <div className="fl-wrap">
               <div className="fl-hero-grid">
                 <div>
-                  <p className="fl-line fl-d1 ed-label" style={{ color: '#e4c48a' }}>For freelancers</p>
+                  <p className="fl-line fl-d1 ed-label" style={{ color: '#C8E985' }}>For freelancers</p>
                   <h1 className="fl-title">
                     <span className="fl-line fl-d2 block">Get found.</span>
                     <em className="fl-line fl-d3 block">Stay clear.</em>
                     <span className="fl-line fl-d4 block">Get paid.</span>
                   </h1>
-                  <p className="fl-line fl-d5 mt-6 max-w-[34rem] text-[1.02rem] leading-7 text-[rgba(247,241,232,0.78)]">
+                  <p className="fl-line fl-d5 mt-6 max-w-[34rem] text-[1.02rem] leading-7 text-[rgba(243,250,229,0.78)]">
                     A calmer operating page for photographers, filmmakers and editors: profile, assignments, shoots and payouts in one {BRAND.name} record.
                   </p>
                   <div className="fl-line fl-d6 mt-8 flex flex-wrap gap-6">
@@ -266,7 +266,7 @@ export function FreelancerLanding() {
                   </button>
                 ))}
               </div>
-              <p className="mt-6 max-w-[32ch] text-[0.9rem] leading-7 text-[rgba(247,241,232,0.72)]">{nodes[node].detail}</p>
+              <p className="mt-6 max-w-[32ch] text-[0.9rem] leading-7 text-[rgba(243,250,229,0.72)]">{nodes[node].detail}</p>
             </div>
           </div>
         </section>
@@ -359,8 +359,8 @@ export function FreelancerLanding() {
           </div>
           <div className="fl-close-shade" aria-hidden="true" />
           <div className="fl-wrap py-[clamp(5rem,10vw,8rem)]">
-            <h2 className="fl-h max-w-[14ch] text-[#f7f1e8]">Your work deserves a quieter way to run.</h2>
-            <p className="mt-5 max-w-[34rem] text-[1rem] leading-7 text-[rgba(247,241,232,0.75)]">Profile, shoots and what you are owed — in the same language as the studio.</p>
+            <h2 className="fl-h max-w-[14ch] text-[#F3FAE5]">Your work deserves a quieter way to run.</h2>
+            <p className="mt-5 max-w-[34rem] text-[1rem] leading-7 text-[rgba(243,250,229,0.75)]">Profile, shoots and what you are owed — in the same language as the studio.</p>
             <div className="mt-8 flex flex-wrap gap-6">
               <Link href="/freelancers/pricing" className="ed-action">Get Started</Link>
               <Link href="/features" className="fl-text">Explore Features</Link>

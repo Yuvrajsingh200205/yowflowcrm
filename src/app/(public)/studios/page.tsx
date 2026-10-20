@@ -34,13 +34,13 @@ export default function StudiosPage() {
           sizes="100vw"
           className="object-cover object-[70%_40%] opacity-40"
         />
-        <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(9,14,13,0.94)_0%,rgba(9,14,13,0.78)_48%,rgba(9,14,13,0.35)_100%)]" />
+        <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(11,12,11,0.94)_0%,rgba(11,12,11,0.78)_48%,rgba(11,12,11,0.35)_100%)]" />
         <Container className="relative pb-20 pt-[clamp(8rem,14vw,11rem)]">
           <p className="ed-label text-[var(--ed-brass-lt)]">For studios</p>
-          <Display as="h1" step="ed-d1" className="mt-6 max-w-[13ch] text-[#F7F1E8]">
+          <Display as="h1" step="ed-d1" className="mt-6 max-w-[13ch] text-[#F3FAE5]">
             Run the studio from one place.
           </Display>
-          <p className="mt-6 max-w-[38ch] text-[1rem] leading-[1.7] text-[rgba(247,241,232,0.78)]">
+          <p className="mt-6 max-w-[38ch] text-[1rem] leading-[1.7] text-[rgba(243,250,229,0.78)]">
             Projects, clients, the day’s shoots, the crew, the payments and the delivery — written to the wedding they belong to.
           </p>
           <div className="mt-9 flex flex-wrap items-center gap-8">

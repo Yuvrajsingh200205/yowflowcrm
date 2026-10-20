@@ -61,7 +61,8 @@ const REQUEST_TIMEOUT_MS = 15_000;
  * cookies — but they are purged whenever auth state is touched so an existing
  * browser does not keep a readable access token lying around.
  */
-const LEGACY_TOKEN_KEYS = [`${BRAND.cookiePrefix}.accessToken`, `${BRAND.cookiePrefix}.refreshToken`];
+// Older builds (including the pre-rebrand `wpp.` keys) kept tokens in localStorage; purge them all.
+const LEGACY_TOKEN_KEYS = ['wpp.accessToken', 'wpp.refreshToken', `${BRAND.cookiePrefix}.accessToken`, `${BRAND.cookiePrefix}.refreshToken`];
 const CLIENT_SESSION_COOKIE = `${BRAND.cookiePrefix}_client_session`;
 const DEFAULT_CLIENT_SESSION_MAX_AGE = 60 * 60 * 24 * 7;
 const ACCESS_TOKEN_REFRESH_WINDOW_MS = 90_000;

@@ -148,7 +148,7 @@ export const FaceSearchSection: React.FC<FaceSearchSectionProps> = ({
   return (
     <div className="space-y-8 animate-in fade-in duration-300">
       {/* Header Banner */}
-      <div className="relative rounded-2xl overflow-hidden bg-gradient-to-r from-slate-900 via-slate-800 to-amber-950/40 p-6 sm:p-10 text-white border border-[#19332d]/80 shadow-xl">
+      <div className="relative rounded-2xl overflow-hidden bg-gradient-to-r from-slate-900 via-slate-800 to-amber-950/40 p-6 sm:p-10 text-white border border-[#252824]/80 shadow-xl">
         <div className="max-w-2xl space-y-3">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-500/20 text-amber-300 text-xs font-medium border border-amber-500/30">
             <Sparkles className="w-3.5 h-3.5" />
@@ -189,12 +189,12 @@ export const FaceSearchSection: React.FC<FaceSearchSectionProps> = ({
                 />
                 <button 
                   onClick={handleClearSearch}
-                  className="absolute top-2 right-2 p-1.5 bg-[#111f1c]/70 hover:bg-rose-600 text-white rounded-full transition-colors"
+                  className="absolute top-2 right-2 p-1.5 bg-[#181917]/70 hover:bg-rose-600 text-white rounded-full transition-colors"
                   title="Remove Selfie"
                 >
                   <Trash2 className="w-4 h-4" />
                 </button>
-                <span className="absolute bottom-2 left-2 right-2 text-center text-[11px] bg-[#254b42]/80 text-amber-200 py-0.5 rounded backdrop-blur">
+                <span className="absolute bottom-2 left-2 right-2 text-center text-[11px] bg-[#373B35]/80 text-amber-200 py-0.5 rounded backdrop-blur">
                   Target Face Loaded
                 </span>
               </div>
@@ -317,7 +317,7 @@ export const FaceSearchSection: React.FC<FaceSearchSectionProps> = ({
                 onClick={() => setActiveFilter('All')}
                 className={`px-3 py-1.5 rounded-full text-xs font-medium transition-colors ${
                   activeFilter === 'All'
-                    ? 'bg-[#254b42] text-white'
+                    ? 'bg-[#373B35] text-white'
                     : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
                 }`}
               >
@@ -354,7 +354,7 @@ export const FaceSearchSection: React.FC<FaceSearchSectionProps> = ({
                   className="group relative rounded-xl overflow-hidden bg-slate-100 border border-[#e2d9d3] shadow-sm hover:shadow-md transition-all cursor-pointer"
                   onClick={() => onOpenMedia(res.media)}
                 >
-                  <div className="aspect-[4/3] w-full overflow-hidden bg-[#254b42]">
+                  <div className="aspect-[4/3] w-full overflow-hidden bg-[#373B35]">
                     <img 
                       src={res.media.thumbnailUrl} 
                       alt={res.media.title} 
@@ -364,7 +364,7 @@ export const FaceSearchSection: React.FC<FaceSearchSectionProps> = ({
                   </div>
 
                   {/* Similarity Badge */}
-                  <span className="absolute top-2 left-2 px-2 py-0.5 rounded-md bg-[#111f1c]/80 backdrop-blur text-[11px] font-mono text-amber-300 border border-amber-500/30">
+                  <span className="absolute top-2 left-2 px-2 py-0.5 rounded-md bg-[#181917]/80 backdrop-blur text-[11px] font-mono text-amber-300 border border-amber-500/30">
                     {res.similarityScore}% Match
                   </span>
 
@@ -377,7 +377,7 @@ export const FaceSearchSection: React.FC<FaceSearchSectionProps> = ({
                     className={`absolute top-2 right-2 p-1.5 rounded-full backdrop-blur transition-all ${
                       res.media.isFavorite 
                         ? 'bg-rose-500 text-white' 
-                        : 'bg-[#111f1c]/60 text-slate-300 hover:text-white opacity-0 group-hover:opacity-100'
+                        : 'bg-[#181917]/60 text-slate-300 hover:text-white opacity-0 group-hover:opacity-100'
                     }`}
                   >
                     <Heart className={`w-3.5 h-3.5 ${res.media.isFavorite ? 'fill-current' : ''}`} />

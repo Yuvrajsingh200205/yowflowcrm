@@ -975,7 +975,7 @@ export const ShootAssignmentsView: React.FC<ShootAssignmentsViewProps> = ({
       {/* Top Header Controls */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-white p-4 rounded-2xl border border-slate-200 shadow-xs">
         <div className="flex items-center gap-3">
-          <div className="w-10 h-10 rounded-xl bg-[#2f5f54] flex items-center justify-center font-bold text-white shadow-xs">
+          <div className="w-10 h-10 rounded-xl bg-[#464B43] flex items-center justify-center font-bold text-white shadow-xs">
             <Film className="w-5 h-5 text-white" />
           </div>
           <div>
@@ -986,7 +986,7 @@ export const ShootAssignmentsView: React.FC<ShootAssignmentsViewProps> = ({
 
         <button
           onClick={() => setShowAddModal(true)}
-          className="px-4 py-2 bg-[#2f5f54] hover:bg-[#254b42] text-white text-xs font-bold rounded-xl transition shadow-xs flex items-center gap-2 justify-center"
+          className="px-4 py-2 bg-[#464B43] hover:bg-[#373B35] text-white text-xs font-bold rounded-xl transition shadow-xs flex items-center gap-2 justify-center"
         >
           <Plus className="w-4 h-4 stroke-[3]" />
           <span>Assign Freelancer to Shoot</span>
@@ -1002,7 +1002,7 @@ export const ShootAssignmentsView: React.FC<ShootAssignmentsViewProps> = ({
             placeholder="Search project, freelancer, client, venue..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="w-full pl-9 pr-4 py-2 text-xs rounded-xl border border-slate-200 bg-white focus:outline-hidden focus:ring-2 focus:ring-[#366e61]"
+            className="w-full pl-9 pr-4 py-2 text-xs rounded-xl border border-slate-200 bg-white focus:outline-hidden focus:ring-2 focus:ring-[#50574D]"
           />
         </div>
 
@@ -1090,7 +1090,7 @@ export const ShootAssignmentsView: React.FC<ShootAssignmentsViewProps> = ({
                       <h3 className="text-base font-black text-slate-900 tracking-tight">
                         {projCard.projectName}
                       </h3>
-                      <span className="px-2 py-0.5 bg-rose-50 text-[#254b42] border border-rose-200/60 text-[10px] font-extrabold rounded-md uppercase">
+                      <span className="px-2 py-0.5 bg-rose-50 text-[#373B35] border border-rose-200/60 text-[10px] font-extrabold rounded-md uppercase">
                         {totalProjectShoots} {totalProjectShoots === 1 ? 'Shoot Event' : 'Shoot Events'}
                       </span>
                       {isHidden && (
@@ -1103,7 +1103,7 @@ export const ShootAssignmentsView: React.FC<ShootAssignmentsViewProps> = ({
                       <span>Client: <strong className="text-slate-800">{projCard.clientName}</strong></span>
                       {projCard.venueLocation && (
                         <span className="flex items-center gap-1">
-                          <MapPin className="w-3.5 h-3.5 text-[#366e61]" />
+                          <MapPin className="w-3.5 h-3.5 text-[#50574D]" />
                           <strong className="text-slate-700">{projCard.venueLocation}</strong>
                         </span>
                       )}
@@ -1151,7 +1151,7 @@ export const ShootAssignmentsView: React.FC<ShootAssignmentsViewProps> = ({
                           firstShoot?.endTime || ''
                         );
                       }}
-                      className="px-3 py-1.5 bg-[#2f5f54] hover:bg-[#254b42] text-white text-xs font-bold rounded-xl transition shadow-2xs flex items-center gap-1 cursor-pointer"
+                      className="px-3 py-1.5 bg-[#464B43] hover:bg-[#373B35] text-white text-xs font-bold rounded-xl transition shadow-2xs flex items-center gap-1 cursor-pointer"
                     >
                       <Plus className="w-3.5 h-3.5" />
                       <span>Assign Crew</span>
@@ -1257,7 +1257,7 @@ export const ShootAssignmentsView: React.FC<ShootAssignmentsViewProps> = ({
                         {/* Function Shoot Title & Details Header */}
                         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-slate-200/60 pb-3">
                           <div className="flex flex-wrap items-center gap-2">
-                            <span className="px-2.5 py-1 bg-[#2f5f54] text-white text-xs font-black uppercase tracking-wider rounded-lg shadow-2xs">
+                            <span className="px-2.5 py-1 bg-[#464B43] text-white text-xs font-black uppercase tracking-wider rounded-lg shadow-2xs">
                               {shoot.eventName}
                             </span>
                             <span className="text-xs font-bold text-slate-700">
@@ -1277,15 +1277,15 @@ export const ShootAssignmentsView: React.FC<ShootAssignmentsViewProps> = ({
 
                           <div className="flex flex-wrap items-center gap-3 text-xs text-slate-600">
                             <span className="flex items-center gap-1 font-bold text-slate-800 bg-white px-2.5 py-1 rounded-lg border border-slate-200">
-                              <Calendar className="w-3.5 h-3.5 text-[#2f5f54]" />
+                              <Calendar className="w-3.5 h-3.5 text-[#464B43]" />
                               {shoot.shootDate}
                             </span>
                             <span className="flex items-center gap-1 bg-white px-2.5 py-1 rounded-lg border border-slate-200 font-medium">
-                              <Clock className="w-3.5 h-3.5 text-[#2f5f54]" />
+                              <Clock className="w-3.5 h-3.5 text-[#464B43]" />
                               {shoot.startTime} - {shoot.endTime}
                             </span>
                             <span className="flex items-center gap-1 bg-white px-2.5 py-1 rounded-lg border border-slate-200 font-medium truncate max-w-[200px]" title={shoot.venue}>
-                              <MapPin className="w-3.5 h-3.5 text-[#2f5f54]" />
+                              <MapPin className="w-3.5 h-3.5 text-[#464B43]" />
                               {shoot.venue}
                             </span>
                           </div>
@@ -1301,7 +1301,7 @@ export const ShootAssignmentsView: React.FC<ShootAssignmentsViewProps> = ({
                             <div className="bg-white border border-slate-200 rounded-xl p-3.5 space-y-3 shadow-2xs">
                               <div className="flex flex-wrap items-center justify-between gap-2 border-b border-slate-100 pb-2">
                                 <div className="flex items-center gap-2">
-                                  <span className="w-2 h-2 rounded-full bg-[#2f5f54]"></span>
+                                  <span className="w-2 h-2 rounded-full bg-[#464B43]"></span>
                                   <span className="text-xs font-black text-slate-900 uppercase tracking-wider">
                                     📋 Tracked Shoot Management Requirements ({shootMgmtCrew.length} Slots)
                                   </span>
@@ -1341,7 +1341,7 @@ export const ShootAssignmentsView: React.FC<ShootAssignmentsViewProps> = ({
                                           pendingReqs
                                         )
                                       }
-                                      className="px-2.5 py-1 bg-[#2f5f54] hover:bg-[#254b42] text-white font-extrabold text-[10px] rounded-lg shadow-2xs cursor-pointer transition flex items-center gap-1"
+                                      className="px-2.5 py-1 bg-[#464B43] hover:bg-[#373B35] text-white font-extrabold text-[10px] rounded-lg shadow-2xs cursor-pointer transition flex items-center gap-1"
                                     >
                                       <span>⚡ Auto-Assign All {pendingReqs.length} Pending</span>
                                     </button>
@@ -1412,7 +1412,7 @@ export const ShootAssignmentsView: React.FC<ShootAssignmentsViewProps> = ({
                                             {req.assignedTo && (
                                               <button
                                                 onClick={() => handleOpenEditAssignment(req.assignedTo!)}
-                                                className="p-1 bg-rose-50 hover:bg-rose-50 text-[#2f5f54] rounded-lg transition cursor-pointer"
+                                                className="p-1 bg-rose-50 hover:bg-rose-50 text-[#464B43] rounded-lg transition cursor-pointer"
                                                 title="Edit Assignment Details"
                                               >
                                                 <Edit3 className="w-3.5 h-3.5" />
@@ -1450,7 +1450,7 @@ export const ShootAssignmentsView: React.FC<ShootAssignmentsViewProps> = ({
                                           shoot.shootLocation
                                         )
                                       }
-                                      className="px-3 py-1.5 bg-rose-50 hover:bg-rose-50 text-[#254b42] border border-rose-200 text-xs font-extrabold rounded-xl transition cursor-pointer"
+                                      className="px-3 py-1.5 bg-rose-50 hover:bg-rose-50 text-[#373B35] border border-rose-200 text-xs font-extrabold rounded-xl transition cursor-pointer"
                                     >
                                       ⚡ Auto-Fill Team (4 Crew)
                                     </button>
@@ -1466,7 +1466,7 @@ export const ShootAssignmentsView: React.FC<ShootAssignmentsViewProps> = ({
                                           shoot.endTime
                                         )
                                       }
-                                      className="px-3 py-1.5 bg-[#2f5f54] hover:bg-[#254b42] text-white text-xs font-bold rounded-xl transition shadow-2xs cursor-pointer"
+                                      className="px-3 py-1.5 bg-[#464B43] hover:bg-[#373B35] text-white text-xs font-bold rounded-xl transition shadow-2xs cursor-pointer"
                                     >
                                       Assign Custom
                                     </button>
@@ -1495,7 +1495,7 @@ export const ShootAssignmentsView: React.FC<ShootAssignmentsViewProps> = ({
                                     shoot.endTime
                                   )
                                 }
-                                className="text-[11px] font-black text-[#2f5f54] hover:text-[#253d37] flex items-center gap-1 cursor-pointer"
+                                className="text-[11px] font-black text-[#464B43] hover:text-[#30342E] flex items-center gap-1 cursor-pointer"
                               >
                                 <Plus className="w-3 h-3" />
                                 <span>Add Crew Member</span>
@@ -1541,7 +1541,7 @@ export const ShootAssignmentsView: React.FC<ShootAssignmentsViewProps> = ({
 
                                     <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3">
                                       <div className="flex items-center gap-2.5">
-                                        <div className="w-8 h-8 rounded-full bg-[#2f5f54] text-white font-bold text-xs flex items-center justify-center font-mono">
+                                        <div className="w-8 h-8 rounded-full bg-[#464B43] text-white font-bold text-xs flex items-center justify-center font-mono">
                                           {displayName[0]}
                                         </div>
                                         <div>
@@ -1593,7 +1593,7 @@ export const ShootAssignmentsView: React.FC<ShootAssignmentsViewProps> = ({
                                               ? 'bg-amber-100 text-amber-800 border-amber-200'
                                               : assignment.assignmentStatus === 'cancelled'
                                               ? 'bg-red-100 text-red-800 border-red-200'
-                                              : 'bg-rose-50 text-[#253d37] border-rose-200'
+                                              : 'bg-rose-50 text-[#30342E] border-rose-200'
                                           }`}
                                         >
                                           <option value="assigned">Assigned</option>
@@ -1605,7 +1605,7 @@ export const ShootAssignmentsView: React.FC<ShootAssignmentsViewProps> = ({
 
                                         <button
                                           onClick={() => handleOpenEditAssignment(assignment)}
-                                          className="p-1 bg-rose-50 hover:bg-rose-50 text-[#2f5f54] rounded-lg transition cursor-pointer"
+                                          className="p-1 bg-rose-50 hover:bg-rose-50 text-[#464B43] rounded-lg transition cursor-pointer"
                                           title="Edit Assignment Details"
                                         >
                                           <Edit3 className="w-3.5 h-3.5" />
@@ -1646,7 +1646,7 @@ export const ShootAssignmentsView: React.FC<ShootAssignmentsViewProps> = ({
                           return next;
                         });
                       }}
-                      className="px-2.5 py-1 bg-white border border-slate-200 hover:bg-slate-100 text-[#2f5f54] font-bold text-xs rounded-lg shadow-2xs transition cursor-pointer"
+                      className="px-2.5 py-1 bg-white border border-slate-200 hover:bg-slate-100 text-[#464B43] font-bold text-xs rounded-lg shadow-2xs transition cursor-pointer"
                     >
                       Show Details
                     </button>
@@ -1664,7 +1664,7 @@ export const ShootAssignmentsView: React.FC<ShootAssignmentsViewProps> = ({
           <div className="bg-white rounded-2xl shadow-2xl border border-slate-200 w-full max-w-3xl overflow-hidden my-6">
             <div className="bg-slate-900 text-white p-5 flex items-center justify-between">
               <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-xl bg-[#2f5f54] flex items-center justify-center font-bold text-white shadow-sm">
+                <div className="w-10 h-10 rounded-xl bg-[#464B43] flex items-center justify-center font-bold text-white shadow-sm">
                   <Film className="w-5 h-5 text-white" />
                 </div>
                 <div>
@@ -1707,14 +1707,14 @@ export const ShootAssignmentsView: React.FC<ShootAssignmentsViewProps> = ({
                     if (selectedProj?.shoots && selectedProj.shoots.length > 0) {
                       return (
                         <div className="col-span-1 sm:col-span-2 bg-rose-50/80 p-3 rounded-xl border border-rose-200 space-y-1">
-                          <label className="text-[11px] font-black text-[#1b2825] block flex items-center gap-1">
-                            <Film className="w-3.5 h-3.5 text-[#2f5f54]" />
+                          <label className="text-[11px] font-black text-[#21241F] block flex items-center gap-1">
+                            <Film className="w-3.5 h-3.5 text-[#464B43]" />
                             Select Planned Shoot Event from Client Project:
                           </label>
                           <select
                             value={selectedShootEventId}
                             onChange={(e) => handleShootEventSelect(e.target.value)}
-                            className="w-full px-3 py-2 text-xs rounded-lg border border-[#dfeae7] bg-white font-extrabold text-[#1b2825] shadow-2xs"
+                            className="w-full px-3 py-2 text-xs rounded-lg border border-[#dfeae7] bg-white font-extrabold text-[#21241F] shadow-2xs"
                           >
                             {selectedProj.shoots.map((s) => (
                               <option key={s.id} value={s.id}>
@@ -1723,7 +1723,7 @@ export const ShootAssignmentsView: React.FC<ShootAssignmentsViewProps> = ({
                             ))}
                             <option value="">+ Custom / Other Function Event</option>
                           </select>
-                          <p className="text-[10px] text-[#254b42] font-medium">
+                          <p className="text-[10px] text-[#373B35] font-medium">
                             Auto-populates event title, shoot date, venue, and timings from client project details.
                           </p>
                         </div>
@@ -1813,7 +1813,7 @@ export const ShootAssignmentsView: React.FC<ShootAssignmentsViewProps> = ({
                   <button
                     type="button"
                     onClick={handleAddFreelancerRow}
-                    className="px-3 py-1 bg-[#2f5f54] hover:bg-[#254b42] text-white text-xs font-bold rounded-lg transition flex items-center gap-1"
+                    className="px-3 py-1 bg-[#464B43] hover:bg-[#373B35] text-white text-xs font-bold rounded-lg transition flex items-center gap-1"
                   >
                     <Plus className="w-3.5 h-3.5" />
                     <span>Add Another Freelancer</span>
@@ -1886,7 +1886,7 @@ export const ShootAssignmentsView: React.FC<ShootAssignmentsViewProps> = ({
                             <select
                               value={row.eventCategory || 'full_day'}
                               onChange={(e) => handleEventCategoryChange(index, e.target.value as any)}
-                              className="w-full px-1.5 py-1 text-xs rounded border border-slate-300 font-bold bg-white focus:ring-1 focus:ring-[#366e61]"
+                              className="w-full px-1.5 py-1 text-xs rounded border border-slate-300 font-bold bg-white focus:ring-1 focus:ring-[#50574D]"
                             >
                               <option value="small_event">Small Event</option>
                               <option value="half_day">Half Day</option>
@@ -1969,7 +1969,7 @@ export const ShootAssignmentsView: React.FC<ShootAssignmentsViewProps> = ({
 
                 <button
                   type="submit"
-                  className="px-5 py-2 bg-[#2f5f54] hover:bg-[#254b42] text-white text-xs font-bold rounded-xl shadow-xs flex items-center gap-1.5"
+                  className="px-5 py-2 bg-[#464B43] hover:bg-[#373B35] text-white text-xs font-bold rounded-xl shadow-xs flex items-center gap-1.5"
                 >
                   <Check className="w-4 h-4" />
                   <span>Confirm Shoot Assignment</span>
@@ -1986,7 +1986,7 @@ export const ShootAssignmentsView: React.FC<ShootAssignmentsViewProps> = ({
           <div className="bg-white rounded-3xl max-w-lg w-full p-6 shadow-2xl border border-slate-200 space-y-5 my-8">
             <div className="flex items-center justify-between border-b border-slate-100 pb-4">
               <div className="flex items-center gap-2.5">
-                <div className="w-10 h-10 rounded-2xl bg-rose-50 text-[#2f5f54] flex items-center justify-center font-bold">
+                <div className="w-10 h-10 rounded-2xl bg-rose-50 text-[#464B43] flex items-center justify-center font-bold">
                   <Edit3 className="w-5 h-5" />
                 </div>
                 <div>
@@ -2174,7 +2174,7 @@ export const ShootAssignmentsView: React.FC<ShootAssignmentsViewProps> = ({
 
                 <div className="flex items-center justify-between text-xs pt-2 border-t border-slate-200/80">
                   <span className="text-slate-600 font-medium">
-                    Total Agreed: <strong className="font-mono text-[#254b42]">₹{((Number(editCharges)||0)+(Number(editTravel)||0)+(Number(editExtra)||0)).toLocaleString('en-IN')}</strong>
+                    Total Agreed: <strong className="font-mono text-[#373B35]">₹{((Number(editCharges)||0)+(Number(editTravel)||0)+(Number(editExtra)||0)).toLocaleString('en-IN')}</strong>
                   </span>
                   <span className="text-slate-600 font-medium">
                     Pending Due: <strong className="font-mono text-red-600">₹{Math.max(0, ((Number(editCharges)||0)+(Number(editTravel)||0)+(Number(editExtra)||0)) - (Number(editAdvance)||0)).toLocaleString('en-IN')}</strong>
@@ -2192,7 +2192,7 @@ export const ShootAssignmentsView: React.FC<ShootAssignmentsViewProps> = ({
                 </button>
                 <button
                   type="submit"
-                  className="px-5 py-2 bg-[#2f5f54] hover:bg-[#254b42] text-white text-xs font-bold rounded-xl transition shadow-2xs flex items-center gap-1.5 cursor-pointer"
+                  className="px-5 py-2 bg-[#464B43] hover:bg-[#373B35] text-white text-xs font-bold rounded-xl transition shadow-2xs flex items-center gap-1.5 cursor-pointer"
                 >
                   <Check className="w-4 h-4" />
                   <span>Update Assignment</span>

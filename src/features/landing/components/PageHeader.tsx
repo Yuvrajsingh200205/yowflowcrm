@@ -24,7 +24,7 @@ export function PageHeader({
     <header className="ed-ink relative isolate overflow-hidden">
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(52rem_34rem_at_88%_-14%,rgba(185,154,94,.15),transparent_70%),radial-gradient(40rem_30rem_at_2%_18%,rgba(59,102,92,.18),transparent_72%)]"
+        className="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(52rem_34rem_at_88%_-14%,rgba(185,154,94,.15),transparent_70%),radial-gradient(40rem_30rem_at_2%_18%,rgba(79,85,76,.18),transparent_72%)]"
       />
       <Container className="pb-[clamp(3.5rem,7vw,6rem)] pt-[clamp(8.5rem,13vw,12rem)]">
         <Reveal className="flex items-center gap-4">

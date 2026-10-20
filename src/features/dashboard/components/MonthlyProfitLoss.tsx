@@ -2,7 +2,7 @@ import { CreditCard, IndianRupee, Plus, Receipt, Users } from 'lucide-react';
 interface Props { fromDate: string; toDate: string; totalPayments: number; paymentCount: number; totalExpenses: number; totalPaidPayroll: number; formatDate: (value: string) => string; onAddExpense: () => void; onRecordPayment: () => void; }
 export function MonthlyProfitLoss({ fromDate: finFromDate, toDate: finToDate, totalPayments: totalMonthlyPaymentsReceived, paymentCount, totalExpenses: totalMonthlyExpenses, totalPaidPayroll, formatDate: formatDateDots, onAddExpense, onRecordPayment }: Props) {
   return (
-  <div className="space-y-5 rounded-3xl border border-[#ddc89c]/30 bg-[radial-gradient(circle_at_90%_0%,rgba(221,200,156,.16),transparent_28%),linear-gradient(125deg,#29443e,#432a34_50%,#17201e)] p-5 text-white shadow-xl md:p-6">
+  <div className="space-y-5 rounded-3xl border border-[#CCEB8E]/30 bg-[radial-gradient(circle_at_90%_0%,rgba(204,235,142,.16),transparent_28%),linear-gradient(125deg,#353A33,#432a34_50%,#1B1D1A)] p-5 text-white shadow-xl md:p-6">
     <div className="flex flex-col md:flex-row md:items-center justify-between gap-3 border-b border-rose-900/60 pb-3">
       <div>
         <div className="flex items-center gap-2">

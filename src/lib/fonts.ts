@@ -1,4 +1,4 @@
-import { Fraunces, Inter, JetBrains_Mono } from 'next/font/google';
+import { Inter, JetBrains_Mono, Space_Grotesk } from 'next/font/google';
 
 /**
  * Editorial type pairing for the public marketing surface only.
@@ -8,11 +8,10 @@ import { Fraunces, Inter, JetBrains_Mono } from 'next/font/google';
  * (now Inter) handles body, navigation and UI at small sizes; JetBrains Mono
  * is for IDs, amounts and data labels. All three are attached to <html>.
  */
-export const displayFont = Fraunces({
+export const displayFont = Space_Grotesk({
   subsets: ['latin'],
   display: 'swap',
-  style: ['normal', 'italic'],
-  axes: ['SOFT', 'WONK', 'opsz'],
+  weight: ['500', '600', '700'],
   variable: '--font-display-face',
 });
 

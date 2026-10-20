@@ -25,7 +25,7 @@ export const buttonStyles = cva(
           'border border-line bg-surface text-fg shadow-[var(--elev-1)] hover:border-line-strong hover:bg-[var(--hover)]',
         ghost: 'text-fg-muted hover:bg-[var(--hover)] hover:text-fg',
         danger: 'bg-bad text-[var(--on-danger)] shadow-[var(--elev-1)] hover:brightness-95',
-        gold: 'bg-gold text-on-gold shadow-[var(--elev-1)] hover:brightness-95',
+        accent: 'bg-lime text-on-lime shadow-[var(--elev-1)] hover:shadow-[var(--glow)] hover:brightness-105',
         link: 'h-auto rounded-sm p-0 text-brand underline-offset-4 hover:underline',
       },
       size: {

@@ -39,14 +39,14 @@ export function FreelancerPortalShell({ children }: { children: React.ReactNode 
   };
 
   return (
-    <div className="min-h-screen bg-[#F7F6F3] text-[#0D1816] md:grid md:grid-cols-[320px_1fr]">
-      <aside className="fixed inset-y-0 left-0 z-40 hidden w-80 flex-col overflow-hidden bg-[#101E1B] text-white md:flex">
+    <div className="min-h-screen bg-[#F7FCEE] text-[#0D1816] md:grid md:grid-cols-[320px_1fr]">
+      <aside className="fixed inset-y-0 left-0 z-40 hidden w-80 flex-col overflow-hidden bg-[#171816] text-white md:flex">
         <div className="flex h-full min-h-0 flex-col p-4 lg:p-5">
-          <Link href="/freelancer/dashboard" className="shrink-0 font-[var(--font-display)] text-2xl font-black leading-tight text-[#D8BE93] lg:text-3xl">Wedding<br />Photo Planet</Link>
-          <p className="mt-3 shrink-0 border-b border-[#C9A876]/35 pb-4 text-[10px] font-black uppercase tracking-[.18em] text-white/45 lg:mt-4 lg:pb-5 lg:text-[11px]">Freelancer Panel</p>
+          <Link href="/freelancer/dashboard" className="shrink-0 font-[var(--font-display)] text-2xl font-black leading-tight text-[#C7E982] lg:text-3xl">Wedding<br />Photo Planet</Link>
+          <p className="mt-3 shrink-0 border-b border-[#B6E25D]/35 pb-4 text-[10px] font-black uppercase tracking-[.18em] text-white/45 lg:mt-4 lg:pb-5 lg:text-[11px]">Freelancer Panel</p>
           <div className="mt-4 shrink-0 rounded-2xl bg-white/8 p-3 lg:mt-5 lg:p-4">
             <div className="flex items-center gap-3">
-              <span className="grid size-12 place-items-center rounded-full bg-[#C9A876] text-lg font-black text-[#101E1B] lg:size-14">F</span>
+              <span className="grid size-12 place-items-center rounded-full bg-[#B6E25D] text-lg font-black text-[#171816] lg:size-14">F</span>
               <div><p className="text-base font-black">Freelancer</p><p className="text-sm text-white/50">Active Panel</p></div>
             </div>
           </div>
@@ -54,27 +54,27 @@ export function FreelancerPortalShell({ children }: { children: React.ReactNode 
             {nav.slice(0, 7).map(({ href, label, icon: Icon }) => {
               const active = pathname === href || (href !== '/freelancer/dashboard' && pathname.startsWith(href));
               return (
-                <Link key={`${href}-${label}`} href={href} className={`flex min-h-11 items-center gap-3 rounded-xl border-l-3 px-4 text-sm font-bold transition lg:min-h-12 lg:text-base ${active ? 'border-[#C9A876] bg-white/10 text-white' : 'border-transparent text-white/62 hover:bg-white/8 hover:text-white'}`}>
+                <Link key={`${href}-${label}`} href={href} className={`flex min-h-11 items-center gap-3 rounded-xl border-l-3 px-4 text-sm font-bold transition lg:min-h-12 lg:text-base ${active ? 'border-[#B6E25D] bg-white/10 text-white' : 'border-transparent text-white/62 hover:bg-white/8 hover:text-white'}`}>
                   <Icon className="size-5" />{label}
                 </Link>
               );
             })}
           </nav>
           <div className="shrink-0 space-y-3 border-t border-white/10 pt-4 lg:space-y-4 lg:pt-5">
-            <div className="flex items-center justify-between text-sm text-white/55"><span>Access</span><span className="flex items-center gap-1 text-[#D8BE93]"><span className="size-2 rounded-full bg-emerald-400" />Active</span></div>
+            <div className="flex items-center justify-between text-sm text-white/55"><span>Access</span><span className="flex items-center gap-1 text-[#C7E982]"><span className="size-2 rounded-full bg-emerald-400" />Active</span></div>
             <button onClick={logout} className="flex min-h-12 w-full items-center justify-center gap-2 rounded-xl bg-white/8 text-base font-bold text-white/75 transition hover:bg-white/12"><LogOut className="size-5" />Logout</button>
           </div>
         </div>
       </aside>
       <div className="md:col-start-2">
-        <header className="sticky top-0 z-30 flex min-h-16 items-center justify-between border-b border-[#EDE8E2] bg-[#F7F6F3]/95 px-4 backdrop-blur-xl md:px-7">
-          <button className="grid size-11 place-items-center rounded-xl border border-[#EDE8E2] bg-white text-[#22413A] md:hidden" aria-label="Open navigation"><Menu className="size-5" /></button>
+        <header className="sticky top-0 z-30 flex min-h-16 items-center justify-between border-b border-[#EDE8E2] bg-[#F7FCEE]/95 px-4 backdrop-blur-xl md:px-7">
+          <button className="grid size-11 place-items-center rounded-xl border border-[#EDE8E2] bg-white text-[#31342F] md:hidden" aria-label="Open navigation"><Menu className="size-5" /></button>
           <div>
-            <p className="text-[10px] font-black uppercase tracking-[.16em] text-[#C9A876]">Freelancer Panel</p>
+            <p className="text-[10px] font-black uppercase tracking-[.16em] text-[#B6E25D]">Freelancer Panel</p>
             <h1 className="text-lg font-black">{BRAND.name}</h1>
           </div>
           <div className="flex items-center gap-2">
-            <Link href="/freelancer/find-vendor" className="hidden min-h-10 items-center gap-2 rounded-full border border-[#EDE8E2] bg-white px-4 text-sm font-bold sm:inline-flex"><Search className="size-4 text-[#3B665C]" />Find Vendor</Link>
+            <Link href="/freelancer/find-vendor" className="hidden min-h-10 items-center gap-2 rounded-full border border-[#EDE8E2] bg-white px-4 text-sm font-bold sm:inline-flex"><Search className="size-4 text-[#4F554C]" />Find Vendor</Link>
             <Link href="/freelancer/notifications" className="grid size-11 place-items-center rounded-full border border-[#EDE8E2] bg-white" aria-label="Notifications"><Bell className="size-4" /></Link>
           </div>
         </header>
@@ -84,7 +84,7 @@ export function FreelancerPortalShell({ children }: { children: React.ReactNode 
         {nav.slice(0, 5).map(({ href, label, icon: Icon }) => {
           const active = pathname === href;
           return (
-            <Link key={`${href}-${label}`} href={href} className={`grid min-h-16 place-items-center text-[10px] font-extrabold ${active ? 'text-[#3B665C]' : 'text-[#686164]'}`}>
+            <Link key={`${href}-${label}`} href={href} className={`grid min-h-16 place-items-center text-[10px] font-extrabold ${active ? 'text-[#4F554C]' : 'text-[#686164]'}`}>
               <Icon className="size-4" />
               <span>{label}</span>
             </Link>

@@ -17,7 +17,7 @@ import { BRAND } from '@/config/brand';
  * making everything brighter.
  *
  * All styling lives in the .ed-nav layer in globals.css, using the brand
- * palette (#162C27 / #1A352F / #C9A55A / #387265 / #F5F0EA). Motion is CSS
+ * palette (#20231F / #272A25 / #ABDE45 / #535A50 / #F5F0EA). Motion is CSS
  * only — the public surface ships no animation library.
  */
 
@@ -34,14 +34,14 @@ function ApertureMark() {
     >
       {/* Ring, plus the faintest maroon body so the mark reads as an object
           rather than as line art floating on the glass. */}
-      <circle cx="17" cy="17" r="15.25" fill="#1A352F" fillOpacity="0.6" />
-      <circle cx="17" cy="17" r="15.25" stroke="#C9A55A" strokeOpacity="0.5" strokeWidth="1" />
+      <circle cx="17" cy="17" r="15.25" fill="#272A25" fillOpacity="0.6" />
+      <circle cx="17" cy="17" r="15.25" stroke="#ABDE45" strokeOpacity="0.5" strokeWidth="1" />
       {/* The iris is a single hexagon. Six crossing blades turned to visual
           noise at 34px; one clean opening still reads unmistakably as a lens. */}
       <g className="ed-nav-blades">
         <path
           d="M23.5 17 L20.25 22.63 L13.75 22.63 L10.5 17 L13.75 11.37 L20.25 11.37 Z"
-          stroke="#C9A55A"
+          stroke="#ABDE45"
           strokeOpacity="0.92"
           strokeWidth="1.1"
           strokeLinejoin="round"
@@ -231,7 +231,7 @@ export function LandingNavbar() {
                   onClick={() => setOpen(false)}
                   className="flex items-baseline gap-5 py-4"
                 >
-                  <span className="ed-numeral text-[0.6875rem] text-[#C9A55A]">
+                  <span className="ed-numeral text-[0.6875rem] text-[#ABDE45]">
                     {String(i + 1).padStart(2, '0')}
                   </span>
                   <span className="ed-display ed-d3 text-white">{item.label}</span>
@@ -251,7 +251,7 @@ export function LandingNavbar() {
             <Link
               href="/login"
               onClick={() => setOpen(false)}
-              className="flex min-h-12 items-center justify-center rounded-[2px] border border-[rgba(201,165,90,0.35)] text-[0.8125rem] font-medium tracking-[0.02em] text-[#F5F0EA] transition-colors hover:bg-[rgba(201,165,90,0.10)]"
+              className="flex min-h-12 items-center justify-center rounded-[2px] border border-[rgba(171,222,69,0.35)] text-[0.8125rem] font-medium tracking-[0.02em] text-[#F5F0EA] transition-colors hover:bg-[rgba(171,222,69,0.10)]"
             >
               Login
             </Link>

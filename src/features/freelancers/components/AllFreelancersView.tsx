@@ -185,10 +185,10 @@ export const AllFreelancersView: React.FC<AllFreelancersViewProps> = ({
             {activeFilterCount > 0 && (
               <button type="button" className={BTN_GHOST} onClick={clearFilters}>Clear ({activeFilterCount})</button>
             )}
-            <button type="button" onClick={() => setViewMode('grid')} className={`${BTN_GHOST} ${viewMode === 'grid' ? 'border-rose-300 bg-[#fbfaf8]' : ''}`} aria-pressed={viewMode === 'grid'} aria-label="Card view">
+            <button type="button" onClick={() => setViewMode('grid')} className={`${BTN_GHOST} ${viewMode === 'grid' ? 'border-rose-300 bg-[#FBFDF6]' : ''}`} aria-pressed={viewMode === 'grid'} aria-label="Card view">
               <LayoutGrid className="size-3.5" /> Cards
             </button>
-            <button type="button" onClick={() => setViewMode('table')} className={`${BTN_GHOST} ${viewMode === 'table' ? 'border-rose-300 bg-[#fbfaf8]' : ''}`} aria-pressed={viewMode === 'table'} aria-label="Table view">
+            <button type="button" onClick={() => setViewMode('table')} className={`${BTN_GHOST} ${viewMode === 'table' ? 'border-rose-300 bg-[#FBFDF6]' : ''}`} aria-pressed={viewMode === 'table'} aria-label="Table view">
               <List className="size-3.5" /> Table
             </button>
           </div>
@@ -225,7 +225,7 @@ export const AllFreelancersView: React.FC<AllFreelancersViewProps> = ({
             return (
               <article key={freelancer.id} className={`${CARD} flex flex-col p-5`}>
                 <button type="button" onClick={() => onOpenProfile(freelancer)} className="flex items-start gap-3 text-left">
-                  <span className="grid size-14 shrink-0 place-items-center overflow-hidden rounded-2xl bg-[#e0ece9] text-sm font-black text-[#254b42]">
+                  <span className="grid size-14 shrink-0 place-items-center overflow-hidden rounded-2xl bg-[#E6E8E4] text-sm font-black text-[#373B35]">
                     {freelancer.profilePhoto ? (
                       // eslint-disable-next-line @next/next/no-img-element
                       <img src={freelancer.profilePhoto} alt="" className="size-14 object-cover" />
@@ -241,7 +241,7 @@ export const AllFreelancersView: React.FC<AllFreelancersViewProps> = ({
                       {isApproved(freelancer) && <Badge className="border-emerald-200 bg-emerald-50 text-emerald-800">Approved</Badge>}
                     </span>
                     <span className="mt-0.5 block text-[11px] font-bold text-slate-400">{freelancer.freelancerId}</span>
-                    <span className="mt-0.5 block text-xs font-bold text-[#2f5f54]">{freelancer.subCategory || freelancer.mainCategory}</span>
+                    <span className="mt-0.5 block text-xs font-bold text-[#464B43]">{freelancer.subCategory || freelancer.mainCategory}</span>
                     <span className="mt-1 flex flex-wrap items-center gap-2 text-[11px] font-medium text-slate-500">
                       <span className="inline-flex items-center gap-1"><MapPin className="size-3" />{freelancer.city || '—'}</span>
                       <span>{freelancer.experienceYears || 0} yrs</span>
@@ -256,7 +256,7 @@ export const AllFreelancersView: React.FC<AllFreelancersViewProps> = ({
                     <Badge key={skill}>{skill}</Badge>
                   ))}
                 </div>
-                <div className="mt-3 grid grid-cols-3 gap-2 rounded-xl bg-[#fbfaf8] p-2 text-center text-[10px]">
+                <div className="mt-3 grid grid-cols-3 gap-2 rounded-xl bg-[#FBFDF6] p-2 text-center text-[10px]">
                   <div>
                     <p className="font-bold uppercase text-slate-400">Availability</p>
                     <p className="font-extrabold text-slate-800">{freelancer.availabilityStatus || 'Available'}</p>

@@ -16,7 +16,7 @@ export function LeadDeleteConfirmModal({ open, title, itemTitle, message, onConf
     <LeadModalShell icon={AlertTriangle} eyebrow="Confirmation Required" title={title} description="This action cannot be automatically reversed." onClose={onCancel} maxWidth="max-w-lg">
       <div className="rounded-3xl border border-red-200 bg-red-50/70 p-5">
         <p className="text-sm font-extrabold uppercase tracking-wide text-red-800">Selected record</p>
-        <p className="mt-1 text-lg font-black text-[#202826]">{itemTitle}</p>
+        <p className="mt-1 text-lg font-black text-[#232622]">{itemTitle}</p>
         <p className="mt-3 text-base font-medium leading-relaxed text-[#685d61]">{message}</p>
       </div>
       <div className="flex flex-col-reverse gap-2 border-t border-[#e7dedb] pt-4 sm:flex-row sm:justify-end">

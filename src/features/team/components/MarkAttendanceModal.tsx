@@ -246,10 +246,10 @@ export const MarkAttendanceModal: React.FC<Props> = ({
                   />
                   <span className={`flex min-h-12 items-center gap-2.5 rounded-xl border px-3 py-2 transition peer-focus-visible:ring-4 peer-focus-visible:ring-rose-100 ${
                     selected
-                      ? 'border-[#2f5f54] bg-[#2f5f54] text-white'
-                      : 'border-[#ded5cf] bg-[#fbfaf8] text-slate-700 hover:border-rose-300'
+                      ? 'border-[#464B43] bg-[#464B43] text-white'
+                      : 'border-[#ded5cf] bg-[#FBFDF6] text-slate-700 hover:border-rose-300'
                   }`}>
-                    <Icon className={`size-4 shrink-0 ${selected ? 'text-white' : 'text-[#2f5f54]'}`} />
+                    <Icon className={`size-4 shrink-0 ${selected ? 'text-white' : 'text-[#464B43]'}`} />
                     <span className="min-w-0">
                       <span className="block text-xs font-extrabold">{label}</span>
                       <span className={`block truncate text-[10px] font-medium ${selected ? 'text-white/80' : 'text-slate-500'}`}>{hint}</span>
@@ -304,7 +304,7 @@ export const MarkAttendanceModal: React.FC<Props> = ({
             <div className="grid grid-cols-2 gap-3">
               <div>
                 <label className={LABEL} htmlFor="ma-in">
-                  <span className="inline-flex items-center gap-1"><Clock className="w-3 h-3 text-[#2f5f54]" /> Check in</span>
+                  <span className="inline-flex items-center gap-1"><Clock className="w-3 h-3 text-[#464B43]" /> Check in</span>
                 </label>
                 <div className="flex gap-1.5">
                   <input id="ma-in" className={FIELD} value={inTime} onChange={(e) => update(() => setInTime(e.target.value))} placeholder="09:30 AM" />
@@ -313,7 +313,7 @@ export const MarkAttendanceModal: React.FC<Props> = ({
               </div>
               <div>
                 <label className={LABEL} htmlFor="ma-out">
-                  <span className="inline-flex items-center gap-1"><Clock className="w-3 h-3 text-[#2f5f54]" /> Check out</span>
+                  <span className="inline-flex items-center gap-1"><Clock className="w-3 h-3 text-[#464B43]" /> Check out</span>
                 </label>
                 <div className="flex gap-1.5">
                   <input id="ma-out" className={FIELD} value={outTime} onChange={(e) => update(() => setOutTime(e.target.value))} placeholder="07:30 PM" />
@@ -322,7 +322,7 @@ export const MarkAttendanceModal: React.FC<Props> = ({
               </div>
             </div>
             <p className="text-[10px] font-bold text-slate-600">
-              Working hours: <span className="font-mono text-[#254b42]">{formatHours(workingHours)}</span>
+              Working hours: <span className="font-mono text-[#373B35]">{formatHours(workingHours)}</span>
               {workingHours !== null && workingHours > 9 && (
                 <Badge className="ml-2 bg-amber-100 text-amber-800 border-amber-200">Long shoot day</Badge>
               )}
@@ -356,7 +356,7 @@ export const MarkAttendanceModal: React.FC<Props> = ({
 
         <div className="flex items-center justify-between rounded-xl bg-slate-50 border border-slate-200 px-3 py-2 text-[11px] font-bold text-slate-700">
           <span>Payout for this day</span>
-          <span className="font-mono text-[#254b42]">₹{payPreview.toLocaleString('en-IN')}</span>
+          <span className="font-mono text-[#373B35]">₹{payPreview.toLocaleString('en-IN')}</span>
         </div>
 
         <footer className="flex items-center justify-end gap-2 border-t border-slate-100 pt-3">

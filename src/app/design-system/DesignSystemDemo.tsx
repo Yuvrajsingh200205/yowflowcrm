@@ -16,7 +16,7 @@ const money = (n: number) => `₹${new Intl.NumberFormat('en-IN', { notation: 'c
 const SWATCHES: [string, string][] = [
   ['canvas', '--background'], ['surface', '--surface'], ['sunken', '--surface-sunken'], ['line', '--border'],
   ['fg', '--text-primary'], ['fg-muted', '--text-secondary'], ['fg-subtle', '--text-muted'],
-  ['brand', '--primary'], ['brand-hover', '--primary-hover'], ['brand-deep', '--primary-dark'], ['gold', '--accent'],
+  ['brand', '--primary'], ['brand-hover', '--primary-hover'], ['brand-deep', '--primary-dark'], ['lime', '--accent'],
   ['ok', '--success'], ['warn', '--warning'], ['bad', '--danger'], ['note', '--info'],
 ];
 
@@ -55,7 +55,7 @@ export function DesignSystemDemo() {
         <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-4 sm:px-6">
           <Logo />
           <div className="flex items-center gap-2">
-            <Badge tone="gold">Design system</Badge>
+            <Badge tone="accent">Design system</Badge>
             <ThemeToggle />
           </div>
         </div>
@@ -77,10 +77,10 @@ export function DesignSystemDemo() {
           </ul>
         </Section>
 
-        <Section id="type" title="Typography" note="Fraunces for display, Inter for UI, JetBrains Mono for IDs and figures. Body is 16px at 1.6; data uses tabular numerals.">
+        <Section id="type" title="Typography" note="Space Grotesk for display, Inter for UI, JetBrains Mono for IDs and figures. Body is 16px at 1.6; data uses tabular numerals.">
           <div className="space-y-4">
-            <p className="font-display text-5xl font-semibold tracking-tight">Display 48 / Fraunces</p>
-            <p className="font-display text-3xl font-semibold tracking-tight">Heading 30 / Fraunces</p>
+            <p className="font-display text-5xl font-semibold tracking-tight">Display 48 / Space Grotesk</p>
+            <p className="font-display text-3xl font-semibold tracking-tight">Heading 30 / Space Grotesk</p>
             <p className="text-xl font-semibold tracking-tight">Title 20 / Inter 600</p>
             <p className="max-w-prose text-base leading-relaxed text-fg-muted">Body 16 — Plan, shoot, collect and deliver every project from one record, with the whole crew looking at the same truth.</p>
             <p className="text-[13px] text-fg-subtle">Caption 13 / Inter 400</p>
@@ -90,7 +90,7 @@ export function DesignSystemDemo() {
 
         <Section id="buttons" title="Buttons" note="One primary action per screen. States shown: default, disabled, loading.">
           <div className="space-y-4">
-            {(['primary', 'secondary', 'ghost', 'danger', 'gold'] as const).map((v) => (
+            {(['primary', 'secondary', 'ghost', 'danger', 'accent'] as const).map((v) => (
               <div key={v} className="flex flex-wrap items-center gap-3">
                 <span className="w-20 text-xs font-medium capitalize text-fg-subtle">{v}</span>
                 <Button variant={v}><Plus />New project</Button>
@@ -120,7 +120,7 @@ export function DesignSystemDemo() {
 
         <Section id="badges" title="Badges & cards">
           <div className="mb-6 flex flex-wrap gap-2">
-            <Badge>Draft</Badge><Badge tone="brand" dot>Shooting</Badge><Badge tone="success" dot>Paid</Badge><Badge tone="warning" dot>Due in 3 days</Badge><Badge tone="danger" dot>Overdue</Badge><Badge tone="info">Lead</Badge><Badge tone="gold">VIP</Badge>
+            <Badge>Draft</Badge><Badge tone="brand" dot>Shooting</Badge><Badge tone="success" dot>Paid</Badge><Badge tone="warning" dot>Due in 3 days</Badge><Badge tone="danger" dot>Overdue</Badge><Badge tone="info">Lead</Badge><Badge tone="accent">VIP</Badge>
           </div>
           <div className="grid gap-4 sm:grid-cols-3">
             {[['Active projects', '24', '+3 this week'], ['Outstanding', '₹4.2L', '5 invoices'], ['Shoots this week', '9', '2 need crew']].map(([t, v, d]) => (

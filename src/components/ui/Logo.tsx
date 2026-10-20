@@ -1,26 +1,29 @@
+import Image from 'next/image';
 import { BRAND } from '@/config/brand';
 import { cn } from '@/lib/cn';
 
-/** Inline mark (follows the theme) + live wordmark so the display font renders correctly. */
-export function LogoMark({ className }: { className?: string }) {
+/**
+ * The Yowflow mark sits on its own near-black tile, so it reads correctly on
+ * both light and dark pages. Swap the file at BRAND.logo.mark to re-skin.
+ */
+export function LogoMark({ className, priority }: { className?: string; priority?: boolean }) {
   return (
-    <svg viewBox="0 0 64 64" className={cn('size-8', className)} role="img" aria-label={BRAND.name}>
-      <rect width="64" height="64" rx="15" className="fill-[var(--primary-dark)]" style={{ fill: 'light-dark(#1F3A34, #2A4A42)' }} />
-      <g fill="none" stroke="#F4EFE6" strokeWidth="3.6" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M16 25V19a3 3 0 0 1 3-3h6" /><path d="M48 25V19a3 3 0 0 0-3-3h-6" />
-        <path d="M16 39v6a3 3 0 0 0 3 3h6" /><path d="M48 39v6a3 3 0 0 1-3 3h-6" />
-      </g>
-      <circle cx="32" cy="32" r="8.5" fill="none" stroke="#C8A15A" strokeWidth="3.6" />
-      <circle cx="32" cy="32" r="2.6" fill="#C8A15A" />
-    </svg>
+    <Image
+      src={BRAND.logo.mark}
+      alt={BRAND.name}
+      width={64}
+      height={64}
+      priority={priority}
+      className={cn('size-9 shrink-0 rounded-[24%] bg-[#030406] ring-1 ring-black/10 dark:ring-white/10', className)}
+    />
   );
 }
 
-export function Logo({ className, markClassName, showName = true }: { className?: string; markClassName?: string; showName?: boolean }) {
+export function Logo({ className, markClassName, showName = true, priority }: { className?: string; markClassName?: string; showName?: boolean; priority?: boolean }) {
   return (
     <span className={cn('inline-flex items-center gap-2.5', className)}>
-      <LogoMark className={markClassName} />
-      {showName && <span className="font-display text-xl font-semibold tracking-tight text-fg">{BRAND.name}</span>}
+      <LogoMark className={markClassName} priority={priority} />
+      {showName && <span className="font-display text-[1.35rem] font-bold leading-none tracking-tight text-fg">{BRAND.name}</span>}
     </span>
   );
 }

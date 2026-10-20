@@ -88,9 +88,9 @@ export const GalleryUploadModal: React.FC<GalleryUploadModalProps> = ({ project,
         className="flex max-h-[88vh] w-full max-w-3xl flex-col overflow-hidden rounded-3xl border border-[#e2d9d3] bg-white shadow-2xl"
         onClick={(e) => e.stopPropagation()}
       >
-        <header className="flex items-start justify-between gap-3 border-b border-[#eee7e2] bg-[#fbfaf8] px-6 py-4">
+        <header className="flex items-start justify-between gap-3 border-b border-[#eee7e2] bg-[#FBFDF6] px-6 py-4">
           <div className="min-w-0">
-            <h2 className="truncate text-lg font-extrabold text-[#162421]">Gallery photos</h2>
+            <h2 className="truncate text-lg font-extrabold text-[#1C1F1B]">Gallery photos</h2>
             <p className="truncate text-xs font-bold text-slate-500">{project.clientWeddingTitle}</p>
           </div>
           <button type="button" onClick={onClose} className="rounded-lg p-1.5 text-slate-400 hover:bg-slate-100 hover:text-slate-700">
@@ -134,7 +134,7 @@ export const GalleryUploadModal: React.FC<GalleryUploadModalProps> = ({ project,
             <p className="py-10 text-center text-sm font-bold text-slate-500">Loading gallery…</p>
           ) : media.length === 0 ? (
             <div className="rounded-2xl border border-dashed border-[#e2d9d3] px-6 py-12 text-center">
-              <p className="text-sm font-extrabold text-[#162421]">No photos uploaded yet</p>
+              <p className="text-sm font-extrabold text-[#1C1F1B]">No photos uploaded yet</p>
               <p className="mx-auto mt-1 max-w-sm text-xs font-medium text-slate-500">
                 Photos you add here appear in this couple&apos;s portal only.
               </p>
@@ -167,7 +167,7 @@ export const GalleryUploadModal: React.FC<GalleryUploadModalProps> = ({ project,
           )}
         </div>
 
-        <footer className="flex items-center justify-between gap-3 border-t border-[#eee7e2] bg-[#fbfaf8] px-6 py-3">
+        <footer className="flex items-center justify-between gap-3 border-t border-[#eee7e2] bg-[#FBFDF6] px-6 py-3">
           <span className="text-xs font-bold text-slate-500">
             {media.length} {media.length === 1 ? 'file' : 'files'} in this gallery
           </span>

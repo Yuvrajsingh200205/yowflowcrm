@@ -13,8 +13,8 @@ interface FreelancerFormModalProps {
 }
 
 const Section: React.FC<{ title: string; children: React.ReactNode }> = ({ title, children }) => (
-  <section className="space-y-4 rounded-2xl border border-[#eee7e2] bg-[#fbfaf8] p-4">
-    <h3 className="text-xs font-extrabold uppercase tracking-wider text-[#254b42]">{title}</h3>
+  <section className="space-y-4 rounded-2xl border border-[#eee7e2] bg-[#FBFDF6] p-4">
+    <h3 className="text-xs font-extrabold uppercase tracking-wider text-[#373B35]">{title}</h3>
     {children}
   </section>
 );
@@ -172,7 +172,7 @@ export const FreelancerFormModal: React.FC<FreelancerFormModalProps> = ({
       <form onSubmit={handleSubmit} className="space-y-5 p-5 sm:p-6">
         <Section title="Basic information">
           <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
-            <span className="grid size-16 place-items-center overflow-hidden rounded-2xl bg-[#e0ece9] text-sm font-black text-[#254b42]">
+            <span className="grid size-16 place-items-center overflow-hidden rounded-2xl bg-[#E6E8E4] text-sm font-black text-[#373B35]">
               {profilePhoto ? <img src={profilePhoto} alt="" className="size-16 object-cover" /> : name.slice(0, 2).toUpperCase() || 'FL'}
             </span>
             <label className={BTN_GHOST}>

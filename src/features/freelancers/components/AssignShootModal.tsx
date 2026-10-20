@@ -133,7 +133,7 @@ export const AssignShootModal: React.FC<AssignShootModalProps> = ({
       />
       <form onSubmit={handleSubmit} className="space-y-4 p-5">
         {shoots.length === 0 ? (
-          <p className="rounded-xl border border-dashed border-[#ded5cf] bg-[#fbfaf8] p-4 text-sm text-slate-600">
+          <p className="rounded-xl border border-dashed border-[#ded5cf] bg-[#FBFDF6] p-4 text-sm text-slate-600">
             No existing shoots found. Add a shoot on the client project first.
           </p>
         ) : (

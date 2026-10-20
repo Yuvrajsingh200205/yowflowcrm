@@ -199,15 +199,15 @@ export const TeamMemberProfileDrawer: React.FC<Props> = ({
   return (
     <Drawer isOpen onClose={onClose} labelledBy={titleId}>
       {/* Header */}
-      <header className="relative flex-shrink-0 space-y-4 overflow-hidden bg-[radial-gradient(circle_at_86%_10%,rgba(236,190,169,.24),transparent_32%),linear-gradient(125deg,#33514A,#55333f_52%,#1b2825)] px-5 py-5 text-white">
+      <header className="relative flex-shrink-0 space-y-4 overflow-hidden bg-[radial-gradient(circle_at_86%_10%,rgba(236,190,169,.24),transparent_32%),linear-gradient(125deg,#41463E,#55333f_52%,#21241F)] px-5 py-5 text-white">
         <div className="absolute -bottom-16 -right-8 size-44 rounded-full border-[24px] border-white/5" />
         <div className="relative flex items-start justify-between gap-3">
           <div className="flex min-w-0 items-start gap-3">
             <Avatar member={member} size="lg" className="ring-2 ring-white/30" />
             <div className="min-w-0">
-              <p className="text-xs font-extrabold uppercase tracking-[.18em] text-[#d2e2de]">Team Member Profile</p>
+              <p className="text-xs font-extrabold uppercase tracking-[.18em] text-[#D9DCD8]">Team Member Profile</p>
               <h2 id={titleId} className="mt-1 truncate text-xl font-black">{member.name}</h2>
-              <p className="text-sm font-semibold text-[#d5e4e1]">{member.role}</p>
+              <p className="text-sm font-semibold text-[#DCDFDA]">{member.role}</p>
               <div className="mt-1.5 flex flex-wrap items-center gap-1.5">
                 <Badge className="border-white/20 bg-white/10 text-white">{getEmployeeCode(member)}</Badge>
                 <Badge className={statusBadge.className}>{statusBadge.label}</Badge>
@@ -244,7 +244,7 @@ export const TeamMemberProfileDrawer: React.FC<Props> = ({
           )}
         </div>
 
-        <nav className="relative flex items-center gap-1 overflow-x-auto rounded-2xl border border-white/25 bg-[#111a18]/55 p-1.5">
+        <nav className="relative flex items-center gap-1 overflow-x-auto rounded-2xl border border-white/25 bg-[#151714]/55 p-1.5">
           {SECTIONS.map((s) => (
             <button
               key={s.id}
@@ -252,8 +252,8 @@ export const TeamMemberProfileDrawer: React.FC<Props> = ({
               onClick={() => setSection(s.id)}
               className={`cursor-pointer whitespace-nowrap rounded-xl border px-3 py-1.5 text-xs font-extrabold transition ${
                 section === s.id
-                  ? 'border-[#efd9b0] bg-[#fffaf6] text-[#254b42] shadow-[0_5px_16px_rgba(0,0,0,.28)]'
-                  : 'border-transparent text-[#c8d8d4] hover:bg-white/10 hover:text-white'
+                  ? 'border-[#DBF1AE] bg-[#fffaf6] text-[#373B35] shadow-[0_5px_16px_rgba(0,0,0,.28)]'
+                  : 'border-transparent text-[#CFD3CD] hover:bg-white/10 hover:text-white'
               }`}
               aria-current={section === s.id ? 'page' : undefined}
             >
@@ -269,7 +269,7 @@ export const TeamMemberProfileDrawer: React.FC<Props> = ({
           <>
             <section className={`${CARD} p-5 space-y-3`}>
               <h3 className="text-xs font-extrabold uppercase tracking-wider text-slate-500 flex items-center gap-1.5">
-                <UserRound className="w-3.5 h-3.5 text-[#2f5f54]" /> Profile
+                <UserRound className="w-3.5 h-3.5 text-[#464B43]" /> Profile
               </h3>
               <dl className="grid grid-cols-1 sm:grid-cols-2 gap-x-4 gap-y-2.5 text-xs">
                 {[
@@ -313,7 +313,7 @@ export const TeamMemberProfileDrawer: React.FC<Props> = ({
               {(member.skills || []).length > 0 && (
                 <div className="border-t border-slate-100 pt-3 flex flex-wrap gap-1.5">
                   {(member.skills || []).map((s) => (
-                    <Badge key={s} className="bg-rose-50 text-[#254b42] border-rose-200">{s}</Badge>
+                    <Badge key={s} className="bg-rose-50 text-[#373B35] border-rose-200">{s}</Badge>
                   ))}
                 </div>
               )}
@@ -373,7 +373,7 @@ export const TeamMemberProfileDrawer: React.FC<Props> = ({
           <>
             <section className={`${CARD} p-5 space-y-3`}>
               <h3 className="text-xs font-extrabold uppercase tracking-wider text-slate-500 flex items-center gap-1.5">
-                <Camera className="w-3.5 h-3.5 text-[#2f5f54]" /> Upcoming shoots ({upcoming.length})
+                <Camera className="w-3.5 h-3.5 text-[#464B43]" /> Upcoming shoots ({upcoming.length})
               </h3>
               {upcoming.length === 0 ? (
                 <EmptyState icon={Camera} title="No upcoming shoots" message="This member is not crewed on any future shoot yet." />
@@ -398,7 +398,7 @@ export const TeamMemberProfileDrawer: React.FC<Props> = ({
 
             <section className={`${CARD} p-5 space-y-3`}>
               <h3 className="text-xs font-extrabold uppercase tracking-wider text-slate-500 flex items-center gap-1.5">
-                <Briefcase className="w-3.5 h-3.5 text-[#2f5f54]" /> Shoot history ({past.length})
+                <Briefcase className="w-3.5 h-3.5 text-[#464B43]" /> Shoot history ({past.length})
               </h3>
               {past.length === 0 ? (
                 <EmptyState icon={Briefcase} title="No past shoots" message="Completed shoots will show here once this member is crewed on one." />
@@ -450,7 +450,7 @@ export const TeamMemberProfileDrawer: React.FC<Props> = ({
           <section className={`${CARD} p-5 space-y-3`}>
             <div className="flex items-center justify-between gap-2">
               <h3 className="text-xs font-extrabold uppercase tracking-wider text-slate-500 flex items-center gap-1.5">
-                <Plane className="w-3.5 h-3.5 text-[#2f5f54]" /> Leave history ({memberLeaves.length})
+                <Plane className="w-3.5 h-3.5 text-[#464B43]" /> Leave history ({memberLeaves.length})
               </h3>
               {onApplyLeave && (
                 <button type="button" onClick={() => onApplyLeave(member)} className={BTN_GHOST}>
@@ -540,7 +540,7 @@ export const TeamMemberProfileDrawer: React.FC<Props> = ({
         {section === 'documents' && (
           <section className={`${CARD} p-5 space-y-3`}>
             <h3 className="text-xs font-extrabold uppercase tracking-wider text-slate-500 flex items-center gap-1.5">
-              <FileText className="w-3.5 h-3.5 text-[#2f5f54]" /> Documents ({(member.documents || []).length})
+              <FileText className="w-3.5 h-3.5 text-[#464B43]" /> Documents ({(member.documents || []).length})
             </h3>
 
             {onUpdateMember && (

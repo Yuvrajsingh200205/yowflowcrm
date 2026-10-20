@@ -80,7 +80,7 @@ export const SelectionWorkflow: React.FC<SelectionWorkflowProps> = ({
             ) : (
               <button
                 onClick={handleSubmit}
-                className="w-full sm:w-auto px-6 py-3 rounded-xl bg-[#254b42] hover:bg-[#2f5f54] text-white font-semibold text-xs sm:text-sm flex items-center justify-center gap-2 shadow-lg shadow-slate-900/10 transition-all hover:scale-[1.02]"
+                className="w-full sm:w-auto px-6 py-3 rounded-xl bg-[#373B35] hover:bg-[#464B43] text-white font-semibold text-xs sm:text-sm flex items-center justify-center gap-2 shadow-lg shadow-slate-900/10 transition-all hover:scale-[1.02]"
               >
                 <Send className="w-4 h-4" />
                 Submit Selection ({selectedCount}/{maxAlbumPhotos})
@@ -123,7 +123,7 @@ export const SelectionWorkflow: React.FC<SelectionWorkflowProps> = ({
           onClick={() => setActiveTab('album')}
           className={`px-4 py-2 rounded-xl text-xs sm:text-sm font-medium flex items-center gap-2 transition-all ${
             activeTab === 'album'
-              ? 'bg-[#254b42] text-white shadow-sm'
+              ? 'bg-[#373B35] text-white shadow-sm'
               : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
           }`}
         >
@@ -135,7 +135,7 @@ export const SelectionWorkflow: React.FC<SelectionWorkflowProps> = ({
           onClick={() => setActiveTab('favorites')}
           className={`px-4 py-2 rounded-xl text-xs sm:text-sm font-medium flex items-center gap-2 transition-all ${
             activeTab === 'favorites'
-              ? 'bg-[#254b42] text-white shadow-sm'
+              ? 'bg-[#373B35] text-white shadow-sm'
               : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
           }`}
         >
@@ -162,7 +162,7 @@ export const SelectionWorkflow: React.FC<SelectionWorkflowProps> = ({
                 className="group relative rounded-xl overflow-hidden bg-slate-100 border border-[#e2d9d3] shadow-sm hover:shadow-md transition-all cursor-pointer"
                 onClick={() => onOpenMedia(item)}
               >
-                <div className="aspect-[4/3] w-full overflow-hidden bg-[#254b42]">
+                <div className="aspect-[4/3] w-full overflow-hidden bg-[#373B35]">
                   <img 
                     src={item.thumbnailUrl} 
                     alt={item.title} 
@@ -172,7 +172,7 @@ export const SelectionWorkflow: React.FC<SelectionWorkflowProps> = ({
                 </div>
 
                 {/* Index badge */}
-                <span className="absolute top-2 left-2 px-2 py-0.5 rounded-md bg-[#111f1c]/80 backdrop-blur text-[11px] font-mono text-amber-300 border border-amber-500/30">
+                <span className="absolute top-2 left-2 px-2 py-0.5 rounded-md bg-[#181917]/80 backdrop-blur text-[11px] font-mono text-amber-300 border border-amber-500/30">
                   #{idx + 1}
                 </span>
 
@@ -182,7 +182,7 @@ export const SelectionWorkflow: React.FC<SelectionWorkflowProps> = ({
                     e.stopPropagation();
                     onToggleAlbumSelect(item);
                   }}
-                  className="absolute top-2 right-2 p-1.5 rounded-full bg-[#111f1c]/70 hover:bg-rose-600 text-white backdrop-blur transition-all"
+                  className="absolute top-2 right-2 p-1.5 rounded-full bg-[#181917]/70 hover:bg-rose-600 text-white backdrop-blur transition-all"
                   title="Remove from Album"
                 >
                   <Trash2 className="w-3.5 h-3.5" />
@@ -217,7 +217,7 @@ export const SelectionWorkflow: React.FC<SelectionWorkflowProps> = ({
                 className="group relative rounded-xl overflow-hidden bg-slate-100 border border-[#e2d9d3] shadow-sm hover:shadow-md transition-all cursor-pointer"
                 onClick={() => onOpenMedia(item)}
               >
-                <div className="aspect-[4/3] w-full overflow-hidden bg-[#254b42]">
+                <div className="aspect-[4/3] w-full overflow-hidden bg-[#373B35]">
                   <img 
                     src={item.thumbnailUrl} 
                     alt={item.title} 

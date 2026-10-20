@@ -425,18 +425,18 @@ export const ShootManagement: React.FC<ShootManagementProps> = ({ projects, onUp
   return (
     <div className="space-y-5 pb-8 w-full">
       
-      <section className="relative overflow-hidden rounded-3xl border border-[#ddc89c]/35 bg-[radial-gradient(circle_at_88%_8%,rgba(221,200,156,.2),transparent_30%),linear-gradient(125deg,#33514A,#55333f_50%,#1b2825)] p-5 text-white shadow-xl sm:p-7">
+      <section className="relative overflow-hidden rounded-3xl border border-[#CCEB8E]/35 bg-[radial-gradient(circle_at_88%_8%,rgba(204,235,142,.2),transparent_30%),linear-gradient(125deg,#41463E,#55333f_50%,#21241F)] p-5 text-white shadow-xl sm:p-7">
         <div className="absolute -bottom-20 -right-10 size-64 rounded-full border-[34px] border-white/[.04]" />
         <div className="relative flex flex-col justify-between gap-5 xl:flex-row xl:items-center">
           <div className="max-w-3xl">
-            <span className="flex w-fit items-center gap-1.5 rounded-full border border-white/20 bg-white/10 px-3 py-1 text-xs font-extrabold uppercase tracking-[.14em] text-[#e0ece9]"><CalendarDays className="size-4 text-emerald-300" />Production workspace</span>
-            <h1 className="mt-3 flex items-center gap-3 text-2xl font-black tracking-tight sm:text-3xl"><span className="grid size-11 place-items-center rounded-2xl bg-white/10"><Film className="size-6 text-[#d5e4e1]" /></span>Shoot Management</h1>
+            <span className="flex w-fit items-center gap-1.5 rounded-full border border-white/20 bg-white/10 px-3 py-1 text-xs font-extrabold uppercase tracking-[.14em] text-[#E6E8E4]"><CalendarDays className="size-4 text-emerald-300" />Production workspace</span>
+            <h1 className="mt-3 flex items-center gap-3 text-2xl font-black tracking-tight sm:text-3xl"><span className="grid size-11 place-items-center rounded-2xl bg-white/10"><Film className="size-6 text-[#DCDFDA]" /></span>Shoot Management</h1>
             <p className="mt-2 text-sm font-medium leading-relaxed text-[#dfeae7] sm:text-base">Plan every function, assign the right crew, and keep each wedding shoot clear and on track.</p>
           </div>
           <div className="flex flex-col gap-2 sm:flex-row sm:items-center">
             <button onClick={() => { setReportMonthFilter(selectedMonth); setReportDateFilter(selectedDate); setShowReportModal(true); }} className="flex items-center justify-center gap-2 rounded-2xl border border-white/20 bg-white/10 px-4 py-3 text-sm font-extrabold text-white transition hover:bg-white/20"><BarChart2 className="size-4" />Crew report</button>
             {canCreate && (
-            <button onClick={() => setShowScheduleShoot(true)} className="group flex items-center justify-center gap-2.5 rounded-2xl border border-white/60 bg-gradient-to-r from-[#f9eee7] to-[#edcfc3] px-5 py-3 text-sm font-extrabold text-[#254b42] shadow-[0_10px_24px_rgba(10,20,17,.22)] transition hover:-translate-y-0.5 hover:shadow-xl"><span className="grid size-8 place-items-center rounded-xl bg-[#2b564c] text-white transition group-hover:rotate-6"><Plus className="size-5" /></span>Schedule a shoot<Sparkles className="size-4 text-[#aa7251]" /></button>
+            <button onClick={() => setShowScheduleShoot(true)} className="group flex items-center justify-center gap-2.5 rounded-2xl border border-white/60 bg-gradient-to-r from-[#f9eee7] to-[#edcfc3] px-5 py-3 text-sm font-extrabold text-[#373B35] shadow-[0_10px_24px_rgba(10,20,17,.22)] transition hover:-translate-y-0.5 hover:shadow-xl"><span className="grid size-8 place-items-center rounded-xl bg-[#3F443D] text-white transition group-hover:rotate-6"><Plus className="size-5" /></span>Schedule a shoot<Sparkles className="size-4 text-[#aa7251]" /></button>
             )}
           </div>
         </div>
@@ -452,14 +452,14 @@ export const ShootManagement: React.FC<ShootManagementProps> = ({ projects, onUp
       </section>
 
       <section className="rounded-2xl border border-[#e2d9d3] bg-white p-3 shadow-[0_8px_24px_rgba(48,44,46,.05)] sm:p-4">
-        <div className="mb-3 flex flex-wrap items-center justify-between gap-2"><div className="flex items-center gap-2 text-sm font-extrabold text-slate-700"><SlidersHorizontal className="size-4 text-[#2f5f54]" />Find and filter shoots</div><div className="flex gap-1.5"><button onClick={expandAll} className="rounded-lg px-2.5 py-1.5 text-xs font-bold text-[#2b564c] hover:bg-rose-50">Expand all</button><button onClick={collapseAll} className="rounded-lg px-2.5 py-1.5 text-xs font-bold text-slate-600 hover:bg-slate-100">Collapse all</button></div></div>
+        <div className="mb-3 flex flex-wrap items-center justify-between gap-2"><div className="flex items-center gap-2 text-sm font-extrabold text-slate-700"><SlidersHorizontal className="size-4 text-[#464B43]" />Find and filter shoots</div><div className="flex gap-1.5"><button onClick={expandAll} className="rounded-lg px-2.5 py-1.5 text-xs font-bold text-[#3F443D] hover:bg-rose-50">Expand all</button><button onClick={collapseAll} className="rounded-lg px-2.5 py-1.5 text-xs font-bold text-slate-600 hover:bg-slate-100">Collapse all</button></div></div>
         <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 xl:grid-cols-5">
-          <label className="relative xl:col-span-2"><Search className="absolute left-3 top-1/2 size-5 -translate-y-1/2 text-[#366e61]" /><input value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)} placeholder="Search client, function or venue…" className="w-full rounded-xl border border-[#ded5cf] bg-[#fbfaf8] py-2.5 pl-10 pr-3 text-sm font-semibold text-slate-900 outline-none placeholder:text-slate-400 focus:border-[#366e61] focus:ring-4 focus:ring-rose-100" /></label>
-          <label className="relative rounded-xl border border-[#ded5cf] bg-[#fbfaf8]"><ListFilter className="pointer-events-none absolute left-3 top-1/2 size-4 -translate-y-1/2 text-[#366e61]" /><select value={selectedProjectId} onChange={(e) => { setSelectedProjectId(e.target.value); if (e.target.value !== 'all') setExpandedProjectIds([e.target.value]); }} className="w-full appearance-none bg-transparent py-2.5 pl-9 pr-3 text-sm font-bold text-slate-700 outline-none"><option value="all">All projects ({projects.length})</option>{projects.map((p) => <option key={p.id} value={p.id}>{p.clientWeddingTitle}</option>)}</select></label>
-          <label className="relative rounded-xl border border-[#ded5cf] bg-[#fbfaf8]"><Calendar className="pointer-events-none absolute left-3 top-1/2 size-4 -translate-y-1/2 text-[#366e61]" /><select value={selectedMonth} onChange={(e) => setSelectedMonth(e.target.value)} className="w-full appearance-none bg-transparent py-2.5 pl-9 pr-3 text-sm font-bold text-slate-700 outline-none"><option value="all">All months</option>{availableMonthOptions.map((m) => <option key={m.value} value={m.value}>{m.label}</option>)}</select></label>
-          <label className="relative rounded-xl border border-[#ded5cf] bg-[#fbfaf8]"><CheckCircle2 className="pointer-events-none absolute left-3 top-1/2 size-4 -translate-y-1/2 text-[#366e61]" /><select value={filterStatus} onChange={(e) => setFilterStatus(e.target.value as 'all' | 'scheduled' | 'completed')} className="w-full appearance-none bg-transparent py-2.5 pl-9 pr-3 text-sm font-bold text-slate-700 outline-none"><option value="all">All statuses</option><option value="scheduled">Upcoming / scheduled</option><option value="completed">Completed</option></select></label>
+          <label className="relative xl:col-span-2"><Search className="absolute left-3 top-1/2 size-5 -translate-y-1/2 text-[#50574D]" /><input value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)} placeholder="Search client, function or venue…" className="w-full rounded-xl border border-[#ded5cf] bg-[#FBFDF6] py-2.5 pl-10 pr-3 text-sm font-semibold text-slate-900 outline-none placeholder:text-slate-400 focus:border-[#50574D] focus:ring-4 focus:ring-rose-100" /></label>
+          <label className="relative rounded-xl border border-[#ded5cf] bg-[#FBFDF6]"><ListFilter className="pointer-events-none absolute left-3 top-1/2 size-4 -translate-y-1/2 text-[#50574D]" /><select value={selectedProjectId} onChange={(e) => { setSelectedProjectId(e.target.value); if (e.target.value !== 'all') setExpandedProjectIds([e.target.value]); }} className="w-full appearance-none bg-transparent py-2.5 pl-9 pr-3 text-sm font-bold text-slate-700 outline-none"><option value="all">All projects ({projects.length})</option>{projects.map((p) => <option key={p.id} value={p.id}>{p.clientWeddingTitle}</option>)}</select></label>
+          <label className="relative rounded-xl border border-[#ded5cf] bg-[#FBFDF6]"><Calendar className="pointer-events-none absolute left-3 top-1/2 size-4 -translate-y-1/2 text-[#50574D]" /><select value={selectedMonth} onChange={(e) => setSelectedMonth(e.target.value)} className="w-full appearance-none bg-transparent py-2.5 pl-9 pr-3 text-sm font-bold text-slate-700 outline-none"><option value="all">All months</option>{availableMonthOptions.map((m) => <option key={m.value} value={m.value}>{m.label}</option>)}</select></label>
+          <label className="relative rounded-xl border border-[#ded5cf] bg-[#FBFDF6]"><CheckCircle2 className="pointer-events-none absolute left-3 top-1/2 size-4 -translate-y-1/2 text-[#50574D]" /><select value={filterStatus} onChange={(e) => setFilterStatus(e.target.value as 'all' | 'scheduled' | 'completed')} className="w-full appearance-none bg-transparent py-2.5 pl-9 pr-3 text-sm font-bold text-slate-700 outline-none"><option value="all">All statuses</option><option value="scheduled">Upcoming / scheduled</option><option value="completed">Completed</option></select></label>
         </div>
-        <div className="mt-3 flex flex-wrap items-center gap-2"><label className="flex items-center gap-2 rounded-xl border border-[#ded5cf] bg-[#fbfaf8] px-3 py-2 text-xs font-bold text-slate-600"><Calendar className="size-4 text-[#366e61]" />Specific date <input type="date" value={selectedDate} onChange={(e) => setSelectedDate(e.target.value)} className="bg-transparent font-bold text-slate-700 outline-none" /></label>{(selectedProjectId !== 'all' || filterStatus !== 'all' || selectedMonth !== 'all' || selectedDate || searchQuery) && <button type="button" onClick={() => { setSelectedProjectId('all'); setFilterStatus('all'); setSelectedMonth('all'); setSelectedDate(''); setSearchQuery(''); }} className="flex items-center gap-1 rounded-lg px-2 py-1.5 text-xs font-extrabold text-rose-700 hover:bg-rose-50"><X className="size-3.5" />Clear filters</button>}</div>
+        <div className="mt-3 flex flex-wrap items-center gap-2"><label className="flex items-center gap-2 rounded-xl border border-[#ded5cf] bg-[#FBFDF6] px-3 py-2 text-xs font-bold text-slate-600"><Calendar className="size-4 text-[#50574D]" />Specific date <input type="date" value={selectedDate} onChange={(e) => setSelectedDate(e.target.value)} className="bg-transparent font-bold text-slate-700 outline-none" /></label>{(selectedProjectId !== 'all' || filterStatus !== 'all' || selectedMonth !== 'all' || selectedDate || searchQuery) && <button type="button" onClick={() => { setSelectedProjectId('all'); setFilterStatus('all'); setSelectedMonth('all'); setSelectedDate(''); setSearchQuery(''); }} className="flex items-center gap-1 rounded-lg px-2 py-1.5 text-xs font-extrabold text-rose-700 hover:bg-rose-50"><X className="size-3.5" />Clear filters</button>}</div>
       </section>
 
       {/* Projects Accordion List */}
@@ -745,8 +745,8 @@ export const ShootManagement: React.FC<ShootManagementProps> = ({ projects, onUp
                                 const entries = Object.entries(roleCounts);
                                 return (
                                   <div className="flex flex-wrap items-center gap-2 bg-[#f8f5f2] p-2.5 rounded-xl border border-[#e6ded8] text-xs">
-                                    <span className="text-[10px] font-black text-[#254b42] uppercase tracking-wider flex items-center gap-1.5 shrink-0">
-                                      <Users className="w-3.5 h-3.5 text-[#2f5f54]" />
+                                    <span className="text-[10px] font-black text-[#373B35] uppercase tracking-wider flex items-center gap-1.5 shrink-0">
+                                      <Users className="w-3.5 h-3.5 text-[#464B43]" />
                                       TEAM BREAKDOWN:
                                     </span>
                                     {entries.length === 0 ? (
@@ -754,7 +754,7 @@ export const ShootManagement: React.FC<ShootManagementProps> = ({ projects, onUp
                                     ) : (
                                       entries.map(([role, count]) => (
                                         <span key={role} className="px-2.5 py-1 bg-white border border-[#dfd6d0] text-slate-800 rounded-lg font-bold text-xs shadow-2xs">
-                                          {role}: <span className="text-[#2f5f54] font-extrabold">{count}</span>
+                                          {role}: <span className="text-[#464B43] font-extrabold">{count}</span>
                                         </span>
                                       ))
                                     )}
@@ -868,9 +868,9 @@ export const ShootManagement: React.FC<ShootManagementProps> = ({ projects, onUp
 
       {/* CREW ASSIGNMENT MODAL */}
       {editingCrewShoot && canAssign && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-[#111a18]/75 p-3 backdrop-blur-sm sm:p-6 animate-in fade-in duration-200">
-          <div className="max-h-[92vh] w-full max-w-3xl overflow-y-auto rounded-[2rem] border border-white/50 bg-white shadow-[0_30px_90px_rgba(9,19,17,.42)]">
-            <header className="relative overflow-hidden bg-[radial-gradient(circle_at_86%_10%,rgba(236,190,169,.24),transparent_32%),linear-gradient(125deg,#33514A,#55333f_52%,#1b2825)] px-5 py-5 text-white sm:px-7 sm:py-6">
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-[#151714]/75 p-3 backdrop-blur-sm sm:p-6 animate-in fade-in duration-200">
+          <div className="max-h-[92vh] w-full max-w-3xl overflow-y-auto rounded-[2rem] border border-white/50 bg-white shadow-[0_30px_90px_rgba(14,15,13,.42)]">
+            <header className="relative overflow-hidden bg-[radial-gradient(circle_at_86%_10%,rgba(236,190,169,.24),transparent_32%),linear-gradient(125deg,#41463E,#55333f_52%,#21241F)] px-5 py-5 text-white sm:px-7 sm:py-6">
               <div className="absolute -bottom-14 -right-8 size-44 rounded-full border-[24px] border-white/5" />
               <div className="relative flex items-start justify-between gap-4">
               <div className="flex items-center gap-4">
@@ -878,7 +878,7 @@ export const ShootManagement: React.FC<ShootManagementProps> = ({ projects, onUp
                   <UserPlus className="size-7 text-[#f6d9ca]" />
                 </div>
                 <div>
-                  <p className="text-xs font-extrabold uppercase tracking-[.18em] text-[#d2e2de]">Production crew</p><h3 className="mt-1 text-xl font-black sm:text-2xl">
+                  <p className="text-xs font-extrabold uppercase tracking-[.18em] text-[#D9DCD8]">Production crew</p><h3 className="mt-1 text-xl font-black sm:text-2xl">
                     Assign Team Crew
                   </h3>
                   <p className="mt-1 text-sm font-semibold text-[#dfeae7]">
@@ -899,8 +899,8 @@ export const ShootManagement: React.FC<ShootManagementProps> = ({ projects, onUp
             <form onSubmit={handleSaveCrewAssignments} className="space-y-6 p-5 sm:p-7">
               
               {/* Quick Select Crew Pill Tags */}
-              <section className="space-y-3"><div><p className="text-sm font-black uppercase tracking-[.1em] text-[#254b42]">01 · Quick select</p><p className="mt-0.5 text-sm text-slate-500">Choose a person to fill the next available role automatically.</p></div>
-                <div className="flex max-h-28 flex-wrap gap-2 overflow-y-auto rounded-2xl border border-[#e2d9d3] bg-[#fbfaf8] p-3">
+              <section className="space-y-3"><div><p className="text-sm font-black uppercase tracking-[.1em] text-[#373B35]">01 · Quick select</p><p className="mt-0.5 text-sm text-slate-500">Choose a person to fill the next available role automatically.</p></div>
+                <div className="flex max-h-28 flex-wrap gap-2 overflow-y-auto rounded-2xl border border-[#e2d9d3] bg-[#FBFDF6] p-3">
                   {availableCrewNames.map((name) => (
                     <span
                       key={name}
@@ -923,7 +923,7 @@ export const ShootManagement: React.FC<ShootManagementProps> = ({ projects, onUp
                           });
                         }
                       }}
-                      className="rounded-xl border border-[#ded5cf] bg-white px-3 py-2 text-xs font-bold text-slate-700 shadow-sm transition hover:border-[#2f5f54] hover:bg-[#2f5f54] hover:text-white"
+                      className="rounded-xl border border-[#ded5cf] bg-white px-3 py-2 text-xs font-bold text-slate-700 shadow-sm transition hover:border-[#464B43] hover:bg-[#464B43] hover:text-white"
                       title="Click to fill into next empty role"
                     >
                       + {name}
@@ -933,7 +933,7 @@ export const ShootManagement: React.FC<ShootManagementProps> = ({ projects, onUp
               </section>
 
               {/* Standard Roles Fields */}
-              <section className="space-y-3 border-t border-[#eee7e2] pt-5"><div><p className="text-sm font-black uppercase tracking-[.1em] text-[#254b42]">02 · Core crew</p><p className="mt-0.5 text-sm text-slate-500">Assign the essential production roles for this shoot.</p></div><div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
+              <section className="space-y-3 border-t border-[#eee7e2] pt-5"><div><p className="text-sm font-black uppercase tracking-[.1em] text-[#373B35]">02 · Core crew</p><p className="mt-0.5 text-sm text-slate-500">Assign the essential production roles for this shoot.</p></div><div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
                 <div>
                   <label className="text-xs font-bold text-slate-700 block mb-1 flex items-center justify-between">
                     <span>Lead Photographer</span>
@@ -952,7 +952,7 @@ export const ShootManagement: React.FC<ShootManagementProps> = ({ projects, onUp
                     value={editingCrewShoot.leadPhotographer}
                     onChange={(e) => setEditingCrewShoot({ ...editingCrewShoot, leadPhotographer: e.target.value })}
                     placeholder="Enter name (e.g. Alex Morgan)"
-                    className="w-full rounded-2xl border border-[#ded5cf] bg-[#fbfaf8] px-4 py-3 text-sm font-semibold text-slate-900 outline-none focus:border-[#366e61] focus:bg-white focus:ring-4 focus:ring-rose-100"
+                    className="w-full rounded-2xl border border-[#ded5cf] bg-[#FBFDF6] px-4 py-3 text-sm font-semibold text-slate-900 outline-none focus:border-[#50574D] focus:bg-white focus:ring-4 focus:ring-rose-100"
                   />
                 </div>
 
@@ -974,7 +974,7 @@ export const ShootManagement: React.FC<ShootManagementProps> = ({ projects, onUp
                     value={editingCrewShoot.cinematographer}
                     onChange={(e) => setEditingCrewShoot({ ...editingCrewShoot, cinematographer: e.target.value })}
                     placeholder="Enter name (e.g. Vikram Sharma)"
-                    className="w-full rounded-2xl border border-[#ded5cf] bg-[#fbfaf8] px-4 py-3 text-sm font-semibold text-slate-900 outline-none focus:border-[#366e61] focus:bg-white focus:ring-4 focus:ring-rose-100"
+                    className="w-full rounded-2xl border border-[#ded5cf] bg-[#FBFDF6] px-4 py-3 text-sm font-semibold text-slate-900 outline-none focus:border-[#50574D] focus:bg-white focus:ring-4 focus:ring-rose-100"
                   />
                 </div>
 
@@ -996,7 +996,7 @@ export const ShootManagement: React.FC<ShootManagementProps> = ({ projects, onUp
                     value={editingCrewShoot.droneOperator}
                     onChange={(e) => setEditingCrewShoot({ ...editingCrewShoot, droneOperator: e.target.value })}
                     placeholder="Enter name (e.g. Rahul Kumar)"
-                    className="w-full rounded-2xl border border-[#ded5cf] bg-[#fbfaf8] px-4 py-3 text-sm font-semibold text-slate-900 outline-none focus:border-[#366e61] focus:bg-white focus:ring-4 focus:ring-rose-100"
+                    className="w-full rounded-2xl border border-[#ded5cf] bg-[#FBFDF6] px-4 py-3 text-sm font-semibold text-slate-900 outline-none focus:border-[#50574D] focus:bg-white focus:ring-4 focus:ring-rose-100"
                   />
                 </div>
 
@@ -1018,7 +1018,7 @@ export const ShootManagement: React.FC<ShootManagementProps> = ({ projects, onUp
                     value={editingCrewShoot.assistant}
                     onChange={(e) => setEditingCrewShoot({ ...editingCrewShoot, assistant: e.target.value })}
                     placeholder="Enter name (e.g. Amit Singh)"
-                    className="w-full rounded-2xl border border-[#ded5cf] bg-[#fbfaf8] px-4 py-3 text-sm font-semibold text-slate-900 outline-none focus:border-[#366e61] focus:bg-white focus:ring-4 focus:ring-rose-100"
+                    className="w-full rounded-2xl border border-[#ded5cf] bg-[#FBFDF6] px-4 py-3 text-sm font-semibold text-slate-900 outline-none focus:border-[#50574D] focus:bg-white focus:ring-4 focus:ring-rose-100"
                   />
                 </div>
               </div></section>
@@ -1026,7 +1026,7 @@ export const ShootManagement: React.FC<ShootManagementProps> = ({ projects, onUp
               {/* Additional Custom Crew Members */}
               <section className="space-y-3 border-t border-[#eee7e2] pt-5">
                 <div className="flex items-center justify-between">
-                  <div><p className="text-sm font-black uppercase tracking-[.1em] text-[#254b42]">03 · Additional crew</p><p className="mt-0.5 text-sm text-slate-500">Add any specialised role needed for this event.</p></div>
+                  <div><p className="text-sm font-black uppercase tracking-[.1em] text-[#373B35]">03 · Additional crew</p><p className="mt-0.5 text-sm text-slate-500">Add any specialised role needed for this event.</p></div>
                   <button
                     type="button"
                     onClick={() =>
@@ -1038,7 +1038,7 @@ export const ShootManagement: React.FC<ShootManagementProps> = ({ projects, onUp
                         ],
                       })
                     }
-                    className="flex items-center gap-1.5 rounded-xl border border-rose-200 bg-rose-50 px-3 py-2 text-xs font-extrabold text-[#2f5f54] transition hover:bg-rose-100"
+                    className="flex items-center gap-1.5 rounded-xl border border-rose-200 bg-rose-50 px-3 py-2 text-xs font-extrabold text-[#464B43] transition hover:bg-rose-100"
                   >
                     <Plus className="w-3.5 h-3.5" />
                     <span>Add Role</span>
@@ -1046,7 +1046,7 @@ export const ShootManagement: React.FC<ShootManagementProps> = ({ projects, onUp
                 </div>
 
                 {editingCrewShoot.crewAssignments.map((crew, idx) => (
-                  <div key={crew.id || idx} className="grid grid-cols-12 items-center gap-2 rounded-2xl border border-[#e2d9d3] bg-[#fbfaf8] p-2.5">
+                  <div key={crew.id || idx} className="grid grid-cols-12 items-center gap-2 rounded-2xl border border-[#e2d9d3] bg-[#FBFDF6] p-2.5">
                     <div className="col-span-4">
                       <input
                         type="text"
@@ -1057,7 +1057,7 @@ export const ShootManagement: React.FC<ShootManagementProps> = ({ projects, onUp
                           setEditingCrewShoot({ ...editingCrewShoot, crewAssignments: updated });
                         }}
                         placeholder="Role (e.g. Crane)"
-                        className="w-full rounded-xl border border-[#ded5cf] bg-white px-3 py-2 text-sm font-semibold text-slate-800 outline-none focus:border-[#366e61] focus:ring-4 focus:ring-rose-100"
+                        className="w-full rounded-xl border border-[#ded5cf] bg-white px-3 py-2 text-sm font-semibold text-slate-800 outline-none focus:border-[#50574D] focus:ring-4 focus:ring-rose-100"
                       />
                     </div>
                     <div className="col-span-7">
@@ -1070,7 +1070,7 @@ export const ShootManagement: React.FC<ShootManagementProps> = ({ projects, onUp
                           setEditingCrewShoot({ ...editingCrewShoot, crewAssignments: updated });
                         }}
                         placeholder="Person Name"
-                        className="w-full rounded-xl border border-[#ded5cf] bg-white px-3 py-2 text-sm font-semibold text-slate-900 outline-none focus:border-[#366e61] focus:ring-4 focus:ring-rose-100"
+                        className="w-full rounded-xl border border-[#ded5cf] bg-white px-3 py-2 text-sm font-semibold text-slate-900 outline-none focus:border-[#50574D] focus:ring-4 focus:ring-rose-100"
                       />
                     </div>
                     <div className="col-span-1 text-right">
@@ -1101,7 +1101,7 @@ export const ShootManagement: React.FC<ShootManagementProps> = ({ projects, onUp
                 </button>
                 <button
                   type="submit"
-                  className="flex items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-[#2f5f54] to-[#254b42] px-6 py-2.5 text-sm font-extrabold text-white shadow-[0_8px_20px_rgba(37,75,66,.25)] transition hover:-translate-y-0.5 hover:shadow-lg"
+                  className="flex items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-[#464B43] to-[#373B35] px-6 py-2.5 text-sm font-extrabold text-white shadow-[0_8px_20px_rgba(55,59,53,.25)] transition hover:-translate-y-0.5 hover:shadow-lg"
                 >
                   <UserCheck className="w-4 h-4" />
                   <span>Save Crew Assignments</span>
@@ -1115,11 +1115,11 @@ export const ShootManagement: React.FC<ShootManagementProps> = ({ projects, onUp
 
       {/* SHOOT & TEAM RESOURCE ALLOCATION REPORT MODAL */}
       {showReportModal && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-[#111a18]/75 p-3 backdrop-blur-sm sm:p-6 animate-in fade-in duration-200">
-          <div className="flex max-h-[92vh] w-full max-w-5xl flex-col overflow-hidden rounded-[2rem] border border-white/50 bg-white shadow-[0_30px_90px_rgba(9,19,17,.42)]">
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-[#151714]/75 p-3 backdrop-blur-sm sm:p-6 animate-in fade-in duration-200">
+          <div className="flex max-h-[92vh] w-full max-w-5xl flex-col overflow-hidden rounded-[2rem] border border-white/50 bg-white shadow-[0_30px_90px_rgba(14,15,13,.42)]">
             
             {/* Modal Header */}
-            <div className="relative shrink-0 overflow-hidden bg-[radial-gradient(circle_at_86%_10%,rgba(236,190,169,.24),transparent_32%),linear-gradient(125deg,#33514A,#55333f_52%,#1b2825)] px-5 py-5 text-white sm:px-7 sm:py-6">
+            <div className="relative shrink-0 overflow-hidden bg-[radial-gradient(circle_at_86%_10%,rgba(236,190,169,.24),transparent_32%),linear-gradient(125deg,#41463E,#55333f_52%,#21241F)] px-5 py-5 text-white sm:px-7 sm:py-6">
               <div className="absolute -bottom-14 -right-8 size-44 rounded-full border-[24px] border-white/5" />
               <div className="relative flex items-center justify-between gap-3">
               <div className="flex items-center gap-2.5">
@@ -1127,7 +1127,7 @@ export const ShootManagement: React.FC<ShootManagementProps> = ({ projects, onUp
                   <BarChart2 className="size-6 text-[#f6d9ca]" />
                 </div>
                 <div>
-                  <p className="text-xs font-extrabold uppercase tracking-[.18em] text-[#d2e2de]">Production overview</p><h3 className="mt-1 text-lg font-black sm:text-xl">
+                  <p className="text-xs font-extrabold uppercase tracking-[.18em] text-[#D9DCD8]">Production overview</p><h3 className="mt-1 text-lg font-black sm:text-xl">
                     <span>Shoot & Team Resource Allocation Report</span>
                   </h3>
                   <p className="mt-1 text-sm text-[#dfeae7]">
@@ -1167,7 +1167,7 @@ export const ShootManagement: React.FC<ShootManagementProps> = ({ projects, onUp
             </div>
 
             {/* Modal Controls / Filter Bar */}
-            <div className="mx-5 mt-5 flex flex-wrap items-center justify-between gap-2.5 rounded-2xl border border-[#e2d9d3] bg-[#fbfaf8] p-3 sm:mx-7">
+            <div className="mx-5 mt-5 flex flex-wrap items-center justify-between gap-2.5 rounded-2xl border border-[#e2d9d3] bg-[#FBFDF6] p-3 sm:mx-7">
               <div className="flex flex-wrap items-center gap-2 text-xs">
                 {/* Month Selector */}
                 <div className="flex items-center gap-1">

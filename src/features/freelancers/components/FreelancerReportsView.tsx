@@ -116,7 +116,7 @@ export const FreelancerReportsView: React.FC<FreelancerReportsViewProps> = ({
       {/* Top Header Controls */}
       <div className="flex flex-col sm:flex-row items-center justify-between gap-4 bg-white p-4 rounded-2xl border border-slate-200 shadow-xs print:hidden">
         <div className="flex items-center gap-3">
-          <div className="w-10 h-10 rounded-xl bg-[#2f5f54] flex items-center justify-center font-bold text-white shadow-xs">
+          <div className="w-10 h-10 rounded-xl bg-[#464B43] flex items-center justify-center font-bold text-white shadow-xs">
             <BarChart3 className="w-5 h-5 text-white" />
           </div>
           <div>
@@ -147,7 +147,7 @@ export const FreelancerReportsView: React.FC<FreelancerReportsViewProps> = ({
       {/* Filter Toolbar */}
       <div className="bg-white p-4 rounded-2xl border border-slate-200 shadow-xs space-y-3 print:hidden">
         <h3 className="text-xs font-bold uppercase tracking-wider text-slate-500 flex items-center gap-1.5">
-          <Filter className="w-3.5 h-3.5 text-[#2f5f54]" />
+          <Filter className="w-3.5 h-3.5 text-[#464B43]" />
           <span>Report Filters</span>
         </h3>
 

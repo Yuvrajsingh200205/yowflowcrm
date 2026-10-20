@@ -979,9 +979,9 @@ export default function App() {
   // Wait for the persisted browser session before deciding whether login is needed.
   if (!isHydrated) {
     return (
-      <div className="flex min-h-screen items-center justify-center bg-[#131f1c] text-[#f8e9df]">
+      <div className="flex min-h-screen items-center justify-center bg-[#181A17] text-[#f8e9df]">
         <div className="flex items-center gap-3 text-sm font-semibold">
-          <span className="h-5 w-5 animate-spin rounded-full border-2 border-[#3d7c6d] border-t-transparent" />
+          <span className="h-5 w-5 animate-spin rounded-full border-2 border-[#5B6257] border-t-transparent" />
           Restoring your studio session…
         </div>
       </div>
@@ -990,9 +990,9 @@ export default function App() {
 
   if (freelancerSessionInCrm) {
     return (
-      <div className="flex min-h-screen items-center justify-center bg-[#131f1c] text-[#f8e9df]">
+      <div className="flex min-h-screen items-center justify-center bg-[#181A17] text-[#f8e9df]">
         <div className="flex items-center gap-3 text-sm font-semibold">
-          <span className="h-5 w-5 animate-spin rounded-full border-2 border-[#3d7c6d] border-t-transparent" />
+          <span className="h-5 w-5 animate-spin rounded-full border-2 border-[#5B6257] border-t-transparent" />
           Opening freelancer workspace…
         </div>
       </div>

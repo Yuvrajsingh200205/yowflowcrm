@@ -14,10 +14,10 @@ interface ClientGalleryScreenProps {
 const Notice: React.FC<{ title: string; children: React.ReactNode }> = ({ title, children }) => (
   <main className="grid min-h-screen place-items-center bg-[#fffdfb] px-6">
     <div className="max-w-md space-y-3 text-center">
-      <span className="mx-auto grid size-12 place-items-center rounded-2xl bg-[linear-gradient(145deg,#2f5f54,#254b42)] font-serif text-lg font-bold text-white">
+      <span className="mx-auto grid size-12 place-items-center rounded-2xl bg-[linear-gradient(145deg,#464B43,#373B35)] font-serif text-lg font-bold text-white">
         W
       </span>
-      <h1 className="font-serif text-2xl text-[#162421]">{title}</h1>
+      <h1 className="font-serif text-2xl text-[#1C1F1B]">{title}</h1>
       <div className="text-sm font-medium text-slate-500">{children}</div>
     </div>
   </main>
@@ -142,7 +142,7 @@ export const ClientGalleryScreen: React.FC<ClientGalleryScreenProps> = ({ projec
       <Notice title="Gallery not available">
         <p>
           This gallery has not been prepared yet. Ask the studio to open it again from the{' '}
-          <Link href="/clients" className="font-bold text-[#2f5f54] underline">
+          <Link href="/clients" className="font-bold text-[#464B43] underline">
             Client Directory
           </Link>
           .

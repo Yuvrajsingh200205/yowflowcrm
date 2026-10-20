@@ -147,10 +147,10 @@ export const TeamPerformanceView: React.FC<Props> = ({ team, attendance, project
   return (
     <div className="space-y-5">
       <section className={`${CARD} overflow-hidden`}>
-        <header className="border-b border-[#eee7e2] bg-[linear-gradient(120deg,#fbfcfc,#fbfaf8)] p-5">
+        <header className="border-b border-[#eee7e2] bg-[linear-gradient(120deg,#fbfcfc,#FBFDF6)] p-5">
           <div className="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
             <div>
-              <h3 className="flex items-center gap-2 text-base font-black text-slate-900"><TrendingUp className="size-5 text-[#2f5f54]" /> Employee performance report</h3>
+              <h3 className="flex items-center gap-2 text-base font-black text-slate-900"><TrendingUp className="size-5 text-[#464B43]" /> Employee performance report</h3>
               <p className="mt-1 text-xs font-medium text-slate-500">Authoritative attendance, shift hours, payroll and delivery metrics from one report API.</p>
             </div>
             <div className="grid gap-2 sm:grid-cols-2">
@@ -180,7 +180,7 @@ export const TeamPerformanceView: React.FC<Props> = ({ team, attendance, project
           return <div className="space-y-5 p-5">
             <div className="flex flex-wrap items-center justify-between gap-2">
               <div><p className="text-lg font-black text-slate-900">{employee.fullName}</p><p className="text-xs font-semibold text-slate-500">{employee.employeeCode || 'No employee ID'} · Shift {employee.shift.start || 'Not set'} – {employee.shift.end || 'Not set'}</p></div>
-              <Badge className="border-[#d0e1dd] bg-[#fafcfb] text-[#2f5f54]">{employeeReport.month}</Badge>
+              <Badge className="border-[#D8DBD6] bg-[#fafcfb] text-[#464B43]">{employeeReport.month}</Badge>
             </div>
             <div className="grid grid-cols-2 gap-3 md:grid-cols-4 xl:grid-cols-6">
               <KpiCard label="Present" value={attendanceSummary.present} hint={`${attendanceSummary.halfDay} half day`} tone="emerald" />
@@ -214,7 +214,7 @@ export const TeamPerformanceView: React.FC<Props> = ({ team, attendance, project
         <header className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
           <div>
             <h3 className="text-sm font-extrabold text-slate-900 uppercase tracking-tight flex items-center gap-2">
-              <CalendarRange className="w-4 h-4 text-[#2f5f54]" /> Upcoming workload
+              <CalendarRange className="w-4 h-4 text-[#464B43]" /> Upcoming workload
             </h3>
             <p className="text-[11px] text-slate-500 font-medium">
               {formatDayLabel(today)} → {formatDayLabel(capacityEnd)} · spot who is carrying too many shoots.
@@ -226,7 +226,7 @@ export const TeamPerformanceView: React.FC<Props> = ({ team, attendance, project
                 key={p.days}
                 type="button"
                 onClick={() => setSpan(p.days)}
-                className={`cursor-pointer rounded-lg px-3 py-1.5 text-xs font-bold transition ${span === p.days ? 'border border-[#efd9b0]/80 bg-white text-[#254b42] shadow-sm' : 'text-slate-600 hover:text-[#254b42]'}`}
+                className={`cursor-pointer rounded-lg px-3 py-1.5 text-xs font-bold transition ${span === p.days ? 'border border-[#DBF1AE]/80 bg-white text-[#373B35] shadow-sm' : 'text-slate-600 hover:text-[#373B35]'}`}
                 aria-pressed={span === p.days}
               >
                 {p.label}
@@ -241,7 +241,7 @@ export const TeamPerformanceView: React.FC<Props> = ({ team, attendance, project
               <button type="button" onClick={() => onOpenProfile(member)} className="flex items-center gap-2.5 min-w-[190px] text-left cursor-pointer group">
                 <Avatar member={member} size="sm" />
                 <div className="min-w-0">
-                  <p className="text-xs font-extrabold text-slate-900 truncate group-hover:text-[#2f5f54] transition">{member.name}</p>
+                  <p className="text-xs font-extrabold text-slate-900 truncate group-hover:text-[#464B43] transition">{member.name}</p>
                   <p className="text-[10px] font-bold text-slate-400 truncate">{member.role}</p>
                 </div>
               </button>
@@ -250,7 +250,7 @@ export const TeamPerformanceView: React.FC<Props> = ({ team, attendance, project
                 <div className="h-6 rounded-lg bg-slate-100 overflow-hidden relative">
                   <div
                     className={`h-full rounded-lg transition-all ${
-                      shootsInRange >= 5 ? 'bg-red-500' : shootsInRange >= 3 ? 'bg-amber-500' : 'bg-[#2f5f54]'
+                      shootsInRange >= 5 ? 'bg-red-500' : shootsInRange >= 3 ? 'bg-amber-500' : 'bg-[#464B43]'
                     }`}
                     style={{ width: `${Math.round((shootsInRange / maxShoots) * 100)}%` }}
                   />
@@ -280,7 +280,7 @@ export const TeamPerformanceView: React.FC<Props> = ({ team, attendance, project
         <header className="flex flex-col lg:flex-row lg:items-end justify-between gap-3">
           <div>
             <h3 className="text-sm font-extrabold text-slate-900 uppercase tracking-tight flex items-center gap-2">
-              <TrendingUp className="w-4 h-4 text-[#2f5f54]" /> Attendance statistics
+              <TrendingUp className="w-4 h-4 text-[#464B43]" /> Attendance statistics
             </h3>
             <p className="text-[11px] text-slate-500 font-medium">
               Weekly offs and holidays are excluded from the percentage; shoot days count as present.
@@ -332,7 +332,7 @@ export const TeamPerformanceView: React.FC<Props> = ({ team, attendance, project
                     <button type="button" onClick={() => onOpenProfile(member)} className="flex items-center gap-2.5 text-left cursor-pointer group">
                       <Avatar member={member} size="sm" />
                       <div className="min-w-0">
-                        <p className="font-extrabold text-slate-900 truncate group-hover:text-[#2f5f54] transition">{member.name}</p>
+                        <p className="font-extrabold text-slate-900 truncate group-hover:text-[#464B43] transition">{member.name}</p>
                         <p className="text-[10px] font-bold text-slate-400 truncate">{member.role}</p>
                       </div>
                     </button>
@@ -360,7 +360,7 @@ export const TeamPerformanceView: React.FC<Props> = ({ team, attendance, project
                   <TD className="font-mono">{formatHours(stats.averageHours)}</TD>
                   <TD className="font-mono">
                     {stats.overtimeHours > 0 ? (
-                      <span className="inline-flex items-center gap-1 text-[#254b42] font-bold">
+                      <span className="inline-flex items-center gap-1 text-[#373B35] font-bold">
                         <Clock className="w-3 h-3" /> {formatHours(stats.overtimeHours)}
                       </span>
                     ) : (

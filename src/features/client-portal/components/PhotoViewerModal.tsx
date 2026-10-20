@@ -135,7 +135,7 @@ export const PhotoViewerModal: React.FC<PhotoViewerModalProps> = ({
 
   return (
     <div 
-      className="fixed inset-0 z-50 bg-[#111f1c]/95 backdrop-blur-md flex flex-col justify-between select-none animate-in fade-in duration-200"
+      className="fixed inset-0 z-50 bg-[#181917]/95 backdrop-blur-md flex flex-col justify-between select-none animate-in fade-in duration-200"
       onClick={onClose}
     >
       {/* Top Bar Header */}
@@ -159,7 +159,7 @@ export const PhotoViewerModal: React.FC<PhotoViewerModalProps> = ({
         <div className="flex shrink-0 items-center gap-1 sm:gap-2">
           {/* Zoom controls for images */}
           {currentItem.mediaType === 'image' && (
-            <div className="hidden sm:flex items-center bg-[#254b42]/80 rounded-full border border-[#19332d] p-1 mr-2">
+            <div className="hidden sm:flex items-center bg-[#373B35]/80 rounded-full border border-[#252824] p-1 mr-2">
               <button 
                 onClick={handleZoomOut} 
                 disabled={zoomLevel <= 1}
@@ -186,7 +186,7 @@ export const PhotoViewerModal: React.FC<PhotoViewerModalProps> = ({
             className={`p-2 rounded-full transition-all ${
               currentItem.isFavorite 
                 ? 'bg-rose-500 text-white shadow-lg shadow-rose-500/30' 
-                : 'bg-[#254b42]/80 text-slate-300 hover:text-rose-400 hover:bg-[#2f5f54]'
+                : 'bg-[#373B35]/80 text-slate-300 hover:text-rose-400 hover:bg-[#464B43]'
             }`}
             title="Mark as Favorite"
           >
@@ -199,7 +199,7 @@ export const PhotoViewerModal: React.FC<PhotoViewerModalProps> = ({
             className={`px-3 py-1.5 rounded-full text-xs font-medium flex items-center gap-1.5 transition-all ${
               currentItem.isSelectedForAlbum 
                 ? 'bg-emerald-600 text-white shadow-lg shadow-emerald-600/30' 
-                : 'bg-[#254b42]/80 text-slate-300 hover:text-emerald-400 hover:bg-[#2f5f54] border border-[#19332d]'
+                : 'bg-[#373B35]/80 text-slate-300 hover:text-emerald-400 hover:bg-[#464B43] border border-[#252824]'
             }`}
             title="Select for Luxury Album"
           >
@@ -213,7 +213,7 @@ export const PhotoViewerModal: React.FC<PhotoViewerModalProps> = ({
           {currentItem.downloadAllowed && (
             <button 
               onClick={handleDownload}
-              className="p-2 rounded-full bg-[#254b42]/80 text-slate-300 hover:text-[#ddc89c] hover:bg-[#2f5f54] transition-colors"
+              className="p-2 rounded-full bg-[#373B35]/80 text-slate-300 hover:text-[#CCEB8E] hover:bg-[#464B43] transition-colors"
               title="Download High-Res"
             >
               <Download className="w-5 h-5" />
@@ -223,12 +223,12 @@ export const PhotoViewerModal: React.FC<PhotoViewerModalProps> = ({
           {/* Share */}
           <button 
             onClick={handleShare}
-            className="p-2 rounded-full bg-[#254b42]/80 text-slate-300 hover:text-[#ddc89c] hover:bg-[#2f5f54] transition-colors relative"
+            className="p-2 rounded-full bg-[#373B35]/80 text-slate-300 hover:text-[#CCEB8E] hover:bg-[#464B43] transition-colors relative"
             title="Share Photo"
           >
             <Share2 className="w-5 h-5" />
             {copyFeedback && (
-              <span className="absolute -bottom-8 right-0 bg-slate-800 text-[#ddc89c] text-xs px-2 py-1 rounded shadow-lg whitespace-nowrap">
+              <span className="absolute -bottom-8 right-0 bg-slate-800 text-[#CCEB8E] text-xs px-2 py-1 rounded shadow-lg whitespace-nowrap">
                 Link Copied!
               </span>
             )}
@@ -238,7 +238,7 @@ export const PhotoViewerModal: React.FC<PhotoViewerModalProps> = ({
           <button 
             onClick={() => setShowInfoSidebar(!showInfoSidebar)}
             className={`p-2 rounded-full transition-colors ${
-              showInfoSidebar ? 'bg-amber-500 text-slate-950' : 'bg-[#254b42]/80 text-slate-300 hover:text-white'
+              showInfoSidebar ? 'bg-amber-500 text-slate-950' : 'bg-[#373B35]/80 text-slate-300 hover:text-white'
             }`}
             title="Details & Retouch Requests"
           >
@@ -248,7 +248,7 @@ export const PhotoViewerModal: React.FC<PhotoViewerModalProps> = ({
           {/* Close Modal */}
           <button 
             onClick={onClose}
-            className="p-2 rounded-full bg-[#254b42]/80 text-slate-400 hover:text-white hover:bg-[#2f5f54] transition-colors ml-2"
+            className="p-2 rounded-full bg-[#373B35]/80 text-slate-400 hover:text-white hover:bg-[#464B43] transition-colors ml-2"
             title="Close (Esc)"
           >
             <X className="w-6 h-6" />
@@ -264,7 +264,7 @@ export const PhotoViewerModal: React.FC<PhotoViewerModalProps> = ({
         {/* Navigation Left */}
         <button 
           onClick={handlePrev}
-          className="absolute left-3 sm:left-6 z-30 p-3 rounded-full bg-[#254b42]/70 hover:bg-[#254b42] text-white/80 hover:text-white backdrop-blur border border-[#19332d] transition-all hover:scale-105"
+          className="absolute left-3 sm:left-6 z-30 p-3 rounded-full bg-[#373B35]/70 hover:bg-[#373B35] text-white/80 hover:text-white backdrop-blur border border-[#252824] transition-all hover:scale-105"
         >
           <ChevronLeft className="w-6 h-6" />
         </button>
@@ -280,7 +280,7 @@ export const PhotoViewerModal: React.FC<PhotoViewerModalProps> = ({
               className="max-h-[82vh] max-w-[92vw] md:max-w-[80vw] object-contain rounded-lg shadow-2xl transition-transform duration-150"
             />
           ) : (
-            <div className="w-[90vw] md:w-[75vw] max-w-4xl aspect-video bg-black rounded-lg overflow-hidden shadow-2xl border border-[#19332d]">
+            <div className="w-[90vw] md:w-[75vw] max-w-4xl aspect-video bg-black rounded-lg overflow-hidden shadow-2xl border border-[#252824]">
               <video 
                 src={currentItem.url} 
                 controls 
@@ -294,7 +294,7 @@ export const PhotoViewerModal: React.FC<PhotoViewerModalProps> = ({
         {/* Navigation Right */}
         <button 
           onClick={handleNext}
-          className="absolute right-3 sm:right-6 z-30 p-3 rounded-full bg-[#254b42]/70 hover:bg-[#254b42] text-white/80 hover:text-white backdrop-blur border border-[#19332d] transition-all hover:scale-105"
+          className="absolute right-3 sm:right-6 z-30 p-3 rounded-full bg-[#373B35]/70 hover:bg-[#373B35] text-white/80 hover:text-white backdrop-blur border border-[#252824] transition-all hover:scale-105"
         >
           <ChevronRight className="w-6 h-6" />
         </button>
@@ -302,10 +302,10 @@ export const PhotoViewerModal: React.FC<PhotoViewerModalProps> = ({
         {/* Side Details & Comments Drawer */}
         {showInfoSidebar && (
           <div 
-            className="absolute top-0 right-0 bottom-0 w-full max-w-sm sm:w-96 bg-[#254b42]/95 border-l border-[#19332d] text-slate-200 p-6 overflow-y-auto z-40 backdrop-blur-xl animate-in slide-in-from-right duration-200"
+            className="absolute top-0 right-0 bottom-0 w-full max-w-sm sm:w-96 bg-[#373B35]/95 border-l border-[#252824] text-slate-200 p-6 overflow-y-auto z-40 backdrop-blur-xl animate-in slide-in-from-right duration-200"
             onClick={(e) => e.stopPropagation()}
           >
-            <div className="flex items-center justify-between border-b border-[#19332d] pb-4 mb-4">
+            <div className="flex items-center justify-between border-b border-[#252824] pb-4 mb-4">
               <h4 className="font-serif text-lg text-amber-200">Memory Details</h4>
               <button 
                 onClick={() => setShowInfoSidebar(false)}
@@ -322,10 +322,10 @@ export const PhotoViewerModal: React.FC<PhotoViewerModalProps> = ({
               </div>
 
               {/* Sub-Folder Categorization */}
-              <div className="p-3 bg-[#254b42]/90 rounded-xl border border-[#19332d] space-y-2">
+              <div className="p-3 bg-[#373B35]/90 rounded-xl border border-[#252824] space-y-2">
                 <div className="flex items-center justify-between">
                   <span className="text-slate-400 text-xs flex items-center gap-1.5 font-medium">
-                    <FolderOpen className="w-3.5 h-3.5 text-[#ddc89c]" />
+                    <FolderOpen className="w-3.5 h-3.5 text-[#CCEB8E]" />
                     Sub-Folder Category
                   </span>
                   {currentItem.subFolderName ? (
@@ -353,7 +353,7 @@ export const PhotoViewerModal: React.FC<PhotoViewerModalProps> = ({
                           targetFolder?.name || undefined
                         );
                       }}
-                      className="w-full bg-[#111f1c] text-slate-200 text-xs rounded-lg px-2.5 py-1.5 border border-slate-700 focus:outline-none focus:border-amber-500"
+                      className="w-full bg-[#181917] text-slate-200 text-xs rounded-lg px-2.5 py-1.5 border border-slate-700 focus:outline-none focus:border-amber-500"
                     >
                       <option value="">📁 General (No Sub-Folder)</option>
                       {subFolders
@@ -376,7 +376,7 @@ export const PhotoViewerModal: React.FC<PhotoViewerModalProps> = ({
                 <div>
                   <span className="text-slate-400 block text-xs">Captured By</span>
                   <span className="text-slate-300 flex items-center gap-1.5 mt-0.5">
-                    <Camera className="w-3.5 h-3.5 text-[#ddc89c]" />
+                    <Camera className="w-3.5 h-3.5 text-[#CCEB8E]" />
                     {currentItem.photographerCredit}
                   </span>
                 </div>
@@ -396,25 +396,25 @@ export const PhotoViewerModal: React.FC<PhotoViewerModalProps> = ({
                 </div>
               )}
 
-              <hr className="border-[#19332d] my-4" />
+              <hr className="border-[#252824] my-4" />
 
               {/* Comments & Requests Section */}
               <div className="space-y-3">
                 <div className="flex items-center justify-between">
                   <span className="font-medium text-slate-200 flex items-center gap-1.5">
-                    <MessageSquare className="w-4 h-4 text-[#ddc89c]" />
+                    <MessageSquare className="w-4 h-4 text-[#CCEB8E]" />
                     Comments & Retouch ({itemComments.length})
                   </span>
                   <button 
                     onClick={() => setShowCommentBox(!showCommentBox)}
-                    className="text-xs text-[#ddc89c] hover:text-amber-300 font-medium"
+                    className="text-xs text-[#CCEB8E] hover:text-amber-300 font-medium"
                   >
                     + Add Note
                   </button>
                 </div>
 
                 {showCommentBox && (
-                  <form onSubmit={handleSubmitComment} className="bg-[#111f1c]/80 p-3 rounded-lg border border-[#19332d] space-y-2">
+                  <form onSubmit={handleSubmitComment} className="bg-[#181917]/80 p-3 rounded-lg border border-[#252824] space-y-2">
                     <div className="flex items-center gap-2">
                       <select 
                         value={commentType} 
@@ -432,7 +432,7 @@ export const PhotoViewerModal: React.FC<PhotoViewerModalProps> = ({
                       onChange={(e) => setCommentText(e.target.value)}
                       placeholder="e.g. Please soften the background light flare or retouch skin..."
                       rows={3}
-                      className="w-full bg-[#254b42] text-slate-100 text-xs rounded p-2 border border-slate-700 focus:outline-none focus:border-amber-500 resize-none"
+                      className="w-full bg-[#373B35] text-slate-100 text-xs rounded p-2 border border-slate-700 focus:outline-none focus:border-amber-500 resize-none"
                       required
                     />
                     <div className="flex justify-end gap-2">
@@ -462,7 +462,7 @@ export const PhotoViewerModal: React.FC<PhotoViewerModalProps> = ({
                     </p>
                   ) : (
                     itemComments.map((comm) => (
-                      <div key={comm.id} className="p-2.5 rounded bg-[#111f1c]/60 border border-[#19332d]/80 text-xs space-y-1">
+                      <div key={comm.id} className="p-2.5 rounded bg-[#181917]/60 border border-[#252824]/80 text-xs space-y-1">
                         <div className="flex items-center justify-between text-slate-400">
                           <span className="font-semibold text-amber-300">{comm.authorName}</span>
                           <span className="text-[10px] text-slate-500">{comm.createdAt}</span>
@@ -485,7 +485,7 @@ export const PhotoViewerModal: React.FC<PhotoViewerModalProps> = ({
 
       {/* Bottom Thumbnail Strip */}
       <div 
-        className="w-full h-20 bg-[#111f1c]/90 border-t border-[#254b42] px-4 flex items-center justify-center gap-2 overflow-x-auto z-20 py-2"
+        className="w-full h-20 bg-[#181917]/90 border-t border-[#373B35] px-4 flex items-center justify-center gap-2 overflow-x-auto z-20 py-2"
         onClick={(e) => e.stopPropagation()}
       >
         {items.map((item, idx) => (

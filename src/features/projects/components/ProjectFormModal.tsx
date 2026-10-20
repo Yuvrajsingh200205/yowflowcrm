@@ -692,15 +692,15 @@ export const ProjectFormModal: React.FC<ProjectFormModalProps> = ({
   };
 
   return (
-    <div className={variant === 'page' ? 'w-full' : 'fixed inset-0 z-50 flex items-center justify-center overflow-y-auto bg-[#111a18]/75 p-3 backdrop-blur-sm sm:p-6'}>
-      <div className={`project-form-shell ${variant === 'page' ? 'mx-auto flex h-[calc(100vh-9rem)] min-h-[720px] w-full max-w-6xl flex-col overflow-hidden rounded-[2rem] border border-[#dfd9d2] bg-white shadow-[0_18px_50px_rgba(22,35,32,.1)]' : 'my-4 flex h-[90vh] min-h-[680px] w-full max-w-5xl flex-col overflow-hidden rounded-[2rem] border border-white/50 bg-white shadow-[0_30px_90px_rgba(9,19,17,.42)]'}`}>
+    <div className={variant === 'page' ? 'w-full' : 'fixed inset-0 z-50 flex items-center justify-center overflow-y-auto bg-[#151714]/75 p-3 backdrop-blur-sm sm:p-6'}>
+      <div className={`project-form-shell ${variant === 'page' ? 'mx-auto flex h-[calc(100vh-9rem)] min-h-[720px] w-full max-w-6xl flex-col overflow-hidden rounded-[2rem] border border-[#dfd9d2] bg-white shadow-[0_18px_50px_rgba(28,30,27,.1)]' : 'my-4 flex h-[90vh] min-h-[680px] w-full max-w-5xl flex-col overflow-hidden rounded-[2rem] border border-white/50 bg-white shadow-[0_30px_90px_rgba(14,15,13,.42)]'}`}>
         
         {/* Modal Header */}
-        <div className="relative sticky top-0 z-20 flex items-center justify-between overflow-hidden bg-[radial-gradient(circle_at_86%_10%,rgba(236,190,169,.24),transparent_32%),linear-gradient(125deg,#33514A,#55333f_52%,#1b2825)] px-5 py-5 text-white sm:px-7 sm:py-6">
+        <div className="relative sticky top-0 z-20 flex items-center justify-between overflow-hidden bg-[radial-gradient(circle_at_86%_10%,rgba(236,190,169,.24),transparent_32%),linear-gradient(125deg,#41463E,#55333f_52%,#21241F)] px-5 py-5 text-white sm:px-7 sm:py-6">
           <div className="absolute -bottom-14 -right-8 size-44 rounded-full border-[24px] border-white/5" />
           <div className="relative flex items-center gap-4">
             <span className="grid size-14 shrink-0 place-items-center rounded-2xl border border-white/30 bg-white/15 shadow-inner"><Folder className="size-7 text-[#f6d9ca]" /></span>
-            <div><p className="flex items-center gap-1.5 text-xs font-extrabold uppercase tracking-[.18em] text-[#d2e2de]"><Sparkles className="size-3.5"/>Project Journey Intake</p><h3 className="mt-1 text-xl font-black sm:text-2xl">{existingProject ? 'Edit Client Wedding Project' : 'Add New Client Project'}</h3><p className="mt-1 text-sm text-[#dfeae7]">Follow the sections below: client → budget → documents → shoots → tasks.</p></div>
+            <div><p className="flex items-center gap-1.5 text-xs font-extrabold uppercase tracking-[.18em] text-[#D9DCD8]"><Sparkles className="size-3.5"/>Project Journey Intake</p><h3 className="mt-1 text-xl font-black sm:text-2xl">{existingProject ? 'Edit Client Wedding Project' : 'Add New Client Project'}</h3><p className="mt-1 text-sm text-[#dfeae7]">Follow the sections below: client → budget → documents → shoots → tasks.</p></div>
           </div>
           <button type="button" onClick={onClose} className="relative flex shrink-0 items-center gap-2 rounded-xl border border-white/20 bg-black/15 px-3 py-2.5 text-sm font-bold text-white/90 transition hover:bg-white/15 hover:text-white">
             {variant === 'page' ? <><ArrowLeft className="size-5"/><span className="hidden sm:inline">Back to Projects</span></> : <X className="size-5"/>}
@@ -711,9 +711,9 @@ export const ProjectFormModal: React.FC<ProjectFormModalProps> = ({
         <form onSubmit={handleSubmit} className="project-guided-form flex min-h-0 flex-1 flex-col overflow-hidden p-5 pb-0 text-xs sm:p-7 sm:pb-0">
           <div ref={stepContentRef} className="min-h-0 flex-1 space-y-6 overflow-y-auto px-1 pb-8 pr-2">
           <div className="grid gap-2 rounded-2xl border border-rose-100 bg-rose-50/60 p-3 sm:grid-cols-5">
-            {['Client info','Budget','Documents','Shoot plan','Tasks'].map((step, index) => <button type="button" key={step} onClick={() => setActiveStep(index + 1)} className={`flex items-center justify-center gap-2 rounded-xl px-3 py-3 text-xs font-black uppercase tracking-wide transition ${activeStep === index + 1 ? 'bg-[#254b42] text-white shadow-md' : index + 1 < activeStep ? 'bg-emerald-50 text-emerald-700 shadow-sm' : 'bg-white text-[#254b42] shadow-sm hover:bg-rose-50'}`}><span className={`grid size-6 place-items-center rounded-full text-[10px] ${activeStep === index + 1 ? 'bg-white/15' : 'bg-current/10'}`}>{index + 1}</span><span className="hidden lg:inline">{step}</span></button>)}
+            {['Client info','Budget','Documents','Shoot plan','Tasks'].map((step, index) => <button type="button" key={step} onClick={() => setActiveStep(index + 1)} className={`flex items-center justify-center gap-2 rounded-xl px-3 py-3 text-xs font-black uppercase tracking-wide transition ${activeStep === index + 1 ? 'bg-[#373B35] text-white shadow-md' : index + 1 < activeStep ? 'bg-emerald-50 text-emerald-700 shadow-sm' : 'bg-white text-[#373B35] shadow-sm hover:bg-rose-50'}`}><span className={`grid size-6 place-items-center rounded-full text-[10px] ${activeStep === index + 1 ? 'bg-white/15' : 'bg-current/10'}`}>{index + 1}</span><span className="hidden lg:inline">{step}</span></button>)}
           </div>
-          <div className="flex items-center justify-between rounded-2xl border border-[#eadfd9] bg-[#fbfaf8] px-4 py-3"><div><p className="text-[10px] font-black uppercase tracking-[.16em] text-[#366e61]">Step {activeStep} of 5</p><h4 className="mt-1 !text-base !normal-case !tracking-normal">{['Client & project basics','Budget & payment plan','Client files & preferences','Shoot schedule & crew','Tasks & deliverables'][activeStep - 1]}</h4></div><span className="text-xs font-bold text-slate-500">{Math.round(activeStep / 5 * 100)}% setup</span></div>
+          <div className="flex items-center justify-between rounded-2xl border border-[#eadfd9] bg-[#FBFDF6] px-4 py-3"><div><p className="text-[10px] font-black uppercase tracking-[.16em] text-[#50574D]">Step {activeStep} of 5</p><h4 className="mt-1 !text-base !normal-case !tracking-normal">{['Client & project basics','Budget & payment plan','Client files & preferences','Shoot schedule & crew','Tasks & deliverables'][activeStep - 1]}</h4></div><span className="text-xs font-bold text-slate-500">{Math.round(activeStep / 5 * 100)}% setup</span></div>
           
           {/* Section 1: Core Client Project Information (Required fields 01, 02, 03) */}
           <div className="space-y-3">
@@ -1235,13 +1235,13 @@ export const ProjectFormModal: React.FC<ProjectFormModalProps> = ({
                       {/* Quantity (Kitne bane) */}
                       <div>
                         <label className="block text-[9px] font-bold text-slate-500 uppercase mb-0.5">Quantity</label>
-                        <div className="flex items-center overflow-hidden rounded-xl border border-slate-200 bg-white focus-within:border-[#366e61] focus-within:ring-4 focus-within:ring-rose-100">
+                        <div className="flex items-center overflow-hidden rounded-xl border border-slate-200 bg-white focus-within:border-[#50574D] focus-within:ring-4 focus-within:ring-rose-100">
                           <button
                             type="button"
                             aria-label="Decrease quantity"
                             onClick={() => handleTaskChange(index, 'quantity', Math.max(0, Number(task.quantity || 0) - 1))}
                             disabled={!task.quantity}
-                            className="grid h-10 w-10 shrink-0 place-items-center border-r border-slate-200 text-lg font-bold text-[#2a544a] transition hover:bg-rose-50 disabled:cursor-not-allowed disabled:text-slate-300"
+                            className="grid h-10 w-10 shrink-0 place-items-center border-r border-slate-200 text-lg font-bold text-[#3E433B] transition hover:bg-rose-50 disabled:cursor-not-allowed disabled:text-slate-300"
                           >
                             −
                           </button>
@@ -1257,7 +1257,7 @@ export const ProjectFormModal: React.FC<ProjectFormModalProps> = ({
                             type="button"
                             aria-label="Increase quantity"
                             onClick={() => handleTaskChange(index, 'quantity', Number(task.quantity || 0) + 1)}
-                            className="grid h-10 w-10 shrink-0 place-items-center border-l border-slate-200 text-lg font-bold text-[#2a544a] transition hover:bg-rose-50"
+                            className="grid h-10 w-10 shrink-0 place-items-center border-l border-slate-200 text-lg font-bold text-[#3E433B] transition hover:bg-rose-50"
                           >
                             +
                           </button>
@@ -1345,13 +1345,13 @@ export const ProjectFormModal: React.FC<ProjectFormModalProps> = ({
               event.stopPropagation();
               if (activeStep === 1 && !clientWeddingTitle.trim()) { showToast('Please enter the Client / Wedding Title before continuing.', { variant: 'error' }); return; }
               setActiveStep((step) => Math.min(5, step + 1));
-            }} className="flex items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-[#2f5f54] to-[#254b42] px-6 py-2.5 text-sm font-extrabold text-white shadow-[0_8px_20px_rgba(37,75,66,.25)] transition hover:-translate-y-0.5 hover:shadow-lg"><span>{`Save & Next: ${['Budget','Documents','Shoot Plan','Tasks'][activeStep - 1]}`}</span><ArrowRight className="size-4"/></button> :
+            }} className="flex items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-[#464B43] to-[#373B35] px-6 py-2.5 text-sm font-extrabold text-white shadow-[0_8px_20px_rgba(55,59,53,.25)] transition hover:-translate-y-0.5 hover:shadow-lg"><span>{`Save & Next: ${['Budget','Documents','Shoot Plan','Tasks'][activeStep - 1]}`}</span><ArrowRight className="size-4"/></button> :
             <button
               key="wizard-submit"
               type="button"
               onClick={() => void handleSubmit()}
               disabled={saving}
-              className="group flex items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-[#2f5f54] to-[#254b42] px-6 py-2.5 text-sm font-extrabold text-white shadow-[0_8px_20px_rgba(37,75,66,.25)] transition hover:-translate-y-0.5 hover:shadow-lg disabled:opacity-60"
+              className="group flex items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-[#464B43] to-[#373B35] px-6 py-2.5 text-sm font-extrabold text-white shadow-[0_8px_20px_rgba(55,59,53,.25)] transition hover:-translate-y-0.5 hover:shadow-lg disabled:opacity-60"
             >
               <Save className="size-4" />
               <span>{saving ? 'Saving…' : existingProject ? 'Save Project Changes' : 'Save & Create Project'}</span>

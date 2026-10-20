@@ -390,12 +390,12 @@ export const TeamAttendance: React.FC<TeamAttendanceProps> = ({
 
   return (
     <div className="space-y-6 pb-12">
-      <section className="relative overflow-hidden rounded-3xl border border-[#ddc89c]/35 bg-[radial-gradient(circle_at_88%_8%,rgba(221,200,156,.2),transparent_30%),linear-gradient(125deg,#33514A,#55333f_50%,#1b2825)] p-5 text-white shadow-xl sm:p-7">
+      <section className="relative overflow-hidden rounded-3xl border border-[#CCEB8E]/35 bg-[radial-gradient(circle_at_88%_8%,rgba(204,235,142,.2),transparent_30%),linear-gradient(125deg,#41463E,#55333f_50%,#21241F)] p-5 text-white shadow-xl sm:p-7">
         <div className="absolute -bottom-20 -right-10 size-64 rounded-full border-[34px] border-white/[.04]" />
         <div className="relative flex flex-col justify-between gap-5 xl:flex-row xl:items-center">
           <div className="max-w-3xl">
             <div className="flex flex-wrap items-center gap-2">
-              <span className="flex items-center gap-1.5 rounded-full border border-white/20 bg-white/10 px-3 py-1 text-xs font-extrabold uppercase tracking-[.14em] text-[#e0ece9]">
+              <span className="flex items-center gap-1.5 rounded-full border border-white/20 bg-white/10 px-3 py-1 text-xs font-extrabold uppercase tracking-[.14em] text-[#E6E8E4]">
                 <ShieldCheck className="size-4 text-emerald-300" />
                 Studio Team CRM
               </span>
@@ -407,7 +407,7 @@ export const TeamAttendance: React.FC<TeamAttendanceProps> = ({
             </div>
             <h1 className="mt-3 flex items-center gap-3 text-2xl font-black tracking-tight sm:text-3xl">
               <span className="grid size-11 place-items-center rounded-2xl bg-white/10">
-                <Users className="size-6 text-[#d5e4e1]" />
+                <Users className="size-6 text-[#DCDFDA]" />
               </span>
               Team & Attendance
             </h1>
@@ -418,7 +418,7 @@ export const TeamAttendance: React.FC<TeamAttendanceProps> = ({
           <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
             {canCreateMember && (
             <button type="button" onClick={() => openAddMember()} className={BTN_CREAM}>
-              <span className="grid size-8 place-items-center rounded-xl bg-[#2b564c] text-white transition group-hover:rotate-6">
+              <span className="grid size-8 place-items-center rounded-xl bg-[#3F443D] text-white transition group-hover:rotate-6">
                 <Plus className="size-5" />
               </span>
               <span>Add Team Member</span>
@@ -496,7 +496,7 @@ export const TeamAttendance: React.FC<TeamAttendanceProps> = ({
             <details className={`${CARD} group`}>
               <summary className="flex items-center justify-between gap-2 px-5 py-3 cursor-pointer list-none">
                 <span className="text-xs font-extrabold uppercase tracking-tight text-slate-800 flex items-center gap-2">
-                  <ShieldCheck className="w-4 h-4 text-[#2f5f54]" /> Software guard &amp; workstation monitoring
+                  <ShieldCheck className="w-4 h-4 text-[#464B43]" /> Software guard &amp; workstation monitoring
                 </span>
                 <Badge className="bg-slate-100 text-slate-600 border-slate-200 group-open:hidden">Show</Badge>
                 <Badge className="bg-slate-100 text-slate-600 border-slate-200 hidden group-open:inline-flex">Hide</Badge>
@@ -635,7 +635,7 @@ export const TeamAttendance: React.FC<TeamAttendanceProps> = ({
             <header className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-slate-100 pb-3">
               <div>
                 <h3 className="text-sm font-extrabold text-slate-900 uppercase tracking-tight flex items-center gap-2">
-                  <IndianRupee className="w-4 h-4 text-[#2f5f54]" /> Team payout ledger
+                  <IndianRupee className="w-4 h-4 text-[#464B43]" /> Team payout ledger
                 </h3>
                 <p className="text-[11px] text-slate-500 font-medium">
                   Pending payouts: <strong className="text-slate-800">{formatCurrency(totalPendingPayout)}</strong>
@@ -677,7 +677,7 @@ export const TeamAttendance: React.FC<TeamAttendanceProps> = ({
                           <TD className="font-mono text-emerald-700 font-semibold">{a.inTime || '--'}</TD>
                           <TD className="font-mono text-red-700 font-semibold">{a.outTime || '--'}</TD>
                           <TD className="text-slate-600 max-w-[190px] truncate">{a.projectTitle || 'Studio duty'}</TD>
-                          <TD className="font-mono font-bold text-[#254b42]">{formatCurrency(a.payAmount)}</TD>
+                          <TD className="font-mono font-bold text-[#373B35]">{formatCurrency(a.payAmount)}</TD>
                           <TD className="text-right">
                             {canManageAttendance ? (
                             <button
@@ -686,7 +686,7 @@ export const TeamAttendance: React.FC<TeamAttendanceProps> = ({
                               className={`px-3 py-1 rounded-lg text-[10px] font-bold uppercase tracking-wider transition cursor-pointer ${
                                 a.paidStatus === 'paid'
                                   ? 'bg-emerald-100 text-emerald-800 border border-emerald-200'
-                                  : 'bg-gradient-to-r from-[#2f5f54] to-[#254b42] text-white hover:opacity-90'
+                                  : 'bg-gradient-to-r from-[#464B43] to-[#373B35] text-white hover:opacity-90'
                               }`}
                             >
                               {a.paidStatus === 'paid' ? 'Mark unpaid' : 'Clear payout'}

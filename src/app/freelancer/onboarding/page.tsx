@@ -3,7 +3,7 @@ import { OnboardingPageClient } from '@/features/freelancer-portal/components/On
 
 export default function FreelancerOnboardingPage() {
   return (
-    <Suspense fallback={<main className="grid min-h-screen place-items-center bg-[#fbfaf8] px-5 text-sm font-bold text-slate-600">Loading invitation...</main>}>
+    <Suspense fallback={<main className="grid min-h-screen place-items-center bg-[#FBFDF6] px-5 text-sm font-bold text-slate-600">Loading invitation...</main>}>
       <OnboardingPageClient />
     </Suspense>
   );

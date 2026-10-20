@@ -17,7 +17,7 @@ interface Props {
 }
 
 const SHOOT_TYPE_SUGGESTIONS = ['Haldi', 'Mehendi', 'Sangeet', 'Wedding Ceremony', 'Reception', 'Pre-Wedding Shoot', 'Engagement'];
-const field = 'w-full rounded-2xl border border-[#ded5cf] bg-[#fbfaf8] py-3 pl-11 pr-4 text-sm font-semibold text-slate-900 outline-none transition placeholder:font-medium placeholder:text-slate-400 focus:border-[#366e61] focus:bg-white focus:ring-4 focus:ring-rose-100';
+const field = 'w-full rounded-2xl border border-[#ded5cf] bg-[#FBFDF6] py-3 pl-11 pr-4 text-sm font-semibold text-slate-900 outline-none transition placeholder:font-medium placeholder:text-slate-400 focus:border-[#50574D] focus:bg-white focus:ring-4 focus:ring-rose-100';
 
 export function ScheduleShootModal({ isOpen, variant = 'modal', onClose, projects, onUpdateProject, team = [], defaultProjectId }: Props) {
   const { showToast } = useToast();
@@ -106,17 +106,17 @@ export function ScheduleShootModal({ isOpen, variant = 'modal', onClose, project
   };
 
   return (
-    <div className={variant === 'page' ? 'w-full space-y-3' : 'fixed inset-0 z-50 flex items-center justify-center bg-[#111a18]/75 p-3 backdrop-blur-sm sm:p-6'}>
+    <div className={variant === 'page' ? 'w-full space-y-3' : 'fixed inset-0 z-50 flex items-center justify-center bg-[#151714]/75 p-3 backdrop-blur-sm sm:p-6'}>
       {variant === 'page' && (
         <button type="button" onClick={handleClose} className="flex cursor-pointer items-center gap-1.5 rounded-lg border border-[#dfd9d2] bg-white px-3 py-2 text-slate-600 shadow-sm transition hover:border-rose-200 hover:bg-rose-50 hover:text-rose-800">
           <ArrowLeft className="h-4 w-4" /><span className="text-xs font-bold">Back to Dashboard</span>
         </button>
       )}
-      <div role="dialog" aria-modal="true" aria-labelledby="shoot-form-title" className={variant === 'page' ? 'mx-auto min-h-[calc(100vh-9rem)] w-full max-w-4xl overflow-hidden rounded-[2rem] border border-white/50 bg-white shadow-[0_30px_90px_rgba(9,19,17,.22)]' : 'max-h-[92vh] w-full max-w-3xl overflow-y-auto rounded-[2rem] border border-white/50 bg-white shadow-[0_30px_90px_rgba(9,19,17,.42)]'}>
-        <header className="relative overflow-hidden bg-[radial-gradient(circle_at_86%_10%,rgba(236,190,169,.24),transparent_32%),linear-gradient(125deg,#33514A,#55333f_52%,#1b2825)] px-5 py-5 text-white sm:px-7 sm:py-6">
+      <div role="dialog" aria-modal="true" aria-labelledby="shoot-form-title" className={variant === 'page' ? 'mx-auto min-h-[calc(100vh-9rem)] w-full max-w-4xl overflow-hidden rounded-[2rem] border border-white/50 bg-white shadow-[0_30px_90px_rgba(14,15,13,.22)]' : 'max-h-[92vh] w-full max-w-3xl overflow-y-auto rounded-[2rem] border border-white/50 bg-white shadow-[0_30px_90px_rgba(14,15,13,.42)]'}>
+        <header className="relative overflow-hidden bg-[radial-gradient(circle_at_86%_10%,rgba(236,190,169,.24),transparent_32%),linear-gradient(125deg,#41463E,#55333f_52%,#21241F)] px-5 py-5 text-white sm:px-7 sm:py-6">
           <div className="absolute -bottom-14 -right-8 size-44 rounded-full border-[24px] border-white/5" />
           <div className="relative flex items-start justify-between gap-4">
-          <div className="flex items-center gap-4"><span className="grid size-14 shrink-0 place-items-center rounded-2xl border border-white/30 bg-white/15 shadow-inner"><Camera className="size-7 text-[#f6d9ca]" /></span><div><p className="flex items-center gap-1.5 text-xs font-extrabold uppercase tracking-[.18em] text-[#d2e2de]"><Sparkles className="size-3.5" /> Production schedule</p><h2 id="shoot-form-title" className="mt-1 text-xl font-black sm:text-2xl">Schedule a Shoot</h2><p className="mt-1 text-sm leading-relaxed text-[#dfeae7]">Add the function details and line up the crew with confidence.</p></div></div>
+          <div className="flex items-center gap-4"><span className="grid size-14 shrink-0 place-items-center rounded-2xl border border-white/30 bg-white/15 shadow-inner"><Camera className="size-7 text-[#f6d9ca]" /></span><div><p className="flex items-center gap-1.5 text-xs font-extrabold uppercase tracking-[.18em] text-[#D9DCD8]"><Sparkles className="size-3.5" /> Production schedule</p><h2 id="shoot-form-title" className="mt-1 text-xl font-black sm:text-2xl">Schedule a Shoot</h2><p className="mt-1 text-sm leading-relaxed text-[#dfeae7]">Add the function details and line up the crew with confidence.</p></div></div>
           {variant === 'modal' && (
             <button type="button" onClick={handleClose} className="grid size-10 shrink-0 place-items-center rounded-xl border border-white/15 bg-black/15 text-white/80 transition hover:bg-white/15 hover:text-white" aria-label="Close schedule shoot form">
               <X className="size-5" />
@@ -126,7 +126,7 @@ export function ScheduleShootModal({ isOpen, variant = 'modal', onClose, project
         </header>
 
         <form onSubmit={handleSubmit} className="space-y-6 p-5 sm:p-7">
-          <section className="space-y-3"><div><p className="text-sm font-black uppercase tracking-[.1em] text-[#254b42]">01 · Function Details</p><p className="mt-0.5 text-sm text-slate-500">Set the client, function, date and location for this shoot.</p></div><div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
+          <section className="space-y-3"><div><p className="text-sm font-black uppercase tracking-[.1em] text-[#373B35]">01 · Function Details</p><p className="mt-0.5 text-sm text-slate-500">Set the client, function, date and location for this shoot.</p></div><div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
             <div className="sm:col-span-2"><Field label="Project / Client" icon={<UserRound className="size-5" />}><select
               required
               value={projectId}
@@ -188,7 +188,7 @@ export function ScheduleShootModal({ isOpen, variant = 'modal', onClose, project
             </Field></div>
           </div></section>
 
-          <section className="space-y-3 border-t border-[#eee7e2] pt-5"><div><p className="text-sm font-black uppercase tracking-[.1em] text-[#254b42]">02 · Crew & Handover</p><p className="mt-0.5 text-sm text-slate-500">Optional now — you can update crew assignments later.</p></div><div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
+          <section className="space-y-3 border-t border-[#eee7e2] pt-5"><div><p className="text-sm font-black uppercase tracking-[.1em] text-[#373B35]">02 · Crew & Handover</p><p className="mt-0.5 text-sm text-slate-500">Optional now — you can update crew assignments later.</p></div><div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
             <Field label="Photographer" icon={<UserRound className="size-5" />}>
               <input
                 list="photographer-suggestions"
@@ -228,12 +228,12 @@ export function ScheduleShootModal({ isOpen, variant = 'modal', onClose, project
               {editorNames.map((n) => <option key={n} value={n} />)}
             </datalist>
             </Field></div>
-            <div className="sm:col-span-2 rounded-2xl border border-dashed border-[#c5d9d4] bg-[#fcfdfd] p-3.5">
+            <div className="sm:col-span-2 rounded-2xl border border-dashed border-[#CED2CC] bg-[#fcfdfd] p-3.5">
               <div className="flex flex-wrap items-center justify-between gap-2">
                 <div><p className="text-sm font-bold text-slate-700">Additional crew members</p><p className="mt-0.5 text-xs text-slate-500">Add roles such as drone pilot, assistant, lightman, or candid photographer.</p></div>
-                <button type="button" onClick={() => setAdditionalCrew((current) => [...current, { id: `crew-${Date.now()}-${current.length}`, role: '', name: '' }])} className="flex items-center gap-1.5 rounded-xl border border-rose-200 bg-white px-3 py-2 text-xs font-extrabold text-[#2f5f54] transition hover:bg-rose-50"><Plus className="size-4" />Add crew</button>
+                <button type="button" onClick={() => setAdditionalCrew((current) => [...current, { id: `crew-${Date.now()}-${current.length}`, role: '', name: '' }])} className="flex items-center gap-1.5 rounded-xl border border-rose-200 bg-white px-3 py-2 text-xs font-extrabold text-[#464B43] transition hover:bg-rose-50"><Plus className="size-4" />Add crew</button>
               </div>
-              {additionalCrew.length > 0 && <div className="mt-3 space-y-2.5">{additionalCrew.map((member, index) => <div key={member.id} className="grid grid-cols-1 gap-2 sm:grid-cols-[minmax(0,.85fr)_minmax(0,1.15fr)_auto] sm:items-end"><label className="block text-xs font-bold text-slate-600">Role<input value={member.role} onChange={(e) => setAdditionalCrew((current) => current.map((item) => item.id === member.id ? { ...item, role: e.target.value } : item))} placeholder="e.g. Drone pilot" className="mt-1 block w-full rounded-xl border border-[#ded5cf] bg-white px-3 py-2.5 text-sm font-semibold text-slate-900 outline-none focus:border-[#366e61] focus:ring-4 focus:ring-rose-100" /></label><label className="block text-xs font-bold text-slate-600">Crew member<input value={member.name} onChange={(e) => setAdditionalCrew((current) => current.map((item) => item.id === member.id ? { ...item, name: e.target.value } : item))} placeholder="Select or type a name" list={`extra-crew-${member.id}`} className="mt-1 block w-full rounded-xl border border-[#ded5cf] bg-white px-3 py-2.5 text-sm font-semibold text-slate-900 outline-none focus:border-[#366e61] focus:ring-4 focus:ring-rose-100" /><datalist id={`extra-crew-${member.id}`}>{[...photographerNames, ...cinematographerNames, ...editorNames].filter((name, itemIndex, names) => names.indexOf(name) === itemIndex).map((name) => <option key={name} value={name} />)}</datalist></label><button type="button" onClick={() => setAdditionalCrew((current) => current.filter((item) => item.id !== member.id))} className="mb-0.5 grid size-10 place-items-center rounded-xl border border-slate-200 bg-white text-slate-400 transition hover:border-red-200 hover:bg-red-50 hover:text-red-600" aria-label={`Remove additional crew member ${index + 1}`}><Trash2 className="size-4" /></button></div>)}</div>}
+              {additionalCrew.length > 0 && <div className="mt-3 space-y-2.5">{additionalCrew.map((member, index) => <div key={member.id} className="grid grid-cols-1 gap-2 sm:grid-cols-[minmax(0,.85fr)_minmax(0,1.15fr)_auto] sm:items-end"><label className="block text-xs font-bold text-slate-600">Role<input value={member.role} onChange={(e) => setAdditionalCrew((current) => current.map((item) => item.id === member.id ? { ...item, role: e.target.value } : item))} placeholder="e.g. Drone pilot" className="mt-1 block w-full rounded-xl border border-[#ded5cf] bg-white px-3 py-2.5 text-sm font-semibold text-slate-900 outline-none focus:border-[#50574D] focus:ring-4 focus:ring-rose-100" /></label><label className="block text-xs font-bold text-slate-600">Crew member<input value={member.name} onChange={(e) => setAdditionalCrew((current) => current.map((item) => item.id === member.id ? { ...item, name: e.target.value } : item))} placeholder="Select or type a name" list={`extra-crew-${member.id}`} className="mt-1 block w-full rounded-xl border border-[#ded5cf] bg-white px-3 py-2.5 text-sm font-semibold text-slate-900 outline-none focus:border-[#50574D] focus:ring-4 focus:ring-rose-100" /><datalist id={`extra-crew-${member.id}`}>{[...photographerNames, ...cinematographerNames, ...editorNames].filter((name, itemIndex, names) => names.indexOf(name) === itemIndex).map((name) => <option key={name} value={name} />)}</datalist></label><button type="button" onClick={() => setAdditionalCrew((current) => current.filter((item) => item.id !== member.id))} className="mb-0.5 grid size-10 place-items-center rounded-xl border border-slate-200 bg-white text-slate-400 transition hover:border-red-200 hover:bg-red-50 hover:text-red-600" aria-label={`Remove additional crew member ${index + 1}`}><Trash2 className="size-4" /></button></div>)}</div>}
             </div>
             <div className="sm:col-span-2"><Field label="Crew Notes / Special Requirements" icon={<MessageSquareText className="size-5" />}>
             <textarea
@@ -256,7 +256,7 @@ export function ScheduleShootModal({ isOpen, variant = 'modal', onClose, project
             </button>
             <button
               type="submit"
-              className="group flex items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-[#2f5f54] to-[#254b42] px-6 py-2.5 text-sm font-extrabold text-white shadow-[0_8px_20px_rgba(37,75,66,.25)] transition hover:-translate-y-0.5 hover:shadow-lg"
+              className="group flex items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-[#464B43] to-[#373B35] px-6 py-2.5 text-sm font-extrabold text-white shadow-[0_8px_20px_rgba(55,59,53,.25)] transition hover:-translate-y-0.5 hover:shadow-lg"
             >
               <Target className="size-5 transition group-hover:rotate-12" />Save Shoot Schedule
             </button>
@@ -268,5 +268,5 @@ export function ScheduleShootModal({ isOpen, variant = 'modal', onClose, project
 }
 
 function Field({ label, icon, children }: { label: string; icon: ReactNode; children: ReactNode }) {
-  return <label className="block text-sm font-bold text-slate-700">{label}<span className="relative mt-1.5 block"><span className="absolute left-3.5 top-3.5 z-10 text-[#366e61]">{icon}</span>{children}</span></label>;
+  return <label className="block text-sm font-bold text-slate-700">{label}<span className="relative mt-1.5 block"><span className="absolute left-3.5 top-3.5 z-10 text-[#50574D]">{icon}</span>{children}</span></label>;
 }

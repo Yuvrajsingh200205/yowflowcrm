@@ -67,7 +67,7 @@ export const GalleryQuickUpload: React.FC<GalleryQuickUploadProps> = ({
         type="button"
         onClick={() => input.current?.click()}
         disabled={Boolean(progress)}
-        className="flex items-center gap-1.5 rounded-full border border-[#ddc89c] bg-[#f9f3e8] px-3.5 py-1.5 text-xs font-semibold text-[#7a5a2e] shadow-xs transition-colors hover:bg-[#f3e8d2] disabled:cursor-not-allowed disabled:opacity-60"
+        className="flex items-center gap-1.5 rounded-full border border-[#CCEB8E] bg-[#F4FBE6] px-3.5 py-1.5 text-xs font-semibold text-[#7a5a2e] shadow-xs transition-colors hover:bg-[#E9F6CF] disabled:cursor-not-allowed disabled:opacity-60"
       >
         {progress ? <Loader2 className="w-3.5 h-3.5 animate-spin" /> : <Icon className="w-3.5 h-3.5" />}
         <span>{progress ? `Uploading ${progress}…` : LABEL[kind]}</span>

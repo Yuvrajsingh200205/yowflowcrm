@@ -1,30 +1,30 @@
 @import "tailwindcss";
 
 :root {
-  /* ── Frameloom design tokens (light) ─────────────────────────────────────
-     Semantic names first; the legacy names below are kept so un-migrated
-     screens inherit the new palette. Never use raw hex in new components. */
-  --primary: #2F5F54;
-  --primary-hover: #254B42;
-  --primary-dark: #1F3A34;
+  /* ── Yowflow design tokens (light) ───────────────────────────────────────
+     Ink + lime. Semantic names first; legacy names stay so un-migrated
+     screens inherit the palette. Never use raw hex in new components. */
+  --primary: #11160F;
+  --primary-hover: #252D21;
+  --primary-dark: #0A0D09;
   --on-primary: #FFFFFF;
-  --accent: #C8A15A;
-  --accent-light: #E7D3A6;
-  --on-accent: #1B2420;
-  --background: #F6F4EF;
-  --background-secondary: #EEEAE2;
+  --accent: #B4F03C;
+  --accent-light: #DDF79B;
+  --on-accent: #0B1006;
+  --background: #F6F7F3;
+  --background-secondary: #EDEFE8;
   --card: #FFFFFF;
   --surface: #FFFFFF;
   --surface-raised: #FFFFFF;
-  --surface-sunken: #F1EEE7;
-  --hover: #EDF3F0;
-  --text-primary: #17211E;
-  --text-secondary: #4F5B56;
-  --text-muted: #67726D;
-  --border: #DDD8CD;
-  --border-soft: #E9E5DB;
-  --border-strong: #C4BEB0;
-  --ring: #2F5F54;
+  --surface-sunken: #F0F2EB;
+  --hover: #EEF1E6;
+  --text-primary: #0E130C;
+  --text-secondary: #475043;
+  --text-muted: #626C5E;
+  --border: #DCE0D3;
+  --border-soft: #E8EBDF;
+  --border-strong: #C3C9B8;
+  --ring: #4D7C0F;
   --success: #2F7D5B;
   --warning: #A8701A;
   --danger: #B3382E;
@@ -34,15 +34,15 @@
   --warning-bg: #FBF1DC;
   --danger-bg: #FBE9E7;
   --info-bg: #E5EFF5;
-  --scrim: rgba(14, 21, 18, 0.48);
-  /* Chart categorical slots — validated (CVD ΔE ≥ 8 adjacent, normal-vision ≥ 15) with
-     scripts/validate_palette.js. Fixed order, never cycled; max 4 on bars/lines. */
+  --scrim: rgba(6, 8, 6, 0.5);
+  /* Chart categorical slots — validated with scripts/validate_palette.js (CVD ΔE ≥ 8 adjacent,
+     normal-vision ≥ 15). Fixed order, never cycled; max 4 on bars/lines. */
   --series-1: #2a78d6;
   --series-2: #eb6834;
   --series-3: #1baf7a;
   --series-4: #eda100;
-  --chart-single: #2F5F54;
-  --chart-grid: #E9E5DB;
+  --chart-single: #4D7C0F;
+  --chart-grid: #E6E9DD;
 
   /* radius */
   --radius-sm: 6px;
@@ -63,55 +63,56 @@
   --z-modal: 70;
   --z-toast: 90;
   /* elevation (layered, tinted to the ink colour) */
-  --elev-1: 0 1px 2px rgba(23, 33, 30, 0.06), 0 0 0 1px rgba(23, 33, 30, 0.03);
-  --elev-2: 0 2px 6px rgba(23, 33, 30, 0.06), 0 8px 20px -8px rgba(23, 33, 30, 0.12);
-  --elev-3: 0 4px 10px rgba(23, 33, 30, 0.06), 0 18px 40px -12px rgba(23, 33, 30, 0.2);
+  --elev-1: 0 1px 2px rgba(14, 19, 12, 0.06), 0 0 0 1px rgba(14, 19, 12, 0.03);
+  --elev-2: 0 2px 6px rgba(14, 19, 12, 0.06), 0 8px 20px -8px rgba(14, 19, 12, 0.14);
+  --elev-3: 0 4px 10px rgba(14, 19, 12, 0.07), 0 18px 40px -12px rgba(14, 19, 12, 0.24);
+  --glow: 0 0 0 1px rgba(180, 240, 60, 0.5), 0 8px 28px -6px rgba(180, 240, 60, 0.45);
   color-scheme: light;
 }
 
-/* Dark theme. Applied with <html data-theme="dark">. New components are fully
-   token-driven; legacy screens are migrated to tokens screen-by-screen. */
-:root[data-theme='dark'] {
-  --primary: #5FA893;
-  --primary-hover: #74B9A5;
-  --primary-dark: #8CCBB8;
-  --on-primary: #0C1411;
-  --accent: #D8B56C;
-  --accent-light: #EBD7A8;
-  --on-accent: #1B2420;
-  --background: #0D1411;
-  --background-secondary: #111A16;
-  --card: #151F1B;
-  --surface: #151F1B;
-  --surface-raised: #1B2722;
-  --surface-sunken: #0A100E;
-  --hover: #1D2B26;
-  --text-primary: #EDEAE2;
-  --text-secondary: #B6BFBA;
-  --text-muted: #8F9A94;
-  --border: #2B3833;
-  --border-soft: #222E29;
-  --border-strong: #3B4A44;
-  --ring: #74B9A5;
+/* Dark theme — the signature Yowflow look: near-black canvas, lime light.
+   Applied with <html data-theme="dark"> or any wrapper carrying it. */
+:root[data-theme='dark'], [data-theme='dark'] {
+  --primary: #B4F03C;
+  --primary-hover: #C6F76A;
+  --primary-dark: #DDF79B;
+  --on-primary: #0A0F08;
+  --accent: #B4F03C;
+  --accent-light: #DDF79B;
+  --on-accent: #0A0F08;
+  --background: #060806;
+  --background-secondary: #0A0E0A;
+  --card: #0E130E;
+  --surface: #0E130E;
+  --surface-raised: #141B14;
+  --surface-sunken: #040504;
+  --hover: #182018;
+  --text-primary: #F1F5EC;
+  --text-secondary: #B2BBAA;
+  --text-muted: #8A9484;
+  --border: #212A1F;
+  --border-soft: #182016;
+  --border-strong: #324030;
+  --ring: #B4F03C;
   --success: #5DBB8E;
   --warning: #E0A94B;
   --danger: #EF7B70;
   --on-danger: #1A0E0C;
   --info: #7DB4D3;
-  --success-bg: #14291F;
-  --warning-bg: #2B2212;
-  --danger-bg: #301A17;
-  --info-bg: #142431;
-  --scrim: rgba(0, 0, 0, 0.62);
+  --success-bg: #0F2418;
+  --warning-bg: #2A2110;
+  --danger-bg: #2E1815;
+  --info-bg: #122230;
+  --scrim: rgba(0, 0, 0, 0.7);
   --series-1: #3987e5;
   --series-2: #d95926;
   --series-3: #199e70;
   --series-4: #c98500;
-  --chart-single: #5FA893;
-  --chart-grid: #26332E;
-  --elev-1: 0 1px 2px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(255, 255, 255, 0.04);
-  --elev-2: 0 2px 6px rgba(0, 0, 0, 0.45), 0 8px 20px -8px rgba(0, 0, 0, 0.6);
-  --elev-3: 0 4px 10px rgba(0, 0, 0, 0.5), 0 18px 40px -12px rgba(0, 0, 0, 0.7);
+  --chart-single: #B4F03C;
+  --chart-grid: #1A2218;
+  --elev-1: 0 1px 2px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(255, 255, 255, 0.05);
+  --elev-2: 0 2px 6px rgba(0, 0, 0, 0.5), 0 8px 20px -8px rgba(0, 0, 0, 0.7);
+  --elev-3: 0 4px 10px rgba(0, 0, 0, 0.55), 0 18px 40px -12px rgba(0, 0, 0, 0.8);
   color-scheme: dark;
 }
 
@@ -131,8 +132,8 @@
   --color-brand-hover: var(--primary-hover);
   --color-brand-deep: var(--primary-dark);
   --color-on-brand: var(--on-primary);
-  --color-gold: var(--accent);
-  --color-on-gold: var(--on-accent);
+  --color-lime: var(--accent);
+  --color-on-lime: var(--on-accent);
   --color-ok: var(--success);
   --color-warn: var(--warning);
   --color-bad: var(--danger);
@@ -312,6 +313,7 @@
 * { box-sizing: border-box; }
 html { scroll-behavior: smooth; }
 html, body { margin: 0; min-height: 100%; background: var(--background); color: var(--text-primary); }
+[data-theme='dark'] { background: var(--background); color: var(--text-primary); }
 body { font-family: var(--font-sans); font-feature-settings: 'cv11', 'ss01'; -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; }
 .tabular { font-variant-numeric: tabular-nums; }
 button, input, select, textarea { font: inherit; }

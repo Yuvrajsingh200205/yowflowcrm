@@ -270,7 +270,7 @@ export const SubFolderCreateModal: React.FC<SubFolderCreateModalProps> = ({
             </button>
             <button
               type="submit"
-              className="px-5 py-2.5 bg-[#254b42] hover:bg-[#2f5f54] text-white font-semibold rounded-xl flex items-center gap-2 shadow-xs transition-transform active:scale-95"
+              className="px-5 py-2.5 bg-[#373B35] hover:bg-[#464B43] text-white font-semibold rounded-xl flex items-center gap-2 shadow-xs transition-transform active:scale-95"
             >
               <FolderPlus className="w-4 h-4" />
               <span>{editingSubFolder ? 'Save Changes' : 'Create Sub-Folder'}</span>

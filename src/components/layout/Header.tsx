@@ -269,13 +269,13 @@ export const TopHeader: React.FC<TopHeaderProps> = ({
     : BRAND.shortName.slice(0, 2).toUpperCase();
 
   return (
-    <header className="relative z-20 border-b border-[#e8ddd7] bg-[linear-gradient(180deg,#fffdfb_0%,#f8f1ee_100%)] shadow-[0_4px_18px_rgba(23,47,42,0.05)]">
+    <header className="relative z-20 border-b border-[#e8ddd7] bg-[linear-gradient(180deg,#fffdfb_0%,#f8f1ee_100%)] shadow-[0_4px_18px_rgba(34,37,33,0.05)]">
       <div className="h-1 bg-[linear-gradient(90deg,#ddc89c_0%,#8f3655_48%,#6d2f45_100%)]" />
       <div className="flex min-h-16 items-center justify-between gap-3 px-4 py-2.5 sm:px-6">
         <div className="flex min-w-0 items-center gap-3 overflow-x-auto scrollbar-none">
           <button
             onClick={onToggleMobileSidebar}
-            className="shrink-0 rounded-lg border border-[#e4d8d2] p-2 text-[#305049] transition hover:bg-[#f2f6f5] md:hidden"
+            className="shrink-0 rounded-lg border border-[#e4d8d2] p-2 text-[#3F443C] transition hover:bg-[#F4F5F3] md:hidden"
             title="Toggle Navigation"
           >
             <Menu className="w-5 h-5" />
@@ -283,13 +283,13 @@ export const TopHeader: React.FC<TopHeaderProps> = ({
 
           {!showProjectFilters ? (
             <div className="flex min-w-0 items-center gap-3">
-              <span className="grid size-10 shrink-0 place-items-center rounded-2xl border border-[#ddc89c]/50 bg-[linear-gradient(145deg,#2f5f54,#254b42)] text-white shadow-[0_8px_16px_rgba(37,75,66,.22)]">
+              <span className="grid size-10 shrink-0 place-items-center rounded-2xl border border-[#CCEB8E]/50 bg-[linear-gradient(145deg,#464B43,#373B35)] text-white shadow-[0_8px_16px_rgba(55,59,53,.22)]">
                 <PageIcon className="size-4" />
               </span>
               <div className="min-w-0">
-                <p className="truncate text-sm font-extrabold tracking-tight text-[#162421] sm:text-base">{pageTitles[activeTab]}</p>
+                <p className="truncate text-sm font-extrabold tracking-tight text-[#1C1F1B] sm:text-base">{pageTitles[activeTab]}</p>
                 <p className="hidden items-center gap-1.5 text-[11px] font-bold uppercase tracking-[.14em] text-[#a07a4a] sm:flex">
-                  <span className="size-1.5 rounded-full bg-[#ddc89c]" />
+                  <span className="size-1.5 rounded-full bg-[#CCEB8E]" />
                   {BRAND.name}
                 </p>
               </div>
@@ -355,7 +355,7 @@ export const TopHeader: React.FC<TopHeaderProps> = ({
           <button
             onClick={onOpenAIModal}
             title="Open AI Helper"
-            className="flex h-9 items-center gap-1.5 rounded-xl border border-[#ddc89c]/70 bg-[#f9f3e8] px-2.5 text-xs font-bold text-[#7a5a2e] transition hover:bg-[#f3e8d2] sm:px-3"
+            className="flex h-9 items-center gap-1.5 rounded-xl border border-[#CCEB8E]/70 bg-[#F4FBE6] px-2.5 text-xs font-bold text-[#7a5a2e] transition hover:bg-[#E9F6CF] sm:px-3"
           >
             <Sparkles className="h-4 w-4" />
             <span className="hidden lg:inline">AI Helper</span>
@@ -363,13 +363,13 @@ export const TopHeader: React.FC<TopHeaderProps> = ({
 
           {isFullAdmin && (onExportData || onImportData) && (
             <details className="group relative">
-              <summary className="flex h-9 cursor-pointer list-none items-center gap-1 rounded-xl border border-[#e4d8d2] bg-white px-2.5 text-xs font-bold text-[#304540] transition hover:bg-[#faf5f3] [&::-webkit-details-marker]:hidden">
+              <summary className="flex h-9 cursor-pointer list-none items-center gap-1 rounded-xl border border-[#e4d8d2] bg-white px-2.5 text-xs font-bold text-[#393E37] transition hover:bg-[#faf5f3] [&::-webkit-details-marker]:hidden">
                 <MoreHorizontal className="h-4 w-4" />
                 <span className="hidden xl:inline">Backup</span>
               </summary>
-              <div className="absolute right-0 top-11 z-40 w-44 space-y-1 rounded-xl border border-[#e4d8d2] bg-white p-2 shadow-[0_14px_35px_rgba(18,37,32,.16)]">
-                {onExportData && <button onClick={onExportData} className="flex w-full items-center gap-2 rounded-lg px-3 py-2 text-left text-xs font-bold text-slate-700 hover:bg-[#f2f6f5]"><Download className="h-4 w-4 text-rose-700" />Export backup</button>}
-                {onImportData && <label className="flex cursor-pointer items-center gap-2 rounded-lg px-3 py-2 text-xs font-bold text-slate-700 hover:bg-[#f2f6f5]"><Upload className="h-4 w-4 text-rose-700" />Restore backup<input type="file" accept=".json" className="hidden" onChange={(e) => { const file = e.target.files?.[0]; if (file) { onImportData(file); e.target.value = ''; } }} /></label>}
+              <div className="absolute right-0 top-11 z-40 w-44 space-y-1 rounded-xl border border-[#e4d8d2] bg-white p-2 shadow-[0_14px_35px_rgba(27,29,26,.16)]">
+                {onExportData && <button onClick={onExportData} className="flex w-full items-center gap-2 rounded-lg px-3 py-2 text-left text-xs font-bold text-slate-700 hover:bg-[#F4F5F3]"><Download className="h-4 w-4 text-rose-700" />Export backup</button>}
+                {onImportData && <label className="flex cursor-pointer items-center gap-2 rounded-lg px-3 py-2 text-xs font-bold text-slate-700 hover:bg-[#F4F5F3]"><Upload className="h-4 w-4 text-rose-700" />Restore backup<input type="file" accept=".json" className="hidden" onChange={(e) => { const file = e.target.files?.[0]; if (file) { onImportData(file); e.target.value = ''; } }} /></label>}
               </div>
             </details>
           )}
@@ -378,11 +378,11 @@ export const TopHeader: React.FC<TopHeaderProps> = ({
 
           {currentUser && (
             <div className="hidden items-center gap-2 rounded-2xl border border-[#e8ddd7] bg-white/80 py-1 pl-1 pr-3 sm:flex">
-              <span className="grid size-8 place-items-center rounded-xl bg-[linear-gradient(145deg,#2f5f54,#254b42)] text-[10px] font-black text-white">
+              <span className="grid size-8 place-items-center rounded-xl bg-[linear-gradient(145deg,#464B43,#373B35)] text-[10px] font-black text-white">
                 {userInitials}
               </span>
               <span className="min-w-0">
-                <span className="block max-w-36 truncate text-xs font-extrabold text-[#162421]">{currentUser.name}</span>
+                <span className="block max-w-36 truncate text-xs font-extrabold text-[#1C1F1B]">{currentUser.name}</span>
                 <span className="block truncate text-[10px] font-bold uppercase tracking-wider text-[#a07a4a]">{currentUser.role}</span>
               </span>
             </div>

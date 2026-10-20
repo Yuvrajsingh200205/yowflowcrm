@@ -11,7 +11,7 @@ const badge = cva('inline-flex items-center gap-1.5 whitespace-nowrap rounded-fu
       warning: 'border-transparent bg-warn-bg text-warn',
       danger: 'border-transparent bg-bad-bg text-bad',
       info: 'border-transparent bg-note-bg text-note',
-      gold: 'border-transparent bg-[color-mix(in_srgb,var(--accent)_22%,transparent)] text-[color-mix(in_srgb,var(--accent)_55%,var(--text-primary))]',
+      accent: 'border-transparent bg-[color-mix(in_srgb,var(--accent)_28%,transparent)] text-[color-mix(in_srgb,var(--accent)_30%,var(--text-primary))]',
     },
   },
   defaultVariants: { tone: 'neutral' },

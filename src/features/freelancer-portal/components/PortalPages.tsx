@@ -10,12 +10,12 @@ import { useFreelancerPortal } from '../useFreelancerPortal';
 import { PortalCard, PortalState } from './FreelancerPortalShell';
 import { BRAND } from '@/config/brand';
 
-const btn = 'inline-flex min-h-11 items-center justify-center rounded-xl bg-[#3B665C] px-4 py-2 text-sm font-black text-white transition hover:bg-[#30564D] disabled:opacity-60';
-const field = 'mt-1 w-full rounded-xl border border-[#DFD9D2] bg-[#F7F6F3] px-3 py-2.5 text-sm font-semibold outline-none focus:border-[#3B665C]';
+const btn = 'inline-flex min-h-11 items-center justify-center rounded-xl bg-[#4F554C] px-4 py-2 text-sm font-black text-white transition hover:bg-[#42473F] disabled:opacity-60';
+const field = 'mt-1 w-full rounded-xl border border-[#DFD9D2] bg-[#F7FCEE] px-3 py-2.5 text-sm font-semibold outline-none focus:border-[#4F554C]';
 const label = 'text-xs font-extrabold text-[#686164]';
 
 function LoadingState() {
-  return <PortalState title="Loading portal" text="Fetching your latest freelancer profile." action={<Loader2 className="mx-auto size-5 animate-spin text-[#3B665C]" />} />;
+  return <PortalState title="Loading portal" text="Fetching your latest freelancer profile." action={<Loader2 className="mx-auto size-5 animate-spin text-[#4F554C]" />} />;
 }
 
 function ErrorState({ text, retry }: { text: string; retry: () => void }) {
@@ -36,7 +36,7 @@ export function DashboardPage() {
   return (
     <div className="space-y-5">
       <div>
-        <p className="text-xs font-extrabold uppercase tracking-[.16em] text-[#3B665C]">Freelancer Portal</p>
+        <p className="text-xs font-extrabold uppercase tracking-[.16em] text-[#4F554C]">Freelancer Portal</p>
         <h1 className="text-3xl font-black">Welcome, {profile.fullName}</h1>
       </div>
       <div className="grid gap-4 lg:grid-cols-3">
@@ -61,7 +61,7 @@ export function DashboardPage() {
       </div>
       <div className="grid gap-4 lg:grid-cols-2">
         <PortalCard>
-          <div className="flex items-center justify-between gap-3"><h2 className="font-black">Availability</h2><Link className="text-sm font-black text-[#3B665C]" href="/freelancer/availability">Update</Link></div>
+          <div className="flex items-center justify-between gap-3"><h2 className="font-black">Availability</h2><Link className="text-sm font-black text-[#4F554C]" href="/freelancer/availability">Update</Link></div>
           <p className="mt-3 text-sm font-semibold text-[#686164]">Today: {todayAvailability?.status?.replaceAll('_', ' ') ?? 'No availability added'}</p>
         </PortalCard>
         <PortalCard>
@@ -111,17 +111,17 @@ export function ProfilePage() {
   const roleLabel = (profile.primarySkill || 'OTHER').replaceAll('_', ' ').toLowerCase().replace(/\b\w/g, (m) => m.toUpperCase());
   return (
     <div className="space-y-6">
-      <section className="overflow-hidden rounded-2xl bg-linear-to-r from-[#152A25] to-[#1B352F] p-6 text-white shadow-sm">
-        <p className="text-xs font-black uppercase tracking-[.14em] text-[#C9A876]">{BRAND.name}</p>
+      <section className="overflow-hidden rounded-2xl bg-linear-to-r from-[#1F211E] to-[#272A26] p-6 text-white shadow-sm">
+        <p className="text-xs font-black uppercase tracking-[.14em] text-[#B6E25D]">{BRAND.name}</p>
         <h1 className="mt-3 text-4xl font-black tracking-tight">My Profile</h1>
         <p className="mt-2 max-w-2xl text-base font-medium leading-6 text-white/65">Review and refine the details you submitted after purchase.</p>
       </section>
       <div className="grid gap-5 rounded-2xl border border-[#EDE8E2] bg-white p-5 shadow-sm lg:grid-cols-[300px_1fr]">
-        <aside className="rounded-2xl border border-[#EDE8E2] bg-[#fbfaf8] p-6 text-center">
-          <div className="mx-auto grid size-40 place-items-center rounded-full bg-[#EDF4F2] text-5xl font-black text-[#3B665C]">{initials.slice(0, 1)}</div>
-          <button type="button" className="mt-5 inline-flex min-h-11 items-center justify-center gap-2 rounded-xl border border-[#D8BE93] bg-white px-5 text-sm font-black text-[#254b42] transition hover:bg-[#EDF4F2]"><Camera className="size-4" />Upload Photo</button>
-          <p className="mt-4 text-sm font-bold text-[#35423F]">{latestSubscription?.plan?.name ?? 'Freelancer'}{latestSubscription?.plan?.billingInterval ? ` · ${String(latestSubscription.plan.billingInterval).toLowerCase()}` : ''}</p>
-          <div className="mt-6 rounded-xl border border-[#eee7e2] bg-white p-3 text-left text-xs font-bold text-[#35423F]">
+        <aside className="rounded-2xl border border-[#EDE8E2] bg-[#FBFDF6] p-6 text-center">
+          <div className="mx-auto grid size-40 place-items-center rounded-full bg-[#EDF4F2] text-5xl font-black text-[#4F554C]">{initials.slice(0, 1)}</div>
+          <button type="button" className="mt-5 inline-flex min-h-11 items-center justify-center gap-2 rounded-xl border border-[#C7E982] bg-white px-5 text-sm font-black text-[#373B35] transition hover:bg-[#EDF4F2]"><Camera className="size-4" />Upload Photo</button>
+          <p className="mt-4 text-sm font-bold text-[#3A3F38]">{latestSubscription?.plan?.name ?? 'Freelancer'}{latestSubscription?.plan?.billingInterval ? ` · ${String(latestSubscription.plan.billingInterval).toLowerCase()}` : ''}</p>
+          <div className="mt-6 rounded-xl border border-[#eee7e2] bg-white p-3 text-left text-xs font-bold text-[#3A3F38]">
             <p>Completion: {completion.percentage}%</p>
             <p className="mt-1">Application: {latestApplication?.status ?? 'No application'}</p>
             <p className="mt-1">Searchable: {data.searchable ? 'Yes' : 'Not yet'}</p>
@@ -317,16 +317,16 @@ function ProfileAvailabilityCalendar() {
     <section className="rounded-2xl border border-[#EDE8E2] bg-white p-5 shadow-sm">
       <div className="flex flex-wrap items-center justify-between gap-3">
         <div className="flex items-center gap-3">
-          <span className="grid size-11 place-items-center rounded-xl bg-[#3B665C]/10 text-[#3B665C]"><CalendarDays className="size-5" /></span>
+          <span className="grid size-11 place-items-center rounded-xl bg-[#4F554C]/10 text-[#4F554C]"><CalendarDays className="size-5" /></span>
           <div>
             <h2 className="text-xl font-black text-[#0D1816]">Availability & Shoot Calendar</h2>
             <p className="text-sm font-semibold text-[#686164]">Manage your availability and view assigned shoots from the CRM.</p>
           </div>
         </div>
         <div className="flex flex-wrap items-center gap-2">
-          <button type="button" onClick={() => setMonth(new Date())} className="min-h-11 rounded-xl border border-[#DFD9D2] bg-white px-4 text-sm font-black text-[#22413A] focus:ring-2 focus:ring-[#3B665C]/30">Today</button>
-          <button type="button" onClick={() => setMonth(new Date(month.getFullYear(), month.getMonth() - 1, 1))} className="grid size-11 place-items-center rounded-xl border border-[#DFD9D2] bg-white focus:ring-2 focus:ring-[#3B665C]/30" aria-label="Previous month"><ChevronLeft className="size-4" /></button>
-          <button type="button" onClick={() => setMonth(new Date(month.getFullYear(), month.getMonth() + 1, 1))} className="grid size-11 place-items-center rounded-xl border border-[#DFD9D2] bg-white focus:ring-2 focus:ring-[#3B665C]/30" aria-label="Next month"><ChevronRight className="size-4" /></button>
+          <button type="button" onClick={() => setMonth(new Date())} className="min-h-11 rounded-xl border border-[#DFD9D2] bg-white px-4 text-sm font-black text-[#31342F] focus:ring-2 focus:ring-[#4F554C]/30">Today</button>
+          <button type="button" onClick={() => setMonth(new Date(month.getFullYear(), month.getMonth() - 1, 1))} className="grid size-11 place-items-center rounded-xl border border-[#DFD9D2] bg-white focus:ring-2 focus:ring-[#4F554C]/30" aria-label="Previous month"><ChevronLeft className="size-4" /></button>
+          <button type="button" onClick={() => setMonth(new Date(month.getFullYear(), month.getMonth() + 1, 1))} className="grid size-11 place-items-center rounded-xl border border-[#DFD9D2] bg-white focus:ring-2 focus:ring-[#4F554C]/30" aria-label="Next month"><ChevronRight className="size-4" /></button>
         </div>
       </div>
       <div className="mt-5 grid gap-5 xl:grid-cols-[1fr_360px]">
@@ -337,14 +337,14 @@ function ProfileAvailabilityCalendar() {
               <span className="rounded-full border border-[#527A68]/30 bg-[#527A68]/10 px-2.5 py-1 text-[#527A68]">Available</span>
               <span className="rounded-full border border-[#B78332]/30 bg-[#B78332]/10 px-2.5 py-1 text-[#B78332]">Partial</span>
               <span className="rounded-full border border-[#B94A48]/30 bg-[#B94A48]/10 px-2.5 py-1 text-[#B94A48]">Unavailable</span>
-              <span className="rounded-full border border-[#3B665C]/25 bg-[#3B665C]/10 px-2.5 py-1 text-[#3B665C]">Shoot</span>
+              <span className="rounded-full border border-[#4F554C]/25 bg-[#4F554C]/10 px-2.5 py-1 text-[#4F554C]">Shoot</span>
             </div>
           </div>
           <div className="grid grid-cols-7 gap-1 text-center text-[10px] font-black uppercase tracking-[.08em] text-[#686164] sm:gap-2">
             {['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'].map((day) => <span key={day}>{day}</span>)}
           </div>
           <div className="mt-2 grid grid-cols-7 gap-1 sm:gap-2">
-            {leadingBlanks.map((_, index) => <div key={`profile-calendar-blank-${index}`} className="min-h-16 rounded-xl bg-[#F7F6F3] sm:min-h-24" />)}
+            {leadingBlanks.map((_, index) => <div key={`profile-calendar-blank-${index}`} className="min-h-16 rounded-xl bg-[#F7FCEE] sm:min-h-24" />)}
             {monthDays.map((day) => {
               const key = dateKey(day);
               const record = availabilityByDate.get(key);
@@ -355,21 +355,21 @@ function ProfileAvailabilityCalendar() {
                   key={key}
                   type="button"
                   onClick={() => setSelectedDate(key)}
-                  className={`min-h-16 rounded-xl border p-2 text-left transition focus:ring-2 focus:ring-[#3B665C]/30 sm:min-h-24 ${record ? statusClass[record.status] : 'border-[#EDE8E2] bg-[#FFFEFC] text-[#0D1816]'} ${selected ? 'ring-2 ring-[#3B665C]/35' : ''}`}
+                  className={`min-h-16 rounded-xl border p-2 text-left transition focus:ring-2 focus:ring-[#4F554C]/30 sm:min-h-24 ${record ? statusClass[record.status] : 'border-[#EDE8E2] bg-[#FEFFFC] text-[#0D1816]'} ${selected ? 'ring-2 ring-[#4F554C]/35' : ''}`}
                 >
                   <span className="block text-sm font-black">{day.getDate()}</span>
                   {record ? <span className="mt-1 block truncate text-[10px] font-black">{statusCopy[record.status]}</span> : null}
-                  {shoots.length ? <span className="mt-1 inline-flex max-w-full items-center gap-1 rounded-full bg-[#3B665C] px-1.5 py-0.5 text-[9px] font-black text-white"><Video className="size-3 shrink-0" />{shoots.length} shoot{shoots.length > 1 ? 's' : ''}</span> : null}
+                  {shoots.length ? <span className="mt-1 inline-flex max-w-full items-center gap-1 rounded-full bg-[#4F554C] px-1.5 py-0.5 text-[9px] font-black text-white"><Video className="size-3 shrink-0" />{shoots.length} shoot{shoots.length > 1 ? 's' : ''}</span> : null}
                 </button>
               );
             })}
           </div>
           {loadingMonth ? <p className="mt-4 flex items-center gap-2 text-sm font-bold text-[#686164]"><Loader2 className="size-4 animate-spin" /> Loading month calendar...</p> : null}
         </div>
-        <aside className="rounded-2xl border border-[#EDE8E2] bg-[#fbfaf8] p-4">
+        <aside className="rounded-2xl border border-[#EDE8E2] bg-[#FBFDF6] p-4">
           <div className="flex items-start justify-between gap-3">
             <div>
-              <p className="text-xs font-black uppercase tracking-[.12em] text-[#3B665C]">Selected date</p>
+              <p className="text-xs font-black uppercase tracking-[.12em] text-[#4F554C]">Selected date</p>
               <h3 className="mt-1 text-xl font-black">{displayDate(selectedDate)}</h3>
               <p className="mt-1 text-sm font-bold text-[#686164]">{selectedRecord ? statusCopy[selectedRecord.status] : 'No availability marked'}</p>
             </div>
@@ -382,7 +382,7 @@ function ProfileAvailabilityCalendar() {
                 key={status}
                 type="button"
                 onClick={() => setSelectedStatus(status)}
-                className={`flex min-h-11 w-full items-center justify-between rounded-xl border px-3 text-sm font-black focus:ring-2 focus:ring-[#3B665C]/30 ${selectedStatus === status ? statusClass[status] : 'border-[#DFD9D2] bg-white text-[#22413A]'}`}
+                className={`flex min-h-11 w-full items-center justify-between rounded-xl border px-3 text-sm font-black focus:ring-2 focus:ring-[#4F554C]/30 ${selectedStatus === status ? statusClass[status] : 'border-[#DFD9D2] bg-white text-[#31342F]'}`}
               >
                 {statusCopy[status]}
                 {selectedStatus === status ? <CheckCircle2 className="size-4" /> : null}
@@ -398,7 +398,7 @@ function ProfileAvailabilityCalendar() {
             {savingDate === selectedDate ? 'Saving...' : 'Save availability'}
           </button>
           <div className="mt-5 border-t border-[#EDE8E2] pt-4">
-            <p className="flex items-center gap-2 text-sm font-black"><BriefcaseBusiness className="size-4 text-[#3B665C]" /> Assigned shoots</p>
+            <p className="flex items-center gap-2 text-sm font-black"><BriefcaseBusiness className="size-4 text-[#4F554C]" /> Assigned shoots</p>
             <div className="mt-3 space-y-3">
               {selectedShoots.length ? selectedShoots.map((shoot) => (
                 <div key={shoot.id} className="rounded-xl border border-[#EDE8E2] bg-white p-3">
@@ -410,7 +410,7 @@ function ProfileAvailabilityCalendar() {
               )) : <p className="rounded-xl border border-dashed border-[#DFD9D2] bg-white p-3 text-sm font-semibold text-[#686164]">No assigned shoot on this date.</p>}
             </div>
           </div>
-          {message ? <p className="mt-4 rounded-xl bg-[#EDF4F2] px-3 py-2 text-sm font-bold text-[#22413A]">{message}</p> : null}
+          {message ? <p className="mt-4 rounded-xl bg-[#EDF4F2] px-3 py-2 text-sm font-bold text-[#31342F]">{message}</p> : null}
         </aside>
       </div>
     </section>
@@ -549,7 +549,7 @@ export function AvailabilityPage() {
           {['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'].map((day) => <span key={day}>{day}</span>)}
         </div>
         <div className="mt-2 grid grid-cols-7 gap-2">
-          {leadingBlanks.map((_, index) => <div key={`blank-${index}`} className="aspect-square rounded-xl bg-[#F7F6F3]" />)}
+          {leadingBlanks.map((_, index) => <div key={`blank-${index}`} className="aspect-square rounded-xl bg-[#F7FCEE]" />)}
           {monthDays.map((day) => {
             const key = dateKey(day);
             const record = byDate.get(key);
@@ -562,7 +562,7 @@ export function AvailabilityPage() {
                   setSelectedDate(key);
                   setNotes(record?.notes || '');
                 }}
-                className={`aspect-square rounded-xl border p-1 text-left text-xs font-black transition ${record ? statusClass[record.status] : 'border-[#EDE8E2] bg-white text-[#0D1816]'} ${isSelected ? 'ring-3 ring-[#3B665C]/25' : ''}`}
+                className={`aspect-square rounded-xl border p-1 text-left text-xs font-black transition ${record ? statusClass[record.status] : 'border-[#EDE8E2] bg-white text-[#0D1816]'} ${isSelected ? 'ring-3 ring-[#4F554C]/25' : ''}`}
               >
                 <span>{day.getDate()}</span>
                 {record ? <span className="mt-1 block truncate text-[9px]">{statusCopy[record.status]}</span> : null}
@@ -638,7 +638,7 @@ export function PortfolioPage() {
         </div>
         <div className="mt-4 flex items-center gap-3"><button className={btn} onClick={create} disabled={!form.fileObjectId || !form.title}>Add item</button>{message ? <p className="text-sm font-bold text-[#686164]">{message}</p> : null}</div>
       </PortalCard>
-      <div className="grid gap-3 sm:grid-cols-2">{data.freelancer.portfolioItems.length ? data.freelancer.portfolioItems.map((item) => <PortalCard key={item.id}><p className="font-black">{item.title}</p><p className="text-sm font-medium text-[#686164]">{item.description || 'No description'}</p><button onClick={() => toggle(item)} className="mt-3 text-sm font-black text-[#3B665C]">{item.isPublished ? 'Unpublish' : 'Publish'}</button></PortalCard>) : <PortalState title="No portfolio items yet" text="Add approved FileObject media to build your freelancer portfolio." />}</div>
+      <div className="grid gap-3 sm:grid-cols-2">{data.freelancer.portfolioItems.length ? data.freelancer.portfolioItems.map((item) => <PortalCard key={item.id}><p className="font-black">{item.title}</p><p className="text-sm font-medium text-[#686164]">{item.description || 'No description'}</p><button onClick={() => toggle(item)} className="mt-3 text-sm font-black text-[#4F554C]">{item.isPublished ? 'Unpublish' : 'Publish'}</button></PortalCard>) : <PortalState title="No portfolio items yet" text="Add approved FileObject media to build your freelancer portfolio." />}</div>
     </div>
   );
 }
@@ -695,7 +695,7 @@ export function SimplePortalListPage({ kind }: { kind: 'connections' | 'assignme
     return (
       <div className="space-y-5">
         <h1 className="text-3xl font-black">My Vendors</h1>
-        {message ? <p className="rounded-xl bg-[#EDF4F2] px-4 py-3 text-sm font-bold text-[#22413A]">{message}</p> : null}
+        {message ? <p className="rounded-xl bg-[#EDF4F2] px-4 py-3 text-sm font-bold text-[#31342F]">{message}</p> : null}
         {data.freelancer.connections.length ? data.freelancer.connections.map((connection) => {
           const canRespond = ['INTERESTED', 'CONTACTED'].includes(connection.status);
           const statusText = connection.status === 'ACCEPTED'
@@ -709,13 +709,13 @@ export function SimplePortalListPage({ kind }: { kind: 'connections' | 'assignme
             <PortalCard key={connection.id}>
               <div className="flex flex-col gap-4 lg:flex-row lg:items-start lg:justify-between">
                 <div>
-                  <p className="text-xs font-black uppercase tracking-[.14em] text-[#3B665C]">{connection.status.replaceAll('_', ' ')}</p>
+                  <p className="text-xs font-black uppercase tracking-[.14em] text-[#4F554C]">{connection.status.replaceAll('_', ' ')}</p>
                   <h2 className="mt-1 text-xl font-black">{connection.project?.name ?? 'Studio interest'}</h2>
                   <p className="mt-1 text-sm font-bold text-[#686164]">{connection.project?.projectNumber ?? 'Project not selected yet'}</p>
                   {connection.shoot ? <p className="mt-2 text-sm font-bold text-[#686164]">{connection.shoot.title} · {new Date(connection.shoot.shootDate).toLocaleDateString('en-IN', { day: '2-digit', month: 'short', year: 'numeric' })}</p> : null}
                   {connection.createdBy?.fullName ? <p className="mt-2 text-xs font-bold text-[#686164]">From: {connection.createdBy.fullName}</p> : null}
-                  <p className="mt-3 rounded-xl bg-[#fbfaf8] p-3 text-sm font-bold leading-6 text-[#686164]">{statusText}</p>
-                  {connection.notes ? <p className="mt-3 whitespace-pre-wrap rounded-xl bg-[#fbfaf8] p-3 text-sm font-semibold leading-6 text-[#686164]">{connection.notes}</p> : null}
+                  <p className="mt-3 rounded-xl bg-[#FBFDF6] p-3 text-sm font-bold leading-6 text-[#686164]">{statusText}</p>
+                  {connection.notes ? <p className="mt-3 whitespace-pre-wrap rounded-xl bg-[#FBFDF6] p-3 text-sm font-semibold leading-6 text-[#686164]">{connection.notes}</p> : null}
                 </div>
                 {canRespond ? (
                   <div className="flex shrink-0 flex-wrap gap-2">

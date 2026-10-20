@@ -77,7 +77,7 @@ export const MonthNavigator: React.FC<{
     <button
       type="button"
       onClick={() => onChange(shiftMonth(monthKey, -1))}
-      className="p-2.5 rounded-xl border border-slate-200 bg-white hover:border-rose-300 hover:text-[#2f5f54] text-slate-500 transition cursor-pointer"
+      className="p-2.5 rounded-xl border border-slate-200 bg-white hover:border-rose-300 hover:text-[#464B43] text-slate-500 transition cursor-pointer"
       aria-label="Previous month"
     >
       <ChevronLeft className="w-5 h-5" />
@@ -86,7 +86,7 @@ export const MonthNavigator: React.FC<{
     <button
       type="button"
       onClick={() => onChange(shiftMonth(monthKey, 1))}
-      className="p-2.5 rounded-xl border border-slate-200 bg-white hover:border-rose-300 hover:text-[#2f5f54] text-slate-500 transition cursor-pointer"
+      className="p-2.5 rounded-xl border border-slate-200 bg-white hover:border-rose-300 hover:text-[#464B43] text-slate-500 transition cursor-pointer"
       aria-label="Next month"
     >
       <ChevronRight className="w-5 h-5" />
@@ -228,7 +228,7 @@ export const TeamAttendanceCalendarGrid: React.FC<TeamGridProps> = ({
               {days.map((dateKey) => (
                 <th
                   key={dateKey}
-                  className={`px-1 pb-3 text-xs font-extrabold ${dateKey === today ? 'text-[#2f5f54]' : 'text-slate-500'}`}
+                  className={`px-1 pb-3 text-xs font-extrabold ${dateKey === today ? 'text-[#464B43]' : 'text-slate-500'}`}
                 >
                   {Number(dateKey.slice(8, 10))}
                 </th>
@@ -246,7 +246,7 @@ export const TeamAttendanceCalendarGrid: React.FC<TeamGridProps> = ({
                   >
                     <Avatar member={member} size="sm" />
                     <div className="min-w-0">
-                      <p className="text-sm font-extrabold text-slate-900 truncate max-w-[165px] group-hover:text-[#2f5f54] transition">{member.name}</p>
+                      <p className="text-sm font-extrabold text-slate-900 truncate max-w-[165px] group-hover:text-[#464B43] transition">{member.name}</p>
                       <p className="text-[11px] font-bold text-slate-500 truncate max-w-[165px]">{member.role}</p>
                     </div>
                   </button>

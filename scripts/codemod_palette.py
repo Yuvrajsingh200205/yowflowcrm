@@ -1,4 +1,4 @@
-"""One-shot palette migration: plum/rose hues -> Frameloom deep green. Gold, reds, blues and neutrals are untouched."""
+"""One-shot palette migration: plum/rose hues -> Yowflow deep green. Gold, reds, blues and neutrals are untouched."""
 import re, colorsys, pathlib
 
 HUE_LO, HUE_HI = 318, 352     # plum / rose band (danger reds sit at 353-10 and are kept)
