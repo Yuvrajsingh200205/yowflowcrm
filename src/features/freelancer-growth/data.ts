@@ -109,7 +109,7 @@ export const comparisonRows = [
 ];
 
 export const testimonials = [
-  { quote: 'The panel keeps my shoots, dues and vendor list in one view. I stopped chasing three spreadsheets before every wedding.', name: 'Rajat Verma', role: 'Candid Photographer, Delhi' },
+  { quote: 'The panel keeps my shoots, dues and vendor list in one view. I stopped chasing three spreadsheets before every wedding.', name: 'Alex Morgan', role: 'Candid Photographer, Delhi' },
   { quote: 'Pricing, client follow-ups and shoot planning feel much cleaner now. It gives a solo creator a studio-grade system.', name: 'Ayesha Khan', role: 'Wedding Filmmaker, Jaipur' },
   { quote: 'I can see what is pending, who is assigned and which vendors are trusted in each city. That clarity is worth it.', name: 'Kabir Anand', role: 'Freelance Editor, Gurugram' },
 ];

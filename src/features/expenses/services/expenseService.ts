@@ -1,9 +1,10 @@
 import { apiRequest } from '@/lib/api/client';
 import { Expense, ExpenseBudget, RecurringExpense } from '../types';
 import { INITIAL_EXPENSE_BUDGETS, INITIAL_RECURRING_EXPENSES } from '../data/mockExpenses';
+import { BRAND } from '@/config/brand';
 
-const RECURRING_KEY = 'wpp_crm_recurring_expenses_v1';
-const BUDGETS_KEY = 'wpp_crm_expense_budgets_v1';
+const RECURRING_KEY = `${BRAND.cookiePrefix}_crm_recurring_expenses_v1`;
+const BUDGETS_KEY = `${BRAND.cookiePrefix}_crm_expense_budgets_v1`;
 
 interface BackendExpensePayment {
   id: string;

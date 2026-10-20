@@ -78,6 +78,7 @@ import { ROUTE_TABS, TAB_ROUTES } from './crmRoutes';
 import { apiErrorMessage, getEmployeeAssignmentConflict, isEmployeeAttendanceUser, leaveTypeInput, normalizeLeaveRequest, toShiftValue } from './crmAppUtils';
 import { useDateInputBounds } from './useDateInputBounds';
 import { computeAutoProjectStatus } from '@/utils/projectStatusCalculator';
+import { BRAND } from '@/config/brand';
 
 export default function App() {
   useDateInputBounds();
@@ -956,7 +957,7 @@ export default function App() {
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
     a.href = url;
-    a.download = `WPP_CRM_Data_Backup_${new Date().toISOString().slice(0, 10)}.json`;
+    a.download = `Data_Backup_${new Date().toISOString().slice(0, 10)}.json`;
     a.click();
     URL.revokeObjectURL(url);
   };
@@ -1403,7 +1404,7 @@ export default function App() {
               email: currentUser.email || '',
               permissions: currentUser.permissions || [],
               organization: {
-                name: currentUser.organization?.name || 'Wedding Photo Planet',
+                name: currentUser.organization?.name || `${BRAND.name}`,
                 timezone: currentUser.organization?.timezone || 'Asia/Kolkata',
                 currency: currentUser.organization?.currency || 'INR',
               },
@@ -1428,7 +1429,7 @@ export default function App() {
           <div className="flex items-center gap-3">
             <span>STUDIO LOGGED IN: {currentUser?.name.toUpperCase()} ({currentUser?.role.toUpperCase()})</span>
             <span className="text-slate-600">|</span>
-            <span>WPP CRM v2.5</span>
+            <span>{BRAND.shortName}</span>
           </div>
           <div className="flex items-center gap-2">
             <span className="flex items-center gap-1.5 text-indigo-300 font-bold">

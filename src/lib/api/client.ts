@@ -1,4 +1,5 @@
 import { authEvent } from '@/lib/auth/authDebug';
+import { BRAND } from '@/config/brand';
 
 export interface ApiMeta {
   requestId?: string;
@@ -60,8 +61,8 @@ const REQUEST_TIMEOUT_MS = 15_000;
  * cookies — but they are purged whenever auth state is touched so an existing
  * browser does not keep a readable access token lying around.
  */
-const LEGACY_TOKEN_KEYS = ['wpp.accessToken', 'wpp.refreshToken'];
-const CLIENT_SESSION_COOKIE = 'wpp_client_session';
+const LEGACY_TOKEN_KEYS = [`${BRAND.cookiePrefix}.accessToken`, `${BRAND.cookiePrefix}.refreshToken`];
+const CLIENT_SESSION_COOKIE = `${BRAND.cookiePrefix}_client_session`;
 const DEFAULT_CLIENT_SESSION_MAX_AGE = 60 * 60 * 24 * 7;
 const ACCESS_TOKEN_REFRESH_WINDOW_MS = 90_000;
 
@@ -90,7 +91,7 @@ type RefreshSessionResult =
  *
  *  - `accessTokenExpiresAt`, in memory only, so the session can be renewed
  *    slightly before it lapses instead of after a user-visible 401.
- *  - `wpp_client_session`, a readable "this browser has a session" flag with no
+ *  - `<prefix>_client_session`, a readable "this browser has a session" flag with no
  *    credential value, which lets the edge middleware and the session provider
  *    tell "signed out" apart from "cookie present but access token expired".
  */

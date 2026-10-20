@@ -50,6 +50,7 @@ import {
   resolveDayStatus,
   toDateKey,
 } from '../teamDomain';
+import { BRAND } from '@/config/brand';
 
 interface Props {
   team: TeamMember[];
@@ -317,7 +318,7 @@ export const AttendanceReportsView: React.FC<Props> = ({ team, attendance, proje
       const doc = new jsPDF({ orientation: 'landscape', unit: 'mm', format: 'a4' });
       doc.setFontSize(16);
       doc.setTextColor(30, 41, 59);
-      doc.text('WEDDING PHOTO PLANET', 14, 15);
+      doc.text(`${BRAND.name.toUpperCase()}`, 14, 15);
       doc.setFontSize(11);
       doc.setTextColor(79, 70, 229);
       doc.text(`${table.title} (${startDate} to ${endDate})`, 14, 22);

@@ -35,6 +35,7 @@ import {
   BarChart2,
   Users,
 } from 'lucide-react';
+import { BRAND } from '@/config/brand';
 
 export interface LeadTargets {
   yearlyLeadTarget: number;
@@ -160,7 +161,7 @@ export const LeadsManagement: React.FC<LeadsManagementProps> = ({ currentUser, t
 
   // Lead Targets & Goals State
   const [targets, setTargets] = useState<LeadTargets>(() => {
-    const saved = localStorage.getItem('wpp_owner_lead_targets');
+    const saved = localStorage.getItem(`${BRAND.cookiePrefix}_owner_lead_targets`);
     if (saved) {
       try {
         return JSON.parse(saved);
@@ -173,14 +174,14 @@ export const LeadsManagement: React.FC<LeadsManagementProps> = ({ currentUser, t
 
   // Remove the legacy demo cache now that the roster is server-owned.
   useEffect(() => {
-    localStorage.removeItem('wpp_owner_crm_leads');
+    localStorage.removeItem(`${BRAND.cookiePrefix}_owner_crm_leads`);
   }, []);
 
   const [showTargetModal, setShowTargetModal] = useState(false);
   const [targetForm, setTargetForm] = useState<LeadTargets>(targets);
 
   useEffect(() => {
-    localStorage.setItem('wpp_owner_lead_targets', JSON.stringify(targets));
+    localStorage.setItem(`${BRAND.cookiePrefix}_owner_lead_targets`, JSON.stringify(targets));
   }, [targets]);
 
   const handleOpenTargetModal = () => {

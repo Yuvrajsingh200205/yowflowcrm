@@ -78,14 +78,14 @@ describe('api client session storage', () => {
 
   it('purges tokens left in localStorage by an older build', async () => {
     const { store } = installBrowser();
-    store.set('wpp.accessToken', 'legacy-access');
-    store.set('wpp.refreshToken', 'legacy-refresh');
+    store.set('fl.accessToken', 'legacy-access');
+    store.set('fl.refreshToken', 'legacy-refresh');
 
     const { setAuthTokens } = await importClient();
     setAuthTokens(null);
 
-    expect(store.get('wpp.accessToken')).toBeUndefined();
-    expect(store.get('wpp.refreshToken')).toBeUndefined();
+    expect(store.get('fl.accessToken')).toBeUndefined();
+    expect(store.get('fl.refreshToken')).toBeUndefined();
   });
 
   it('tracks the session with the readable hint cookie only', async () => {
@@ -96,7 +96,7 @@ describe('api client session storage', () => {
 
     setAuthTokens({ accessToken: 'a.b.c', accessTokenExpiresIn: 900, refreshTokenExpiresIn: 604800 });
     expect(hasStoredSession()).toBe(true);
-    expect(readCookie()).toContain('wpp_client_session=1');
+    expect(readCookie()).toContain('fl_client_session=1');
     // The flag carries no credential.
     expect(readCookie()).not.toContain('a.b.c');
 
@@ -105,7 +105,7 @@ describe('api client session storage', () => {
   });
 
   it('issues one /auth/refresh for concurrent callers', async () => {
-    installBrowser('wpp_client_session=1');
+    installBrowser('fl_client_session=1');
     const fetchMock = vi.fn(async () => ({
       ok: true,
       status: 200,
@@ -125,7 +125,7 @@ describe('api client session storage', () => {
   });
 
   it('gives up and clears the session when a refresh is rejected', async () => {
-    const { readCookie } = installBrowser('wpp_client_session=1');
+    const { readCookie } = installBrowser('fl_client_session=1');
     const fetchMock = vi.fn(async () => ({
       ok: false,
       status: 401,
@@ -141,12 +141,12 @@ describe('api client session storage', () => {
     expect(result).toMatchObject({ reason: 'invalid' });
     // The cleared hint cookie is what stops the app retrying /me -> /refresh.
     expect(hasStoredSession()).toBe(false);
-    expect(readCookie()).not.toContain('wpp_client_session=1');
+    expect(readCookie()).not.toContain('fl_client_session=1');
     expect(fetchMock).toHaveBeenCalledTimes(1);
   });
 
   it('does not retry a rejected refresh on the next call', async () => {
-    installBrowser('wpp_client_session=1');
+    installBrowser('fl_client_session=1');
     const fetchMock = vi.fn(async () => ({
       ok: false,
       status: 401,

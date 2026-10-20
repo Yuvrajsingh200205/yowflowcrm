@@ -1,6 +1,7 @@
 import React from 'react';
 import { Project } from '@/types';
 import { X, Printer, Camera } from 'lucide-react';
+import { BRAND } from '@/config/brand';
 
 interface InvoiceModalProps {
   project: Project | null;
@@ -48,15 +49,15 @@ export const InvoiceModal: React.FC<InvoiceModalProps> = ({ project, onClose }) 
             <div>
               <div className="flex items-center gap-2 text-indigo-700 font-black text-xl tracking-tight">
                 <Camera className="w-6 h-6 text-indigo-600" />
-                <span>Wedding Photo Planet</span>
+                <span>{BRAND.name}</span>
               </div>
               <p className="text-xs font-bold text-slate-700 mt-0.5">
-                Owner: Rajat Verma • Premium Wedding Photography & Films
+                {BRAND.tagline}
               </p>
               <p className="text-[10px] text-slate-500 mt-0.5">
-                New Delhi • Udaipur • Goa • Destination Weddings
+                {BRAND.domain}
               </p>
-              <p className="text-[10px] text-slate-500">Phone: +91 98765 00001 | Email: rajat@weddingphotoplanet.com</p>
+              <p className="text-[10px] text-slate-500">{BRAND.supportPhone ? `Phone: ${BRAND.supportPhone} | ` : ''}Email: {BRAND.supportEmail}</p>
             </div>
 
             <div className="text-right">
@@ -138,9 +139,9 @@ export const InvoiceModal: React.FC<InvoiceModalProps> = ({ project, onClose }) 
             </div>
 
             <div className="text-center">
-              <div className="font-bold text-slate-900 text-xs italic font-serif">Rajat Verma</div>
+              <div className="font-bold text-slate-900 text-xs italic font-serif">Alex Morgan</div>
               <p className="text-[9px] text-slate-500 border-t border-slate-300 pt-0.5 mt-0.5 font-semibold">
-                Authorized Signature • Wedding Photo Planet
+                Authorized Signature • {BRAND.name}
               </p>
             </div>
           </div>

@@ -45,6 +45,7 @@ import {
   getDepartmentForRole,
   getEmployeeCode,
 } from '../teamDomain';
+import { BRAND } from '@/config/brand';
 
 interface Props {
   isOpen: boolean;
@@ -410,7 +411,7 @@ export const TeamMemberFormModal: React.FC<Props> = ({
               </div>
               <div>
                 <label className={LABEL} htmlFor="tm-email">Email</label>
-                <input id="tm-email" type="email" className={FIELD} value={form.email} onChange={(e) => set('email', e.target.value)} placeholder="name@weddingphotoplanet.com" />
+                <input id="tm-email" type="email" className={FIELD} value={form.email} onChange={(e) => set('email', e.target.value)} placeholder={`name@${BRAND.domain}`} />
               </div>
               {!isEdit && (
                 <div className="sm:col-span-2">

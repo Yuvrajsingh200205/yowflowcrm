@@ -8,6 +8,7 @@ import { freelancerPortalApi, AvailabilityStatus, PortalAvailability, PortalPort
 import { getFreelancerProfileCompletion } from '../profileCompletion';
 import { useFreelancerPortal } from '../useFreelancerPortal';
 import { PortalCard, PortalState } from './FreelancerPortalShell';
+import { BRAND } from '@/config/brand';
 
 const btn = 'inline-flex min-h-11 items-center justify-center rounded-xl bg-[#8D5265] px-4 py-2 text-sm font-black text-white transition hover:bg-[#774255] disabled:opacity-60';
 const field = 'mt-1 w-full rounded-xl border border-[#DFD9D2] bg-[#F7F6F3] px-3 py-2.5 text-sm font-semibold outline-none focus:border-[#8D5265]';
@@ -111,7 +112,7 @@ export function ProfilePage() {
   return (
     <div className="space-y-6">
       <section className="overflow-hidden rounded-2xl bg-linear-to-r from-[#3B1D29] to-[#4A2635] p-6 text-white shadow-sm">
-        <p className="text-xs font-black uppercase tracking-[.14em] text-[#C9A876]">Wedding Photo Planet</p>
+        <p className="text-xs font-black uppercase tracking-[.14em] text-[#C9A876]">{BRAND.name}</p>
         <h1 className="mt-3 text-4xl font-black tracking-tight">My Profile</h1>
         <p className="mt-2 max-w-2xl text-base font-medium leading-6 text-white/65">Review and refine the details you submitted after purchase.</p>
       </section>

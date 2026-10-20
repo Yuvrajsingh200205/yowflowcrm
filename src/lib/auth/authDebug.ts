@@ -1,11 +1,12 @@
 'use client';
+import { BRAND } from '@/config/brand';
 
 type AuthDebugDetails = Record<string, unknown>;
 
 const enabled = () =>
   typeof window !== 'undefined' &&
   process.env.NODE_ENV !== 'production' &&
-  window.localStorage.getItem('wpp.auth.debug') !== '0';
+  window.localStorage.getItem(`${BRAND.cookiePrefix}.auth.debug`) !== '0';
 
 function sanitize(details: AuthDebugDetails): AuthDebugDetails {
   const redacted = new Set(['token', 'accessToken', 'refreshToken', 'authorization', 'cookie', 'cookies', 'password']);

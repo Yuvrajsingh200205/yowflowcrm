@@ -29,6 +29,7 @@ import {
   Target,
   DollarSign
 } from 'lucide-react';
+import { BRAND } from '@/config/brand';
 
 interface TeamDailyReportingWidgetProps {
   team: TeamMember[];
@@ -62,7 +63,7 @@ export const TeamDailyReportingWidget: React.FC<TeamDailyReportingWidgetProps> =
   const [assigningTaskMember, setAssigningTaskMember] = useState<TeamMember | null>(null);
   const [taskTitleInput, setTaskTitleInput] = useState('');
   const [taskCategoryInput, setTaskCategoryInput] = useState<TeamTask['category']>('social_media');
-  const [taskDomainInput, setTaskDomainInput] = useState('weddingphotoplanet.com');
+  const [taskDomainInput, setTaskDomainInput] = useState(`${BRAND.domain}`);
   const [taskProjectIdInput, setTaskProjectIdInput] = useState('');
   const [taskPriorityInput, setTaskPriorityInput] = useState<'high' | 'medium' | 'low'>('high');
   const [taskDueDateInput, setTaskDueDateInput] = useState(selectedDate);
@@ -168,7 +169,7 @@ export const TeamDailyReportingWidget: React.FC<TeamDailyReportingWidgetProps> =
     setEditingTaskItem(null);
     setTaskTitleInput('');
     setTaskCategoryInput('management');
-    setTaskDomainInput('weddingphotoplanet.com');
+    setTaskDomainInput(`${BRAND.domain}`);
     setTaskProjectIdInput('');
     setTaskPriorityInput('high');
     setTaskDueDateInput(selectedDate);
@@ -186,7 +187,7 @@ export const TeamDailyReportingWidget: React.FC<TeamDailyReportingWidgetProps> =
       setEditingTaskItem(task);
       setTaskTitleInput(task.title);
       setTaskCategoryInput(task.category || 'social_media');
-      setTaskDomainInput(task.domainName || 'weddingphotoplanet.com');
+      setTaskDomainInput(task.domainName || `${BRAND.domain}`);
       setTaskProjectIdInput(task.projectId || '');
       setTaskPriorityInput(task.priority || 'high');
       setTaskDueDateInput(task.dueDate || selectedDate);

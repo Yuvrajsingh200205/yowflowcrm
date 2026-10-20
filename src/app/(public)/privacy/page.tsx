@@ -1,6 +1,7 @@
 import { Container, Section } from '@/features/landing/components/Editorial';
 import { PageHeader } from '@/features/landing/components/PageHeader';
 import { LegalNotice } from '@/features/landing/components/LegalNotice';
+import { BRAND } from '@/config/brand';
 
 export const metadata = { title: 'Privacy' };
 
@@ -10,7 +11,7 @@ export default function PrivacyPage() {
       <PageHeader
         mark="Legal · Privacy"
         title={<>What we hold, and why.</>}
-        lead="Wedding Photo Planet stores operational studio data — client contacts, project records, shoot schedules, payments and the photographs a studio uploads for delivery."
+        lead={`${BRAND.name} stores operational studio data — client contacts, project records, shoot schedules, payments and the photographs a studio uploads for delivery.`}
       />
       <Section tone="paper">
         <LegalNotice document="privacy policy" />

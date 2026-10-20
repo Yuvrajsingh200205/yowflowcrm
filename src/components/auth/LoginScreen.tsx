@@ -8,6 +8,7 @@ import { LoginInput } from '@/lib/api/auth';
 import { LoginHero } from './LoginHero';
 import { LoginFormCard } from './LoginFormCard';
 import { LoginToast } from './LoginToast';
+import { BRAND } from '@/config/brand';
 
 interface LoginScreenProps {
   onLogin: (input: LoginInput) => Promise<void>;
@@ -25,14 +26,14 @@ export const LoginScreen: React.FC<LoginScreenProps> = ({ onLogin, onClose }) =>
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   useEffect(() => {
-    const remembered = window.localStorage.getItem('wpp-remembered-account');
+    const remembered = window.localStorage.getItem(`${BRAND.cookiePrefix}-remembered-account`);
     if (remembered) setIdentifier(remembered);
-    setIsDark(window.localStorage.getItem('wpp-login-theme') === 'dark');
+    setIsDark(window.localStorage.getItem(`${BRAND.cookiePrefix}-login-theme`) === 'dark');
   }, []);
 
   const selectTheme = (dark: boolean) => {
     setIsDark(dark);
-    window.localStorage.setItem('wpp-login-theme', dark ? 'dark' : 'light');
+    window.localStorage.setItem(`${BRAND.cookiePrefix}-login-theme`, dark ? 'dark' : 'light');
   };
 
   const handleLogin = async (event: React.FormEvent<HTMLFormElement>) => {
@@ -49,8 +50,8 @@ export const LoginScreen: React.FC<LoginScreenProps> = ({ onLogin, onClose }) =>
 
     setIdentifier(submittedIdentifier);
     setPassword('');
-    if (rememberMe) window.localStorage.setItem('wpp-remembered-account', submittedIdentifier);
-    else window.localStorage.removeItem('wpp-remembered-account');
+    if (rememberMe) window.localStorage.setItem(`${BRAND.cookiePrefix}-remembered-account`, submittedIdentifier);
+    else window.localStorage.removeItem(`${BRAND.cookiePrefix}-remembered-account`);
     setIsSubmitting(true);
     try {
       await onLogin({ email: submittedIdentifier, password: submittedPassword });
@@ -92,7 +93,7 @@ export const LoginScreen: React.FC<LoginScreenProps> = ({ onLogin, onClose }) =>
         {onClose && <button type="button" onClick={onClose} aria-label="Close login" className="fixed right-4 top-4 z-70 rounded-full p-2 text-[#7d5c66] hover:bg-white/40"><X className="size-5" /></button>}
       </div>
       <footer className="hidden h-9 items-center justify-center gap-2.5 pt-2 text-xs font-extrabold uppercase tracking-[.12em] text-[#d9bdc4] lg:flex">
-        Wedding Photo Planet CRM © 2026 <span>·</span> <Heart className="size-3 fill-[#d56686] text-[#d56686]" /> Made with passion
+        {BRAND.name} © 2026 <span>·</span> <Heart className="size-3 fill-[#d56686] text-[#d56686]" /> Made with passion
       </footer>
       <LoginToast message={message} onDismiss={() => setMessage(null)} />
     </main>

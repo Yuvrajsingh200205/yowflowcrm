@@ -11,6 +11,7 @@ import { expenseService, type ExpenseSummary } from '../services/expenseService'
 import { Expense, ExpenseApprovalStatus, ExpenseCategory, ExpensePaymentMethod, ExpensePaymentStatus } from '../types';
 import { IncomeManagement } from '@/features/income';
 import { incomeService } from '@/features/income/services/incomeService';
+import { BRAND } from '@/config/brand';
 
 type Section = 'overview' | 'income' | 'monthly' | 'shoots' | 'office' | 'freelancers' | 'travel' | 'equipment' | 'vendors' | 'other' | 'recurring' | 'reports';
 type FreelancerOption = { id: string; name: string; role?: string };
@@ -162,7 +163,7 @@ export function ExpenseManagement({ projects, freelancers, currentUser }: { proj
     doc.text(reportTitle, 14, 14);
     doc.setFont('helvetica', 'normal');
     doc.setFontSize(9);
-    doc.text(`Wedding Photo Planet CRM  |  Generated ${new Date().toLocaleDateString('en-IN')}`, 14, 22);
+    doc.text(`${BRAND.name}  |  Generated ${new Date().toLocaleDateString('en-IN')}`, 14, 22);
     doc.setTextColor(48, 44, 46);
     doc.setFont('helvetica', 'bold');
     doc.setFontSize(11);

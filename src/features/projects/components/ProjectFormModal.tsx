@@ -498,7 +498,7 @@ export const ProjectFormModal: React.FC<ProjectFormModalProps> = ({
     albumDesigning: 'not_started',
     albumPrinting: 'not_sent',
     otherPhoto: '',
-    assignedEditor: 'Pooja Verma',
+    assignedEditor: 'Sam Rivera',
     notes: '',
   });
 

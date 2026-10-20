@@ -5,6 +5,7 @@ import { OwnerExcelSheet } from './OwnerExcelSheet';
 import { Crown, LayoutGrid, ListTodo, NotebookPen, Sheet, UsersRound } from 'lucide-react';
 import { TeamMember, Project } from '@/types';
 import { KpiCard } from '@/features/team/components/TeamUiKit';
+import { BRAND } from '@/config/brand';
 
 interface OwnerWorkspaceProps {
   projects?: Project[];
@@ -29,7 +30,7 @@ export const OwnerWorkspace: React.FC<OwnerWorkspaceProps> = ({
               <span className="grid size-7 place-items-center rounded-full border border-white/15 bg-white/10">
                 <Crown className="size-3.5" />
               </span>
-              Owner Workspace • Wedding Photo Planet CRM
+              Owner Workspace • {BRAND.name}
             </div>
             <h1 className="mt-3 flex items-center gap-3 text-2xl font-black tracking-tight sm:text-3xl lg:text-4xl">
               <span className="grid size-11 place-items-center rounded-2xl bg-white/10">

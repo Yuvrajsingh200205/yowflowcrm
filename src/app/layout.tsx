@@ -1,11 +1,12 @@
 import type { Metadata, Viewport } from 'next';
 import { AuthSessionProvider } from '@/components/auth/AuthSessionProvider';
 import './globals.css';
+import { BRAND } from '@/config/brand';
 
 export const metadata: Metadata = {
-  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL ?? 'https://weddingphotoplanet.com'),
-  title: { default: 'Wedding Photo Planet CRM', template: '%s | WPP CRM' },
-  description: 'Wedding Photo Planet studio operations and client relationship management.',
+  metadataBase: new URL(BRAND.siteUrl),
+  title: { default: `${BRAND.name} — ${BRAND.tagline}`, template: `%s | ${BRAND.shortName}` },
+  description: BRAND.description,
 };
 
 export const viewport: Viewport = {

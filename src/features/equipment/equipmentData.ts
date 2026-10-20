@@ -14,7 +14,7 @@ export interface EquipmentItem {
 export const EQUIPMENT_CATEGORIES: EquipmentItem['category'][] = ['Cameras', 'Lenses', 'Drones', 'Lighting', 'Audio', 'Gimbals & Stabilizers', 'Accessories', 'Other'];
 
 export const INITIAL_EQUIPMENT: EquipmentItem[] = [
-  { id: 'eq-1', name: 'Sony FX3 Cinema Camera Body', category: 'Cameras', serialNumber: 'FX3-98210', status: 'in_use', assignedToShoot: 'Rohan & Ananya Royal Wedding', assignedMember: 'Rajat Verma', conditionNote: 'Pristine condition. Clean sensor.' },
+  { id: 'eq-1', name: 'Sony FX3 Cinema Camera Body', category: 'Cameras', serialNumber: 'FX3-98210', status: 'in_use', assignedToShoot: 'Rohan & Ananya Royal Wedding', assignedMember: 'Alex Morgan', conditionNote: 'Pristine condition. Clean sensor.' },
   { id: 'eq-2', name: 'Sony A7IV Full Frame Body #1', category: 'Cameras', serialNumber: 'A74-11022', status: 'available', conditionNote: 'Dual SD card loaded.' },
   { id: 'eq-3', name: 'Sony A7IV Full Frame Body #2', category: 'Cameras', serialNumber: 'A74-11023', status: 'available' },
   { id: 'eq-4', name: 'Sony 24-70mm f/2.8 GM II Lens', category: 'Lenses', serialNumber: 'GM2470-33', status: 'in_use', assignedToShoot: 'Siddharth & Meera Pre-Wedding', assignedMember: 'Tokir' },

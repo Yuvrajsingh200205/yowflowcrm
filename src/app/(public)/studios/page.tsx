@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import { Action, Container, Display, TextLink } from '@/features/landing/components/Editorial';
 import { Reveal } from '@/features/landing/components/Reveal';
+import { BRAND } from '@/config/brand';
 
 export const metadata = {
   title: 'For Studios',
@@ -26,7 +27,7 @@ export default function StudiosPage() {
     <>
       <header className="ed-ink relative isolate overflow-hidden">
         <Image
-          src="/images/wpp-landing-hero-cinematic.png"
+          src="/images/hero-aperture.svg"
           alt=""
           fill
           priority

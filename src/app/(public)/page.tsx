@@ -1,15 +1,14 @@
 import type { Metadata } from 'next';
 import { LandingPage } from '@/features/landing/components/LandingPage';
+import { BRAND } from '@/config/brand';
 
 export const metadata: Metadata = {
-  title: 'Wedding Photo Planet — studio operations for wedding photography',
-  description:
-    'A working CRM for wedding photography studios: inquiries, projects, shoots, crew, freelancers and payments on one record. Client galleries and the freelancer portal are in build.',
+  title: { absolute: `${BRAND.name} — ${BRAND.tagline}` },
+  description: BRAND.description,
   openGraph: {
-    title: 'Wedding Photo Planet',
-    description:
-      'Studio operations for wedding photography — from the first inquiry to the photographs a couple keeps.',
-    images: ['/images/wedding-band.jpg'],
+    title: BRAND.name,
+    description: BRAND.description,
+    images: ['/images/studio-light.svg'],
   },
 };
 

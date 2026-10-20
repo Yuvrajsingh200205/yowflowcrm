@@ -1,6 +1,7 @@
 'use client';
 
 import { plans, type BillingCycle } from './data';
+import { BRAND } from '@/config/brand';
 
 export type MockFreelancerAccount = {
   fullName: string;
@@ -29,9 +30,9 @@ export type MockFreelancerAccount = {
   applicationSubmittedAt?: string;
 };
 
-const ACCOUNT_KEY = 'wpp_mock_freelancer_account';
-const SESSION_KEY = 'wpp_mock_freelancer_session';
-const CLIENT_COOKIE = 'wpp_client_session';
+const ACCOUNT_KEY = `${BRAND.cookiePrefix}_mock_freelancer_account`;
+const SESSION_KEY = `${BRAND.cookiePrefix}_mock_freelancer_session`;
+const CLIENT_COOKIE = `${BRAND.cookiePrefix}_client_session`;
 
 const DEMO_FREELANCER_ACCOUNT: MockFreelancerAccount = {
   fullName: 'Freelancer Demo',

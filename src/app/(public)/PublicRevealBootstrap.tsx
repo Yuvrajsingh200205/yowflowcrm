@@ -4,7 +4,7 @@ import { useEffect } from 'react';
 
 export function PublicRevealBootstrap() {
   useEffect(() => {
-    const root = document.querySelector<HTMLElement>('.wpp-ed');
+    const root = document.querySelector<HTMLElement>('.ui-ed');
     if (!root) return;
     root.setAttribute('data-ed-js', 'true');
     const timeout = window.setTimeout(() => {

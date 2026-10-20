@@ -4,8 +4,9 @@ import { useEffect, useMemo, useState } from 'react';
 import { Camera, Plus, Search, Sparkles, Trash2 } from 'lucide-react';
 import { EquipmentFormModal } from './EquipmentFormModal';
 import { EQUIPMENT_CATEGORIES, EquipmentItem, INITIAL_EQUIPMENT } from './equipmentData';
+import { BRAND } from '@/config/brand';
 
-const STORAGE_KEY = 'wpp_owner_equipment_inventory';
+const STORAGE_KEY = `${BRAND.cookiePrefix}_owner_equipment_inventory`;
 
 export function EquipmentInventory() {
   const [equipment, setEquipment] = useState<EquipmentItem[]>(() => {

@@ -34,6 +34,7 @@ import {
   Film,
   Trash2
 } from 'lucide-react';
+import { BRAND } from '@/config/brand';
 
 interface FreelancerProfileModalProps {
   freelancer: Freelancer;
@@ -103,7 +104,7 @@ export const FreelancerProfileModal: React.FC<FreelancerProfileModalProps> = ({
       id: `doc-${Date.now()}`,
       title: docTitle.trim(),
       type: docType,
-      fileUrl: docUrl.trim() || 'https://weddingphotoplanet.com/docs/placeholder.pdf',
+      fileUrl: docUrl.trim() || `https://${BRAND.domain}/docs/placeholder.pdf`,
       fileName: `${docTitle.trim().replace(/\s+/g, '_')}.pdf`,
       status: 'uploaded',
       uploadDate: new Date().toISOString().split('T')[0],

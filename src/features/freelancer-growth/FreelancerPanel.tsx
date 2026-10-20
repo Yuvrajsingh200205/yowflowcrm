@@ -6,6 +6,7 @@ import { useEffect, useMemo, useState } from 'react';
 import { Bell, CalendarDays, Check, ChevronRight, LogOut, Menu, Plus, Search, Settings, X } from 'lucide-react';
 import { activity, finance, freelancerId, panelNav, projects, shoots, statusTone, vendors, type Vendor } from './data';
 import { getCurrentMockFreelancer, getMockPlan, logoutMockFreelancer, updateMockFreelancerAccount, type MockFreelancerAccount } from './mockFreelancerStore';
+import { BRAND } from '@/config/brand';
 
 const money = (amount: number) => `₹${amount.toLocaleString('en-IN')}`;
 const totalReceived = finance.filter((item) => item.status === 'Received').reduce((sum, item) => sum + item.amount, 0);
@@ -26,7 +27,7 @@ export function PanelShell({ children }: { children: React.ReactNode }) {
           <button type="button" onClick={() => setOpen(true)} className="grid size-11 place-items-center rounded-xl border border-[#EDE8E2] bg-white md:hidden" aria-label="Open panel navigation"><Menu className="size-5" /></button>
           <div>
             <p className="text-[10px] font-black uppercase tracking-[.12em] text-[#C9A876]">Freelancer Panel</p>
-            <h1 className="text-lg font-black">Wedding Photo Planet</h1>
+            <h1 className="text-lg font-black">{BRAND.name}</h1>
           </div>
           <div className="flex items-center gap-2">
             <Link href="/panel/find-vendor" className="hidden min-h-10 items-center gap-2 rounded-full border border-[#EDE8E2] bg-white px-4 text-sm font-bold sm:inline-flex"><Search className="size-4 text-[#8D5265]" />Find Vendor</Link>
@@ -41,7 +42,7 @@ export function PanelShell({ children }: { children: React.ReactNode }) {
 }
 
 function PanelSidebar({ pathname, account }: { pathname: string; account: MockFreelancerAccount | null }) {
-  const studioName = account?.studioName ?? 'Rajat Studio';
+  const studioName = account?.studioName ?? 'Demo Studio';
   const initials = studioName.split(/\s+/).slice(0, 2).map((part) => part[0]).join('').toUpperCase() || 'RS';
   const plan = account ? getMockPlan(account.planId) : null;
   return (
@@ -99,7 +100,7 @@ export function PanelDashboard() {
 
 function Welcome({ account }: { account: MockFreelancerAccount | null }) {
   const plan = account ? getMockPlan(account.planId) : null;
-  return <section className="overflow-hidden rounded-2xl bg-linear-to-r from-[#3B1D29] to-[#4A2635] p-6 text-white shadow-sm"><p className="text-xs font-black uppercase tracking-[.12em] text-[#C9A876]">Freelancer dashboard overview • Wedding Photo Planet</p><h2 className="mt-2 text-3xl font-black">Welcome Back, {account?.studioName ?? 'Rajat Studio'}</h2><p className="mt-2 max-w-2xl text-sm leading-6 text-white/65">{plan ? `${plan.name} is active with ${account?.billingCycle} billing.` : 'Your profile is active, three projects are in motion, and one balance needs follow-up this week.'}</p></section>;
+  return <section className="overflow-hidden rounded-2xl bg-linear-to-r from-[#3B1D29] to-[#4A2635] p-6 text-white shadow-sm"><p className="text-xs font-black uppercase tracking-[.12em] text-[#C9A876]">Freelancer dashboard overview • {BRAND.name}</p><h2 className="mt-2 text-3xl font-black">Welcome Back, {account?.studioName ?? 'Demo Studio'}</h2><p className="mt-2 max-w-2xl text-sm leading-6 text-white/65">{plan ? `${plan.name} is active with ${account?.billingCycle} billing.` : 'Your profile is active, three projects are in motion, and one balance needs follow-up this week.'}</p></section>;
 }
 
 function Stats() {
@@ -265,7 +266,7 @@ export function FinancePage() {
 }
 
 function PanelPage({ title, subtitle, children }: { title: string; subtitle: string; children: React.ReactNode }) {
-  return <div className="space-y-5"><section className="rounded-2xl bg-linear-to-r from-[#3B1D29] to-[#4A2635] p-6 text-white"><p className="text-xs font-black uppercase tracking-[.12em] text-[#C9A876]">Wedding Photo Planet</p><h1 className="mt-2 text-3xl font-black">{title}</h1><p className="mt-2 text-sm text-white/65">{subtitle}</p></section>{children}</div>;
+  return <div className="space-y-5"><section className="rounded-2xl bg-linear-to-r from-[#3B1D29] to-[#4A2635] p-6 text-white"><p className="text-xs font-black uppercase tracking-[.12em] text-[#C9A876]">{BRAND.name}</p><h1 className="mt-2 text-3xl font-black">{title}</h1><p className="mt-2 text-sm text-white/65">{subtitle}</p></section>{children}</div>;
 }
 
 function Filter({ value, setValue, options }: { value: string; setValue: (value: string) => void; options: string[] }) {

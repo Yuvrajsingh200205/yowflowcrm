@@ -9,6 +9,7 @@ import type {
   ClientRequestItem,
   SharedGalleryLink,
 } from './clientPortalTypes';
+import { BRAND } from '@/config/brand';
 
 /**
  * Portal state for the real CRM projects. There are no demo couples here — a
@@ -20,7 +21,7 @@ import type {
  * it, and stay in step through the `storage` event. It is the single module that
  * swaps for the galleries API once that lands.
  */
-const STORAGE_KEY = 'wpp_client_portal_v3';
+const STORAGE_KEY = `${BRAND.cookiePrefix}_client_portal_v3`;
 
 /** What a couple has marked on a photograph, keyed by its gallery media id. */
 export interface MediaFlags {

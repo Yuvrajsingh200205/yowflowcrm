@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { Container } from './Editorial';
+import { BRAND } from '@/config/brand';
 
 /**
  * Footer as a colophon.
@@ -51,7 +52,7 @@ export function LandingFooter() {
         <div className="grid gap-x-8 gap-y-12 border-t border-[var(--ed-rule-ink)] pt-12 lg:grid-cols-12">
           <div className="lg:col-span-5">
             <Link href="/" className="ed-display block max-w-[14ch] text-[clamp(1.75rem,3.4vw,2.5rem)] leading-[1.06] tracking-[-0.02em] text-[var(--ed-on-ink)]">
-              Wedding Photo Planet
+              {BRAND.name}
             </Link>
             <p className="mt-6 max-w-[34ch] text-[0.8125rem] leading-[1.7] text-[var(--ed-on-ink-dim)]">
               Studio operations for wedding photography — from the first inquiry to the photographs a
@@ -81,7 +82,7 @@ export function LandingFooter() {
         </div>
 
         <div className="mt-14 flex flex-col gap-3 border-t border-[var(--ed-rule-ink)] pt-6 sm:flex-row sm:items-center sm:justify-between">
-          <p className="text-[0.75rem] text-[var(--ed-on-ink-dim)]">© {year} Wedding Photo Planet</p>
+          <p className="text-[0.75rem] text-[var(--ed-on-ink-dim)]">© {year} {BRAND.name}</p>
           <p className="ed-numeral text-[0.6875rem] uppercase tracking-[0.16em] text-[var(--ed-on-ink-dim)]">
             Set in Fraunces &amp; Instrument Sans
           </p>

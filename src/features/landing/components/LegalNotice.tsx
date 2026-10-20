@@ -1,5 +1,6 @@
 import { TextLink } from './Editorial';
 import { Reveal } from './Reveal';
+import { BRAND } from '@/config/brand';
 
 /**
  * Honest placeholder for legal copy.
@@ -15,7 +16,7 @@ export function LegalNotice({ document }: { document: string }) {
       <div className="border-l-2 border-[var(--ed-brass)] pl-6">
         <span className="ed-label text-[var(--ed-plum)]">Not yet published</span>
         <p className="mt-4 text-[0.9375rem] leading-[1.8] text-[var(--ed-on-paper)]">
-          The final {document} is with counsel and will be published here before Wedding Photo Planet is
+          The final {document} is with counsel and will be published here before {BRAND.name} is
           generally available.
         </p>
         <p className="mt-4 text-[0.875rem] leading-[1.8] text-[var(--ed-on-paper-dim)]">

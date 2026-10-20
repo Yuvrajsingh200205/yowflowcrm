@@ -62,6 +62,7 @@ import { GalleryQuickUpload } from './GalleryQuickUpload';
 import { SelectionWorkflow } from './SelectionWorkflow';
 import { ClientRequestsSection } from './ClientRequestsSection';
 import { SubFolderCreateModal } from './SubFolderCreateModal';
+import { BRAND } from '@/config/brand';
 
 const money = (amount: number) => `₹${Math.round(amount || 0).toLocaleString('en-IN')}`;
 
@@ -226,7 +227,7 @@ export const ClientPortalDashboard: React.FC<ClientPortalDashboardProps> = ({
             </div>
             <div className="min-w-0">
               <span className="font-serif text-base sm:text-lg tracking-wide text-slate-900 block truncate leading-tight font-medium">
-                Wedding Photo Planet
+                {BRAND.name}
               </span>
               <span className="text-[10px] tracking-widest uppercase font-semibold text-amber-800 block truncate">
                 Luxury Client Gallery

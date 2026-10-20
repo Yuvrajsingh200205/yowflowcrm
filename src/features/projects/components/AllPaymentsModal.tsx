@@ -110,7 +110,7 @@ export const AllPaymentsModal: React.FC<AllPaymentsModalProps> = ({
       amount: amountNum,
       type: 'installment',
       paymentMode: newPayMode,
-      receiptNumber: `WPP-REC-${Math.floor(1000 + Math.random() * 9000)}`,
+      receiptNumber: `REC-${Math.floor(1000 + Math.random() * 9000)}`,
       notes: newPayNotes || 'Payment Installment',
       receiptScreenshot: newPayScreenshot || undefined,
     };

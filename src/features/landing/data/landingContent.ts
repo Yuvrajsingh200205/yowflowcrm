@@ -1,3 +1,4 @@
+import { BRAND } from '@/config/brand';
 /**
  * Copy for the public marketing surface.
  *
@@ -30,7 +31,7 @@ export const navItems = [
 ];
 
 export const hero = {
-  eyebrow: 'Wedding Photo Planet',
+  eyebrow: `${BRAND.name}`,
   headline: ['A season of weddings.', 'One place that knows', 'where each one stands.'],
   standfirst:
     'A working CRM for wedding photography studios — inquiries, projects, shoots, crew, freelancers and payments held on a single record. The client gallery and freelancer portal are being built on the same foundation.',
@@ -52,7 +53,7 @@ export const standfirst = {
   lines: ['A studio’s hardest work happens', 'between the photographs.'],
   body: [
     'The follow-up nobody logged. The second shooter nobody confirmed. The balance nobody chased. The album sitting at ninety percent while the couple waits.',
-    'None of it is photography, and all of it decides whether the studio survives the season. Wedding Photo Planet is built for that part of the work — so the rest can be about the pictures.',
+    `None of it is photography, and all of it decides whether the studio survives the season. ${BRAND.name} is built for that part of the work — so the rest can be about the pictures.`,
   ],
 };
 

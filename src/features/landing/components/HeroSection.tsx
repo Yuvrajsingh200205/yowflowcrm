@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { ArrowRight, BarChart3, Camera, Image as ImageIcon, Mouse, Users } from 'lucide-react';
+import { BRAND } from '@/config/brand';
 
 const heroStats = [
   { value: '500+', label: 'Studios' },
@@ -20,7 +21,7 @@ export function HeroSection() {
   return (
     <section className="ed-hero-scene ed-ink relative isolate min-h-[100svh] overflow-hidden bg-[#210912]">
       <Image
-        src="/images/wpp-landing-hero-cinematic.png"
+        src="/images/hero-aperture.svg"
         alt="Bride under a floral stone arch at sunset with wedding photographs, a camera and burgundy silk."
         fill
         priority

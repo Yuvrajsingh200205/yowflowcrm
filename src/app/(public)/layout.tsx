@@ -7,7 +7,7 @@ import { PublicRevealBootstrap } from './PublicRevealBootstrap';
 /**
  * Public marketing shell.
  *
- * The editorial font variables and the `.wpp-ed` token scope are applied here
+ * The editorial font variables and the `.ui-ed` token scope are applied here
  * rather than on <html>, so the authenticated CRM keeps its existing
  * system-font rendering and token set untouched.
  */
@@ -15,7 +15,7 @@ export default function Layout({ children }: { children: ReactNode }) {
   return (
     <div
       suppressHydrationWarning
-      className={`${displayFont.variable} ${sansFont.variable} wpp-ed min-h-screen`}
+      className={`${displayFont.variable} ${sansFont.variable} ui-ed min-h-screen`}
     >
       <PublicRevealBootstrap />
       <a

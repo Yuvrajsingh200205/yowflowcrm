@@ -2,10 +2,11 @@ import Link from 'next/link';
 import { Action, Container, Display, TextLink } from '@/features/landing/components/Editorial';
 import { Reveal } from '@/features/landing/components/Reveal';
 import { shippedModules } from '@/features/landing/data/landingContent';
+import { BRAND } from '@/config/brand';
 
 export const metadata = {
   title: 'Features',
-  description: 'Plan, shoot, collect and deliver a wedding from one Wedding Photo Planet record.',
+  description: `Plan, shoot, collect and deliver a wedding from one ${BRAND.name} record.`,
 };
 
 const chapters = [

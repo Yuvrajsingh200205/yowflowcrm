@@ -47,15 +47,16 @@ Legend: [x] done · [~] in progress · [ ] todo
 3. **Delivery**: incremental on `rebrand/v2`; `main` and the deployed app stay untouched until each phase is green.
 4. **Auth cookies**: rename via brand config, changed in frontend + backend together and re-verified with the login → /me → refresh → logout flow.
 
-## Phase 1 — White-label cleanup  [ ]
-- [ ] `brand.config.ts` (FE) + `brand` env/config (BE): name, tagline, logo, colors, support email, domain, cookie prefix
-- [ ] Replace all hardcoded brand strings/emails/phones/domains with config
-- [ ] Replace previous-client images; remove demo/seed data tied to the client
-- [ ] Neutral seed (fake studio, fake data); `.env.example` complete
-- [ ] Docs (webhook URL etc.) use placeholders
+## Phase 1 — White-label cleanup  [x]
+- [x] `src/config/brand.ts` (FE) + `src/config/brand.ts` + `BRAND_*` env (BE): name, tagline, support email, domain, cookie prefix
+- [x] Replace all hardcoded brand strings/emails/phones/domains with config (codemod: `scripts/codemod_brand.py`)
+- [x] Previous-client images removed; neutral SVG art. [x] Owner/other-client names scrubbed from demo data (full demo-data rewrite → Phase 6)
+- [x] Neutral seed org + `.env.example` (BRAND_*). [ ] Realistic fake dataset → Phase 6
+- [x] Docs (webhook URL etc.) use placeholders
 - [ ] Rotation checklist in `docs/SECURITY_ROTATION.md`
-## Phase 2 — Brand identity  [ ]
-- [ ] Name, tagline, value prop, SVG wordmark + icon, favicon/OG image
+## Phase 2 — Brand identity  [~]
+- [x] Name **Frameloom**, tagline, value prop, SVG mark + wordmark, favicon (`app/icon.svg`)
+- [ ] OG image (PNG) → Phase 5; trademark/domain check on "Frameloom" is on the owner
 ## Phase 3 — Design system  [ ]
 - [ ] Tokens (color light/dark, type, space, radius, shadow, motion)
 - [ ] Components with all states + `/design-system` docs page

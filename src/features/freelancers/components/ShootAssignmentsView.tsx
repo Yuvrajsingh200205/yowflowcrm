@@ -1737,7 +1737,7 @@ export const ShootAssignmentsView: React.FC<ShootAssignmentsViewProps> = ({
                       <label className="text-[11px] font-bold text-slate-600 block mb-1">Custom Project Title</label>
                       <input
                         type="text"
-                        placeholder="e.g. Verma Wedding Destination"
+                        placeholder="e.g. Morgan Wedding Destination"
                         value={customProjectName}
                         onChange={(e) => setCustomProjectName(e.target.value)}
                         className="w-full px-3 py-2 text-xs rounded-lg border border-slate-300 bg-white"

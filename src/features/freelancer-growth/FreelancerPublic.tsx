@@ -8,6 +8,7 @@ import { ArrowRight, Camera, Check, CreditCard, Eye, EyeOff, LockKeyhole, Mail, 
 import { comparisonRows, plans, type BillingCycle } from './data';
 import { FreelancerLanding } from './landing/FreelancerLanding';
 import { saveMockFreelancerAccount } from './mockFreelancerStore';
+import { BRAND } from '@/config/brand';
 
 const money = (amount: number) => `₹${amount.toLocaleString('en-IN')}`;
 const container = 'mx-auto w-full max-w-7xl px-5 sm:px-8 lg:px-10';
@@ -88,7 +89,7 @@ export function CheckoutPage({ planId }: { planId: string }) {
     }
     startTransition(() => {
       saveMockFreelancerAccount({ ...parsed.data, planId: plan.id, billingCycle: cycle, purchasedAt: new Date().toISOString() });
-      window.localStorage.setItem('wpp-remembered-account', parsed.data.email);
+      window.localStorage.setItem(`${BRAND.cookiePrefix}-remembered-account`, parsed.data.email);
       window.setTimeout(() => setComplete(true), 650);
     });
   };
@@ -133,5 +134,5 @@ function Field({ icon: Icon, label, placeholder, value, error, onChange, type = 
 
 function FreelancerNav({ active, light = false }: { active: 'freelancers' | 'pricing'; light?: boolean }) {
   const text = light ? 'text-[#221219]' : 'text-white';
-  return <header className={`fixed inset-x-0 top-0 z-50 border-b ${light ? 'border-[#EDE8E2] bg-[#F7F6F3]/90' : 'border-white/10 bg-[#2A1620]/60'} backdrop-blur-xl`}><div className={`${container} flex h-18 items-center justify-between gap-4`}><Link href="/" className={`font-[var(--font-display)] text-lg font-black ${text}`}>Wedding Photo Planet</Link><nav className="hidden items-center gap-5 text-sm font-bold md:flex">{[['/freelancers', 'Home'], ['/freelancers#features', 'Features'], ['/freelancers#proof', 'Proof'], ['/freelancers/pricing', 'Pricing'], ['/contact', 'Contact']].map(([href, label]) => <Link key={href} href={href} className={`${text} ${active === 'pricing' && href.includes('pricing') ? 'opacity-100' : 'opacity-70'} transition hover:opacity-100`}>{label}</Link>)}</nav><div className="flex items-center gap-2"><Link href="/login" className={`hidden rounded-full border px-4 py-2 text-sm font-bold sm:inline-flex ${light ? 'border-[#EDE8E2] text-[#221219]' : 'border-white/25 text-white'}`}>Login</Link><Link href="/freelancers/pricing" className={cta}>Get Started</Link></div></div></header>;
+  return <header className={`fixed inset-x-0 top-0 z-50 border-b ${light ? 'border-[#EDE8E2] bg-[#F7F6F3]/90' : 'border-white/10 bg-[#2A1620]/60'} backdrop-blur-xl`}><div className={`${container} flex h-18 items-center justify-between gap-4`}><Link href="/" className={`font-[var(--font-display)] text-lg font-black ${text}`}>{BRAND.name}</Link><nav className="hidden items-center gap-5 text-sm font-bold md:flex">{[['/freelancers', 'Home'], ['/freelancers#features', 'Features'], ['/freelancers#proof', 'Proof'], ['/freelancers/pricing', 'Pricing'], ['/contact', 'Contact']].map(([href, label]) => <Link key={href} href={href} className={`${text} ${active === 'pricing' && href.includes('pricing') ? 'opacity-100' : 'opacity-70'} transition hover:opacity-100`}>{label}</Link>)}</nav><div className="flex items-center gap-2"><Link href="/login" className={`hidden rounded-full border px-4 py-2 text-sm font-bold sm:inline-flex ${light ? 'border-[#EDE8E2] text-[#221219]' : 'border-white/25 text-white'}`}>Login</Link><Link href="/freelancers/pricing" className={cta}>Get Started</Link></div></div></header>;
 }

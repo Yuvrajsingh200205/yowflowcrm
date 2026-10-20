@@ -25,6 +25,7 @@ import { Badge, BTN_CREAM, BTN_GHOST, BTN_PRIMARY, CARD, EmptyState, FIELD, KpiC
 import { usePermission } from '@/features/access';
 import { useClientPortalSync } from '@/features/client-portal';
 import { GalleryUploadModal } from '@/features/client-portal/GalleryUploadModal';
+import { BRAND } from '@/config/brand';
 
 interface ClientsDirectoryViewProps {
   projects: Project[];
@@ -153,7 +154,7 @@ export const ClientsDirectoryView: React.FC<ClientsDirectoryViewProps> = ({
               <span className="grid size-7 place-items-center rounded-full border border-white/15 bg-white/10">
                 <Heart className="size-3.5" />
               </span>
-              Studio Clients Desk • Wedding Photo Planet CRM
+              Studio Clients Desk • {BRAND.name}
             </div>
             <h1 className="mt-3 flex items-center gap-3 text-2xl font-black tracking-tight sm:text-3xl lg:text-4xl">
               <span className="grid size-11 place-items-center rounded-2xl bg-white/10">

@@ -1,9 +1,10 @@
-export const ACCESS_COOKIE = 'wpp_access_token';
-export const REFRESH_COOKIE = 'wpp_refresh_token';
-export const CLIENT_SESSION_COOKIE = 'wpp_client_session';
-export const FREELANCER_ACCESS_COOKIE = 'wpp_freelancer_access_token';
-export const FREELANCER_REFRESH_COOKIE = 'wpp_freelancer_refresh_token';
-export const FREELANCER_SESSION_COOKIE = 'wpp_freelancer_session';
+import { BRAND } from '@/config/brand';
+export const ACCESS_COOKIE = `${BRAND.cookiePrefix}_access_token`;
+export const REFRESH_COOKIE = `${BRAND.cookiePrefix}_refresh_token`;
+export const CLIENT_SESSION_COOKIE = `${BRAND.cookiePrefix}_client_session`;
+export const FREELANCER_ACCESS_COOKIE = `${BRAND.cookiePrefix}_freelancer_access_token`;
+export const FREELANCER_REFRESH_COOKIE = `${BRAND.cookiePrefix}_freelancer_refresh_token`;
+export const FREELANCER_SESSION_COOKIE = `${BRAND.cookiePrefix}_freelancer_session`;
 
 const PUBLIC_PREFIXES = [
   // A shared gallery is opened by family who have no CRM account; the token in
@@ -34,6 +35,7 @@ const PUBLIC_ROUTES = [
 
 const PUBLIC_FILES = [
   '/favicon.ico',
+  '/icon.svg',
   '/robots.txt',
   '/sitemap.xml',
 ];
@@ -54,7 +56,8 @@ export function isFrameworkRoute(pathname: string): boolean {
   return (
     pathname.startsWith('/_next/') ||
     pathname.startsWith('/api/') ||
-    pathname.startsWith('/images/')
+    pathname.startsWith('/images/') ||
+    pathname.startsWith('/brand/')
   );
 }
 

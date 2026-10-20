@@ -34,6 +34,7 @@ import {
   Trash2
 } from 'lucide-react';
 import { SOFTWARE_OPTIONS } from './TeamAttendance';
+import { BRAND } from '@/config/brand';
 
 interface MemberDashboardModalProps {
   member: TeamMember;
@@ -83,7 +84,7 @@ export const MemberDashboardModal: React.FC<MemberDashboardModalProps> = ({
   // New task form inside modal
   const [showAddTaskForm, setShowAddTaskForm] = useState(false);
   const [newTaskTitle, setNewTaskTitle] = useState('');
-  const [newTaskDomainSelect, setNewTaskDomainSelect] = useState('weddingphotoplanet.com');
+  const [newTaskDomainSelect, setNewTaskDomainSelect] = useState(`${BRAND.domain}`);
   const [customDomainInput, setCustomDomainInput] = useState('');
   const [newTaskProjectId, setNewTaskProjectId] = useState('');
   const [newTaskCategory, setNewTaskCategory] = useState<TeamTask['category']>('management');
@@ -838,7 +839,7 @@ export const MemberDashboardModal: React.FC<MemberDashboardModalProps> = ({
                 <div className="bg-white border-2 border-[#8f3655] rounded-2xl p-6 space-y-5 shadow-xl animate-in fade-in">
                   <div className="flex justify-between items-start border-b-2 border-slate-900 pb-4">
                     <div>
-                      <h2 className="text-xl font-black text-slate-900 uppercase tracking-tight">WEDDING PHOTO PLANET CRM</h2>
+                      <h2 className="text-xl font-black text-slate-900 uppercase tracking-tight">{BRAND.name.toUpperCase()} CRM</h2>
                       <p className="text-xs font-bold text-slate-600">STUDIO SALARY DISBURSED SLIP - AUGUST 2026</p>
                       <p className="text-[11px] text-slate-500">Official Monthly Payroll Statement</p>
                     </div>
@@ -923,7 +924,7 @@ export const MemberDashboardModal: React.FC<MemberDashboardModalProps> = ({
 
                           doc.setFontSize(16);
                           doc.setFont('helvetica', 'bold');
-                          doc.text('WEDDING PHOTO PLANET', 14, 15);
+                          doc.text(`${BRAND.name.toUpperCase()}`, 14, 15);
 
                           doc.setFontSize(11);
                           doc.setTextColor(79, 70, 229);
@@ -1016,7 +1017,7 @@ export const MemberDashboardModal: React.FC<MemberDashboardModalProps> = ({
                       <label className="block text-xs font-bold text-slate-700 mb-1">Task Title / Description *</label>
                       <input
                         type="text"
-                        placeholder="e.g. Publish 2 Instagram Reels & Write Blog Article for weddingphotoplanet.com"
+                        placeholder={`e.g. Publish 2 Instagram Reels & Write Blog Article for ${BRAND.domain}`}
                         value={newTaskTitle}
                         onChange={(e) => setNewTaskTitle(e.target.value)}
                         className="w-full bg-white border border-slate-300 rounded-xl p-2.5 text-xs font-bold text-slate-900"

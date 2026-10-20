@@ -1,11 +1,12 @@
 import Image from 'next/image';
 import { Camera, Heart } from 'lucide-react';
+import { BRAND } from '@/config/brand';
 
 export function LoginHero() {
   return (
-    <section aria-label="Wedding Photo Planet introduction" className="relative min-h-24 overflow-hidden bg-[#2b0b18] px-5 py-4 text-[#fff4ed] sm:min-h-44 sm:px-10 sm:py-6 lg:min-h-0 lg:px-[7%] lg:py-[clamp(24px,4vh,48px)]">
+    <section aria-label={`${BRAND.name} introduction`} className="relative min-h-24 overflow-hidden bg-[#2b0b18] px-5 py-4 text-[#fff4ed] sm:min-h-44 sm:px-10 sm:py-6 lg:min-h-0 lg:px-[7%] lg:py-[clamp(24px,4vh,48px)]">
       <Image
-        src="/images/wedding-login-hero.png"
+        src="/images/hero-aperture.svg"
         alt=""
         aria-hidden="true"
         fill
@@ -20,7 +21,7 @@ export function LoginHero() {
       </div>
       <div className="relative z-1 mt-5 hidden sm:block lg:mt-[clamp(24px,5vh,60px)]">
         <p className="hidden font-serif text-2xl lg:block lg:text-[27px]">Welcome Back to</p>
-        <h1 className="font-serif text-[clamp(28px,5vw,38px)] leading-[1.15] tracking-[-.03em] lg:mt-2 lg:text-[clamp(32px,3vw,49px)]">Wedding Photo Planet <em className="not-italic text-[#d56686]">CRM</em></h1>
+        <h1 className="font-serif text-[clamp(28px,5vw,38px)] leading-[1.15] tracking-[-.03em] lg:mt-2 lg:text-[clamp(32px,3vw,49px)]">{BRAND.name} <em className="not-italic text-[#d56686]">CRM</em></h1>
         <div className="mt-6 hidden w-36 items-center gap-2 text-[#dc748d] lg:flex"><span className="h-px flex-1 bg-[#dfa786]" /><Heart className="size-3.5 fill-current" /><span className="h-px flex-1 bg-[#dfa786]" /></div>
         <h2 className="mt-6 hidden text-[17px] font-medium leading-[1.65] text-[#f1dfda] lg:block">Manage your clients, projects, shoots &amp; memories<br />all in one beautiful place.</h2>
       </div>

@@ -5,6 +5,7 @@ import { usePathname, useRouter } from 'next/navigation';
 import { Bell, BriefcaseBusiness, CalendarDays, ClipboardList, CreditCard, Image, LayoutDashboard, LogOut, Menu, Search, UserRound, Video, WalletCards } from 'lucide-react';
 import { freelancerPortalApi } from '@/lib/api/freelancerPortal';
 import { useAuthSession } from '@/components/auth/AuthSessionProvider';
+import { BRAND } from '@/config/brand';
 
 const nav = [
   { href: '/freelancer/dashboard', label: 'Dashboard', icon: LayoutDashboard },
@@ -70,7 +71,7 @@ export function FreelancerPortalShell({ children }: { children: React.ReactNode 
           <button className="grid size-11 place-items-center rounded-xl border border-[#EDE8E2] bg-white text-[#5A2F3E] md:hidden" aria-label="Open navigation"><Menu className="size-5" /></button>
           <div>
             <p className="text-[10px] font-black uppercase tracking-[.16em] text-[#C9A876]">Freelancer Panel</p>
-            <h1 className="text-lg font-black">Wedding Photo Planet</h1>
+            <h1 className="text-lg font-black">{BRAND.name}</h1>
           </div>
           <div className="flex items-center gap-2">
             <Link href="/freelancer/find-vendor" className="hidden min-h-10 items-center gap-2 rounded-full border border-[#EDE8E2] bg-white px-4 text-sm font-bold sm:inline-flex"><Search className="size-4 text-[#8D5265]" />Find Vendor</Link>

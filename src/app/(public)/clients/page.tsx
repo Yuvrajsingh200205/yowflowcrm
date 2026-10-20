@@ -58,7 +58,7 @@ export default function ClientsPage() {
 
       <section className="relative isolate min-h-[26rem] overflow-hidden">
         <Image
-          src="/images/wedding-portrait.jpg"
+          src="/images/portrait-abstract.svg"
           alt="A quiet wedding portrait."
           fill
           sizes="100vw"

@@ -1,8 +1,9 @@
 import { ApiError, ApiMeta } from './client';
+import { BRAND } from '@/config/brand';
 
 const configuredApiUrl = process.env.NEXT_PUBLIC_API_URL ?? 'http://localhost:5050/api/v1';
 const baseUrl = configuredApiUrl.replace(/[“”"']/g, '').trim().replace(/\/$/, '');
-const SESSION_COOKIE = 'wpp_freelancer_session';
+const SESSION_COOKIE = `${BRAND.cookiePrefix}_freelancer_session`;
 
 function apiBaseUrl(): string {
   if (typeof window === 'undefined' || baseUrl.startsWith('/')) return baseUrl;

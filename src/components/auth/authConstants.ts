@@ -1,6 +1,6 @@
 export const OWNER_USER = {
-  id: 'owner-rajat',
-  name: 'Rajat Verma',
+  id: 'owner-demo',
+  name: 'Alex Morgan',
   role: 'Owner',
   email: 'admin@gmail.com',
   accessRoleId: 'super_admin',

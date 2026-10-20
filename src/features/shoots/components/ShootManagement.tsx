@@ -951,7 +951,7 @@ export const ShootManagement: React.FC<ShootManagementProps> = ({ projects, onUp
                     type="text"
                     value={editingCrewShoot.leadPhotographer}
                     onChange={(e) => setEditingCrewShoot({ ...editingCrewShoot, leadPhotographer: e.target.value })}
-                    placeholder="Enter name (e.g. Rajat Verma)"
+                    placeholder="Enter name (e.g. Alex Morgan)"
                     className="w-full rounded-2xl border border-[#ded5cf] bg-[#fbfaf8] px-4 py-3 text-sm font-semibold text-slate-900 outline-none focus:border-[#9b4865] focus:bg-white focus:ring-4 focus:ring-rose-100"
                   />
                 </div>

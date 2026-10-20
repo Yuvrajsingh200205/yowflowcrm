@@ -3,10 +3,11 @@ import { Container, Section, TextLink } from '@/features/landing/components/Edit
 import { PageHeader } from '@/features/landing/components/PageHeader';
 import { Reveal } from '@/features/landing/components/Reveal';
 import { contactChannels, contactDoors } from '@/features/landing/data/contactContent';
+import { BRAND } from '@/config/brand';
 
 export const metadata = {
   title: 'Contact',
-  description: 'Reach Wedding Photo Planet — studio access, freelancer registration and client sign-in.',
+  description: `Reach ${BRAND.name} — studio access, freelancer registration and client sign-in.`,
 };
 
 /**

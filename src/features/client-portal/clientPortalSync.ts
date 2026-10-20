@@ -53,7 +53,7 @@ export function projectToClientUser(
     id: existingClient?.id || `client-${project.id}`,
     projectId: project.id,
     clientNames: extractedNames,
-    primaryEmail: `${emailSlug}.wpp@gmail.com`,
+    primaryEmail: `${emailSlug}@example.com`,
     mobile: project.clientContactMobile || '+91 98000 00000',
     weddingDate: project.weddingFunctionDates || '2026',
     venue: project.venueLocation || 'Venue TBD',

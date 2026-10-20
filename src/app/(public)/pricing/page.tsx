@@ -2,10 +2,11 @@ import { Action, Container, Display, TextLink } from '@/features/landing/compone
 import { FaqSection } from '@/features/landing/components/FaqSection';
 import { Reveal } from '@/features/landing/components/Reveal';
 import { pricingPlans } from '@/features/landing/data/pricingData';
+import { BRAND } from '@/config/brand';
 
 export const metadata = {
   title: 'Pricing',
-  description: 'Wedding Photo Planet is structured around studio, freelancer and client access. Studio terms are quoted.',
+  description: `${BRAND.name} is structured around studio, freelancer and client access. Studio terms are quoted.`,
 };
 
 export default function PricingPage() {

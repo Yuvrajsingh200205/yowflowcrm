@@ -8,6 +8,7 @@ import { indianMobileError, nextIndianMobileValue } from '@/lib/validation/india
 import { ApiError } from '@/lib/api/client';
 import { freelancerPortalApi } from '@/lib/api/freelancerPortal';
 import { getMockFreelancerAccount } from '@/features/freelancer-growth/mockFreelancerStore';
+import { BRAND } from '@/config/brand';
 
 const STEPS = ['Account', 'Profile', 'Skills', 'Availability', 'Rates', 'Review'];
 const roles = ['Wedding Photographer', 'Wedding Videographer', 'Cinematographer', 'Second Shooter', 'Drone Operator', 'Photo Editor', 'Video Editor', 'Album Designer'];
@@ -143,7 +144,7 @@ export const PublicFreelancerRegistration: React.FC = () => {
         expectedRate: form.dailyRate || undefined,
         notes,
       });
-      window.localStorage.setItem('wpp-remembered-account', form.email.trim());
+      window.localStorage.setItem(`${BRAND.cookiePrefix}-remembered-account`, form.email.trim());
       setSubmittedName(form.name.trim());
       setSubmitted(true);
     } catch (error) {
@@ -165,7 +166,7 @@ export const PublicFreelancerRegistration: React.FC = () => {
       <section className="mx-auto max-w-2xl text-center">
         <div className="mx-auto grid size-16 place-items-center rounded-2xl bg-emerald-50 text-emerald-700"><CheckCircle2 className="size-8" /></div>
         <h1 className="mt-5 text-3xl font-black tracking-tight text-slate-900">Application submitted</h1>
-        <p className="mx-auto mt-3 max-w-lg text-sm font-medium leading-relaxed text-slate-600">Thanks, {submittedName}. Your Wedding Photo Planet freelancer profile is ready. Sign in with {form.email} and the password you created to open your panel.</p>
+        <p className="mx-auto mt-3 max-w-lg text-sm font-medium leading-relaxed text-slate-600">Thanks, {submittedName}. Your {BRAND.name} freelancer profile is ready. Sign in with {form.email} and the password you created to open your panel.</p>
         <div className="mt-6 flex flex-wrap justify-center gap-2">
           <button type="button" onClick={() => router.push('/login?returnTo=/freelancer/profile')} className={BTN_PRIMARY}>Continue to Login</button>
           <button type="button" onClick={() => { setSubmitted(false); setStep(0); }} className={BTN_GHOST}>Start another application</button>
@@ -179,7 +180,7 @@ export const PublicFreelancerRegistration: React.FC = () => {
       <section className="relative overflow-hidden bg-[radial-gradient(circle_at_88%_8%,rgba(221,200,156,.2),transparent_30%),linear-gradient(125deg,#704758,#55333f_50%,#38262d)] px-5 py-8 text-white sm:px-8 sm:py-12">
         <div className="absolute -bottom-20 -right-10 size-64 rounded-full border-[34px] border-white/[.04]" />
         <div className="relative mx-auto max-w-5xl">
-          <span className="inline-flex items-center gap-1.5 rounded-full border border-white/20 bg-white/10 px-3 py-1 text-xs font-extrabold uppercase tracking-[.14em] text-[#f0dce3]"><Sparkles className="size-3.5" /> Wedding Photo Planet</span>
+          <span className="inline-flex items-center gap-1.5 rounded-full border border-white/20 bg-white/10 px-3 py-1 text-xs font-extrabold uppercase tracking-[.14em] text-[#f0dce3]"><Sparkles className="size-3.5" /> {BRAND.name}</span>
           <h1 className="mt-4 text-3xl font-black tracking-tight sm:text-4xl">Join our freelancer network</h1>
           <p className="mt-2 max-w-2xl text-sm font-medium leading-relaxed text-[#eadfe2] sm:text-base">{fromCheckout ? 'Your plan is purchased. Complete this profile so your panel can open with the right details.' : 'Find meaningful wedding assignments, build a trusted studio relationship, and keep your profile ready for the right production opportunity.'}</p>
           <div className="mt-5 flex flex-wrap gap-2 text-xs font-bold text-[#f1dce3]"><span className="rounded-full bg-white/10 px-3 py-1.5">Professional opportunities</span><span className="rounded-full bg-white/10 px-3 py-1.5">Clear assignment terms</span><span className="rounded-full bg-white/10 px-3 py-1.5">One trusted profile</span></div>
@@ -203,7 +204,7 @@ export const PublicFreelancerRegistration: React.FC = () => {
           {submitError ? <p className="rounded-xl bg-red-50 px-3 py-2 text-sm font-bold text-red-700">{submitError}</p> : null}
           <div className="mt-7 flex items-center justify-between gap-3 border-t border-[#eee7e2] pt-5"><button type="button" onClick={() => setStep((current) => Math.max(0, current - 1))} disabled={step === 0 || submitting} className={BTN_GHOST}><ArrowLeft className="size-3.5" /> Back</button><button type="submit" disabled={submitting} className={BTN_PRIMARY}>{step === STEPS.length - 1 ? (submitting ? 'Submitting…' : 'Submit application') : <>Continue <ArrowRight className="size-3.5" /></>}</button></div>
         </form>
-        <p className="mt-4 flex items-center justify-center gap-1.5 text-center text-xs font-medium text-slate-500"><MapPin className="size-3.5 text-[#8f3655]" /> Your details are reviewed by the Wedding Photo Planet production team.</p>
+        <p className="mt-4 flex items-center justify-center gap-1.5 text-center text-xs font-medium text-slate-500"><MapPin className="size-3.5 text-[#8f3655]" /> Your details are reviewed by the {BRAND.name} production team.</p>
       </section>
     </main>
   );

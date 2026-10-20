@@ -1,15 +1,10 @@
-/**
- * Contact details.
- *
- * ⚠ CONFIRM BEFORE LAUNCH — `email` and `phone` below are the only two values
- * on the public site that were not derived from the codebase. The domain is
- * taken from weddingphotoplanet.com, which appears throughout the app, but the
- * mailbox and number must be confirmed by the business. Nothing else on the
- * marketing surface invents a fact.
- */
+import { BRAND } from '@/config/brand';
+/** Contact details. Edit them in `src/config/brand.ts`. */
 export const contactChannels = [
-  { label: 'Email', value: 'hello@weddingphotoplanet.com', href: 'mailto:hello@weddingphotoplanet.com' },
-  { label: 'Phone', value: '+91 98765 00001', href: 'tel:+919876500001' },
+  { label: 'Email', value: `${BRAND.supportEmail}`, href: `mailto:${BRAND.supportEmail}` },
+  ...(BRAND.supportPhone
+    ? [{ label: 'Phone', value: BRAND.supportPhone, href: `tel:${BRAND.supportPhone.replace(/[^+\d]/g, '')}` }]
+    : []),
 ];
 
 /** Every destination here is a route that already exists in the app. */

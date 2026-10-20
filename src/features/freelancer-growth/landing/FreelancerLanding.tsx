@@ -7,6 +7,7 @@ import { LandingFooter } from '@/features/landing/components/LandingFooter';
 import { LandingNavbar } from '@/features/landing/components/LandingNavbar';
 import { comparisonRows, featureSteps, finance, plans, projects, shoots, testimonials, type BillingCycle } from '../data';
 import './freelancer-landing.css';
+import { BRAND } from '@/config/brand';
 
 const money = (amount: number) => `₹${amount.toLocaleString('en-IN')}`;
 
@@ -84,12 +85,12 @@ export function FreelancerLanding() {
   }, []);
 
   return (
-    <div className="fl-page wpp-ed">
+    <div className="fl-page ui-ed">
       <LandingNavbar />
       <main>
         <section className="fl-hero" ref={hero}>
           <div className="fl-hero-photo">
-            <Image src="/images/wedding-login-hero.png" alt="A photographer working a wedding." fill priority sizes="100vw" />
+            <Image src="/images/hero-aperture.svg" alt="A photographer working a wedding." fill priority sizes="100vw" />
           </div>
           <div className="fl-hero-shade" />
           <div className="fl-hero-copy">
@@ -103,7 +104,7 @@ export function FreelancerLanding() {
                     <span className="fl-line fl-d4 block">Get paid.</span>
                   </h1>
                   <p className="fl-line fl-d5 mt-6 max-w-[34rem] text-[1.02rem] leading-7 text-[rgba(247,241,232,0.78)]">
-                    A calmer operating page for photographers, filmmakers and editors: profile, assignments, shoots and payouts in one Wedding Photo Planet record.
+                    A calmer operating page for photographers, filmmakers and editors: profile, assignments, shoots and payouts in one {BRAND.name} record.
                   </p>
                   <div className="fl-line fl-d6 mt-8 flex flex-wrap gap-6">
                     <Link href="/freelancers/pricing" className="ed-action">Get Started</Link>
@@ -354,7 +355,7 @@ export function FreelancerLanding() {
 
         <section className="fl-close">
           <div className="fl-close-photo">
-            <Image src="/images/wedding-portrait.jpg" alt="" fill sizes="100vw" />
+            <Image src="/images/portrait-abstract.svg" alt="" fill sizes="100vw" />
           </div>
           <div className="fl-close-shade" aria-hidden="true" />
           <div className="fl-wrap py-[clamp(5rem,10vw,8rem)]">

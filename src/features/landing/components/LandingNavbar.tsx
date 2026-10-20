@@ -5,6 +5,7 @@ import { usePathname } from 'next/navigation';
 import { useEffect, useRef, useState } from 'react';
 import { ArrowRight } from 'lucide-react';
 import { navItems } from '../data/landingContent';
+import { BRAND } from '@/config/brand';
 
 /**
  * Landing navigation.
@@ -135,9 +136,9 @@ export function LandingNavbar() {
       <header className="ed-nav" data-scrolled={scrolled} data-open={open}>
       <div className="ed-nav-bar">
         {/* ---- Brand ---- */}
-        <Link href="/" className="ed-nav-lockup" aria-label="Wedding Photo Planet — home">
+        <Link href="/" className="ed-nav-lockup" aria-label={`${BRAND.name} — home`}>
           <ApertureMark />
-          <span className="ed-nav-wordmark">Wedding Photo Planet</span>
+          <span className="ed-nav-wordmark">{BRAND.name}</span>
         </Link>
 
         {/* ---- Navigation ---- */}

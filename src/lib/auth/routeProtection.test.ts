@@ -48,7 +48,7 @@ describe('route protection helpers', () => {
   it('ignores framework and API paths', () => {
     expect(isFrameworkRoute('/_next/static/chunk.js')).toBe(true);
     expect(isFrameworkRoute('/api/v1/auth/me')).toBe(true);
-    expect(isFrameworkRoute('/images/wedding-login-hero.png')).toBe(true);
+    expect(isFrameworkRoute('/images/hero-aperture.svg')).toBe(true);
     expect(isFrameworkRoute('/projects/new')).toBe(false);
   });
 

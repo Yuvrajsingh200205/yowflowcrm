@@ -2,6 +2,7 @@ import type { ReactNode } from 'react';
 import Link from 'next/link';
 import { Camera, Heart, LayoutDashboard, Menu, Sparkles, UserRound } from 'lucide-react';
 import { motion } from '@/lib/animations/motion';
+import { BRAND } from '@/config/brand';
 
 type NavItem = { href: string; label: string };
 
@@ -24,7 +25,7 @@ const CLIENT_NAV: NavItem[] = [
   { href: '/client/galleries/sample', label: 'Galleries' },
 ];
 
-function Brand({ label = 'Wedding Photo Planet' }: { label?: string }) {
+function Brand({ label = `${BRAND.name}` }: { label?: string }) {
   return (
     <Link href="/" className="flex items-center gap-2 text-sm font-black tracking-tight text-[#302C2E]">
       <span className="grid size-9 place-items-center rounded-xl bg-[#5A2F3E] text-[#DDC89C] shadow-sm">

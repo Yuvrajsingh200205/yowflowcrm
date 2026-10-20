@@ -27,6 +27,7 @@ import {
 } from 'lucide-react';
 import { ProjectStatus, TeamMember } from '@/types';
 import { NotificationBell } from '@/features/notifications/NotificationBell';
+import { BRAND } from '@/config/brand';
 
 export type TabType = 'dashboard' | 'roles' | 'projects' | 'shoots' | 'expenses' | 'data' | 'team' | 'freelancers' | 'clients' | 'deliveries' | 'owner_workspace' | 'equipment' | 'leads' | 'access' | 'settings';
 
@@ -97,7 +98,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
           <div className="flex items-center justify-between">
             <div>
               <h1 className="sidebar-brand text-lg font-black tracking-tight text-indigo-400">
-                WEDDING PHOTO PLANET
+                {BRAND.name.toUpperCase()}
               </h1>
               <p className="text-[10px] text-slate-400 uppercase tracking-widest mt-0.5 font-bold">
                 CRM Studio System
@@ -121,7 +122,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
                 {userInitials}
               </div>
               <div className="truncate">
-                <p className="text-xs font-bold text-white truncate">{currentUser?.name || 'Rajat Verma'}</p>
+                <p className="text-xs font-bold text-white truncate">{currentUser?.name || 'Alex Morgan'}</p>
                 <p className="text-[10px] text-indigo-300 font-medium truncate flex items-center gap-1">
                   {isFullAdmin ? <ShieldCheck className="w-3 h-3 text-indigo-400 inline" /> : <UserCheck className="w-3 h-3 text-emerald-400 inline" />}
                   <span>{currentUser?.role || 'Owner'}</span>
@@ -265,7 +266,7 @@ export const TopHeader: React.FC<TopHeaderProps> = ({
   const PageIcon = PAGE_ICONS[activeTab];
   const userInitials = currentUser?.name
     ? currentUser.name.split(' ').map((n) => n[0]).join('').slice(0, 2).toUpperCase()
-    : 'WPP';
+    : BRAND.shortName.slice(0, 2).toUpperCase();
 
   return (
     <header className="relative z-20 border-b border-[#e8ddd7] bg-[linear-gradient(180deg,#fffdfb_0%,#f8f1ee_100%)] shadow-[0_4px_18px_rgba(67,31,43,0.05)]">
@@ -289,7 +290,7 @@ export const TopHeader: React.FC<TopHeaderProps> = ({
                 <p className="truncate text-sm font-extrabold tracking-tight text-[#321f27] sm:text-base">{pageTitles[activeTab]}</p>
                 <p className="hidden items-center gap-1.5 text-[11px] font-bold uppercase tracking-[.14em] text-[#a07a4a] sm:flex">
                   <span className="size-1.5 rounded-full bg-[#ddc89c]" />
-                  Wedding Photo Planet
+                  {BRAND.name}
                 </p>
               </div>
             </div>

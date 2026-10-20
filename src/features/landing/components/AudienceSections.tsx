@@ -34,7 +34,7 @@ function ProductionDocket() {
     <div className="bg-[var(--ed-paper-2)] p-6 sm:p-8">
       <div className="flex items-baseline justify-between gap-4 border-b border-[var(--ed-rule-paper)] pb-4">
         <span className="ed-label text-[var(--ed-plum)]">Project record — example</span>
-        <span className="ed-numeral text-[0.6875rem] text-[var(--ed-on-paper-dim)]">WPP·0247</span>
+        <span className="ed-numeral text-[0.6875rem] text-[var(--ed-on-paper-dim)]">No. 0247</span>
       </div>
       <dl className="mt-1">
         {rows.map(([label, value]) => (
@@ -147,7 +147,7 @@ export function ClientSection() {
     <section id="clients" className="ed-ink relative isolate overflow-hidden">
       <div className="absolute inset-0 -z-10">
         <Image
-          src="/images/wedding-band.jpg"
+          src="/images/studio-light.svg"
           alt=""
           aria-hidden="true"
           fill

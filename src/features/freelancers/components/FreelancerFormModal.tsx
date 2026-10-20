@@ -3,6 +3,7 @@ import { Freelancer, FreelancerApplicationStatus, FreelancerCategory, Freelancer
 import { UserPlus } from 'lucide-react';
 import { BTN_GHOST, BTN_PRIMARY, FIELD, LABEL, Modal, ModalHero } from '@/features/team/components/TeamUiKit';
 import { indianMobileError, nextIndianMobileValue } from '@/lib/validation/indianMobile';
+import { BRAND } from '@/config/brand';
 
 interface FreelancerFormModalProps {
   existingFreelancer?: Freelancer | null;
@@ -164,7 +165,7 @@ export const FreelancerFormModal: React.FC<FreelancerFormModalProps> = ({
         icon={UserPlus}
         eyebrow="Production Network"
         title={existingFreelancer ? 'Edit Freelancer' : 'Add Freelancer'}
-        description={existingFreelancer ? existingFreelancer.freelancerId : 'Create a talent profile for Wedding Photo Planet shoots.'}
+        description={existingFreelancer ? existingFreelancer.freelancerId : `Create a talent profile for ${BRAND.name} shoots.`}
         onClose={onClose}
         labelledBy="freelancer-form-title"
       />

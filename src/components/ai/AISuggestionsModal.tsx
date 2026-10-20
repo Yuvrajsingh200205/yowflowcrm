@@ -28,7 +28,7 @@ Target vibe: ${vibe}
 4. Haldi Reel: "Rangisari" (Folk Fusion) - Vibrant yellow petal splash
 5. Reception Film: cinematic instrumental with a restrained orchestral build
 
-🎥 Essential Wedding Shot List for Rajat Verma's Crew:
+🎥 Essential Wedding Shot List for Alex Morgan's Crew:
 • Pre-Wedding: Sunrise golden hour silhouette, wide drone orbit at venue, close-up ring reflection
 • Varmala: Slow-mo 120fps rose petal shower shot from FX3, 360-degree gimbal wrap around couple
 • Phere: Flame bokeh background, emotional candid father-daughter moment, close up mangalsutra tying
@@ -57,7 +57,7 @@ Target vibe: ${vibe}
               AI Wedding Song & Shot List Generator
             </h3>
             <p className="text-[11px] text-slate-500">
-              Generate trending music recommendations and cinematic shot lists for Rajat Verma's team
+              Generate trending music recommendations and cinematic shot lists for Alex Morgan's team
             </p>
           </div>
           <button

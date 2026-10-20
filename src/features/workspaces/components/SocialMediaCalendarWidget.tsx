@@ -37,6 +37,7 @@ import {
   Zap,
   FolderPlus
 } from 'lucide-react';
+import { BRAND } from '@/config/brand';
 
 export interface SocialAccount {
   id: string;
@@ -186,8 +187,8 @@ export const WEB_SUB_CATEGORIES: Record<'Off page' | 'On page' | 'Monthly report
 const DEFAULT_WEB_DOMAINS: WebsiteDomain[] = [
   {
     id: 'web-1',
-    siteName: 'Wedding Photo Planet Official Blog',
-    url: 'weddingphotoplanet.com/blog',
+    siteName: `${BRAND.name} Official Blog`,
+    url: `${BRAND.domain}/blog`,
     type: 'WordPress',
     monthlyGoal: 8,
     notes: '📌 Primary SEO Blog for Destination Weddings.\n- Focus on Udaipur, Jaipur & Goa venue reviews & photography guides.\n- Target 8 high-quality articles per month.\n- Ensure all images have proper alt tags.',
@@ -222,7 +223,7 @@ const DEFAULT_WEB_DOMAINS: WebsiteDomain[] = [
   {
     id: 'web-2',
     siteName: 'Royal Wedding Stories Portfolio',
-    url: 'royalweddingstories.in',
+    url: 'demo-weddings.example',
     type: 'Custom React/Next.js',
     monthlyGoal: 6,
     notes: '📌 High-res client photo stories, cinematic trailers & bride testimonials.\n- Maintain fast page speed loading under 2 seconds.\n- Add Schema Video markup.',
@@ -238,8 +239,8 @@ const DEFAULT_WEB_DOMAINS: WebsiteDomain[] = [
   },
   {
     id: 'web-3',
-    siteName: 'Aarvi Production Studio News',
-    url: 'aarviproductions.com/news',
+    siteName: 'Demo Studio News',
+    url: 'demo-studio.example/news',
     type: 'Medium / Substack',
     monthlyGoal: 4,
     notes: '📌 Studio news, camera gear reviews, industry awards & behind-the-scenes.',
@@ -248,7 +249,7 @@ const DEFAULT_WEB_DOMAINS: WebsiteDomain[] = [
       { id: 't3-2', text: 'Share latest wedding teaser links on Substack newsletter', completed: true, priority: 'Low' }
     ],
     keywords: [
-      { id: 'k3-1', keyword: 'Aarvi Production Wedding Filmography', targetUrl: '/about-us', searchVolume: '2.4K/mo', difficulty: 'Low', status: 'Top 3' }
+      { id: 'k3-1', keyword: 'Demo Studio Wedding Filmography', targetUrl: '/about-us', searchVolume: '2.4K/mo', difficulty: 'Low', status: 'Top 3' }
     ],
     color: 'bg-amber-500'
   }
@@ -284,7 +285,7 @@ const DEFAULT_WEB_POSTS: WebContentPost[] = [
     websiteId: 'web-3',
     title: 'Why 4K Drone Videography & Slog-3 Color Grading Define Modern Weddings',
     subCategory: 'SEO Ranking & Organic Traffic Audit',
-    focusKeywords: 'Drone Videography, Wedding Editing, Aarvi Production Studio',
+    focusKeywords: 'Drone Videography, Wedding Editing, Demo Studio',
     contentType: 'Monthly report',
     metaDescription: 'How our cinematography crew captures 4K aerial shots and cinematic color palettes.',
     date: '2026-08-22',
@@ -296,8 +297,8 @@ const DEFAULT_WEB_POSTS: WebContentPost[] = [
 const DEFAULT_ACCOUNTS: SocialAccount[] = [
   {
     id: 'acc-1',
-    clientName: 'Aarvi Productions Official',
-    handle: '@aarviproductions',
+    clientName: 'Demo Studio Official',
+    handle: '@demostudio',
     platform: 'Instagram',
     monthlyGoal: 20,
     notes: 'Main brand page. Focus on luxury cinematic wedding teasers & reels.',
@@ -314,8 +315,8 @@ const DEFAULT_ACCOUNTS: SocialAccount[] = [
   },
   {
     id: 'acc-3',
-    clientName: 'Aarvi YouTube Channel',
-    handle: 'Aarvi Wedding Films',
+    clientName: 'Demo YouTube Channel',
+    handle: 'Demo Wedding Films',
     platform: 'YouTube',
     monthlyGoal: 6,
     notes: '4K Full Wedding Teasers & Shorts',
@@ -330,7 +331,7 @@ const DEFAULT_POSTS: SocialPost[] = [
     date: '2026-08-02',
     postType: 'Reel',
     concept: 'Cinematic Phere Slow-mo in 4K',
-    caption: 'Pure magic captured during sunset phere ✨ #WeddingFilm #AarviFilms',
+    caption: 'Pure magic captured during sunset phere ✨ #WeddingFilm #DemoFilms',
     hashtags: '#cinematicwedding #weddingreels #indianwedding',
     status: 'Posted',
     mediaUrl: 'https://drive.google.com'
@@ -395,10 +396,10 @@ export const SocialMediaCalendarWidget: React.FC<SocialMediaCalendarWidgetProps>
   const [activeHubTab, setActiveHubTab] = useState<'social' | 'website'>('website');
 
   // Persistence Keys
-  const STORAGE_KEY_ACCOUNTS = 'wpp_social_accounts_v2';
-  const STORAGE_KEY_POSTS = 'wpp_social_calendar_posts_v2';
-  const STORAGE_KEY_WEB_DOMAINS = 'wpp_web_domains_v2';
-  const STORAGE_KEY_WEB_POSTS = 'wpp_web_calendar_posts_v2';
+  const STORAGE_KEY_ACCOUNTS = `${BRAND.cookiePrefix}_social_accounts_v2`;
+  const STORAGE_KEY_POSTS = `${BRAND.cookiePrefix}_social_calendar_posts_v2`;
+  const STORAGE_KEY_WEB_DOMAINS = `${BRAND.cookiePrefix}_web_domains_v2`;
+  const STORAGE_KEY_WEB_POSTS = `${BRAND.cookiePrefix}_web_calendar_posts_v2`;
 
   // Social State
   const [accounts, setAccounts] = useState<SocialAccount[]>(() => {
@@ -3327,7 +3328,7 @@ export const SocialMediaCalendarWidget: React.FC<SocialMediaCalendarWidgetProps>
                 <input
                   type="text"
                   required
-                  placeholder="e.g. royalweddings.com"
+                  placeholder="e.g. yourdomain.com"
                   value={webUrl}
                   onChange={(e) => setWebUrl(e.target.value)}
                   className="w-full px-3 py-2 text-xs border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 font-medium"

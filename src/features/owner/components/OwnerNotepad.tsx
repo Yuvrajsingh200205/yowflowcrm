@@ -3,8 +3,9 @@ import { Eye, EyeOff, GripVertical, NotebookPen, Pin, Save, SquarePen, Trash2 } 
 import { ConfirmDeleteModal } from '@/components/common/ConfirmDeleteModal';
 import { usePersonalNotes } from '@/hooks/usePersonalNotes';
 import type { PersonalNote } from '@/lib/api/personalNotes';
+import { BRAND } from '@/config/brand';
 
-const HIDDEN_KEY = 'wpp_owner_notepad_hidden';
+const HIDDEN_KEY = `${BRAND.cookiePrefix}_owner_notepad_hidden`;
 
 export function OwnerNotepad() {
   const { data: notes, loading, create, update, remove, reorder } = usePersonalNotes();

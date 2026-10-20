@@ -36,6 +36,7 @@ import {
 import { BTN_CREAM, BTN_GHOST, CARD, TOGGLE_ACTIVE, TOGGLE_IDLE } from '@/features/team/components/TeamUiKit';
 import { usePermission } from '@/features/access';
 import { useToast } from '@/components/common';
+import { BRAND } from '@/config/brand';
 
 type FreelancerTab = 'dashboard' | 'all_freelancers' | 'interested' | 'applications' | 'calendar' | 'payments' | 'reports';
 
@@ -214,7 +215,7 @@ export const FreelancerTeamManager: React.FC<FreelancerTeamManagerProps> = (prop
               Freelancer Team
             </h1>
             <p className="mt-2 text-sm font-medium leading-relaxed text-[#eadfe2] sm:text-base">
-              Talent directory, shoot invitations, availability and freelancer payouts — one production desk for Wedding Photo Planet.
+              Talent directory, shoot invitations, availability and freelancer payouts — one production desk for {BRAND.name}.
             </p>
           </div>
           <div className="flex flex-wrap items-center gap-2">

@@ -15,6 +15,7 @@ import {
   Sparkles
 } from 'lucide-react';
 import { Project, PaymentRecord, ScheduledPayment } from '@/types';
+import { BRAND } from '@/config/brand';
 
 interface ClientPaymentsSectionProps {
   project: Project;
@@ -76,7 +77,7 @@ export const ClientPaymentsSection: React.FC<ClientPaymentsSectionProps> = ({
     if (onMakePayment) {
       onMakePayment(stage.amount, stage.stageName);
     }
-    setPaymentSuccessMessage(`Payment of ₹${stage.amount.toLocaleString('en-IN')} for "${stage.stageName}" completed successfully! Transaction ID: WPP_TXN_${Date.now()}`);
+    setPaymentSuccessMessage(`Payment of ₹${stage.amount.toLocaleString('en-IN')} for "${stage.stageName}" completed successfully! Transaction ID: TXN_${Date.now()}`);
     setSelectedPaymentModal(null);
     setTimeout(() => {
       setPaymentSuccessMessage(null);
@@ -215,7 +216,7 @@ export const ClientPaymentsSection: React.FC<ClientPaymentsSectionProps> = ({
                     </button>
                   ) : (
                     <button
-                      onClick={() => alert(`Receipt WPP-REC-${stage.id.toUpperCase()} downloaded for ₹${stage.amount.toLocaleString('en-IN')}`)}
+                      onClick={() => alert(`Receipt REC-${stage.id.toUpperCase()} downloaded for ₹${stage.amount.toLocaleString('en-IN')}`)}
                       className="px-3 py-1.5 bg-white text-slate-700 hover:text-slate-900 text-xs font-medium rounded-lg border border-slate-200 flex items-center gap-1 hover:bg-slate-50 transition-colors"
                       title="Download Official Tax Receipt"
                     >
@@ -286,7 +287,7 @@ export const ClientPaymentsSection: React.FC<ClientPaymentsSectionProps> = ({
           <div className="bg-white rounded-2xl max-w-md w-full p-6 sm:p-8 space-y-6 shadow-2xl border border-slate-100 animate-in zoom-in-95 duration-150">
             <div className="space-y-1 text-center">
               <span className="px-2.5 py-1 rounded-full bg-amber-100 text-amber-800 text-xs font-semibold">
-                Wedding Photo Planet Secure Gateway
+                {BRAND.name} Secure Gateway
               </span>
               <h3 className="text-xl font-serif text-slate-900 mt-2">
                 Pay ₹{selectedPaymentModal.amount.toLocaleString('en-IN')}

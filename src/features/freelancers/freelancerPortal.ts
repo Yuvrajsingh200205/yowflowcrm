@@ -3,6 +3,7 @@
  * Admin CRM remains the source of truth. Do not invent a messaging UI here.
  */
 import { Freelancer, FreelancerAssignment, FreelancerPayment } from '@/types';
+import { BRAND } from '@/config/brand';
 
 export type FreelancerPortalAuth = {
   freelancerId: string;
@@ -45,7 +46,7 @@ export type FreelancerMatchQuery = {
   maxBudget?: number;
 };
 
-export const FREELANCER_APPLICATIONS_STORAGE_KEY = 'wpp_freelancer_public_applications';
+export const FREELANCER_APPLICATIONS_STORAGE_KEY = `${BRAND.cookiePrefix}_freelancer_public_applications`;
 
 export type PublicFreelancerApplicationInput = {
   name: string;

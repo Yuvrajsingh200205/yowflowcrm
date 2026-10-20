@@ -1,4 +1,5 @@
 import { Project, TeamMember, AttendanceRecord, TeamTask } from '@/types';
+import { BRAND } from '@/config/brand';
 
 export const INITIAL_PROJECTS: Project[] = [
   {
@@ -12,7 +13,7 @@ export const INITIAL_PROJECTS: Project[] = [
     totalBudget: 450000,
     advanceReceived: 250000,
     balanceDue: 200000,
-    quotationLink: 'https://weddingphotoplanet.com/quotes/Q-2026-ROHAN.pdf',
+    quotationLink: `https://${BRAND.domain}/quotes/Q-2026-ROHAN.pdf`,
     specialNotesMusicPreferences: 'Client loves Lofi Romantic Bollywood tracks for Teaser ("Kesariya", "Ranja"), energetic Punjabi dhol for Sangeet Reels. Wants cinematic slow-mo during Phere and no harsh flash.',
     status: 'running',
     createdAt: '2026-07-10',
@@ -33,7 +34,7 @@ export const INITIAL_PROJECTS: Project[] = [
       albumDesigning: 'in_progress',
       albumPrinting: 'not_sent',
       otherPhoto: '30 Premium Acrylic Sheets Canvas Frame',
-      assignedEditor: 'Pooja Verma (Album Specialist)',
+      assignedEditor: 'Sam Rivera (Album Specialist)',
       notes: 'Selection completed by client on LightDrive (450 photos chosen out of 3,000 RAWs).',
     },
     shoots: [
@@ -44,12 +45,12 @@ export const INITIAL_PROJECTS: Project[] = [
         time: '06:00 AM - 07:00 PM',
         venue: 'South Goa Beaches & Fort Aguada',
         location: 'Goa',
-        leadPhotographer: 'Rajat Verma (Owner/Lead)',
+        leadPhotographer: 'Alex Morgan (Owner/Lead)',
         cinematographer: 'Rahul Kapoor',
         droneOperator: 'Amit Kumar',
         assistant: 'Sunil Sharma',
         crewAssignments: [
-          { id: 'c1', name: 'Rajat Verma', role: 'Photographer', mobile: '+91 98765 00001' },
+          { id: 'c1', name: 'Alex Morgan', role: 'Photographer', mobile: '+91 98765 00001' },
           { id: 'c2', name: 'Rahul Kapoor', role: 'Cinematographer', mobile: '+91 98765 00002' },
           { id: 'c3', name: 'Amit Kumar', role: 'Drone Operator', mobile: '+91 98765 00003' },
           { id: 'c4', name: 'Sunil Sharma', role: 'Assistant', mobile: '+91 98765 00004' },
@@ -65,13 +66,13 @@ export const INITIAL_PROJECTS: Project[] = [
         time: '05:00 PM - 02:00 AM',
         venue: 'Grand Ballroom, Oberoi Udaivilas',
         location: 'Udaipur',
-        leadPhotographer: 'Rajat Verma',
+        leadPhotographer: 'Alex Morgan',
         cinematographer: 'Rahul Kapoor',
         droneOperator: 'Amit Kumar',
         assistant: 'Sunil Sharma',
         crewAssignments: [
           // 3 Photographers
-          { id: 'c10', name: 'Rajat Verma', role: 'Photographer', mobile: '+91 98765 00001' },
+          { id: 'c10', name: 'Alex Morgan', role: 'Photographer', mobile: '+91 98765 00001' },
           { id: 'c11', name: 'Pankaj Mehra', role: 'Photographer', mobile: '+91 98765 00011' },
           { id: 'c12', name: 'Suresh Kumar', role: 'Photographer', mobile: '+91 98765 00012' },
           // 3 Videographers
@@ -81,7 +82,7 @@ export const INITIAL_PROJECTS: Project[] = [
           // 3 Assistants
           { id: 'c16', name: 'Sunil Sharma', role: 'Assistant', mobile: '+91 98765 00004' },
           { id: 'c17', name: 'Deepak Saini', role: 'Assistant', mobile: '+91 98765 00017' },
-          { id: 'c18', name: 'Rohit Verma', role: 'Assistant', mobile: '+91 98765 00018' },
+          { id: 'c18', name: 'Chris Park', role: 'Assistant', mobile: '+91 98765 00018' },
         ],
         equipmentChecklist: ['Sony FX3 x2', 'Sony A7S III', 'Gimbal', 'Aputure 300d II Light'],
         status: 'scheduled',
@@ -94,7 +95,7 @@ export const INITIAL_PROJECTS: Project[] = [
       hardDrive2: 'HDD-02: SanDisk Extreme SSD 4TB (Office Vault)',
       hardDrive2Done: true,
       cloudBackupDone: true,
-      cloudBackupLink: 'https://drive.google.com/drive/folders/weddingphotoplanet-rohan',
+      cloudBackupLink: 'https://drive.google.com/drive/folders/demo-studio-rohan',
       totalDataSizeGB: 1250,
       rawCleanupStatus: 'raw_kept',
     },
@@ -105,7 +106,7 @@ export const INITIAL_PROJECTS: Project[] = [
         amount: 150000,
         type: 'advance',
         paymentMode: 'UPI / GPay',
-        receiptNumber: 'WPP-REC-8901',
+        receiptNumber: 'REC-8901',
         notes: 'Booking confirmation advance received',
       },
       {
@@ -114,7 +115,7 @@ export const INITIAL_PROJECTS: Project[] = [
         amount: 100000,
         type: 'installment',
         paymentMode: 'Bank Transfer',
-        receiptNumber: 'WPP-REC-8925',
+        receiptNumber: 'REC-8925',
         notes: 'Pre-wedding video delivery installment received',
       }
     ],
@@ -138,7 +139,7 @@ export const INITIAL_PROJECTS: Project[] = [
     totalBudget: 180000,
     advanceReceived: 120000,
     balanceDue: 60000,
-    quotationLink: 'https://weddingphotoplanet.com/quotes/Q-2026-AAKASH.pdf',
+    quotationLink: `https://${BRAND.domain}/quotes/Q-2026-AAKASH.pdf`,
     specialNotesMusicPreferences: 'Classical fusion & instrumental violin preferred for highlight video. Clean natural skin tones in photo color grading.',
     status: 'urgent',
     createdAt: '2026-06-15',
@@ -159,7 +160,7 @@ export const INITIAL_PROJECTS: Project[] = [
       albumDesigning: 'in_progress',
       albumPrinting: 'design_sent',
       otherPhoto: 'Family Mini Album',
-      assignedEditor: 'Pooja Verma (Album Specialist)',
+      assignedEditor: 'Sam Rivera (Album Specialist)',
       notes: 'Album draft sent to client on WhatsApp for final approval.',
     },
     shoots: [
@@ -170,7 +171,7 @@ export const INITIAL_PROJECTS: Project[] = [
         time: '04:00 PM - 11:30 PM',
         venue: 'Crystal Room, Taj Mahal Palace',
         location: 'Mumbai',
-        leadPhotographer: 'Rajat Verma',
+        leadPhotographer: 'Alex Morgan',
         cinematographer: 'Rahul Kapoor',
         droneOperator: 'Amit Kumar',
         assistant: 'Deepak Saini',
@@ -196,7 +197,7 @@ export const INITIAL_PROJECTS: Project[] = [
         amount: 80000,
         type: 'advance',
         paymentMode: 'Bank Transfer',
-        receiptNumber: 'WPP-REC-8712',
+        receiptNumber: 'REC-8712',
         notes: 'Initial advance',
       },
       {
@@ -205,7 +206,7 @@ export const INITIAL_PROJECTS: Project[] = [
         amount: 40000,
         type: 'installment',
         paymentMode: 'UPI / GPay',
-        receiptNumber: 'WPP-REC-8920',
+        receiptNumber: 'REC-8920',
         notes: 'Mid-stage payment',
       }
     ],
@@ -229,7 +230,7 @@ export const INITIAL_PROJECTS: Project[] = [
     totalBudget: 550000,
     advanceReceived: 550000,
     balanceDue: 0,
-    quotationLink: 'https://weddingphotoplanet.com/quotes/Q-2026-KABIR.pdf',
+    quotationLink: `https://${BRAND.domain}/quotes/Q-2026-KABIR.pdf`,
     specialNotesMusicPreferences: 'High energy Bollywood & EDM edits for Teaser. Couple wants premium Glass Velvet Album with Wooden Box.',
     status: 'ready_to_deliver',
     createdAt: '2026-05-01',
@@ -250,7 +251,7 @@ export const INITIAL_PROJECTS: Project[] = [
       albumDesigning: 'completed',
       albumPrinting: 'proof_approved',
       otherPhoto: '2x Parent Mini Albums + 1x Velvet Main Album',
-      assignedEditor: 'Pooja Verma',
+      assignedEditor: 'Sam Rivera',
       notes: 'Albums printed at Canvera, courier received at studio. Ready for handover.',
     },
     shoots: [
@@ -261,7 +262,7 @@ export const INITIAL_PROJECTS: Project[] = [
         time: '10:00 AM - 04:00 AM',
         venue: 'JW Marriott Lawn',
         location: 'Mussoorie',
-        leadPhotographer: 'Rajat Verma',
+        leadPhotographer: 'Alex Morgan',
         cinematographer: 'Rahul Kapoor',
         droneOperator: 'Amit Kumar',
         assistant: 'Sunil Sharma',
@@ -287,7 +288,7 @@ export const INITIAL_PROJECTS: Project[] = [
         amount: 250000,
         type: 'advance',
         paymentMode: 'Bank Transfer',
-        receiptNumber: 'WPP-REC-8501',
+        receiptNumber: 'REC-8501',
       },
       {
         id: 'pay-5',
@@ -295,7 +296,7 @@ export const INITIAL_PROJECTS: Project[] = [
         amount: 300000,
         type: 'final',
         paymentMode: 'Bank Transfer',
-        receiptNumber: 'WPP-REC-8840',
+        receiptNumber: 'REC-8840',
         notes: 'Full payment cleared on wedding day',
       }
     ],
@@ -319,7 +320,7 @@ export const INITIAL_PROJECTS: Project[] = [
     totalBudget: 150000,
     advanceReceived: 150000,
     balanceDue: 0,
-    quotationLink: 'https://weddingphotoplanet.com/quotes/Q-2026-MEHTA.pdf',
+    quotationLink: `https://${BRAND.domain}/quotes/Q-2026-MEHTA.pdf`,
     specialNotesMusicPreferences: 'Yellow theme Haldi aesthetic color grading with bright warm tone.',
     status: 'completed',
     createdAt: '2026-04-10',
@@ -339,7 +340,7 @@ export const INITIAL_PROJECTS: Project[] = [
       albumDesigning: 'completed',
       albumPrinting: 'delivered',
       otherPhoto: '30 Pages Custom Leatherette Album',
-      assignedEditor: 'Pooja Verma',
+      assignedEditor: 'Sam Rivera',
     },
     shoots: [
       {
@@ -349,7 +350,7 @@ export const INITIAL_PROJECTS: Project[] = [
         time: '11:00 AM - 05:00 PM',
         venue: 'Hyatt Poolside',
         location: 'Gurugram',
-        leadPhotographer: 'Rajat Verma',
+        leadPhotographer: 'Alex Morgan',
         cinematographer: 'Rahul Kapoor',
         droneOperator: 'None',
         assistant: 'Deepak Saini',
@@ -374,7 +375,7 @@ export const INITIAL_PROJECTS: Project[] = [
         amount: 50000,
         type: 'advance',
         paymentMode: 'Cash',
-        receiptNumber: 'WPP-REC-8300',
+        receiptNumber: 'REC-8300',
       },
       {
         id: 'pay-7',
@@ -382,7 +383,7 @@ export const INITIAL_PROJECTS: Project[] = [
         amount: 100000,
         type: 'final',
         paymentMode: 'UPI / GPay',
-        receiptNumber: 'WPP-REC-8750',
+        receiptNumber: 'REC-8750',
       }
     ],
     deliveryStatus: {
@@ -407,7 +408,7 @@ export const INITIAL_PROJECTS: Project[] = [
     totalBudget: 120000,
     advanceReceived: 70000,
     balanceDue: 50000,
-    quotationLink: 'https://weddingphotoplanet.com/quotes/Q-2026-SID.pdf',
+    quotationLink: `https://${BRAND.domain}/quotes/Q-2026-SID.pdf`,
     specialNotesMusicPreferences: 'Royal Rajasthani heritage theme, slow cinematic drone shots at sunset.',
     status: 'pending',
     createdAt: '2026-07-25',
@@ -437,7 +438,7 @@ export const INITIAL_PROJECTS: Project[] = [
         time: '07:00 AM - 06:00 PM',
         venue: 'Neemrana Fort Palace',
         location: 'Alwar / Jaipur Highway',
-        leadPhotographer: 'Rajat Verma',
+        leadPhotographer: 'Alex Morgan',
         cinematographer: 'Rahul Kapoor',
         droneOperator: 'Amit Kumar',
         assistant: 'Sunil Sharma',
@@ -462,7 +463,7 @@ export const INITIAL_PROJECTS: Project[] = [
         amount: 40000,
         type: 'advance',
         paymentMode: 'UPI / GPay',
-        receiptNumber: 'WPP-REC-8950',
+        receiptNumber: 'REC-8950',
         notes: 'Booking advance received',
       },
       {
@@ -471,7 +472,7 @@ export const INITIAL_PROJECTS: Project[] = [
         amount: 30000,
         type: 'installment',
         paymentMode: 'UPI / GPay',
-        receiptNumber: 'WPP-REC-8980',
+        receiptNumber: 'REC-8980',
         notes: 'Neemrana Pre-wedding shoot confirmation installment',
       }
     ],

@@ -58,6 +58,7 @@ import {
   RotateCcw,
 } from 'lucide-react';
 import { SOFTWARE_OPTIONS } from '@/features/team/components/TeamAttendance';
+import { BRAND } from '@/config/brand';
 
 // Office Expense Interface for Account Manager & Studio Accounting
 export interface OfficeExpense {
@@ -383,7 +384,7 @@ interface RoleNoteItem {
 
 const RoleNotepadWidget: React.FC<{ activeMember: TeamMember | null }> = ({ activeMember }) => {
   return <OwnerNotepad />;
-  const memberKey = `wpp_private_notes_${activeMember?.id || activeMember?.role || 'default'}`;
+  const memberKey = `${BRAND.cookiePrefix}_private_notes_${activeMember?.id || activeMember?.role || 'default'}`;
 
   const [notes, setNotes] = useState<RoleNoteItem[]>(() => {
     try {
@@ -1053,7 +1054,7 @@ const VideoEditorMonthlyTargetBoard: React.FC<{
   activeMember: TeamMember | null;
   tasks: TeamTask[];
 }> = ({ projects, activeMember, tasks }) => {
-  const memberKey = `wpp_editor_targets_${activeMember?.id || 'default'}`;
+  const memberKey = `${BRAND.cookiePrefix}_editor_targets_${activeMember?.id || 'default'}`;
   const defaultTargets = useMemo(() => ({
     reels: 10,
     teaser: 5,
@@ -1565,7 +1566,7 @@ export const RoleDashboards: React.FC<RoleDashboardsProps> = ({
   const [showAddTaskModal, setShowAddTaskModal] = useState(false);
   const [editingTask, setEditingTask] = useState<TeamTask | null>(null);
   const [newTaskTitle, setNewTaskTitle] = useState('');
-  const [newTaskDomainSelect, setNewTaskDomainSelect] = useState('weddingphotoplanet.com');
+  const [newTaskDomainSelect, setNewTaskDomainSelect] = useState(`${BRAND.domain}`);
   const [customDomainInput, setCustomDomainInput] = useState('');
   const [newTaskAssignedToId, setNewTaskAssignedToId] = useState(activeMemberId);
   const [newTaskProjectId, setNewTaskProjectId] = useState('');
@@ -1692,7 +1693,7 @@ export const RoleDashboards: React.FC<RoleDashboardsProps> = ({
         taskName: 'Photo Selection & Retouching',
         quantity: 100,
         unit: 'Photos',
-        assignedTo: 'Pooja Verma',
+        assignedTo: 'Sam Rivera',
         status: 'not_started',
       },
       {
@@ -1700,7 +1701,7 @@ export const RoleDashboards: React.FC<RoleDashboardsProps> = ({
         taskName: 'Wedding Albums (12x36)',
         quantity: 2,
         unit: 'Albums',
-        assignedTo: 'Rajat Verma',
+        assignedTo: 'Alex Morgan',
         status: 'not_started',
       },
     ];
@@ -1944,7 +1945,7 @@ export const RoleDashboards: React.FC<RoleDashboardsProps> = ({
         monthYear: '2026-08'
       }
     ], []);
-  const { value: persistedOfficeExpenses, save: savePersistedOfficeExpenses } = usePersonalJsonNote('wpp_studio_office_expenses', defaultOfficeExpenses);
+  const { value: persistedOfficeExpenses, save: savePersistedOfficeExpenses } = usePersonalJsonNote(`${BRAND.cookiePrefix}_studio_office_expenses`, defaultOfficeExpenses);
 
   // Office Expenses State & Initial Pre-populated records
   const [officeExpenses, setOfficeExpenses] = useState<OfficeExpense[]>(defaultOfficeExpenses);
@@ -2444,7 +2445,7 @@ export const RoleDashboards: React.FC<RoleDashboardsProps> = ({
     setNewTaskPriority(task.priority || 'high');
     setNewTaskNotes(task.notes || '');
 
-    const standardDomains = ['weddingphotoplanet.com', 'royalweddingstories.in', 'aarviproductions.com'];
+    const standardDomains = [BRAND.domain];
     if (task.domainName) {
       if (standardDomains.includes(task.domainName)) {
         setNewTaskDomainSelect(task.domainName);
@@ -2454,7 +2455,7 @@ export const RoleDashboards: React.FC<RoleDashboardsProps> = ({
         setCustomDomainInput(task.domainName);
       }
     } else {
-      setNewTaskDomainSelect('weddingphotoplanet.com');
+      setNewTaskDomainSelect(`${BRAND.domain}`);
       setCustomDomainInput('');
     }
     setShowAddTaskModal(true);
@@ -3542,7 +3543,7 @@ export const RoleDashboards: React.FC<RoleDashboardsProps> = ({
                                 <button
                                   type="button"
                                   onClick={() => {
-                                    const msg = `🧾 *OFFICIAL PAYMENT RECEIPT*\nRef: ${pay.receiptNumber || 'REC-INCOME'}\nDate: ${pay.date}\nClient: ${pay.projectTitle}\nAmount Received: ₹${pay.amount.toLocaleString('en-IN')}\nPayment Mode: ${pay.paymentMode}\nNotes: ${pay.notes || 'Thank you!'}\n\n- Wedding Photo Planet Accounting Portal`;
+                                    const msg = `🧾 *OFFICIAL PAYMENT RECEIPT*\nRef: ${pay.receiptNumber || 'REC-INCOME'}\nDate: ${pay.date}\nClient: ${pay.projectTitle}\nAmount Received: ₹${pay.amount.toLocaleString('en-IN')}\nPayment Mode: ${pay.paymentMode}\nNotes: ${pay.notes || 'Thank you!'}\n\n- ${BRAND.name} Accounting Portal`;
                                     window.open(`https://wa.me/${(pay.clientContact || '').replace(/\D/g, '')}?text=${encodeURIComponent(msg)}`, '_blank');
                                   }}
                                   className="p-1.5 rounded-lg bg-emerald-50 hover:bg-emerald-100 text-emerald-700 font-bold text-[11px] border border-emerald-200 flex items-center gap-1 cursor-pointer"
@@ -4227,7 +4228,7 @@ export const RoleDashboards: React.FC<RoleDashboardsProps> = ({
                                       <button
                                         type="button"
                                         onClick={() => {
-                                          const msg = `🧾 *OFFICIAL PAYMENT RECEIPT*\nRef: ${pay.receiptNumber || 'REC-INCOME'}\nDate: ${pay.date}\nClient: ${pay.projectTitle}\nAmount Received: ₹${pay.amount.toLocaleString('en-IN')}\nPayment Mode: ${pay.paymentMode}\nNotes: ${pay.notes || 'Thank you!'}\n\n- Wedding Photo Planet Accounting Portal`;
+                                          const msg = `🧾 *OFFICIAL PAYMENT RECEIPT*\nRef: ${pay.receiptNumber || 'REC-INCOME'}\nDate: ${pay.date}\nClient: ${pay.projectTitle}\nAmount Received: ₹${pay.amount.toLocaleString('en-IN')}\nPayment Mode: ${pay.paymentMode}\nNotes: ${pay.notes || 'Thank you!'}\n\n- ${BRAND.name} Accounting Portal`;
                                           window.open(`https://wa.me/${(pay.clientContact || '').replace(/\D/g, '')}?text=${encodeURIComponent(msg)}`, '_blank');
                                         }}
                                         className="p-1.5 rounded-lg bg-emerald-50 hover:bg-emerald-100 text-emerald-700 font-bold text-[11px] border border-emerald-200 flex items-center gap-1 cursor-pointer"
@@ -5582,7 +5583,7 @@ export const RoleDashboards: React.FC<RoleDashboardsProps> = ({
                 <label className="block font-bold text-slate-700 mb-1">Task Title / Description *</label>
                 <input
                   type="text"
-                  placeholder="e.g. Write Blog Article & Post 2 Reels for weddingphotoplanet.com"
+                  placeholder={`e.g. Write Blog Article & Post 2 Reels for ${BRAND.domain}`}
                   value={newTaskTitle}
                   onChange={(e) => setNewTaskTitle(e.target.value)}
                   className="w-full bg-white border border-slate-200 rounded-lg p-2 text-slate-800 text-xs font-semibold"
@@ -5763,7 +5764,7 @@ export const RoleDashboards: React.FC<RoleDashboardsProps> = ({
             {/* Salary Slip Layout */}
             <div className="p-4 bg-slate-50 border border-slate-200 rounded-xl space-y-4 text-xs">
               <div className="text-center border-b border-slate-200 pb-3">
-                <h4 className="font-black text-indigo-600 text-base tracking-tight">WEDDING PHOTO PLANET</h4>
+                <h4 className="font-black text-indigo-600 text-base tracking-tight">{BRAND.name.toUpperCase()}</h4>
                 <p className="text-[10px] text-slate-400 font-bold uppercase">Salary Advice Statement - August 2026</p>
               </div>
 

@@ -64,6 +64,7 @@ import {
   ChevronDown,
   FolderKanban
 } from 'lucide-react';
+import { BRAND } from '@/config/brand';
 
 interface ProjectDetailModalProps {
   project: Project | null;
@@ -554,7 +555,7 @@ export const ProjectDetailModal: React.FC<ProjectDetailModalProps> = ({
 
     const totalScheduled = paymentSchedules.reduce((acc, i) => acc + i.amount, 0);
 
-    const message = `📋 *PAYMENT SCHEDULE & MILESTONES*\nClient: ${project.clientWeddingTitle}\nTotal Package Budget: ₹${project.totalBudget.toLocaleString('en-IN')}\nTotal Scheduled: ₹${totalScheduled.toLocaleString('en-IN')}\nReceived Till Date: ₹${receivedAmount.toLocaleString('en-IN')}\nBalance Remaining: ₹${balanceDue.toLocaleString('en-IN')}\n\n*Payment Terms Breakdown:*\n${milestonesText}\n\n- Wedding Photo Planet Accounts`;
+    const message = `📋 *PAYMENT SCHEDULE & MILESTONES*\nClient: ${project.clientWeddingTitle}\nTotal Package Budget: ₹${project.totalBudget.toLocaleString('en-IN')}\nTotal Scheduled: ₹${totalScheduled.toLocaleString('en-IN')}\nReceived Till Date: ₹${receivedAmount.toLocaleString('en-IN')}\nBalance Remaining: ₹${balanceDue.toLocaleString('en-IN')}\n\n*Payment Terms Breakdown:*\n${milestonesText}\n\n- ${BRAND.name} Accounts`;
 
     const cleanMobile = (project.clientContactMobile || '').replace(/\D/g, '');
     window.open(`https://wa.me/${cleanMobile}?text=${encodeURIComponent(message)}`, '_blank');
@@ -570,7 +571,7 @@ export const ProjectDetailModal: React.FC<ProjectDetailModalProps> = ({
     doc.setTextColor(255, 255, 255);
     doc.setFont('helvetica', 'bold');
     doc.setFontSize(16);
-    doc.text('WEDDING PHOTO PLANET', 14, 13);
+    doc.text(`${BRAND.name.toUpperCase()}`, 14, 13);
 
     doc.setFontSize(9);
     doc.setFont('helvetica', 'normal');
@@ -734,7 +735,7 @@ export const ProjectDetailModal: React.FC<ProjectDetailModalProps> = ({
     doc.setFont('helvetica', 'normal');
     doc.setTextColor(120, 120, 120);
     doc.text('Note: This is an official payment statement reflecting recorded installment logs and scheduled milestones.', 14, currentY);
-    doc.text('Thank you for choosing Wedding Photo Planet! - Studio Operations & Accounts Team', 14, currentY + 5);
+    doc.text(`Thank you for choosing ${BRAND.name}! - Studio Operations & Accounts Team`, 14, currentY + 5);
 
     doc.save(`Payment_Statement_${(project.clientWeddingTitle || 'Client').replace(/\s+/g, '_')}.pdf`);
   };
@@ -1075,7 +1076,7 @@ export const ProjectDetailModal: React.FC<ProjectDetailModalProps> = ({
   const [shootStartTime, setShootStartTime] = useState('');
   const [shootVenue, setShootVenue] = useState('');
   const [newShootCrew, setNewShootCrew] = useState<CrewMemberAssignment[]>([
-    { id: 'c1', name: 'Rajat Verma', role: 'Photographer', mobile: '' },
+    { id: 'c1', name: 'Alex Morgan', role: 'Photographer', mobile: '' },
     { id: 'c2', name: 'Rahul Kapoor', role: 'Videographer', mobile: '' },
     { id: 'c3', name: 'Sunil Sharma', role: 'Assistant', mobile: '' }
   ]);
@@ -4131,7 +4132,7 @@ export const ProjectDetailModal: React.FC<ProjectDetailModalProps> = ({
                   list="edit-crew-modal-list"
                   value={editingCrewData.name}
                   onChange={(e) => setEditingCrewData({ ...editingCrewData, name: e.target.value })}
-                  placeholder="e.g. Rajat Verma"
+                  placeholder="e.g. Alex Morgan"
                   className="w-full bg-slate-50 border border-slate-300 rounded-lg p-2 font-bold text-slate-900"
                 />
                 <datalist id="edit-crew-modal-list">

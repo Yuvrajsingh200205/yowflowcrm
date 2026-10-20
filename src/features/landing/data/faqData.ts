@@ -1,8 +1,9 @@
+import { BRAND } from '@/config/brand';
 /** Answers state what exists today and what is still being built. No promises
  *  about backend functionality that has not shipped. */
 export const faqs = [
   {
-    question: 'What is Wedding Photo Planet?',
+    question: `What is ${BRAND.name}?`,
     answer:
       'A studio operations product for wedding photography businesses. The admin CRM is live and in use. A freelancer portal and a client gallery are being built on the same data foundation.',
   },

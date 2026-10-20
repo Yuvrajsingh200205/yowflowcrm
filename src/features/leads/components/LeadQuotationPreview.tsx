@@ -1,3 +1,4 @@
+import { BRAND } from '@/config/brand';
 import type { LeadQuotationFile, OwnerLead } from '@/types';
 import type { ReactNode } from 'react';
 import { Calendar, Download, FileText, IndianRupee, Mail, Phone, Printer } from 'lucide-react';
@@ -21,7 +22,7 @@ export function LeadQuotationPreview({ preview, onClose }: LeadQuotationPreviewP
 
       <article className="mx-auto max-w-3xl space-y-6 rounded-3xl border border-[#ddd1cd] bg-white p-5 text-[#342d30] shadow-xl shadow-[#3a242c]/5 sm:p-8">
         <header className="flex flex-col justify-between gap-4 border-b-2 border-[#55333f] pb-5 sm:flex-row sm:items-center">
-          <div><p className="text-xs font-black uppercase tracking-[.18em] text-[#8d4963]">Official Studio Quotation</p><h2 className="mt-1 text-2xl font-black tracking-tight text-[#2f272a]">AARVI PRODUCTION & FILMS</h2><p className="mt-1 text-sm font-semibold text-[#796e72]">Wedding Photography & Cinematography Studio</p></div>
+          <div><p className="text-xs font-black uppercase tracking-[.18em] text-[#8d4963]">Official Studio Quotation</p><h2 className="mt-1 text-2xl font-black tracking-tight text-[#2f272a]">{BRAND.name.toUpperCase()}</h2><p className="mt-1 text-sm font-semibold text-[#796e72]">Wedding Photography & Cinematography Studio</p></div>
           <div className="min-w-48 rounded-2xl border border-[#e1d6d2] bg-[#faf7f5] p-3 sm:text-right"><span className="text-xs font-extrabold uppercase text-[#8b7f83]">Quotation reference</span><p className="mt-1 font-mono text-sm font-black text-[#71364c]">#QT-{lead.id.slice(-6).toUpperCase()}</p><p className="mt-1 text-sm font-semibold text-[#786e72]">Date: {file.uploadedDate}</p></div>
         </header>
 

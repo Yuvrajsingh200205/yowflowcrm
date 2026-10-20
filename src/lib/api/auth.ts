@@ -1,6 +1,7 @@
 import { apiRequest, hasStoredSession, setAuthTokens } from './client';
+import { BRAND } from '@/config/brand';
 
-const FREELANCER_SESSION_COOKIE = 'wpp_freelancer_session';
+const FREELANCER_SESSION_COOKIE = `${BRAND.cookiePrefix}_freelancer_session`;
 
 function clearFreelancerSessionMarker(): void {
   if (typeof document === 'undefined') return;

@@ -8,6 +8,7 @@ import { ApiError } from '@/lib/api/client';
 import { freelancerPortalApi, PortalDashboard, PortalList, PortalNotification, PortalPayout, PortalProjectSummary, PortalShootSummary, PortalTaskSummary } from '@/lib/api/freelancerPortal';
 import { getFreelancerProfileCompletion } from '../profileCompletion';
 import { PortalCard, PortalState } from './FreelancerPortalShell';
+import { BRAND } from '@/config/brand';
 
 const btn = 'inline-flex min-h-11 items-center justify-center rounded-xl bg-[#8D5265] px-4 py-2 text-sm font-black text-white transition hover:bg-[#774255] disabled:opacity-60';
 const muted = 'text-sm font-semibold leading-6 text-[#686164]';
@@ -228,7 +229,7 @@ export function VendorSearchPage() {
   return (
     <div className="space-y-6">
       <section className="overflow-hidden rounded-2xl bg-linear-to-r from-[#3B1D29] to-[#4A2635] p-6 text-white shadow-sm">
-        <p className="text-xs font-black uppercase tracking-[.14em] text-[#C9A876]">Wedding Photo Planet</p>
+        <p className="text-xs font-black uppercase tracking-[.14em] text-[#C9A876]">{BRAND.name}</p>
         <h1 className="mt-3 text-4xl font-black tracking-tight">Find Vendor</h1>
         <p className="mt-2 max-w-2xl text-base font-medium leading-6 text-white/65">Search vendors from your freelancer network.</p>
       </section>

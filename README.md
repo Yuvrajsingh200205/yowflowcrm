@@ -1,46 +1,22 @@
-# Wedding Photo Planet CRM
+# Frameloom — Frontend
 
-A Next.js App Router frontend for Wedding Photo Planet's studio operations. It communicates with the production CRM backend over HTTP; it does not include backend source code or database access.
+Next.js (App Router) frontend for **Frameloom**, a studio-operations platform for photo and video studios: leads, projects, shoots, freelancers, invoices and client galleries in one workspace.
 
-## Development
+It talks to the Frameloom backend (`yowflow_backend`) over HTTP and proxies `/api/v1` through Next rewrites so auth cookies stay first-party.
 
-```bash
-npm install
-npm run dev
-```
+## White-label
 
-Open [http://localhost:3000](http://localhost:3000). The root URL redirects to `/dashboard`.
+All branding lives in [`src/config/brand.ts`](src/config/brand.ts): name, tagline, domain, support email/phone, cookie prefix, logo paths and colors. Every value can also be overridden with a `NEXT_PUBLIC_BRAND_*` env var. `NEXT_PUBLIC_BRAND_COOKIE_PREFIX` must equal the backend's `BRAND_COOKIE_PREFIX`.
 
-## Quality checks
+## Scripts
 
-```bash
-npm run lint
-npm run build
-```
+| Command | What it does |
+| --- | --- |
+| `npm run dev` | Dev server on :3000 |
+| `npm run build` | Production build |
+| `npm run lint` | Type-check (`tsc --noEmit`) |
+| `npm test` | Vitest unit tests |
 
-## Workspace routes
+## Environment
 
-- `/dashboard`
-- `/owner-workspace`
-- `/workspaces`
-- `/leads`
-- `/projects`
-- `/shoots`
-- `/data-management`
-- `/team`
-- `/freelancers`
-- `/deliveries`
-
-Authentication is integrated with the standalone backend. The remaining CRM screens are being migrated from their legacy client-side data layer feature by feature; they must not be treated as backend-integrated until that work is complete.
-
-## Architecture
-
-```
-Browser → Next.js frontend → NEXT_PUBLIC_API_URL → Express API → Prisma → PostgreSQL
-```
-
-The production backend is a separate repository at `../wedding-photo-planet-backend`. This frontend has no Prisma, Express server, or database connection code. Configure its public API URL with `NEXT_PUBLIC_API_URL`; never place database credentials or backend secrets in this repository.
-
-## Frontend organization
-
-The admin panel is organized by business feature rather than as one flat component directory. See [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md) for the folder map and rules for adding future pages or components.
+See [`.env.example`](.env.example).
