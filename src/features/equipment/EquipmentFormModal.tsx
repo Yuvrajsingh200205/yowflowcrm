@@ -41,7 +41,7 @@ export function EquipmentFormModal({ open, onClose, onSubmit }: Props) {
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-[#151714]/75 p-3 backdrop-blur-sm sm:p-6">
       <div role="dialog" aria-modal="true" aria-labelledby="equipment-form-title" className="no-scrollbar max-h-[92vh] w-full max-w-2xl overflow-y-auto rounded-[2rem] border border-white/50 bg-white shadow-[0_30px_90px_rgba(14,15,13,.42)]">
-        <header className="relative overflow-hidden bg-[radial-gradient(circle_at_85%_15%,rgba(235,190,167,.22),transparent_32%),linear-gradient(125deg,#41463E,#55333f_52%,#21241F)] px-5 py-5 text-white sm:px-7 sm:py-6">
+        <header className="relative overflow-hidden bg-[radial-gradient(circle_at_85%_15%,rgba(235,190,167,.22),transparent_32%),linear-gradient(125deg,#41463E,#30342E_52%,#21241F)] px-5 py-5 text-white sm:px-7 sm:py-6">
           <div className="absolute -bottom-12 -right-8 size-40 rounded-full border-[22px] border-white/5" />
           <div className="relative flex items-start justify-between gap-4">
             <div className="flex items-center gap-4">

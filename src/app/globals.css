@@ -316,7 +316,6 @@ html, body { margin: 0; min-height: 100%; background: var(--background); color: 
 [data-theme='dark'] { background: var(--background); color: var(--text-primary); }
 body { font-family: var(--font-sans); font-feature-settings: 'cv11', 'ss01'; -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; }
 .tabular { font-variant-numeric: tabular-nums; }
-button, input, select, textarea { font: inherit; }
 
 /* Guided project intake: retains the complete project schema while making the long form easier to scan. */
 .project-guided-form > div:not(:first-child) { border-radius: 1rem; }
@@ -417,38 +416,6 @@ input:focus-visible, select:focus-visible, textarea:focus-visible, button:focus-
 }
 
 /* Dark studio sidebar anchors the light editorial workspace. */
-.app-sidebar {
-  background: linear-gradient(180deg, #152420 0%, #111A18 100%) !important;
-  color: #E8DDD7 !important;
-  border-color: rgba(228, 206, 161, 0.18) !important;
-  box-shadow: 10px 0 30px rgba(41, 36, 38, 0.10);
-}
-.app-sidebar .sidebar-brand { color: var(--accent-light) !important; }
-.app-sidebar .sidebar-profile,
-.app-sidebar .sidebar-footer {
-  background: rgba(255, 255, 255, 0.055) !important;
-  border-color: rgba(228, 206, 161, 0.16) !important;
-}
-.app-sidebar .sidebar-profile p:first-child { color: #FFFFFF !important; }
-.app-sidebar .sidebar-profile p:last-child { color: var(--accent-light) !important; }
-.app-sidebar .sidebar-footer { color: #AEBDBA !important; }
-.app-sidebar .sidebar-divider { background: rgba(228, 206, 161, 0.18) !important; }
-.app-sidebar nav button { color: #C0CFCC !important; }
-.app-sidebar nav button svg { color: currentColor !important; }
-.app-sidebar nav button:hover,
-.app-sidebar nav button[aria-current="page"] {
-  background: rgba(255, 255, 255, 0.09) !important;
-  color: #FFFFFF !important;
-}
-.app-sidebar nav button[aria-current="page"] {
-  box-shadow: inset 3px 0 0 var(--accent);
-}
-.app-sidebar .sidebar-switch {
-  background: rgba(255, 255, 255, 0.055) !important;
-  border-color: rgba(228, 206, 161, 0.16) !important;
-  color: #CAD8D5 !important;
-}
-.app-sidebar .sidebar-switch:hover { background: rgba(255, 255, 255, 0.10) !important; color: #FFFFFF !important; }
 
 /* A layered, editorial workspace canvas adds depth without changing layout. */
 .crm-canvas {

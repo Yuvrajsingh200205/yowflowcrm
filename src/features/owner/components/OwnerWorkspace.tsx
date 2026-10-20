@@ -22,7 +22,7 @@ export const OwnerWorkspace: React.FC<OwnerWorkspaceProps> = ({
 
   return (
     <div className="space-y-6 pb-12">
-      <section className="relative overflow-hidden rounded-3xl border border-[#CCEB8E]/35 bg-[radial-gradient(circle_at_88%_20%,rgba(204,235,142,.24),transparent_25%),radial-gradient(circle_at_8%_130%,rgba(149,158,145,.34),transparent_38%),linear-gradient(125deg,#41463E,#55333f_48%,#21241F)] p-5 text-white shadow-[0_18px_42px_rgba(32,35,31,.17)] sm:p-7 lg:p-8">
+      <section className="relative overflow-hidden rounded-3xl border border-[#CCEB8E]/35 bg-[radial-gradient(circle_at_88%_20%,rgba(204,235,142,.24),transparent_25%),radial-gradient(circle_at_8%_130%,rgba(149,158,145,.34),transparent_38%),linear-gradient(125deg,#41463E,#30342E_48%,#21241F)] p-5 text-white shadow-[0_18px_42px_rgba(32,35,31,.17)] sm:p-7 lg:p-8">
         <div className="pointer-events-none absolute -right-16 -top-24 size-72 rounded-full border border-white/10 shadow-[0_0_0_56px_rgba(255,255,255,.025),0_0_0_112px_rgba(255,255,255,.018)]" />
         <div className="relative flex flex-col justify-between gap-5 xl:flex-row xl:items-center">
           <div className="max-w-3xl">

@@ -1,214 +1,123 @@
+'use client';
+
 import React from 'react';
-import {
-  Camera,
-  Sparkles,
-  LayoutDashboard,
-  FolderKanban,
-  Film,
-  HardDrive,
-  Users,
-  Menu,
-  X,
-  CheckCircle2,
-  Clock,
-  AlertCircle,
-  Briefcase,
-  Download,
-  Upload,
-  LogOut,
-  ShieldCheck,
-  UserCheck,
-  Crown,
-  Target,
-  Banknote,
-  Heart,
-  MoreHorizontal,
-  Settings
-} from 'lucide-react';
+import { AlertCircle, CheckCircle2, Download, LogOut, Menu, MoreHorizontal, Search, ShieldCheck, Sparkles, Upload, UserCheck, X } from 'lucide-react';
 import { ProjectStatus, TeamMember } from '@/types';
 import { NotificationBell } from '@/features/notifications/NotificationBell';
-import { BRAND } from '@/config/brand';
+import { Logo } from '@/components/ui/Logo';
+import { Button } from '@/components/ui/Button';
+import { Dropdown, DropdownContent, DropdownItem, DropdownLabel, DropdownSeparator, DropdownTrigger } from '@/components/ui/Dropdown';
+import { ThemeToggle } from '@/components/ui/Theme';
+import { Tooltip } from '@/components/ui/Tooltip';
+import { cn } from '@/lib/cn';
+import { CommandPalette, useCommandShortcut, type Command } from './CommandPalette';
+import { NAV_GROUPS, PAGE_TITLES, type TabType } from './navigation';
 
-export type TabType = 'dashboard' | 'roles' | 'projects' | 'shoots' | 'expenses' | 'data' | 'team' | 'freelancers' | 'clients' | 'deliveries' | 'owner_workspace' | 'equipment' | 'leads' | 'access' | 'settings';
+export type { TabType } from './navigation';
+
+type AppUser = TeamMember | { id: string; name: string; role: string; email: string; roles?: string[]; permissions?: string[] } | null | undefined;
+
+const initialsOf = (name?: string) =>
+  (name ?? '').split(' ').filter(Boolean).map((n) => n[0]).join('').slice(0, 2).toUpperCase() || 'Y';
 
 interface SidebarProps {
   activeTab: TabType;
   setActiveTab: (tab: TabType) => void;
   isOpenOnMobile: boolean;
   setIsOpenOnMobile: (open: boolean) => void;
-  currentUser?: TeamMember | { id: string; name: string; role: string; email: string; roles?: string[]; permissions?: string[] } | null;
+  currentUser?: AppUser;
   onLogout?: () => void;
   canAccessTab?: (tab: TabType) => boolean;
 }
 
-export const Sidebar: React.FC<SidebarProps> = ({
-  activeTab,
-  setActiveTab,
-  isOpenOnMobile,
-  setIsOpenOnMobile,
-  currentUser,
-  onLogout,
-  canAccessTab,
-}) => {
+/** The sidebar is always dark (data-theme="dark" scopes the tokens) so the lime accent reads in every theme. */
+export const Sidebar: React.FC<SidebarProps> = ({ activeTab, setActiveTab, isOpenOnMobile, setIsOpenOnMobile, currentUser, onLogout, canAccessTab }) => {
   const userRoles = currentUser && 'roles' in currentUser ? currentUser.roles ?? [] : [];
   const userPermissions = currentUser && 'permissions' in currentUser ? currentUser.permissions ?? [] : [];
-  const roleNames = [currentUser?.role, ...userRoles]
-    .filter(Boolean)
-    .map((role) => String(role).trim().toLowerCase().replace(/[\s-]+/g, '_'));
+  const roleNames = [currentUser?.role, ...userRoles].filter(Boolean).map((r) => String(r).trim().toLowerCase().replace(/[\s-]+/g, '_'));
   const isFullAdmin =
-    roleNames.some((role) => ['owner', 'studio_owner', 'admin', 'super_admin'].includes(role)) ||
+    roleNames.some((r) => ['owner', 'studio_owner', 'admin', 'super_admin'].includes(r)) ||
     (userPermissions.includes('USER_MANAGE') && userPermissions.includes('PERMISSION_ASSIGN'));
   const allowed = (tab: TabType) => (canAccessTab ? canAccessTab(tab) : true);
-
-  const navItems = [
-    { id: 'dashboard' as TabType, label: 'Dashboard', icon: LayoutDashboard },
-    { id: 'owner_workspace' as TabType, label: 'My workrole', icon: Crown },
-    { id: 'leads' as TabType, label: 'Leads & Inquiries', icon: Target },
-    { id: 'projects' as TabType, label: 'Projects', icon: FolderKanban },
-    { id: 'shoots' as TabType, label: 'Shoot Management', icon: Film },
-    { id: 'data' as TabType, label: 'Data Management', icon: HardDrive },
-    { id: 'team' as TabType, label: 'Team & Attendance', icon: Users },
-    { id: 'freelancers' as TabType, label: 'Freelancer Team', icon: UserCheck },
-    { id: 'expenses' as TabType, label: 'Finance', icon: Banknote },
-    { id: 'clients' as TabType, label: 'Clients', icon: Heart },
-    { id: 'equipment' as TabType, label: 'Equipment Inventory', icon: Camera },
-    { id: 'access' as TabType, label: 'Roles & Permissions', icon: ShieldCheck },
-    { id: 'settings' as TabType, label: 'Settings', icon: Settings },
-  ].filter((item) => allowed(item.id));
-
-  const userInitials = currentUser?.name
-    ? currentUser.name.split(' ').map((n) => n[0]).join('')
-    : 'RV';
+  const groups = NAV_GROUPS.map((g) => ({ ...g, items: g.items.filter((i) => allowed(i.id)) })).filter((g) => g.items.length > 0);
 
   return (
     <>
-      {/* Mobile Overlay */}
-      {isOpenOnMobile && (
-        <div
-          onClick={() => setIsOpenOnMobile(false)}
-          className="fixed inset-0 z-40 bg-slate-950/60 backdrop-blur-xs md:hidden"
-        />
-      )}
+      {isOpenOnMobile && <div onClick={() => setIsOpenOnMobile(false)} aria-hidden="true" className="fixed inset-0 z-40 bg-[var(--scrim)] backdrop-blur-[2px] md:hidden" />}
 
-      {/* Sidebar Container */}
-      <aside className={`app-sidebar fixed md:static inset-y-0 left-0 z-50 w-64 bg-slate-900 text-white flex flex-col border-r border-slate-700 transition-transform duration-200 transform ${isOpenOnMobile ? 'translate-x-0' : '-translate-x-full md:translate-x-0'
-        }`}>
-        {/* Brand Header */}
-        <div className="p-5">
-          <div className="flex items-center justify-between">
-            <div>
-              <h1 className="sidebar-brand text-lg font-black tracking-tight text-indigo-400">
-                {BRAND.name.toUpperCase()}
-              </h1>
-              <p className="text-[10px] text-slate-400 uppercase tracking-widest mt-0.5 font-bold">
-                CRM Studio System
-              </p>
-            </div>
-            <button
-              onClick={() => setIsOpenOnMobile(false)}
-              className="md:hidden text-slate-400 hover:text-white p-1"
-            >
-              <X className="w-5 h-5" />
-            </button>
-          </div>
-
-          <div className="sidebar-divider h-[1px] bg-slate-700 my-3" />
-
-          {/* User Profile Block */}
-          <div className="sidebar-profile flex items-center justify-between bg-slate-800/80 p-2.5 rounded-xl border border-slate-700">
-            <div className="flex items-center gap-2.5 overflow-hidden">
-              <div className={`w-9 h-9 rounded-full flex items-center justify-center text-xs font-bold text-white shadow-xs flex-shrink-0 ${isFullAdmin ? 'bg-indigo-600' : 'bg-emerald-600'
-                }`}>
-                {userInitials}
-              </div>
-              <div className="truncate">
-                <p className="text-xs font-bold text-white truncate">{currentUser?.name || 'Alex Morgan'}</p>
-                <p className="text-[10px] text-indigo-300 font-medium truncate flex items-center gap-1">
-                  {isFullAdmin ? <ShieldCheck className="w-3 h-3 text-indigo-400 inline" /> : <UserCheck className="w-3 h-3 text-emerald-400 inline" />}
-                  <span>{currentUser?.role || 'Owner'}</span>
-                </p>
-              </div>
-            </div>
-
-            {onLogout && (
-              <button
-                onClick={onLogout}
-                title="Switch Role / Logout"
-                className="p-1.5 hover:bg-red-500/20 text-slate-400 hover:text-red-400 rounded-lg transition"
-              >
-                <LogOut className="w-4 h-4" />
-              </button>
-            )}
-          </div>
+      <aside
+        data-theme="dark"
+        aria-label="Primary"
+        className={cn(
+          'fixed inset-y-0 left-0 z-50 flex w-[17rem] flex-col border-r border-line-soft bg-canvas text-fg transition-transform duration-[var(--dur-slow)] ease-[var(--ease-out)] md:static md:translate-x-0 motion-reduce:transition-none',
+          isOpenOnMobile ? 'translate-x-0' : '-translate-x-full',
+        )}
+      >
+        <div className="flex h-16 shrink-0 items-center justify-between px-5">
+          <Logo priority />
+          <button type="button" onClick={() => setIsOpenOnMobile(false)} aria-label="Close navigation" className="grid size-9 cursor-pointer place-items-center rounded-md text-fg-muted hover:bg-[var(--hover)] hover:text-fg md:hidden">
+            <X className="size-5" />
+          </button>
         </div>
 
-        {/* Navigation Item Links */}
-        <nav className="flex-1 px-4 space-y-1 overflow-y-auto">
-          {navItems.map((item) => {
-            const Icon = item.icon;
-            const isActive = activeTab === item.id;
-            return (
-              <button
-                key={item.id}
-                aria-current={isActive ? 'page' : undefined}
-                onClick={() => {
-                  setActiveTab(item.id);
-                  setIsOpenOnMobile(false);
-                }}
-                className={`w-full flex items-center gap-3 px-3 py-2.5 rounded text-sm font-medium transition-colors text-left ${isActive
-                  ? 'bg-indigo-600 text-white shadow-sm font-semibold'
-                  : 'text-slate-400 hover:bg-slate-800 hover:text-white'
-                  }`}
-              >
-                <Icon className={`w-4 h-4 ${isActive ? 'text-white' : 'text-slate-400'}`} />
-                <span>{item.label}</span>
-              </button>
-            );
-          })}
-
+        <nav aria-label="Main" className="flex-1 space-y-6 overflow-y-auto px-3 pb-6 pt-2">
+          {groups.map((group) => (
+            <div key={group.label}>
+              <p className="px-3 pb-2 text-[11px] font-semibold uppercase tracking-[.12em] text-fg-subtle">{group.label}</p>
+              <ul className="space-y-0.5">
+                {group.items.map((item) => {
+                  const Icon = item.icon;
+                  const isActive = activeTab === item.id;
+                  return (
+                    <li key={item.id}>
+                      <button
+                        type="button"
+                        aria-current={isActive ? 'page' : undefined}
+                        onClick={() => { setActiveTab(item.id); setIsOpenOnMobile(false); }}
+                        className={cn(
+                          'group relative flex h-10 w-full cursor-pointer items-center gap-3 rounded-[var(--radius-md)] px-3 text-left text-[13.5px] font-medium transition-colors duration-[var(--dur-base)]',
+                          'focus-visible:outline-2 focus-visible:outline-offset-[-2px] focus-visible:outline-[var(--ring)]',
+                          isActive ? 'bg-[var(--hover)] text-fg' : 'text-fg-muted hover:bg-[color-mix(in_srgb,var(--hover)_60%,transparent)] hover:text-fg',
+                        )}
+                      >
+                        {isActive && <span className="absolute -left-3 top-2 h-6 w-[3px] rounded-r-full bg-lime shadow-[0_0_12px_var(--accent)]" aria-hidden="true" />}
+                        <Icon className={cn('size-[18px] shrink-0 transition-colors', isActive ? 'text-brand' : 'text-fg-subtle group-hover:text-fg-muted')} aria-hidden="true" />
+                        <span className="truncate">{item.label}</span>
+                      </button>
+                    </li>
+                  );
+                })}
+              </ul>
+            </div>
+          ))}
         </nav>
 
-        {/* Footer Status & Logout button */}
-        <div className="sidebar-footer p-4 mt-auto border-t border-slate-800 bg-slate-950/40 space-y-2">
-          {onLogout && (
-            <button
-              onClick={onLogout}
-              className="sidebar-switch w-full py-2 px-3 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white text-xs font-bold flex items-center justify-center gap-2 border border-slate-700 transition"
-            >
-              <LogOut className="w-3.5 h-3.5 text-indigo-400" />
-              <span>Logout</span>
-            </button>
-          )}
-
-          <div className="flex items-center justify-between text-[10px] text-slate-500 font-bold">
-            <span>Access: {isFullAdmin ? 'FULL ADMIN' : 'ROLE RESTRICTED'}</span>
-            <div className="flex items-center gap-1 text-green-400">
-              <div className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse" />
-              <span>Active</span>
-            </div>
-          </div>
+        <div className="shrink-0 border-t border-line-soft p-3">
+          <Dropdown>
+            <DropdownTrigger asChild>
+              <button type="button" className="flex w-full cursor-pointer items-center gap-3 rounded-[var(--radius-lg)] p-2 text-left transition-colors hover:bg-[var(--hover)] focus-visible:outline-2 focus-visible:outline-[var(--ring)]">
+                <span className="grid size-9 shrink-0 place-items-center rounded-full bg-lime text-xs font-bold text-on-lime">{initialsOf(currentUser?.name)}</span>
+                <span className="min-w-0 flex-1">
+                  <span className="block truncate text-[13px] font-semibold text-fg">{currentUser?.name || 'Account'}</span>
+                  <span className="flex items-center gap-1 truncate text-[11px] text-fg-subtle">
+                    {isFullAdmin ? <ShieldCheck className="size-3 text-brand" aria-hidden="true" /> : <UserCheck className="size-3" aria-hidden="true" />}
+                    {currentUser?.role || 'Member'}
+                  </span>
+                </span>
+                <MoreHorizontal className="size-4 text-fg-subtle" aria-hidden="true" />
+              </button>
+            </DropdownTrigger>
+            <DropdownContent side="top" align="start" className="w-60">
+              <DropdownLabel>{currentUser?.email || 'Signed in'}</DropdownLabel>
+              <DropdownSeparator />
+              <DropdownItem onSelect={() => setActiveTab('settings')}><UserCheck />Account settings</DropdownItem>
+              {onLogout && <DropdownItem destructive onSelect={onLogout}><LogOut />Log out</DropdownItem>}
+            </DropdownContent>
+          </Dropdown>
         </div>
       </aside>
     </>
   );
-};
-
-const PAGE_ICONS: Record<TabType, typeof LayoutDashboard> = {
-  dashboard: LayoutDashboard,
-  roles: Briefcase,
-  projects: FolderKanban,
-  shoots: Film,
-  expenses: Banknote,
-  data: HardDrive,
-  team: Users,
-  freelancers: UserCheck,
-  clients: Heart,
-  deliveries: CheckCircle2,
-  owner_workspace: Crown,
-  equipment: Camera,
-  leads: Target,
-  access: ShieldCheck,
-  settings: Settings,
 };
 
 interface TopHeaderProps {
@@ -222,173 +131,95 @@ interface TopHeaderProps {
   onImportData?: (file: File) => void;
   currentUser?: TeamMember | { id: string; name: string; role: string; email: string } | null;
   onLogout?: () => void;
-  counts: {
-    total: number;
-    running: number;
-    completed: number;
-    readyToDeliver: number;
-    pending: number;
-    urgent: number;
-  };
+  canAccessTab?: (tab: TabType) => boolean;
+  counts: { total: number; running: number; completed: number; readyToDeliver: number; pending: number; urgent: number };
 }
 
 export const TopHeader: React.FC<TopHeaderProps> = ({
-  activeTab,
-  setActiveTab,
-  statusFilter,
-  setStatusFilter,
-  onOpenAIModal,
-  onToggleMobileSidebar,
-  onExportData,
-  onImportData,
-  currentUser,
-  counts,
+  activeTab, setActiveTab, statusFilter, setStatusFilter, onOpenAIModal, onToggleMobileSidebar, onExportData, onImportData, currentUser, onLogout, canAccessTab, counts,
 }) => {
-  const isFullAdmin = currentUser?.role === 'Owner' || currentUser?.role === 'Studio Manager' || currentUser?.role === 'Manager' || currentUser?.role === 'Account Manager';
+  const [paletteOpen, setPaletteOpen] = React.useState(false);
+  useCommandShortcut(React.useCallback(() => setPaletteOpen((o) => !o), []));
+
+  const isFullAdmin = ['Owner', 'Studio Manager', 'Manager', 'Account Manager'].includes(currentUser?.role ?? '');
   const showProjectFilters = activeTab === 'projects' || activeTab === 'deliveries';
-  const pageTitles: Record<TabType, string> = {
-    dashboard: 'Studio Dashboard',
-    roles: 'My Desk',
-    projects: 'Projects',
-    shoots: 'Shoot Management',
-    expenses: 'Expense Management',
-    data: 'Data Management',
-    team: 'Team & Attendance',
-    freelancers: 'Freelancer Team',
-    clients: 'Clients',
-    deliveries: 'Deliveries',
-    owner_workspace: 'Owner Workspace',
-    equipment: 'Equipment Inventory',
-    leads: 'Leads & Inquiries',
-    access: 'Roles & Permissions',
-    settings: 'Settings',
-  };
-  const PageIcon = PAGE_ICONS[activeTab];
-  const userInitials = currentUser?.name
-    ? currentUser.name.split(' ').map((n) => n[0]).join('').slice(0, 2).toUpperCase()
-    : BRAND.shortName.slice(0, 2).toUpperCase();
+  const isMac = typeof navigator !== 'undefined' && /Mac|iPhone|iPad/.test(navigator.platform);
+
+  const commands = React.useMemo<Command[]>(() => {
+    const list: Command[] = [];
+    for (const g of NAV_GROUPS) for (const i of g.items) {
+      if (canAccessTab && !canAccessTab(i.id)) continue;
+      list.push({ id: `nav-${i.id}`, label: i.label, group: 'Go to', icon: i.icon, keywords: i.keywords, run: () => setActiveTab(i.id) });
+    }
+    list.push({ id: 'act-ai', label: 'Open AI helper', group: 'Actions', icon: Sparkles, run: onOpenAIModal });
+    if (isFullAdmin && onExportData) list.push({ id: 'act-export', label: 'Export backup', group: 'Actions', icon: Download, run: onExportData });
+    if (onLogout) list.push({ id: 'act-logout', label: 'Log out', group: 'Account', icon: LogOut, run: onLogout });
+    return list;
+  }, [canAccessTab, setActiveTab, onOpenAIModal, isFullAdmin, onExportData, onLogout]);
+
+  const tab = (active: boolean, danger = false) =>
+    cn(
+      'inline-flex h-8 cursor-pointer items-center gap-1.5 whitespace-nowrap rounded-[var(--radius-md)] px-3 text-[13px] font-medium transition-colors focus-visible:outline-2 focus-visible:outline-[var(--ring)]',
+      active ? 'bg-surface text-fg shadow-[var(--elev-1)]' : danger ? 'text-bad hover:bg-bad-bg' : 'text-fg-muted hover:text-fg',
+    );
 
   return (
-    <header className="relative z-20 border-b border-[#e8ddd7] bg-[linear-gradient(180deg,#fffdfb_0%,#f8f1ee_100%)] shadow-[0_4px_18px_rgba(34,37,33,0.05)]">
-      <div className="h-1 bg-[linear-gradient(90deg,#ddc89c_0%,#8f3655_48%,#6d2f45_100%)]" />
-      <div className="flex min-h-16 items-center justify-between gap-3 px-4 py-2.5 sm:px-6">
-        <div className="flex min-w-0 items-center gap-3 overflow-x-auto scrollbar-none">
-          <button
-            onClick={onToggleMobileSidebar}
-            className="shrink-0 rounded-lg border border-[#e4d8d2] p-2 text-[#3F443C] transition hover:bg-[#F4F5F3] md:hidden"
-            title="Toggle Navigation"
-          >
-            <Menu className="w-5 h-5" />
-          </button>
-
+    <header className="relative z-20 border-b border-line-soft bg-[color-mix(in_srgb,var(--background)_86%,transparent)] backdrop-blur-md">
+      <div className="flex h-16 items-center justify-between gap-3 px-4 sm:px-6">
+        <div className="flex min-w-0 items-center gap-3">
+          <Button variant="ghost" size="icon" className="md:hidden" onClick={onToggleMobileSidebar} aria-label="Open navigation"><Menu /></Button>
           {!showProjectFilters ? (
-            <div className="flex min-w-0 items-center gap-3">
-              <span className="grid size-10 shrink-0 place-items-center rounded-2xl border border-[#CCEB8E]/50 bg-[linear-gradient(145deg,#464B43,#373B35)] text-white shadow-[0_8px_16px_rgba(55,59,53,.22)]">
-                <PageIcon className="size-4" />
-              </span>
-              <div className="min-w-0">
-                <p className="truncate text-sm font-extrabold tracking-tight text-[#1C1F1B] sm:text-base">{pageTitles[activeTab]}</p>
-                <p className="hidden items-center gap-1.5 text-[11px] font-bold uppercase tracking-[.14em] text-[#a07a4a] sm:flex">
-                  <span className="size-1.5 rounded-full bg-[#CCEB8E]" />
-                  {BRAND.name}
-                </p>
-              </div>
+            <h1 className="truncate font-display text-lg font-semibold tracking-tight text-fg sm:text-xl">{PAGE_TITLES[activeTab]}</h1>
+          ) : (
+            <div role="tablist" aria-label="Project filters" className="flex items-center gap-1 overflow-x-auto rounded-[var(--radius-lg)] border border-line-soft bg-surface-sunken p-1">
+              <button role="tab" aria-selected={activeTab === 'projects' && statusFilter === 'all'} className={tab(activeTab === 'projects' && statusFilter === 'all')} onClick={() => { setActiveTab('projects'); setStatusFilter('all'); }}>All ({counts.total})</button>
+              <button role="tab" aria-selected={activeTab === 'projects' && statusFilter === 'running'} className={tab(activeTab === 'projects' && statusFilter === 'running')} onClick={() => { setActiveTab('projects'); setStatusFilter('running'); }}>
+                <span className="size-1.5 rounded-full bg-lime shadow-[0_0_8px_var(--accent)]" aria-hidden="true" />Running ({counts.running})
+              </button>
+              <button role="tab" aria-selected={activeTab === 'deliveries' || (activeTab === 'projects' && statusFilter === 'ready_to_deliver')} className={tab(activeTab === 'deliveries' || (activeTab === 'projects' && statusFilter === 'ready_to_deliver'))} onClick={() => setActiveTab('deliveries')}>
+                <CheckCircle2 className="size-3.5 text-ok" aria-hidden="true" />Ready ({counts.readyToDeliver})
+              </button>
+              <button role="tab" aria-selected={activeTab === 'projects' && statusFilter === 'urgent'} className={tab(activeTab === 'projects' && statusFilter === 'urgent', true)} onClick={() => { setActiveTab('projects'); setStatusFilter('urgent'); }}>
+                <AlertCircle className="size-3.5" aria-hidden="true" />Urgent ({counts.urgent})
+              </button>
             </div>
-          ) : <div className="flex items-center gap-4 whitespace-nowrap text-xs font-semibold text-slate-600 sm:gap-6 sm:text-sm">
-            <button
-              onClick={() => {
-                setActiveTab('projects');
-                setStatusFilter('all');
-              }}
-              className={`py-3 px-1 border-b-2 transition ${activeTab === 'projects' && statusFilter === 'all'
-                ? 'text-rose-800 border-rose-700 font-bold'
-                : 'border-transparent text-slate-500 hover:text-slate-800'
-                }`}
-            >
-              All Projects ({counts.total})
-            </button>
-
-            <button
-              onClick={() => {
-                setActiveTab('projects');
-                setStatusFilter('running');
-              }}
-              className={`py-3 px-1 border-b-2 transition flex items-center gap-1.5 ${activeTab === 'projects' && statusFilter === 'running'
-                ? 'text-rose-800 border-rose-700 font-bold'
-                : 'border-transparent text-slate-500 hover:text-slate-800'
-                }`}
-            >
-              <span className="h-2 w-2 rounded-full bg-rose-600 animate-pulse" />
-              <span>Running ({counts.running})</span>
-            </button>
-
-            <button
-              onClick={() => {
-                setActiveTab('deliveries');
-              }}
-              className={`py-3 px-1 border-b-2 transition flex items-center gap-1.5 ${activeTab === 'deliveries' || (activeTab === 'projects' && statusFilter === 'ready_to_deliver')
-                ? 'text-rose-800 border-rose-700 font-bold'
-                : 'border-transparent text-slate-500 hover:text-slate-800'
-                }`}
-            >
-              <CheckCircle2 className="w-3.5 h-3.5 text-green-600" />
-              <span>Ready ({counts.readyToDeliver})</span>
-            </button>
-
-            <button
-              onClick={() => {
-                setActiveTab('projects');
-                setStatusFilter('urgent');
-              }}
-              className={`py-3 px-1 border-b-2 transition flex items-center gap-1.5 ${activeTab === 'projects' && statusFilter === 'urgent'
-                ? 'text-red-600 border-red-600 font-bold'
-                : 'border-transparent text-red-500 hover:text-red-700'
-                }`}
-            >
-              <AlertCircle className="w-3.5 h-3.5 text-red-600" />
-              <span>Urgent ({counts.urgent})</span>
-            </button>
-          </div>}
+          )}
         </div>
 
         <div className="flex shrink-0 items-center gap-1.5 sm:gap-2">
           <button
-            onClick={onOpenAIModal}
-            title="Open AI Helper"
-            className="flex h-9 items-center gap-1.5 rounded-xl border border-[#CCEB8E]/70 bg-[#F4FBE6] px-2.5 text-xs font-bold text-[#7a5a2e] transition hover:bg-[#E9F6CF] sm:px-3"
+            type="button"
+            onClick={() => setPaletteOpen(true)}
+            aria-label="Open command palette"
+            className="hidden h-9 w-56 cursor-pointer items-center gap-2 rounded-[var(--radius-md)] border border-line bg-surface px-3 text-[13px] text-fg-subtle transition-colors hover:border-line-strong focus-visible:outline-2 focus-visible:outline-[var(--ring)] lg:flex"
           >
-            <Sparkles className="h-4 w-4" />
-            <span className="hidden lg:inline">AI Helper</span>
+            <Search className="size-4" aria-hidden="true" />
+            <span className="flex-1 text-left">Search…</span>
+            <kbd className="rounded border border-line px-1.5 font-mono text-[10px]">{isMac ? '⌘' : 'Ctrl'} K</kbd>
           </button>
+          <Tooltip content="Search"><Button variant="ghost" size="icon" className="lg:hidden" onClick={() => setPaletteOpen(true)} aria-label="Search"><Search /></Button></Tooltip>
+
+          <Button variant="accent" size="sm" onClick={onOpenAIModal} className="px-2.5 sm:px-3" aria-label="Open AI helper"><Sparkles /><span className="hidden lg:inline">AI Helper</span></Button>
 
           {isFullAdmin && (onExportData || onImportData) && (
-            <details className="group relative">
-              <summary className="flex h-9 cursor-pointer list-none items-center gap-1 rounded-xl border border-[#e4d8d2] bg-white px-2.5 text-xs font-bold text-[#393E37] transition hover:bg-[#faf5f3] [&::-webkit-details-marker]:hidden">
-                <MoreHorizontal className="h-4 w-4" />
-                <span className="hidden xl:inline">Backup</span>
-              </summary>
-              <div className="absolute right-0 top-11 z-40 w-44 space-y-1 rounded-xl border border-[#e4d8d2] bg-white p-2 shadow-[0_14px_35px_rgba(27,29,26,.16)]">
-                {onExportData && <button onClick={onExportData} className="flex w-full items-center gap-2 rounded-lg px-3 py-2 text-left text-xs font-bold text-slate-700 hover:bg-[#F4F5F3]"><Download className="h-4 w-4 text-rose-700" />Export backup</button>}
-                {onImportData && <label className="flex cursor-pointer items-center gap-2 rounded-lg px-3 py-2 text-xs font-bold text-slate-700 hover:bg-[#F4F5F3]"><Upload className="h-4 w-4 text-rose-700" />Restore backup<input type="file" accept=".json" className="hidden" onChange={(e) => { const file = e.target.files?.[0]; if (file) { onImportData(file); e.target.value = ''; } }} /></label>}
-              </div>
-            </details>
+            <Dropdown>
+              <DropdownTrigger asChild><Button variant="secondary" size="sm" aria-label="Backup options"><MoreHorizontal /><span className="hidden xl:inline">Backup</span></Button></DropdownTrigger>
+              <DropdownContent align="end">
+                {onExportData && <DropdownItem onSelect={onExportData}><Download />Export backup</DropdownItem>}
+                {onImportData && (
+                  <DropdownItem onSelect={(e) => e.preventDefault()} asChild>
+                    <label className="cursor-pointer"><Upload />Restore backup<input type="file" accept=".json" className="sr-only" onChange={(e) => { const f = e.target.files?.[0]; if (f) { onImportData(f); e.target.value = ''; } }} /></label>
+                  </DropdownItem>
+                )}
+              </DropdownContent>
+            </Dropdown>
           )}
 
           {currentUser && <NotificationBell enabled />}
-
-          {currentUser && (
-            <div className="hidden items-center gap-2 rounded-2xl border border-[#e8ddd7] bg-white/80 py-1 pl-1 pr-3 sm:flex">
-              <span className="grid size-8 place-items-center rounded-xl bg-[linear-gradient(145deg,#464B43,#373B35)] text-[10px] font-black text-white">
-                {userInitials}
-              </span>
-              <span className="min-w-0">
-                <span className="block max-w-36 truncate text-xs font-extrabold text-[#1C1F1B]">{currentUser.name}</span>
-                <span className="block truncate text-[10px] font-bold uppercase tracking-wider text-[#a07a4a]">{currentUser.role}</span>
-              </span>
-            </div>
-          )}
+          <ThemeToggle />
         </div>
       </div>
+      <CommandPalette commands={commands} open={paletteOpen} onOpenChange={setPaletteOpen} />
     </header>
   );
 };

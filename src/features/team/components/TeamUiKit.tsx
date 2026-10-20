@@ -240,7 +240,7 @@ export const ModalHero: React.FC<{
   labelledBy?: string;
   actions?: React.ReactNode;
 }> = ({ icon: Icon, eyebrow, title, description, onClose, labelledBy, actions }) => (
-  <header className="relative shrink-0 overflow-hidden bg-[radial-gradient(circle_at_86%_10%,rgba(236,190,169,.24),transparent_32%),linear-gradient(125deg,#41463E,#55333f_52%,#21241F)] px-5 py-5 text-white sm:px-7 sm:py-6">
+  <header className="relative shrink-0 overflow-hidden bg-[radial-gradient(circle_at_86%_10%,rgba(236,190,169,.24),transparent_32%),linear-gradient(125deg,#41463E,#30342E_52%,#21241F)] px-5 py-5 text-white sm:px-7 sm:py-6">
     <div className="absolute -bottom-14 -right-8 size-44 rounded-full border-[24px] border-white/5" />
     <div className="relative flex items-start justify-between gap-4">
       <div className="flex min-w-0 items-center gap-4">

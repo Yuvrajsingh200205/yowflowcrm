@@ -979,9 +979,9 @@ export default function App() {
   // Wait for the persisted browser session before deciding whether login is needed.
   if (!isHydrated) {
     return (
-      <div className="flex min-h-screen items-center justify-center bg-[#181A17] text-[#f8e9df]">
-        <div className="flex items-center gap-3 text-sm font-semibold">
-          <span className="h-5 w-5 animate-spin rounded-full border-2 border-[#5B6257] border-t-transparent" />
+      <div data-theme="dark" className="flex min-h-screen items-center justify-center bg-canvas text-fg">
+        <div className="flex items-center gap-3 text-sm font-medium">
+          <span className="size-5 animate-spin rounded-full border-2 border-[var(--accent)] border-t-transparent motion-reduce:animate-none" />
           Restoring your studio session…
         </div>
       </div>
@@ -990,9 +990,9 @@ export default function App() {
 
   if (freelancerSessionInCrm) {
     return (
-      <div className="flex min-h-screen items-center justify-center bg-[#181A17] text-[#f8e9df]">
-        <div className="flex items-center gap-3 text-sm font-semibold">
-          <span className="h-5 w-5 animate-spin rounded-full border-2 border-[#5B6257] border-t-transparent" />
+      <div data-theme="dark" className="flex min-h-screen items-center justify-center bg-canvas text-fg">
+        <div className="flex items-center gap-3 text-sm font-medium">
+          <span className="size-5 animate-spin rounded-full border-2 border-[var(--accent)] border-t-transparent motion-reduce:animate-none" />
           Opening freelancer workspace…
         </div>
       </div>
@@ -1036,6 +1036,7 @@ export default function App() {
           setStatusFilter={setStatusFilter}
           onOpenAIModal={() => setIsAIModalOpen(true)}
           onToggleMobileSidebar={() => setIsMobileSidebarOpen(!isMobileSidebarOpen)}
+          canAccessTab={canAccessTab}
           onExportData={handleExportData}
           onImportData={handleImportData}
           currentUser={currentUser}
@@ -1424,19 +1425,13 @@ export default function App() {
 
         </div>
 
-        {/* High Density Status Bar Footer */}
-        <footer className="h-8 bg-slate-800 text-slate-400 flex items-center px-4 text-[10px] justify-between uppercase font-mono tracking-wider flex-shrink-0 z-10 border-t border-slate-700">
-          <div className="flex items-center gap-3">
-            <span>STUDIO LOGGED IN: {currentUser?.name.toUpperCase()} ({currentUser?.role.toUpperCase()})</span>
-            <span className="text-slate-600">|</span>
-            <span>{BRAND.shortName}</span>
-          </div>
-          <div className="flex items-center gap-2">
-            <span className="flex items-center gap-1.5 text-indigo-300 font-bold">
-              <div className="w-2 h-2 bg-indigo-500 rounded-full animate-pulse" />
-              SYSTEM LIVE
-            </span>
-          </div>
+        {/* Status bar */}
+        <footer className="z-10 flex h-8 flex-shrink-0 items-center justify-between border-t border-line-soft bg-surface-sunken px-4 text-[11px] text-fg-subtle">
+          <span className="truncate">Signed in as <strong className="font-medium text-fg-muted">{currentUser?.name}</strong> · {currentUser?.role}</span>
+          <span className="flex items-center gap-1.5 font-medium text-fg-muted">
+            <span className="relative flex size-2"><span className="absolute inline-flex size-full animate-ping rounded-full bg-lime opacity-60 motion-reduce:animate-none" /><span className="relative inline-flex size-2 rounded-full bg-lime" /></span>
+            Live
+          </span>
         </footer>
 
       </main>

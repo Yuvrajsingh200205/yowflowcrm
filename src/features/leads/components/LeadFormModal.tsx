@@ -68,7 +68,7 @@ export function LeadFormModal(props: LeadFormModalProps) {
 
   return <div className="fixed inset-0 z-50 flex items-center justify-center bg-[#151714]/75 p-3 backdrop-blur-sm sm:p-6">
     <div role="dialog" aria-modal="true" aria-labelledby="lead-form-title" className="max-h-[92vh] w-full max-w-3xl overflow-y-auto rounded-[2rem] border border-white/50 bg-white shadow-[0_30px_90px_rgba(14,15,13,.42)]">
-      <header className="relative overflow-hidden bg-[radial-gradient(circle_at_86%_10%,rgba(236,190,169,.24),transparent_32%),linear-gradient(125deg,#41463E,#55333f_52%,#21241F)] px-5 py-5 text-white sm:px-7 sm:py-6">
+      <header className="relative overflow-hidden bg-[radial-gradient(circle_at_86%_10%,rgba(236,190,169,.24),transparent_32%),linear-gradient(125deg,#41463E,#30342E_52%,#21241F)] px-5 py-5 text-white sm:px-7 sm:py-6">
         <div className="absolute -bottom-14 -right-8 size-44 rounded-full border-[24px] border-white/5" />
         <div className="relative flex items-start justify-between gap-4">
           <div className="flex items-center gap-4"><span className="grid size-14 shrink-0 place-items-center rounded-2xl border border-white/30 bg-white/15 shadow-inner"><Target className="size-7 text-[#f6d9ca]" /></span><div><p className="flex items-center gap-1.5 text-xs font-extrabold uppercase tracking-[.18em] text-[#D9DCD8]"><Sparkles className="size-3.5" /> Lead Journey Intake</p><h2 id="lead-form-title" className="mt-1 text-xl font-black sm:text-2xl">{props.editingLead ? 'Edit Lead Record' : 'Add New Lead / Inquiry'}</h2><p className="mt-1 text-sm leading-relaxed text-[#dfeae7]">Capture the couple’s requirement and assign the next action clearly.</p></div></div>

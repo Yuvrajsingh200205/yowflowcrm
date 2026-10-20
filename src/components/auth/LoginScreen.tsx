@@ -63,7 +63,7 @@ export const LoginScreen: React.FC<LoginScreenProps> = ({ onLogin, onClose }) =>
   };
 
   return (
-    <main className="fixed inset-0 z-60 min-h-dvh overflow-x-hidden overflow-y-auto bg-[#151714] bg-[radial-gradient(circle_at_12%_10%,#6f2841_0,transparent_29%),radial-gradient(circle_at_85%_90%,#5d2038_0,transparent_26%)] text-[#20231F] lg:h-dvh lg:overflow-hidden lg:px-[3vw] lg:pb-2 lg:pt-4">
+    <main className="fixed inset-0 z-60 min-h-dvh overflow-x-hidden overflow-y-auto bg-[#151714] bg-[radial-gradient(circle_at_12%_10%,#353A33_0,transparent_29%),radial-gradient(circle_at_85%_90%,#2C302A_0,transparent_26%)] text-[#20231F] lg:h-dvh lg:overflow-hidden lg:px-[3vw] lg:pb-2 lg:pt-4">
       <Link
         href="/"
         aria-label="Go to home page"

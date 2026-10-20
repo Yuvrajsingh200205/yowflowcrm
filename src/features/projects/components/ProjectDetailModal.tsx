@@ -4234,7 +4234,7 @@ export const ProjectDetailModal: React.FC<ProjectDetailModalProps> = ({
       {showAddScheduleModal && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-[#151714]/75 p-4 backdrop-blur-sm sm:p-8">
           <div role="dialog" aria-modal="true" className="flex max-h-[90vh] w-full max-w-xl flex-col overflow-hidden rounded-[2rem] border border-white/50 bg-[#fffdfb] shadow-[0_30px_90px_rgba(14,15,13,.42)]">
-            <header className="relative shrink-0 overflow-hidden bg-[radial-gradient(circle_at_86%_10%,rgba(236,190,169,.24),transparent_32%),linear-gradient(125deg,#41463E,#55333f_52%,#21241F)] px-6 py-6 text-white sm:px-8">
+            <header className="relative shrink-0 overflow-hidden bg-[radial-gradient(circle_at_86%_10%,rgba(236,190,169,.24),transparent_32%),linear-gradient(125deg,#41463E,#30342E_52%,#21241F)] px-6 py-6 text-white sm:px-8">
               <div className="absolute -bottom-14 -right-8 size-44 rounded-full border-[24px] border-white/5" />
               <div className="relative flex items-start justify-between gap-4">
                 <div className="flex min-w-0 items-center gap-4">
@@ -4267,7 +4267,7 @@ export const ProjectDetailModal: React.FC<ProjectDetailModalProps> = ({
 
             <form onSubmit={handleSaveScheduleItem} className="flex min-h-0 flex-1 flex-col">
               <div className="min-h-0 flex-1 space-y-6 overflow-y-auto px-6 py-6 sm:px-8 sm:py-7">
-                <div className="grid grid-cols-2 gap-4 rounded-2xl border border-[#CCEB8E]/40 bg-[linear-gradient(125deg,#41463E,#55333f_52%,#21241F)] px-5 py-4 text-white">
+                <div className="grid grid-cols-2 gap-4 rounded-2xl border border-[#CCEB8E]/40 bg-[linear-gradient(125deg,#41463E,#30342E_52%,#21241F)] px-5 py-4 text-white">
                   <div>
                     <p className="text-[10px] font-extrabold uppercase tracking-[.14em] text-[#D9DCD8]">Total Package Amount</p>
                     <p className="mt-2 font-mono text-xl font-black text-[#CCEB8E]">

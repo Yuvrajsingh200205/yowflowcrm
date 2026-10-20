@@ -98,7 +98,7 @@ export const CategoriesManagerModal: React.FC<CategoriesManagerModalProps> = ({
   return (
     <div className="fixed inset-0 z-[80] bg-[#151714]/75 backdrop-blur-xs flex items-center justify-center p-4 overflow-y-auto">
       <div className="bg-white rounded-[2rem] shadow-[0_30px_90px_rgba(14,15,13,.42)] border border-white/50 w-full max-w-3xl overflow-hidden my-8">
-        <div className="bg-[linear-gradient(125deg,#41463E,#55333f_52%,#21241F)] text-white p-5 flex items-center justify-between">
+        <div className="bg-[linear-gradient(125deg,#41463E,#30342E_52%,#21241F)] text-white p-5 flex items-center justify-between">
           <div className="flex items-center gap-3">
             <div className="w-10 h-10 rounded-xl bg-white/15 flex items-center justify-center font-bold text-white">
               <Tag className="w-5 h-5 text-white" />

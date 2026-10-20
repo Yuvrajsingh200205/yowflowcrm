@@ -56,7 +56,7 @@ export function HeroSection() {
             <div className="mt-8 flex flex-wrap items-center gap-6">
               <Link
                 href="/contact"
-                className="inline-flex h-14 min-w-[16.5rem] items-center justify-center gap-4 rounded-full border border-[rgba(196,232,123,0.28)] bg-[linear-gradient(180deg,#C75F8B_0%,#B54674_100%)] px-8 text-base font-bold text-white shadow-[0_18px_44px_rgba(83,90,79,0.42),inset_0_1px_0_rgba(255,255,255,0.2)] transition-transform hover:-translate-y-0.5"
+                className="inline-flex h-14 min-w-[16.5rem] items-center justify-center gap-4 rounded-full border border-[rgba(196,232,123,0.28)] bg-[linear-gradient(180deg,#91998D_0%,#596055_100%)] px-8 text-base font-bold text-white shadow-[0_18px_44px_rgba(83,90,79,0.42),inset_0_1px_0_rgba(255,255,255,0.2)] transition-transform hover:-translate-y-0.5"
               >
                 Get Started Today
                 <ArrowRight className="h-5 w-5" aria-hidden="true" />

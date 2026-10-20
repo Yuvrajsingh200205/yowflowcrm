@@ -199,7 +199,7 @@ export const TeamMemberProfileDrawer: React.FC<Props> = ({
   return (
     <Drawer isOpen onClose={onClose} labelledBy={titleId}>
       {/* Header */}
-      <header className="relative flex-shrink-0 space-y-4 overflow-hidden bg-[radial-gradient(circle_at_86%_10%,rgba(236,190,169,.24),transparent_32%),linear-gradient(125deg,#41463E,#55333f_52%,#21241F)] px-5 py-5 text-white">
+      <header className="relative flex-shrink-0 space-y-4 overflow-hidden bg-[radial-gradient(circle_at_86%_10%,rgba(236,190,169,.24),transparent_32%),linear-gradient(125deg,#41463E,#30342E_52%,#21241F)] px-5 py-5 text-white">
         <div className="absolute -bottom-16 -right-8 size-44 rounded-full border-[24px] border-white/5" />
         <div className="relative flex items-start justify-between gap-3">
           <div className="flex min-w-0 items-start gap-3">

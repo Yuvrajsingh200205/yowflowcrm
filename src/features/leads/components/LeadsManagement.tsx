@@ -580,7 +580,7 @@ export const LeadsManagement: React.FC<LeadsManagementProps> = ({ currentUser, t
 
       {/* YEARLY & MONTHLY TARGETING & GOALS WIDGET (Visible to Owner & Managers only) */}
       {isOwner && activeSubTab === 'list' && (
-        <div className="space-y-4 rounded-3xl border border-[#CCEB8E]/30 bg-[linear-gradient(135deg,#1e302b,#302329_55%,#131a18)] p-5 text-white shadow-xl md:p-6">
+        <div className="space-y-4 rounded-3xl border border-[#CCEB8E]/30 bg-[linear-gradient(135deg,#1e302b,#192320_55%,#131a18)] p-5 text-white shadow-xl md:p-6">
           <div className="flex flex-col items-start justify-between gap-3 border-b border-rose-300/15 pb-3.5 sm:flex-row sm:items-center">
             <div className="flex items-center gap-2.5">
               <div className="rounded-2xl border border-[#DBF1AE]/25 bg-[#DBF1AE]/10 p-2.5 text-[#DBF1AE]">

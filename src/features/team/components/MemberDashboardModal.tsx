@@ -357,7 +357,7 @@ export const MemberDashboardModal: React.FC<MemberDashboardModalProps> = ({
   return createPortal(
     <div className="fixed inset-0 z-[80] flex items-center justify-center overflow-y-auto bg-[#151714]/75 p-3 backdrop-blur-sm sm:p-5">
       <div className="flex max-h-[92vh] w-full max-w-5xl flex-col overflow-hidden rounded-[2rem] border border-white/50 bg-white shadow-[0_30px_90px_rgba(14,15,13,.42)] animate-in fade-in zoom-in-95 duration-150 xl:max-w-6xl">
-        <div className="relative flex shrink-0 flex-col justify-between gap-4 overflow-hidden bg-[radial-gradient(circle_at_86%_10%,rgba(236,190,169,.24),transparent_32%),linear-gradient(125deg,#41463E,#55333f_52%,#21241F)] p-5 text-white sm:flex-row sm:items-center">
+        <div className="relative flex shrink-0 flex-col justify-between gap-4 overflow-hidden bg-[radial-gradient(circle_at_86%_10%,rgba(236,190,169,.24),transparent_32%),linear-gradient(125deg,#41463E,#30342E_52%,#21241F)] p-5 text-white sm:flex-row sm:items-center">
           <div className="absolute -bottom-16 -right-8 size-44 rounded-full border-[24px] border-white/5" />
           <div className="relative z-10 flex items-center gap-4">
             <div className="w-14 h-14 rounded-2xl bg-[#464B43] text-white font-black text-xl flex items-center justify-center border-2 border-rose-300 shadow-md">

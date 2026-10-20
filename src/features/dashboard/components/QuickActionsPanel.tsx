@@ -7,27 +7,25 @@ import { usePermission } from '@/features/access';
 export function QuickActionsPanel() {
   const { can } = usePermission();
   const actions = [
-    { label: 'New Project', icon: FolderPlus, href: '/projects/new', accent: 'bg-rose-50 text-rose-700', show: can('weddings.create') },
-    { label: 'Schedule Shoot', icon: Camera, href: '/shoots', accent: 'text-rose-700 bg-rose-50', show: can('shoots.create') || can('shoots.view') },
-    { label: 'Record Payment', icon: CreditCard, href: '/expenses', accent: 'text-emerald-700 bg-emerald-50', show: can('finance.record_payment') },
-    { label: 'Add Expense', icon: Receipt, href: '/expenses', accent: 'text-amber-700 bg-amber-50', show: can('finance.manage_expenses') },
-  ].filter((action) => action.show);
+    { label: 'New project', icon: FolderPlus, href: '/projects/new', show: can('weddings.create') },
+    { label: 'Schedule shoot', icon: Camera, href: '/shoots', show: can('shoots.create') || can('shoots.view') },
+    { label: 'Record payment', icon: CreditCard, href: '/expenses', show: can('finance.record_payment') },
+    { label: 'Add expense', icon: Receipt, href: '/expenses', show: can('finance.manage_expenses') },
+  ].filter((a) => a.show);
 
   if (!actions.length) return null;
 
   return (
-    <section className="grid grid-cols-2 gap-3 sm:grid-cols-4">
-      {actions.map(({ label, icon: Icon, href, accent }) => (
+    <section aria-label="Quick actions" className="grid grid-cols-2 gap-3 sm:grid-cols-4">
+      {actions.map(({ label, icon: Icon, href }) => (
         <Link
           key={label}
           href={href}
           prefetch
-          className="group flex items-center gap-3 rounded-2xl border border-[#dfd9d2] bg-white p-3.5 text-left shadow-[0_10px_30px_rgba(48,44,46,.07)] transition hover:-translate-y-0.5 hover:border-rose-300"
+          className="group flex h-14 items-center gap-3 rounded-[var(--radius-lg)] border border-line-soft bg-surface px-4 text-sm font-medium text-fg shadow-[var(--elev-1)] transition-[transform,border-color,box-shadow] duration-[var(--dur-base)] ease-[var(--ease-out)] hover:-translate-y-0.5 hover:border-[var(--ring)] hover:shadow-[var(--elev-2)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--ring)] motion-reduce:transition-none motion-reduce:hover:translate-y-0"
         >
-          <span className={`grid size-9 shrink-0 place-items-center rounded-xl transition group-hover:scale-105 ${accent}`}>
-            <Icon className="size-4" />
-          </span>
-          <span className="text-xs font-extrabold uppercase tracking-wide text-slate-800">{label}</span>
+          <span className="grid size-8 shrink-0 place-items-center rounded-[var(--radius-md)] bg-lime text-on-lime transition-transform group-hover:scale-105 motion-reduce:transition-none"><Icon className="size-4" aria-hidden="true" /></span>
+          {label}
         </Link>
       ))}
     </section>

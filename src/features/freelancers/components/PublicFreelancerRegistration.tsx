@@ -177,7 +177,7 @@ export const PublicFreelancerRegistration: React.FC = () => {
 
   return (
     <main className="min-h-screen bg-[#FBFDF6] pb-12">
-      <section className="relative overflow-hidden bg-[radial-gradient(circle_at_88%_8%,rgba(204,235,142,.2),transparent_30%),linear-gradient(125deg,#41463E,#55333f_50%,#21241F)] px-5 py-8 text-white sm:px-8 sm:py-12">
+      <section className="relative overflow-hidden bg-[radial-gradient(circle_at_88%_8%,rgba(204,235,142,.2),transparent_30%),linear-gradient(125deg,#41463E,#30342E_50%,#21241F)] px-5 py-8 text-white sm:px-8 sm:py-12">
         <div className="absolute -bottom-20 -right-10 size-64 rounded-full border-[34px] border-white/[.04]" />
         <div className="relative mx-auto max-w-5xl">
           <span className="inline-flex items-center gap-1.5 rounded-full border border-white/20 bg-white/10 px-3 py-1 text-xs font-extrabold uppercase tracking-[.14em] text-[#E6E8E4]"><Sparkles className="size-3.5" /> {BRAND.name}</span>

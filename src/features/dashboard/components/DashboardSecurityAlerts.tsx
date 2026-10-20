@@ -1,11 +1,30 @@
-import { Lock, Monitor, ShieldAlert } from 'lucide-react';
+import { Lock, ShieldAlert } from 'lucide-react';
 import { TeamMember } from '@/types';
+import { Badge } from '@/components/ui/Badge';
+import { Button } from '@/components/ui/Button';
 
 export function DashboardSecurityAlerts({ team, onTeam }: { team: TeamMember[]; onTeam: () => void }) {
-  const alerts = team.filter((member) => (member.unauthorizedMinutes || 0) >= 5 || member.isLoggedOut);
+  const alerts = team.filter((m) => (m.unauthorizedMinutes || 0) >= 5 || m.isLoggedOut);
   if (!alerts.length) return null;
-  return <div className="space-y-3 rounded-2xl border border-amber-300 bg-amber-50 p-4 shadow-sm sm:p-5">
-    <div className="flex items-center justify-between border-b border-amber-200/80 pb-2"><h4 className="flex items-center gap-2 text-xs font-black uppercase tracking-wider text-amber-900"><ShieldAlert className="size-4 animate-pulse text-amber-600" />Live Software Security & Auto-Logout Alerts ({alerts.length})</h4><button onClick={onTeam} className="flex items-center gap-1 text-xs font-bold uppercase text-rose-700 underline"><Monitor className="size-3.5" /> Manage Team Roster →</button></div>
-    <div className="grid grid-cols-1 gap-2 text-xs md:grid-cols-2">{alerts.map((member) => <div key={member.id} className={`flex items-center justify-between gap-2 rounded-lg border p-2.5 ${member.isLoggedOut ? 'border-red-300 bg-red-100/90 text-red-900' : 'border-amber-200 bg-white text-amber-950'}`}><div><div className="flex items-center gap-2"><strong className="text-slate-900">{member.name}</strong><span className={`flex items-center gap-1 rounded px-1.5 py-0.5 font-bold uppercase ${member.isLoggedOut ? 'bg-red-600 text-white' : 'bg-amber-200 text-amber-900'}`}>{member.isLoggedOut && <Lock className="size-3" />}{member.isLoggedOut ? 'Auto Logged Out' : `${member.unauthorizedMinutes}m Unauthorized`}</span></div><p className="mt-1 text-slate-600">Current App: <strong>{member.currentSoftware}</strong> (Assigned: {member.assignedSoftwares?.join(' | ') || member.assignedSoftware || 'N/A'})</p></div><button onClick={onTeam} className="rounded bg-rose-700 px-2.5 py-1 font-bold uppercase text-white">View</button></div>)}</div>
-  </div>;
+  return (
+    <section role="alert" aria-label="Security alerts" className="rounded-[var(--radius-lg)] border border-warn/40 bg-warn-bg p-5">
+      <div className="flex flex-wrap items-center justify-between gap-3">
+        <h4 className="flex items-center gap-2 text-sm font-semibold text-fg"><ShieldAlert className="size-4 text-warn" aria-hidden="true" />Software and auto-logout alerts ({alerts.length})</h4>
+        <Button variant="secondary" size="sm" onClick={onTeam}>Manage team</Button>
+      </div>
+      <ul className="mt-3 grid gap-2 md:grid-cols-2">
+        {alerts.map((m) => (
+          <li key={m.id} className="flex items-center justify-between gap-3 rounded-[var(--radius-md)] border border-line-soft bg-surface p-3 text-[13px]">
+            <div className="min-w-0">
+              <div className="flex flex-wrap items-center gap-2">
+                <strong className="text-fg">{m.name}</strong>
+                <Badge tone={m.isLoggedOut ? 'danger' : 'warning'} dot>{m.isLoggedOut ? <><Lock className="size-3" aria-hidden="true" />Auto logged out</> : `${m.unauthorizedMinutes} min unauthorized`}</Badge>
+              </div>
+              <p className="mt-1 truncate text-fg-muted">Current app: <strong className="text-fg">{m.currentSoftware}</strong> · assigned {m.assignedSoftwares?.join(', ') || m.assignedSoftware || 'none'}</p>
+            </div>
+          </li>
+        ))}
+      </ul>
+    </section>
+  );
 }

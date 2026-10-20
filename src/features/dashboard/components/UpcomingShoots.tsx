@@ -1,7 +1,42 @@
 import { Calendar, MapPin } from 'lucide-react';
 import { Project } from '@/types';
+import { Badge } from '@/components/ui/Badge';
+import { EmptyState } from '@/components/ui/States';
 
 type Shoot = Project['shoots'][number] & { clientTitle: string; projectId: string };
+
 export function UpcomingShoots({ shoots, onOpen }: { shoots: Shoot[]; onOpen: () => void }) {
-  return <div className="space-y-5"><section className="dashboard-panel dashboard-panel--shoots flex h-[34rem] flex-col overflow-hidden rounded-2xl border border-[#dfd9d2] border-t-3 border-t-[#607c96] bg-white shadow-[0_10px_30px_rgba(48,44,46,.07)]"><div className="flex items-center justify-between border-b border-[#ece6e1] bg-linear-to-r from-[#f3f7fa] to-white p-4"><h3 className="flex items-center gap-2 text-sm font-extrabold uppercase tracking-wide text-slate-800"><Calendar className="size-4 text-rose-700" />Upcoming Shoots</h3><button onClick={onOpen} className="text-xs font-bold uppercase text-rose-700 hover:underline">View Calendar →</button></div><div className="min-h-0 flex-1 space-y-2.5 overflow-y-auto p-3.5">{shoots.length === 0 ? <p className="py-4 text-center text-xs italic text-slate-400">No upcoming shoots scheduled.</p> : shoots.map((shoot) => <div key={shoot.id} className="dashboard-shoot space-y-1 rounded-xl border border-[#e6ded8] bg-[#faf8f6] p-3 text-xs"><div className="flex items-center justify-between"><span className="font-bold text-slate-900">{shoot.title}</span><span className="rounded bg-slate-200 px-2 py-0.5 font-mono text-xs font-bold text-slate-700">{shoot.date}</span></div><p className="truncate text-xs font-medium text-slate-600">{shoot.clientTitle}</p><div className="flex items-center gap-1 text-xs text-slate-500"><MapPin className="size-3 text-slate-400" /><span className="truncate">{shoot.venue}</span></div><div className="flex flex-wrap items-center gap-x-3 gap-y-0.5 border-t border-slate-200 pt-1.5 text-xs font-medium text-slate-500">{shoot.leadPhotographer && <span>Lead: {shoot.leadPhotographer}</span>}{shoot.cinematographer && <span>Cine: {shoot.cinematographer}</span>}{shoot.droneOperator && <span className="font-bold text-rose-700">Drone: {shoot.droneOperator}</span>}</div></div>)}</div></section></div>;
+  return (
+    <section aria-labelledby="upcoming-shoots" className="flex h-[34rem] flex-col overflow-hidden rounded-[var(--radius-lg)] border border-line-soft bg-surface shadow-[var(--elev-1)]">
+      <div className="flex items-center justify-between border-b border-line-soft px-5 py-4">
+        <h3 id="upcoming-shoots" className="flex items-center gap-2 text-[15px] font-semibold tracking-tight text-fg"><Calendar className="size-4 text-brand" aria-hidden="true" />Upcoming shoots</h3>
+        <button type="button" onClick={onOpen} className="cursor-pointer text-[13px] font-medium text-brand hover:underline focus-visible:outline-2 focus-visible:outline-[var(--ring)]">View calendar →</button>
+      </div>
+      <div className="min-h-0 flex-1 overflow-y-auto p-3">
+        {shoots.length === 0 ? (
+          <EmptyState icon={<Calendar />} title="No shoots scheduled" description="Scheduled shoots show up here with crew and venue." action={{ label: 'Schedule a shoot', onClick: onOpen }} />
+        ) : (
+          <ul className="space-y-2">
+            {shoots.map((s) => (
+              <li key={s.id} className="rounded-[var(--radius-md)] border border-line-soft bg-surface-sunken p-3.5">
+                <div className="flex items-start justify-between gap-3">
+                  <p className="text-sm font-medium text-fg">{s.title}</p>
+                  <Badge tone="neutral" className="font-mono tabular">{s.date}</Badge>
+                </div>
+                <p className="mt-0.5 truncate text-[13px] text-fg-muted">{s.clientTitle}</p>
+                <p className="mt-2 flex items-center gap-1.5 text-xs text-fg-subtle"><MapPin className="size-3" aria-hidden="true" /><span className="truncate">{s.venue}</span></p>
+                {(s.leadPhotographer || s.cinematographer || s.droneOperator) && (
+                  <p className="mt-2 flex flex-wrap gap-x-3 gap-y-0.5 border-t border-line-soft pt-2 text-xs text-fg-muted">
+                    {s.leadPhotographer && <span>Lead: {s.leadPhotographer}</span>}
+                    {s.cinematographer && <span>Cine: {s.cinematographer}</span>}
+                    {s.droneOperator && <span>Drone: {s.droneOperator}</span>}
+                  </p>
+                )}
+              </li>
+            ))}
+          </ul>
+        )}
+      </div>
+    </section>
+  );
 }

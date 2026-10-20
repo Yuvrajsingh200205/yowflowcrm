@@ -14,7 +14,7 @@ def convert(r, g, b):
     r2, g2, b2 = colorsys.hls_to_rgb(TARGET_HUE, l2, s2)
     return round(r2 * 255), round(g2 * 255), round(b2 * 255)
 
-HEX = re.compile(r'#([0-9a-fA-F]{6})\b')
+HEX = re.compile(r'#([0-9a-fA-F]{6})(?![0-9a-fA-F])')
 RGBA = re.compile(r'rgba?\(\s*(\d{1,3})\s*,\s*(\d{1,3})\s*,\s*(\d{1,3})')
 
 def hex_sub(m):

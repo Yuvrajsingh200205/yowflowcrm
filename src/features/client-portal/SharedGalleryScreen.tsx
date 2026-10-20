@@ -79,7 +79,7 @@ export const SharedGalleryScreen: React.FC<{ token: string }> = ({ token }) => {
   return (
     <main className="min-h-screen bg-[#fffdfb]">
       <header className="sticky top-0 z-30 border-b border-[#e2d9d3] bg-white/95 backdrop-blur-md">
-        <div className="h-1 bg-[linear-gradient(90deg,#ddc89c_0%,#8f3655_48%,#6d2f45_100%)]" />
+        <div className="h-1 bg-[linear-gradient(90deg,#CCEB8E_0%,#464B43_48%,#373B35_100%)]" />
         <div className="mx-auto flex w-full max-w-[1800px] items-center justify-between gap-3 px-3 py-3 sm:px-5 lg:px-6 xl:px-10">
           <div className="min-w-0">
             <p className="truncate font-serif text-base text-[#1C1F1B] sm:text-lg">{gallery.title}</p>

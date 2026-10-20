@@ -27,7 +27,7 @@ export function SettingsManager({ viewer }: { viewer?: Viewer }) {
   if (error || !data) return <div className={CARD}><EmptyState icon={Settings} title="Settings unavailable" message={error} action={<button className={BTN_PRIMARY} onClick={() => void load()}>Retry</button>} /></div>;
   const pending = new Set(data.requests.filter(r => r.status === 'PENDING').map(r => r.moduleKey));
   return <div className="space-y-6 pb-8">
-    <section className="rounded-3xl border border-[#CCEB8E]/35 bg-[linear-gradient(125deg,#41463E,#55333f_50%,#21241F)] p-5 text-white shadow-xl sm:p-7"><p className="text-xs font-extrabold uppercase tracking-[.14em] text-[#E6E8E4]">Workspace</p><h1 className="mt-2 text-3xl font-black">Settings</h1><p className="mt-2 text-sm text-[#dfeae7]">Manage your profile, preferences and access from one place.</p></section>
+    <section className="rounded-3xl border border-[#CCEB8E]/35 bg-[linear-gradient(125deg,#41463E,#30342E_50%,#21241F)] p-5 text-white shadow-xl sm:p-7"><p className="text-xs font-extrabold uppercase tracking-[.14em] text-[#E6E8E4]">Workspace</p><h1 className="mt-2 text-3xl font-black">Settings</h1><p className="mt-2 text-sm text-[#dfeae7]">Manage your profile, preferences and access from one place.</p></section>
     <Profile data={data} admin={data.viewer.isAdmin} save={save} />
     {data.viewer.isAdmin && <Organization data={data} save={save} />}
     <Preferences data={data} save={save} />

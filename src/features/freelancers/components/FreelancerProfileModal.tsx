@@ -121,7 +121,7 @@ export const FreelancerProfileModal: React.FC<FreelancerProfileModalProps> = ({
   return (
     <div className="fixed inset-0 z-[80] flex items-center justify-center overflow-hidden bg-[#151714]/75 p-3 backdrop-blur-xs sm:p-5">
       <div className="flex h-[min(820px,92vh)] w-full max-w-5xl flex-col overflow-hidden rounded-[1.5rem] border border-white/50 bg-white shadow-[0_30px_90px_rgba(14,15,13,.42)]">
-        <div className="relative shrink-0 overflow-hidden bg-[radial-gradient(circle_at_86%_10%,rgba(236,190,169,.20),transparent_30%),linear-gradient(125deg,#41463E,#55333f_52%,#21241F)] px-4 py-4 text-white sm:px-5">
+        <div className="relative shrink-0 overflow-hidden bg-[radial-gradient(circle_at_86%_10%,rgba(236,190,169,.20),transparent_30%),linear-gradient(125deg,#41463E,#30342E_52%,#21241F)] px-4 py-4 text-white sm:px-5">
           <button
             onClick={onClose}
             className="absolute right-3 top-3 grid size-9 place-items-center rounded-xl border border-white/10 bg-[#302c2e]/80 text-slate-300 transition hover:bg-[#211e20] hover:text-white"

@@ -696,7 +696,7 @@ export const ProjectFormModal: React.FC<ProjectFormModalProps> = ({
       <div className={`project-form-shell ${variant === 'page' ? 'mx-auto flex h-[calc(100vh-9rem)] min-h-[720px] w-full max-w-6xl flex-col overflow-hidden rounded-[2rem] border border-[#dfd9d2] bg-white shadow-[0_18px_50px_rgba(28,30,27,.1)]' : 'my-4 flex h-[90vh] min-h-[680px] w-full max-w-5xl flex-col overflow-hidden rounded-[2rem] border border-white/50 bg-white shadow-[0_30px_90px_rgba(14,15,13,.42)]'}`}>
         
         {/* Modal Header */}
-        <div className="relative sticky top-0 z-20 flex items-center justify-between overflow-hidden bg-[radial-gradient(circle_at_86%_10%,rgba(236,190,169,.24),transparent_32%),linear-gradient(125deg,#41463E,#55333f_52%,#21241F)] px-5 py-5 text-white sm:px-7 sm:py-6">
+        <div className="relative sticky top-0 z-20 flex items-center justify-between overflow-hidden bg-[radial-gradient(circle_at_86%_10%,rgba(236,190,169,.24),transparent_32%),linear-gradient(125deg,#41463E,#30342E_52%,#21241F)] px-5 py-5 text-white sm:px-7 sm:py-6">
           <div className="absolute -bottom-14 -right-8 size-44 rounded-full border-[24px] border-white/5" />
           <div className="relative flex items-center gap-4">
             <span className="grid size-14 shrink-0 place-items-center rounded-2xl border border-white/30 bg-white/15 shadow-inner"><Folder className="size-7 text-[#f6d9ca]" /></span>

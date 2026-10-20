@@ -14,7 +14,7 @@ def conv(r, g, b):
         return None
     return round(r2*255), round(g2*255), round(b2*255)
 
-HEX = re.compile(r'#([0-9a-fA-F]{6})\b'); RGB = re.compile(r'rgba?\(\s*(\d{1,3})\s*,\s*(\d{1,3})\s*,\s*(\d{1,3})')
+HEX = re.compile(r'#([0-9a-fA-F]{6})(?![0-9a-fA-F])'); RGB = re.compile(r'rgba?\(\s*(\d{1,3})\s*,\s*(\d{1,3})\s*,\s*(\d{1,3})')
 def hs(m):
     v = m.group(1); c = conv(int(v[:2],16), int(v[2:4],16), int(v[4:],16))
     return m.group(0) if not c else '#%02X%02X%02X' % c

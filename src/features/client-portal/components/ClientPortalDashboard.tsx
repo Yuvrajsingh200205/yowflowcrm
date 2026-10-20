@@ -211,7 +211,7 @@ export const ClientPortalDashboard: React.FC<ClientPortalDashboardProps> = ({
     <div className="min-h-screen bg-[#fffdfb] text-slate-900 flex flex-col font-sans selection:bg-amber-100 selection:text-amber-900">
       {/* Top Luxury Client Navbar */}
       <header className="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-[#e2d9d3] shadow-xs">
-        <div className="h-1 bg-[linear-gradient(90deg,#ddc89c_0%,#8f3655_48%,#6d2f45_100%)]" />
+        <div className="h-1 bg-[linear-gradient(90deg,#CCEB8E_0%,#464B43_48%,#373B35_100%)]" />
         <div className="mx-auto flex w-full max-w-[1800px] items-center justify-between gap-3 px-3 sm:px-5 lg:px-6 xl:px-10 py-3 sm:py-3.5">
         <div className="flex min-w-0 items-center gap-2 sm:gap-6">
           <button 
