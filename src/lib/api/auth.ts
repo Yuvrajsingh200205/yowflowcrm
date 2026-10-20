@@ -19,6 +19,7 @@ export interface SessionUser {
   roles: string[];
   permissions: string[];
   organization: { id: string; name: string; slug: string; currency: string; timezone: string };
+  emailVerified?: boolean;
   freelancerProfile: { id: string; status: string } | null;
 }
 
@@ -27,6 +28,48 @@ export interface LoginInput {
   password: string;
   organizationSlug?: string;
 }
+
+export interface SignupInput {
+  studioName: string;
+  fullName: string;
+  email: string;
+  password: string;
+  plan?: 'starter' | 'studio' | 'scale';
+}
+
+export interface ContactInput {
+  name: string;
+  email: string;
+  company?: string;
+  phone?: string;
+  message: string;
+  source?: string;
+  /** Honeypot — must stay empty. */
+  website?: string;
+}
+
+export const accountApi = {
+  async signup(input: SignupInput): Promise<{ organization: { id: string; name: string; slug: string }; trialEndsAt: string }> {
+    const { data } = await apiRequest<{ organization: { id: string; name: string; slug: string }; trialEndsAt: string }>('/auth/signup', { method: 'POST', body: JSON.stringify(input) });
+    return data;
+  },
+  async forgotPassword(email: string): Promise<void> {
+    await apiRequest<{ sent: boolean }>('/auth/forgot-password', { method: 'POST', body: JSON.stringify({ email }) });
+  },
+  async resetPassword(token: string, password: string): Promise<void> {
+    await apiRequest<{ passwordReset: boolean }>('/auth/reset-password', { method: 'POST', body: JSON.stringify({ token, password }) });
+  },
+  async verifyEmail(token: string): Promise<void> {
+    await apiRequest<{ verified: boolean }>('/auth/verify-email', { method: 'POST', body: JSON.stringify({ token }) });
+  },
+  async resendVerification(): Promise<{ alreadyVerified: boolean }> {
+    const { data } = await apiRequest<{ alreadyVerified: boolean }>('/auth/resend-verification', { method: 'POST' });
+    return data;
+  },
+  async contact(input: ContactInput): Promise<void> {
+    await apiRequest<{ received: boolean }>('/public/contact', { method: 'POST', body: JSON.stringify(input) });
+  },
+};
 
 export const authApi = {
   async login(input: LoginInput): Promise<SessionUser> {

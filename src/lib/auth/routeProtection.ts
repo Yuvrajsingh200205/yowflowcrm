@@ -12,18 +12,23 @@ const PUBLIC_PREFIXES = [
   // password before returning a single photograph.
   '/share',
   '/login',
+  '/signup',
+  '/forgot-password',
+  '/reset-password',
+  '/verify-email',
   '/design-system',
   '/pricing',
   '/features',
-  '/studios',
-  '/clients',
   '/contact',
-  '/services',
+  '/about',
+  '/changelog',
   '/privacy',
   '/terms',
   '/client',
-  '/freelancers',
+  // Marketing for freelancers only — `/freelancers` itself is the CRM workspace and must stay protected.
   '/freelancers/join',
+  '/freelancers/pricing',
+  '/freelancers/checkout',
   '/panel',
 ];
 
@@ -58,7 +63,8 @@ export function isFrameworkRoute(pathname: string): boolean {
     pathname.startsWith('/_next/') ||
     pathname.startsWith('/api/') ||
     pathname.startsWith('/images/') ||
-    pathname.startsWith('/brand/')
+    pathname.startsWith('/brand/') ||
+    pathname.startsWith('/marketing/')
   );
 }
 

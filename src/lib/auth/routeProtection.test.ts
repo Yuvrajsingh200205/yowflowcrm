@@ -79,4 +79,21 @@ describe('route protection helpers', () => {
     expect(safeReturnPath('//evil.test')).toBe('/dashboard');
     expect(safeReturnPath(null)).toBe('/dashboard');
   });
+
+  it('serves marketing and account pages publicly', () => {
+    for (const path of ['/', '/features', '/pricing', '/about', '/contact', '/changelog', '/privacy', '/terms', '/signup', '/forgot-password', '/reset-password', '/verify-email', '/freelancers/join', '/freelancers/pricing']) {
+      expect(isPublicRoute(path), path).toBe(true);
+    }
+  });
+
+  it('keeps every CRM workspace route protected (marketing pages must never shadow them)', () => {
+    for (const path of ['/dashboard', '/clients', '/freelancers', '/leads', '/projects', '/shoots', '/expenses', '/team', '/settings', '/roles-permissions']) {
+      expect(isPublicRoute(path), path).toBe(false);
+    }
+  });
+
+  it('derives cookie names from the brand prefix', () => {
+    expect(ACCESS_COOKIE).toBe('yf_access_token');
+    expect(REFRESH_COOKIE).toBe('yf_refresh_token');
+  });
 });

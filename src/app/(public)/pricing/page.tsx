@@ -1,68 +1,69 @@
-import { Action, Container, Display, TextLink } from '@/features/landing/components/Editorial';
-import { FaqSection } from '@/features/landing/components/FaqSection';
-import { Reveal } from '@/features/landing/components/Reveal';
-import { pricingPlans } from '@/features/landing/data/pricingData';
+import type { Metadata } from 'next';
+import { Check, Minus } from 'lucide-react';
 import { BRAND } from '@/config/brand';
+import { PLANS } from '@/config/marketing';
+import { PageHero } from '@/features/marketing/PageHero';
+import { PricingSection } from '@/features/marketing/PricingSection';
+import { Faq, FinalCta } from '@/features/marketing/Sections';
 
-export const metadata = {
+export const metadata: Metadata = {
   title: 'Pricing',
-  description: `${BRAND.name} is structured around studio, freelancer and client access. Studio terms are quoted.`,
+  description: `${BRAND.name} plans for solo photographers, growing studios and multi-branch agencies. 14-day free trial, no credit card.`,
+  alternates: { canonical: '/pricing' },
 };
+
+const ROWS: Array<[string, boolean | string, boolean | string, boolean | string]> = [
+  ['Team members', '2', '10', 'Unlimited'],
+  ['Active projects', '25', 'Unlimited', 'Unlimited'],
+  ['Lead pipeline and quotations', true, true, true],
+  ['Invoices and payment tracking', true, true, true],
+  ['Client portal storage', '5 GB / project', '25 GB / project', 'Custom'],
+  ['Freelancer network and payouts', false, true, true],
+  ['Shoot scheduling and crew assignment', false, true, true],
+  ['Finance, expenses and reports', false, true, true],
+  ['Meta Lead Ads integration', false, true, true],
+  ['Roles, permissions and audit log', false, true, true],
+  ['Multiple branches', false, false, true],
+  ['API access and webhooks', false, false, true],
+  ['Custom branding', false, false, true],
+  ['Support', 'Email', 'Priority', 'Dedicated + SLA'],
+];
+
+function Cell({ v }: { v: boolean | string }) {
+  if (v === true) return <><Check className="mx-auto size-4 text-brand" aria-hidden="true" /><span className="sr-only">Included</span></>;
+  if (v === false) return <><Minus className="mx-auto size-4 text-fg-subtle" aria-hidden="true" /><span className="sr-only">Not included</span></>;
+  return <span className="text-fg">{v}</span>;
+}
 
 export default function PricingPage() {
   return (
     <>
-      <header className="ed-ink">
-        <Container className="pb-16 pt-[clamp(8rem,14vw,11rem)]">
-          <p className="ed-label text-[var(--ed-brass)]">Pricing</p>
-          <Display as="h1" step="ed-d1" className="mt-6 max-w-[16ch] text-[var(--ed-on-ink)]">
-            Priced for the role, <em>not the empty seat.</em>
-          </Display>
-          <p className="mt-6 max-w-[46ch] text-[0.9375rem] leading-[1.75] text-[var(--ed-on-ink-dim)]">
-            A studio, a freelancer and a couple are not the same customer. Studio terms are quoted against the season. Nothing here is a contract.
-          </p>
-        </Container>
-      </header>
+      <PageHero eyebrow="Pricing" title="Simple pricing for studios of every size." lead="Start with a 14-day free trial. Upgrade, downgrade or cancel whenever you like." />
+      <div className="mx-auto max-w-6xl px-4 pb-24 sm:px-6"><PricingSection /></div>
 
-      <section className="bg-[var(--ed-paper)]">
-        <Container className="py-[clamp(3.5rem,7vw,6rem)]">
-          <div className="grid gap-px bg-[var(--ed-rule-paper)] lg:grid-cols-3">
-            {pricingPlans.map((plan, index) => (
-              <Reveal key={plan.name} delay={index * 80} className={`bg-[var(--ed-paper)] p-7 sm:p-9 ${plan.highlighted ? 'border-t-2 border-t-[var(--ed-brass)]' : ''}`}>
-                <p className="ed-label text-[var(--ed-plum)]">{plan.label}</p>
-                <h2 className="ed-display ed-d3 mt-4">{plan.name}</h2>
-                <p className="ed-display mt-8 text-[2rem] leading-none text-[var(--ed-plum-deep)]">{plan.price}</p>
-                <p className="mt-2 text-[0.75rem] uppercase tracking-[0.12em] text-[var(--ed-on-paper-dim)]">{plan.priceNote}</p>
-                <p className="mt-6 min-h-[4.5rem] text-[0.875rem] leading-[1.7] text-[var(--ed-on-paper-dim)]">{plan.description}</p>
-                <ul className="mt-6 border-t border-[var(--ed-rule-paper)]">
-                  {plan.features.map((feature) => (
-                    <li key={feature} className="border-b border-[var(--ed-rule-paper)] py-3 text-[0.875rem]">
-                      {feature}
-                    </li>
-                  ))}
-                </ul>
-                <div className="mt-8">
-                  <TextLink href={plan.href}>{plan.cta}</TextLink>
-                </div>
-              </Reveal>
-            ))}
-          </div>
-          <div className="mt-12 flex flex-wrap items-center gap-8">
-            <Action href="/contact">Get Started</Action>
-            <TextLink href="/studios">View for Studios</TextLink>
-          </div>
-        </Container>
+      <section aria-labelledby="compare" className="mx-auto max-w-5xl px-4 pb-24 sm:px-6 sm:pb-32">
+        <h2 id="compare" className="font-display text-2xl font-semibold tracking-tight sm:text-3xl">Compare plans</h2>
+        <div className="relative mt-8 overflow-x-auto rounded-[var(--radius-xl)] border border-line-soft bg-surface">
+          <table className="w-full min-w-[40rem] border-collapse text-left text-sm">
+            <thead>
+              <tr className="bg-surface-sunken">
+                <th scope="col" className="px-5 py-4 font-medium text-fg-muted">Feature</th>
+                {PLANS.map((p) => <th key={p.id} scope="col" className="px-5 py-4 text-center font-display text-base font-semibold">{p.name}</th>)}
+              </tr>
+            </thead>
+            <tbody>
+              {ROWS.map(([label, a, b, c]) => (
+                <tr key={label} className="border-t border-line-soft">
+                  <th scope="row" className="px-5 py-3.5 font-normal text-fg-muted">{label}</th>
+                  {[a, b, c].map((v, i) => <td key={i} className="px-5 py-3.5 text-center"><Cell v={v} /></td>)}
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
       </section>
-
-      <FaqSection />
-
-      <section className="bg-[var(--ed-paper)]">
-        <Container className="py-12">
-          <p className="max-w-[62ch] text-[0.8125rem] leading-[1.7] text-[var(--ed-on-paper-dim)]">
-            Final pricing, billing terms and any trial are confirmed in writing before a studio is onboarded. Freelancer portal pricing is separate and still being set.
-          </p>
-        </Container>
-      </section>
+      <Faq />
+      <FinalCta />
     </>
   );
 }

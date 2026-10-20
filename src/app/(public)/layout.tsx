@@ -1,32 +1,14 @@
 import type { ReactNode } from 'react';
-import { LandingFooter } from '@/features/landing/components/LandingFooter';
-import { LandingNavbar } from '@/features/landing/components/LandingNavbar';
-import { displayFont, sansFont } from '@/lib/fonts';
-import { PublicRevealBootstrap } from './PublicRevealBootstrap';
+import { MarketingFooter, MarketingNav } from '@/features/marketing/MarketingChrome';
 
-/**
- * Public marketing shell.
- *
- * The editorial font variables and the `.ui-ed` token scope are applied here
- * rather than on <html>, so the authenticated CRM keeps its existing
- * system-font rendering and token set untouched.
- */
+/** Public marketing shell: always the dark, lime-accented Yowflow look. */
 export default function Layout({ children }: { children: ReactNode }) {
   return (
-    <div
-      suppressHydrationWarning
-      className={`${displayFont.variable} ${sansFont.variable} ui-ed min-h-screen`}
-    >
-      <PublicRevealBootstrap />
-      <a
-        href="#main"
-        className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[60] focus:bg-[var(--ed-brass)] focus:px-4 focus:py-2 focus:text-[0.8125rem] focus:font-semibold focus:text-[var(--ed-ink)]"
-      >
-        Skip to content
-      </a>
-      <LandingNavbar />
+    <div data-theme="dark" className="min-h-screen bg-canvas text-fg">
+      <a href="#main" className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[70] focus:rounded-md focus:bg-lime focus:px-4 focus:py-2 focus:text-sm focus:font-semibold focus:text-on-lime">Skip to content</a>
+      <MarketingNav />
       <main id="main">{children}</main>
-      <LandingFooter />
+      <MarketingFooter />
     </div>
   );
 }

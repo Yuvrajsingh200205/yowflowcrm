@@ -2,13 +2,13 @@
 
 import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
-import { ArrowLeft, Heart, X } from 'lucide-react';
 import { ApiError } from '@/lib/api/client';
 import { LoginInput } from '@/lib/api/auth';
-import { LoginHero } from './LoginHero';
-import { LoginFormCard } from './LoginFormCard';
-import { LoginToast } from './LoginToast';
 import { BRAND } from '@/config/brand';
+import { Button } from '@/components/ui/Button';
+import { Checkbox, Field, Input } from '@/components/ui/Field';
+import { AuthShell } from './AuthShell';
+import { PasswordField } from './PasswordField';
 
 interface LoginScreenProps {
   onLogin: (input: LoginInput) => Promise<void>;
@@ -16,86 +16,63 @@ interface LoginScreenProps {
   onClose?: () => void;
 }
 
-export const LoginScreen: React.FC<LoginScreenProps> = ({ onLogin, onClose }) => {
+const REMEMBER_KEY = `${BRAND.cookiePrefix}-remembered-account`;
+
+export const LoginScreen: React.FC<LoginScreenProps> = ({ onLogin }) => {
   const [identifier, setIdentifier] = useState('');
   const [password, setPassword] = useState('');
-  const [showPassword, setShowPassword] = useState(false);
   const [rememberMe, setRememberMe] = useState(true);
-  const [isDark, setIsDark] = useState(false);
-  const [message, setMessage] = useState<{ type: 'error' | 'info'; text: string } | null>(null);
+  const [error, setError] = useState<string | null>(null);
+  const [fieldErrors, setFieldErrors] = useState<{ identifier?: string; password?: string }>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   useEffect(() => {
-    const remembered = window.localStorage.getItem(`${BRAND.cookiePrefix}-remembered-account`);
-    if (remembered) setIdentifier(remembered);
-    setIsDark(window.localStorage.getItem(`${BRAND.cookiePrefix}-login-theme`) === 'dark');
+    try { const r = window.localStorage.getItem(REMEMBER_KEY); if (r) setIdentifier(r); } catch { /* storage unavailable */ }
   }, []);
-
-  const selectTheme = (dark: boolean) => {
-    setIsDark(dark);
-    window.localStorage.setItem(`${BRAND.cookiePrefix}-login-theme`, dark ? 'dark' : 'light');
-  };
 
   const handleLogin = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    setMessage(null);
-    const formData = new FormData(event.currentTarget);
-    const submittedIdentifier = String(formData.get('identifier') ?? identifier).trim();
-    const submittedPassword = String(formData.get('password') ?? password).trim();
+    setError(null);
+    const id = identifier.trim();
+    const errs = { identifier: id ? undefined : 'Enter your email address.', password: password ? undefined : 'Enter your password.' };
+    setFieldErrors(errs);
+    if (errs.identifier || errs.password) return;
 
-    if (!submittedIdentifier || !submittedPassword) {
-      setMessage({ type: 'error', text: 'Please enter your email/username and password.' });
-      return;
-    }
-
-    setIdentifier(submittedIdentifier);
-    setPassword('');
-    if (rememberMe) window.localStorage.setItem(`${BRAND.cookiePrefix}-remembered-account`, submittedIdentifier);
-    else window.localStorage.removeItem(`${BRAND.cookiePrefix}-remembered-account`);
+    try { if (rememberMe) window.localStorage.setItem(REMEMBER_KEY, id); else window.localStorage.removeItem(REMEMBER_KEY); } catch { /* ignore */ }
     setIsSubmitting(true);
     try {
-      await onLogin({ email: submittedIdentifier, password: submittedPassword });
-    } catch (error) {
-      setMessage({ type: 'error', text: error instanceof ApiError ? error.message : 'Unable to sign in. Please try again.' });
+      await onLogin({ email: id, password });
+    } catch (e) {
+      setPassword('');
+      setError(e instanceof ApiError ? e.message : 'We couldn’t sign you in. Check your connection and try again.');
     } finally {
       setIsSubmitting(false);
     }
   };
 
   return (
-    <main className="fixed inset-0 z-60 min-h-dvh overflow-x-hidden overflow-y-auto bg-[#0B0C09] bg-[radial-gradient(circle_at_12%_10%,#1C2017_0,transparent_29%),radial-gradient(circle_at_85%_90%,#171A13_0,transparent_26%)] text-[#11130E] lg:h-dvh lg:overflow-hidden lg:px-[3vw] lg:pb-2 lg:pt-4">
-      <Link
-        href="/"
-        aria-label="Go to home page"
-        title="Go to home page"
-        className="fixed left-5 top-5 z-70 grid size-11 place-items-center rounded-full border border-white/25 bg-white/12 text-white shadow-[0_12px_28px_rgba(5,5,5,.28)] backdrop-blur-md transition hover:-translate-y-0.5 hover:bg-white/22 lg:left-[calc(3vw+14px)] lg:top-7"
-      >
-        <ArrowLeft className="size-5.5" />
-      </Link>
-      <div className="mx-auto grid min-h-dvh w-full overflow-hidden bg-[#EFF6E0] shadow-[0_35px_100px_rgba(5,5,5,.48)] lg:h-[calc(100dvh-54px)] lg:min-h-0 lg:max-w-360 lg:grid-cols-[46%_54%] lg:rounded-[30px] lg:border lg:border-[rgba(239,252,213,.6)] xl:grid-cols-[48%_52%]">
-        <LoginHero />
-        <LoginFormCard
-          identifier={identifier} password={password} rememberMe={rememberMe}
-          showPassword={showPassword} isDark={isDark} message={message}
-          onIdentifierChange={(value) => { setIdentifier(value); setMessage(null); }}
-          onPasswordChange={(value) => { setPassword(value); setMessage(null); }}
-          onRememberChange={(value) => {
-            setRememberMe(value);
-            setMessage({ type: 'info', text: value ? 'Remember me enabled' : 'Remember me disabled' });
-          }}
-          onPasswordVisibility={() => setShowPassword((value) => !value)}
-          onThemeChange={selectTheme}
-          onForgotPassword={() => setMessage({ type: 'info', text: 'Please contact your administrator to reset your password.' })}
-          onGoogleLogin={() => setMessage({ type: 'info', text: 'Google sign-in is not configured for this CRM.' })}
-          onSubmit={handleLogin}
-          isSubmitting={isSubmitting}
-        />
-        {onClose && <button type="button" onClick={onClose} aria-label="Close login" className="fixed right-4 top-4 z-70 rounded-full p-2 text-[#272D21] hover:bg-white/40"><X className="size-5" /></button>}
-      </div>
-      <footer className="hidden h-9 items-center justify-center gap-2.5 pt-2 text-xs font-extrabold uppercase tracking-[.12em] text-[#CACEC8] lg:flex">
-        {BRAND.name} © 2026 <span>·</span> <Heart className="size-3 fill-[#9CA398] text-[#9CA398]" /> Made with passion
-      </footer>
-      <LoginToast message={message} onDismiss={() => setMessage(null)} />
-    </main>
+    <AuthShell
+      title="Welcome back"
+      subtitle="Sign in to your studio workspace."
+      footer={<>New to {BRAND.name}? <Link href="/signup" className="font-medium text-brand underline-offset-4 hover:underline">Start a free trial</Link></>}
+    >
+      <form onSubmit={handleLogin} noValidate className="space-y-5">
+        {error && <div role="alert" className="rounded-[var(--radius-md)] border border-bad/40 bg-bad-bg px-4 py-3 text-sm text-bad">{error}</div>}
+        <Field label="Email" error={fieldErrors.identifier} required>
+          {(a) => <Input id={a.id} name="identifier" type="email" inputMode="email" autoComplete="username" value={identifier} onChange={(e) => { setIdentifier(e.target.value); setError(null); }} aria-describedby={a.describedBy} invalid={a.invalid} placeholder="you@studio.com" autoFocus />}
+        </Field>
+        <PasswordField value={password} onChange={(v) => { setPassword(v); setError(null); }} error={fieldErrors.password} autoComplete="current-password" />
+        <div className="flex items-center justify-between">
+          <Checkbox label="Remember me" checked={rememberMe} onChange={(e) => setRememberMe(e.target.checked)} />
+          <Link href="/forgot-password" className="text-sm font-medium text-brand underline-offset-4 hover:underline">Forgot password?</Link>
+        </div>
+        <Button type="submit" size="lg" className="w-full" loading={isSubmitting}>{isSubmitting ? 'Signing in…' : 'Sign in'}</Button>
+      </form>
+      <p className="mt-8 border-t border-line-soft pt-6 text-center text-sm text-fg-muted">
+        Freelancer? <Link href="/freelancer/login" className="font-medium text-fg underline-offset-4 hover:underline">Freelancer login</Link>
+        <span className="mx-2 text-fg-subtle" aria-hidden="true">·</span>
+        Client? <Link href="/client/login" className="font-medium text-fg underline-offset-4 hover:underline">Client portal</Link>
+      </p>
+    </AuthShell>
   );
 };

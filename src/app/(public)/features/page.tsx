@@ -1,134 +1,50 @@
-import Link from 'next/link';
-import { Action, Container, Display, TextLink } from '@/features/landing/components/Editorial';
-import { Reveal } from '@/features/landing/components/Reveal';
-import { shippedModules } from '@/features/landing/data/landingContent';
+import type { Metadata } from 'next';
+import Image from 'next/image';
+import { Check } from 'lucide-react';
 import { BRAND } from '@/config/brand';
+import { PageHero } from '@/features/marketing/PageHero';
+import { Reveal } from '@/features/marketing/Reveal';
+import { FinalCta } from '@/features/marketing/Sections';
+import { cn } from '@/lib/cn';
 
-export const metadata = {
+export const metadata: Metadata = {
   title: 'Features',
-  description: `Plan, shoot, collect and deliver a wedding from one ${BRAND.name} record.`,
+  description: `Leads, projects, shoots, freelancers, finance, client galleries and permissions — everything ${BRAND.name} does for photo and video studios.`,
+  alternates: { canonical: '/features' },
 };
 
-const chapters = [
-  {
-    index: '01',
-    kicker: 'Plan',
-    title: 'The inquiry becomes a project, not a lost message.',
-    body: 'Leads, follow-ups and the wedding itself sit on one record, with the budget and the milestones beside the names.',
-    points: ['Inquiries and follow-ups', 'Project budget and milestones', 'Tasks across the team'],
-  },
-  {
-    index: '02',
-    kicker: 'Create',
-    title: 'The day is written down before anyone leaves.',
-    body: 'Shoots carry the venue, the call time and who is actually standing there with a camera.',
-    points: ['Shoot schedules', 'Venues and crew', 'Day-of assignments'],
-  },
-  {
-    index: '03',
-    kicker: 'Collect',
-    title: 'What is owed stays attached to the wedding.',
-    body: 'Invoices, receipts, expenses and freelancer payouts are part of the same production record.',
-    points: ['Invoices and receipts', 'Expenses', 'Freelancer payouts'],
-  },
-  {
-    index: '04',
-    kicker: 'Deliver',
-    title: 'The handoff keeps moving after the wedding.',
-    body: 'Delivery status and client assets are tracked today. The gallery a couple signs into is still being built on that record.',
-    points: ['Delivery status', 'Client assets on the project', 'Gallery foundation, in build'],
-  },
-  {
-    index: '05',
-    kicker: 'Connect',
-    title: 'The studio, the crew and the couple share one wedding.',
-    body: 'Role-based access for the team. Freelancer records today. A portal and a client gallery still being finished.',
-    points: ['Clients on the project', 'Freelancer assignments', 'Notifications to the right role'],
-  },
-];
+const SECTIONS = [
+  { id: 'leads', title: 'Lead pipeline that never goes cold', body: 'Every enquiry lands in one place with its source, event date and owner. Reminders keep follow-ups on time, and a booked lead becomes a project in one click.', points: ['Capture from forms and Meta Lead Ads', 'Follow-up reminders and notes per lead', 'Quotations with taxes, validity and PDF export', 'Conversion and source analytics'], img: '/marketing/leads.webp' },
+  { id: 'projects', title: 'One record per project', body: 'Events, deliverables, deadlines, payment milestones and the people involved, together. The status updates itself as shoots and deliveries are completed.', points: ['Multi-day events and sub-events', 'Payment schedules with milestones', 'Automatic progress from tasks and deliveries', 'WhatsApp-ready payment summaries'], img: '/marketing/projects.webp' },
+  { id: 'shoots', title: 'Shoots and crew without the chaos', body: 'Plan each day, assign photographers, cinematographers and assistants by role, and catch double-bookings before the day of the shoot.', points: ['Calendar and call sheets', 'Role-based crew assignment', 'Freelancer availability and invitations', 'Attendance and day-wise reports'], img: '/marketing/dashboard.webp' },
+  { id: 'finance', title: 'Money you can reason about', body: 'Quotations, invoices, payments and expenses roll up into monthly profit and loss, so you always know what is collected, due and spent.', points: ['Invoices and receipts as PDFs', 'Payment allocation across milestones', 'Expense categories and recurring costs', 'Staff salary and freelancer payouts'], img: '/marketing/dashboard.webp' },
+  { id: 'portal', title: 'A private portal your clients will love', body: 'Share galleries through a branded portal with album selection, comments and request tracking. Family gets expiring links without needing an account.', points: ['Private galleries and sub-folders', 'Selection workflow for albums', 'Expiring, optionally password-protected links', 'Client payment schedule and receipts'], img: '/marketing/projects.webp' },
+  { id: 'access', title: 'Access that matches your org chart', body: 'Roles and fine-grained permissions decide who can view or change what. Sensitive actions are recorded in an audit log.', points: ['System and custom roles', 'Per-user permission overrides', 'Audit trail with who, what and when', 'HttpOnly session cookies, no tokens in the browser'], img: '/marketing/leads.webp' },
+] as const;
 
 export default function FeaturesPage() {
   return (
     <>
-      <header className="ed-ink">
-        <Container className="grid items-end gap-10 pb-16 pt-[clamp(8rem,14vw,11rem)] lg:grid-cols-12">
-          <div className="lg:col-span-7">
-            <p className="ed-label text-[var(--ed-brass)]">Features</p>
-            <Display as="h1" step="ed-d1" className="mt-6 max-w-[14ch] text-[var(--ed-on-ink)]">
-              Five parts of one wedding.
-            </Display>
-          </div>
-          <div className="lg:col-span-4 lg:col-start-9">
-            <p className="text-[0.9375rem] leading-[1.75] text-[var(--ed-on-ink-dim)]">
-              Not a list of buttons. The work a studio actually does, in the order it happens, on the record that already exists.
-            </p>
-            <div className="mt-8">
-              <Action href="/contact">Get Started</Action>
-            </div>
-          </div>
-        </Container>
-      </header>
-
-      <section className="bg-[var(--ed-paper)]">
-        <Container className="py-[clamp(3rem,6vw,5rem)]">
-          <ol className="border-t border-[var(--ed-rule-paper)]">
-            {chapters.map((chapter) => (
-              <Reveal as="li" key={chapter.index} className="grid gap-8 border-b border-[var(--ed-rule-paper)] py-12 lg:grid-cols-12 lg:py-16">
-                <div className="lg:col-span-3">
-                  <p className="ed-numeral text-[clamp(2rem,4vw,3rem)] leading-none text-[var(--ed-brass)]">{chapter.index}</p>
-                  <p className="ed-label mt-4 text-[var(--ed-plum)]">{chapter.kicker}</p>
-                </div>
-                <div className="lg:col-span-5">
-                  <h2 className="ed-display ed-d3 text-[var(--ed-on-paper)]">{chapter.title}</h2>
-                  <p className="mt-4 max-w-[42ch] text-[0.9375rem] leading-[1.75] text-[var(--ed-on-paper-dim)]">{chapter.body}</p>
-                </div>
-                <ul className="lg:col-span-3 lg:col-start-10">
-                  {chapter.points.map((point) => (
-                    <li key={point} className="border-t border-[var(--ed-rule-paper)] py-3 text-[0.875rem]">
-                      {point}
-                    </li>
-                  ))}
-                </ul>
-              </Reveal>
-            ))}
-          </ol>
-        </Container>
-      </section>
-
-      <section className="ed-ink">
-        <Container className="py-[clamp(4rem,8vw,7rem)]">
-          <div className="flex flex-wrap items-end justify-between gap-6">
-            <Display step="ed-d2" className="max-w-[12ch] text-[var(--ed-on-ink)]">
-              Live in the CRM today.
-            </Display>
-            <p className="max-w-[28ch] text-[0.8125rem] leading-[1.7] text-[var(--ed-on-ink-dim)]">
-              Nine modules. Each one writes to the same project.
-            </p>
-          </div>
-          <ol className="mt-12 grid border-t border-[var(--ed-rule-ink)] sm:grid-cols-2 lg:grid-cols-3">
-            {shippedModules.map((module, index) => (
-              <li key={module.title} className="border-b border-[var(--ed-rule-ink)] py-6 pr-8">
-                <span className="ed-numeral text-[0.75rem] text-[var(--ed-brass)]">{String(index + 1).padStart(2, '0')}</span>
-                <h3 className="ed-display ed-d4 mt-3 text-[var(--ed-on-ink)]">{module.title}</h3>
-                <p className="mt-2 text-[0.8125rem] leading-[1.65] text-[var(--ed-on-ink-dim)]">{module.description}</p>
-              </li>
-            ))}
-          </ol>
-          <div className="mt-12 flex flex-wrap items-center gap-8">
-            <Action href="/studios">View for Studios</Action>
-            <TextLink href="/pricing">Pricing</TextLink>
-          </div>
-        </Container>
-      </section>
-
-      <section className="bg-[var(--ed-paper)]">
-        <Container className="flex flex-col gap-6 py-16 sm:flex-row sm:items-end sm:justify-between">
-          <p className="ed-display max-w-[18ch] text-[clamp(1.6rem,3vw,2.4rem)] leading-[1.15] text-[var(--ed-on-paper)]">
-            See it against a real season. <em>Talk to us.</em>
-          </p>
-          <Link href="/contact" className="ed-action">Contact Us</Link>
-        </Container>
-      </section>
+      <PageHero eyebrow="Features" title="Everything your studio runs on, connected." lead={`${BRAND.name} replaces the spreadsheets, chat threads and half-used tools with a single workspace.`} />
+      <div className="mx-auto max-w-6xl space-y-24 px-4 pb-24 sm:space-y-32 sm:px-6 sm:pb-32">
+        {SECTIONS.map((s, i) => (
+          <section key={s.id} id={s.id} className="grid items-center gap-10 scroll-mt-24 lg:grid-cols-2 lg:gap-16">
+            <Reveal className={cn(i % 2 === 1 && 'lg:order-2')}>
+              <h2 className="font-display text-3xl font-semibold leading-[1.1] tracking-tight text-balance sm:text-4xl">{s.title}</h2>
+              <p className="mt-4 text-base leading-relaxed text-fg-muted">{s.body}</p>
+              <ul className="mt-6 space-y-3">
+                {s.points.map((p) => <li key={p} className="flex gap-3 text-[15px] text-fg"><Check className="mt-0.5 size-4 shrink-0 text-brand" aria-hidden="true" />{p}</li>)}
+              </ul>
+            </Reveal>
+            <Reveal delay={0.08} className={cn(i % 2 === 1 && 'lg:order-1')}>
+              <div className="overflow-hidden rounded-[1.2rem] border border-line bg-surface shadow-[0_30px_90px_-30px_rgba(0,0,0,.7)]">
+                <Image src={s.img} alt={`${BRAND.name} ${s.title} screen`} width={1440} height={900} sizes="(min-width:1024px) 560px, 100vw" className="h-auto w-full" />
+              </div>
+            </Reveal>
+          </section>
+        ))}
+      </div>
+      <FinalCta />
     </>
   );
 }

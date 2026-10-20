@@ -58,7 +58,7 @@ export const FEATURES: Feature[] = [
   { id: 'finance', icon: 'Banknote', title: 'Quotes, invoices, finance', body: 'Branded quotations and invoices as PDFs, payment tracking, expenses and monthly profit and loss.', span: 'wide' },
   { id: 'portal', icon: 'Images', title: 'Client portal and galleries', body: 'Private galleries with album selection, comments and expiring share links for family.' },
   { id: 'team', icon: 'Users', title: 'Team, attendance, payroll', body: 'Attendance, leave and salary records with reports your accountant can use.' },
-  { id: 'access', icon: 'ShieldCheck', title: 'Roles and permissions', body: 'Fine-grained access so editors, sales and accounts each see exactly what they need. Every sensitive action is audited.' },
+  { id: 'access', icon: 'ShieldCheck', title: 'Roles and permissions', body: 'Fine-grained access so editors, sales and accounts each see exactly what they need. Every sensitive action is audited.', span: 'wide' },
 ];
 
 export const STEPS = [
