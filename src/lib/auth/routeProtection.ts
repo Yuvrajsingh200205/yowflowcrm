@@ -12,6 +12,9 @@ const PUBLIC_PREFIXES = [
   // the URL is the credential and the API enforces revocation, expiry and any
   // password before returning a single photograph.
   '/share',
+  // The couple's portal has its own session (httpOnly portal cookies); each screen
+  // loads /portal/me and redirects to /client/login on 401, and the API enforces scope.
+  '/client',
   '/login',
   '/signup',
   '/forgot-password',
@@ -49,7 +52,7 @@ const PUBLIC_FILES = [
  */
 export const APP_ROUTE_ROOTS = new Set([
   ...Object.values(TAB_ROUTES).map((route) => route.split('/')[1]),
-  'projects', 'expenses', 'payments', 'shoots', 'client-gallery', 'admin', 'freelancer',
+  'projects', 'expenses', 'payments', 'shoots', 'admin', 'freelancer', 'client',
 ]);
 
 export function isKnownAppRoute(pathname: string): boolean {

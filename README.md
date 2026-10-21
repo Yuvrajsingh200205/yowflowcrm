@@ -53,7 +53,7 @@ Rules that keep re-skinning safe:
 
 ```text
 src/
-├── app/                  routes (public marketing, auth, workspace, portals)
+├── app/                  routes (public marketing, auth, workspace, /client portal, /freelancer portal)
 ├── components/ui/        design-system components
 ├── components/layout/    app shell: sidebar, top bar, command palette
 ├── features/             domain modules (leads, projects, shoots, finance, …)
@@ -71,3 +71,11 @@ See [`TEST_REPORT.md`](TEST_REPORT.md) for the last results.
 ## Deployment
 
 See [`DEPLOYMENT.md`](DEPLOYMENT.md).
+
+
+## Client portal
+
+Couples sign in at `/client/login` (invite link from the studio → set password). Studios manage it from **Clients → Client portal**:
+invite, publish, per-section gates (visible / download / share / watermark), upload, and the couple's requests, notes and album picks.
+Backend: `/api/v1/portal/*` (couple) and `/api/v1/projects/:id/gallery/*`, `/api/v1/clients/:id/portal-access` (studio). Portal sessions use their own httpOnly cookies and never grant staff access.
+Thumbnails/previews are generated with `sharp` on upload (`GALLERY_DERIVATIVES=inline`); older uploads can be optimised from the studio panel.

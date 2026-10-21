@@ -23,7 +23,17 @@
 - API keys (hashed, read-only/full, revocable, audited) and billing endpoints with signature-verified payments.
 - Dashboard trends endpoint; workspace members endpoint; `emailVerified` on `/auth/me`.
 
+### Client portal (new, end to end)
+- Couples get their own login (`/client/login`): invite e-mail → set password → private dashboard. Separate identity and cookies from staff; scoped to one client in one studio at the database-query level.
+- Project overview (events, deliverables), payments (schedule, invoices, receipts), notifications, requests with studio replies, share links the couple can create and revoke.
+- Gallery viewer: sections and folders, favourites, album picks with a studio-set target and "send selection", filters, keyboard lightbox with notes to the studio, gated downloads, infinite scroll over keyset-paginated media with generated thumbnails/previews.
+- Studio side (Clients → *Client portal*): invite / resend / suspend / remove, publish + notify, per-section visible / download / share / watermark gates, upload, activity feed with replies and album-selection export.
+- Galleries are now created as drafts; nothing reaches a client until the studio publishes.
+- Replaced the localStorage-based prototype (`/client-gallery`).
+
 ### Fixed
+- Intermittent "An unexpected database error occurred": pool exhaustion is now reported as a retryable 503 with `Retry-After`, reads retry automatically, connection-pool limits are configured, Vercel functions run in the database's region.
+- Parallel first uploads into a new gallery section could fail with a unique-constraint error (serialised with an advisory lock).
 - Production build proxied to the previous client's backend by default — now a required setting.
 - Marketing routes shadowed the CRM `/clients` and `/freelancers` workspace routes.
 - Client bundle crashed in production (`process is not defined`) — brand config now inlines correctly.

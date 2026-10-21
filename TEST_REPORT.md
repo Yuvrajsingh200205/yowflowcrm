@@ -6,16 +6,18 @@ Last run: 21 Oct 2026, macOS, Node 25, Chromium (Playwright 1.x), isolated local
 
 | Layer | Tool | Result |
 |---|---|---|
-| Backend integration + unit | Vitest + Supertest, real PostgreSQL | **265 / 265** (20 files) — includes ~40 new tests for signup, email verification, password reset, contact form, API keys, billing, dashboard trends and workspace members |
-| Frontend unit | Vitest | **61 / 61** |
-| End-to-end | Playwright | **70 / 70** |
+| Backend integration + unit | Vitest + Supertest, real PostgreSQL | **300 / 300** (24 files) — includes signup, email verification, password reset, contact form, API keys, billing, dashboard trends, workspace members, **client-portal auth (12) and data API (12: tenant isolation, hidden-section leakage, download gating, album cap, keyset pagination, thumbnails from real JPEGs, comments/requests/share links/notifications, parallel-upload race)**, error mapping and query budgets |
+| Frontend unit | Vitest | **56 / 56** |
+| End-to-end | Playwright | **75** (70 + 5 client-portal) |
 | Accessibility | axe-core (WCAG 2.0/2.1 A + AA), 11 public + 4 app pages | **0 serious/critical violations** |
 | Responsive | Playwright at 375 / 768 / 1440, 11 public + 4 app pages | **no horizontal overflow**, screenshots reviewed |
 | Type-check | `tsc --noEmit` (both repos) | clean |
 | Lint | ESLint (backend) | clean (0 warnings) |
 | Lighthouse | v12, production build | see below |
 
-## What the E2E suite covers (70 tests)
+## What the E2E suite covers (75 tests)
+
+- **Client portal (5):** studio invites the couple from the UI, hides a section, enables downloads, publishes → the couple accepts the e-mailed link in a fresh browser, sets a password, sees the project / payments / gallery (hidden section absent), favourites and fills the album to its cap, sends the selection, uses the keyboard lightbox, sends a note, files a request, creates a share link → the studio sees all of it and replies → the couple sees the reply and notification, signs out and is bounced to login; wrong-password and staff-cookie-cannot-enter checks; invalid invite link; **axe + no sideways scroll at 375px on 7 portal screens and 2 auth screens**; **130-photo gallery pages in 48 at a time with no duplicates, lazy-loaded, thumbnails < 60 kB**.
 
 - **Marketing (10):** home content and console errors, every nav link, pricing monthly/yearly toggle and plan → signup deep link, FAQ keyboard accordion, contact form validation and delivery, legal/about/changelog, branded 404 with a real 404 status, sitemap/robots/JSON-LD/OG tags, mobile menu.
 - **Authentication and account lifecycle (10):** protected-route redirect with `returnTo`, wrong password, empty submit and password reveal, session survives reload then logout, self-serve signup with verify banner and onboarding, email verification link, duplicate signup, forgot → reset → sign in (single-use link), no account enumeration, bad/missing tokens.

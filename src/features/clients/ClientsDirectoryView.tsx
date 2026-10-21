@@ -17,14 +17,12 @@ import {
   Phone,
   ImagePlus,
   Search,
-  Sparkles,
-  UserPlus,
+    UserPlus,
   UsersRound,
 } from 'lucide-react';
 import { Badge, BTN_CREAM, BTN_GHOST, BTN_PRIMARY, CARD, EmptyState, FIELD, KpiCard } from '@/features/team/components/TeamUiKit';
 import { usePermission } from '@/features/access';
-import { useClientPortalSync } from '@/features/client-portal';
-import { GalleryUploadModal } from '@/features/client-portal/GalleryUploadModal';
+import { ClientPortalManager } from '@/features/portal/staff/ClientPortalManager';
 import { BRAND } from '@/config/brand';
 
 interface ClientsDirectoryViewProps {
@@ -68,7 +66,6 @@ export const ClientsDirectoryView: React.FC<ClientsDirectoryViewProps> = ({
 }) => {
   const { can } = usePermission();
   // Keeps each wedding's gallery prepared so "Open Portal" is never an empty screen.
-  const { hydrated: portalReady, openPortal } = useClientPortalSync(projects);
   const canAdd = can('clients.create');
   const canSeePay = can('finance.view_payments');
   const [galleryProject, setGalleryProject] = useState<Project | null>(null);
@@ -421,20 +418,11 @@ export const ClientsDirectoryView: React.FC<ClientsDirectoryViewProps> = ({
                     </button>
                     <button
                       type="button"
-                      disabled={!portalReady}
-                      onClick={() => openPortal(project.id)}
-                      title="Open this couple's Luxury Client Gallery in a new tab"
-                      className={BTN_GHOST}
-                    >
-                      <Sparkles className="size-3.5 text-[#a07a4a]" /> Open Portal
-                    </button>
-                    <button
-                      type="button"
                       onClick={() => setGalleryProject(project)}
-                      title="Upload and manage this couple's gallery photos"
+                      title="Manage this couple's client portal: gallery, access and requests"
                       className={BTN_GHOST}
                     >
-                      <ImagePlus className="size-3.5 text-[#24291E]" /> Photos
+                      <ImagePlus className="size-3.5 text-[#24291E]" /> Client portal
                     </button>
                   </div>
                   {nextShoot && (
@@ -450,7 +438,7 @@ export const ClientsDirectoryView: React.FC<ClientsDirectoryViewProps> = ({
       )}
 
       {galleryProject && (
-        <GalleryUploadModal project={galleryProject} onClose={() => setGalleryProject(null)} />
+        <ClientPortalManager project={galleryProject} onClose={() => setGalleryProject(null)} />
       )}
     </div>
   );

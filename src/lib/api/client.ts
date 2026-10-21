@@ -44,7 +44,7 @@ if (!/^(https?:\/\/|\/)/i.test(baseUrl)) {
   throw new Error('NEXT_PUBLIC_API_URL must be an absolute http(s) URL or an app-relative path.');
 }
 
-function apiBaseUrl(): string {
+export function apiBaseUrl(): string {
   if (typeof window === 'undefined' || baseUrl.startsWith('/')) return baseUrl;
   const url = new URL(baseUrl);
   if (url.origin === window.location.origin) return baseUrl;

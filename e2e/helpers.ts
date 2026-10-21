@@ -12,21 +12,21 @@ const LOG = path.join(__dirname, '.artifacts', 'backend.log');
 export const uniqueEmail = (tag: string) => `${tag}.${Date.now()}.${Math.floor(Math.random() * 1e4)}@e2e.test`;
 
 /** Dev mail is logged by the backend (no SMTP). Returns the app path + token from the newest matching mail. */
-export function latestMailLink(kind: 'verify-email' | 'reset-password', to: string): string {
+export function latestMailLink(kind: 'verify-email' | 'reset-password' | 'accept-invite', to: string): string {
   const lines = fs.readFileSync(LOG, 'utf8').split('\n').reverse();
   for (const line of lines) {
     if (!line.includes('mail (dev, not sent)') || !line.includes(kind)) continue;
     try {
       const j = JSON.parse(line.slice(line.indexOf('{')));
       if (j.to !== to) continue;
-      const m = /https?:\/\/[^\s"]+?(\/(?:verify-email|reset-password)\?token=[^\s"\\]+)/.exec(j.body);
+      const m = /https?:\/\/[^\s"\/]+(\/(?:client\/)?(?:verify-email|reset-password|accept-invite)\?token=[^\s"\\]+)/.exec(j.body);
       if (m) return m[1];
     } catch { /* not a JSON line */ }
   }
   throw new Error(`No ${kind} mail found for ${to}`);
 }
 
-export async function waitForMail(kind: 'verify-email' | 'reset-password', to: string): Promise<string> {
+export async function waitForMail(kind: 'verify-email' | 'reset-password' | 'accept-invite', to: string): Promise<string> {
   for (let i = 0; i < 40; i++) {
     try { return latestMailLink(kind, to); } catch { await new Promise((r) => setTimeout(r, 250)); }
   }

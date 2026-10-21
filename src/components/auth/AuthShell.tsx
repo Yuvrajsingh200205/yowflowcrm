@@ -14,7 +14,7 @@ const POINTS = [
  * Split layout for every authentication screen. The brand side is always dark;
  * the form side follows the page theme (light by default).
  */
-export function AuthShell({ title, subtitle, children, footer }: { title: string; subtitle?: ReactNode; children: ReactNode; footer?: ReactNode }) {
+export function AuthShell({ title, subtitle, children, footer, heading = 'Run the business of your studio, calmly.', points = POINTS }: { title: string; subtitle?: ReactNode; children: ReactNode; footer?: ReactNode; heading?: string; points?: string[] }) {
   return (
     <div className="grid min-h-dvh bg-canvas text-fg lg:grid-cols-[minmax(0,5fr)_minmax(0,6fr)]">
       <aside data-theme="dark" className="relative hidden overflow-hidden bg-canvas text-fg lg:flex lg:flex-col lg:justify-between lg:p-12" aria-hidden="false">
@@ -24,9 +24,9 @@ export function AuthShell({ title, subtitle, children, footer }: { title: string
         </div>
         <Link href="/" className="relative w-fit rounded-md focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--ring)]"><Logo priority /></Link>
         <div className="relative max-w-md">
-          <h2 className="font-display text-4xl font-semibold leading-[1.1] tracking-tight text-balance xl:text-5xl">Run the business of your studio, calmly.</h2>
+          <h2 className="font-display text-4xl font-semibold leading-[1.1] tracking-tight text-balance xl:text-5xl">{heading}</h2>
           <ul className="mt-8 space-y-3.5">
-            {POINTS.map((p) => <li key={p} className="flex gap-3 text-[15px] text-fg-muted"><Check className="mt-0.5 size-4 shrink-0 text-brand" aria-hidden="true" />{p}</li>)}
+            {points.map((p) => <li key={p} className="flex gap-3 text-[15px] text-fg-muted"><Check className="mt-0.5 size-4 shrink-0 text-brand" aria-hidden="true" />{p}</li>)}
           </ul>
         </div>
         <p className="relative text-xs text-fg-subtle">© {new Date().getFullYear()} {BRAND.name}</p>
