@@ -6,6 +6,7 @@ const PAGES: Array<{ path: string; priority: number; changeFrequency: 'weekly' |
   { path: '/features', priority: 0.9, changeFrequency: 'monthly' },
   { path: '/pricing', priority: 0.9, changeFrequency: 'monthly' },
   { path: '/about', priority: 0.6, changeFrequency: 'yearly' },
+  { path: '/for-freelancers', priority: 0.6, changeFrequency: 'monthly' },
   { path: '/contact', priority: 0.7, changeFrequency: 'yearly' },
   { path: '/changelog', priority: 0.5, changeFrequency: 'weekly' },
   { path: '/signup', priority: 0.8, changeFrequency: 'yearly' },

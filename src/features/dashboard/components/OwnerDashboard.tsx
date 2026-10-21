@@ -18,6 +18,8 @@ import { MonthlyStaffSalary } from './MonthlyStaffSalary';
 import { SalaryPaymentModal } from './SalaryPaymentModal';
 import { ExpenseModals } from './ExpenseModals';
 import { QuickActionsPanel } from './QuickActionsPanel';
+import { DashboardCharts } from './DashboardCharts';
+import { DashboardOnboarding } from './DashboardOnboarding';
 import { useToast } from '@/components/common';
 import { usePermission } from '@/features/access';
 import { settingsApi } from '@/lib/api/settings';
@@ -512,10 +514,12 @@ export const OwnerDashboard: React.FC<OwnerDashboardProps> = ({
     <div className="space-y-7 pb-10">
       
       <DashboardHeader currentUserName={currentUser?.name} />
+      <DashboardOnboarding state={{ emailVerified: (currentUser as { emailVerified?: boolean } | null | undefined)?.emailVerified !== false, hasProjects: allProjectsCount > 0, hasTeam: team.length > 1 }} />
       {can('dashboard.view_alerts') && <DashboardSecurityAlerts team={team} onTeam={() => setActiveTab('team')} />}
       <DashboardKpiGrid showRevenue={can('dashboard.view_financial')} showKpi={can('dashboard.view_kpi')} totalRevenue={totalRevenue} totalAdvanceReceived={totalAdvanceReceived} totalBalanceDue={totalBalanceDue} allProjectsCount={allProjectsCount} runningProjectsCount={runningProjectsCount} readyToDeliverCount={readyToDeliverCount} deliveredProjectsCount={deliveredProjectsCount} pendingProjectsCount={pendingProjectsCount} urgentProjectsCount={urgentProjectsCount} onPayments={onOpenAllPaymentsModal} onProjects={() => setActiveTab('projects')} onCompleted={() => onProjectStatusNavigate?.('completed')} onUrgent={() => onProjectStatusNavigate?.('urgent')} />
       {attendanceSlot}
       {can('dashboard.view_quick_actions') && <QuickActionsPanel />}
+      {can('dashboard.view_kpi') && <DashboardCharts showFinancial={can('dashboard.view_financial')} />}
       {(can('dashboard.view_projects') || can('dashboard.view_upcoming')) && (
         <div className="grid grid-cols-1 items-start gap-5 xl:grid-cols-3">
           {can('dashboard.view_projects') && (

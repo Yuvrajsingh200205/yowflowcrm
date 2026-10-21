@@ -189,7 +189,7 @@ export const TopHeader: React.FC<TopHeaderProps> = ({
           <button
             type="button"
             onClick={() => setPaletteOpen(true)}
-            aria-label="Open command palette"
+           
             className="hidden h-9 w-56 cursor-pointer items-center gap-2 rounded-[var(--radius-md)] border border-line bg-surface px-3 text-[13px] text-fg-subtle transition-colors hover:border-line-strong focus-visible:outline-2 focus-visible:outline-[var(--ring)] lg:flex"
           >
             <Search className="size-4" aria-hidden="true" />

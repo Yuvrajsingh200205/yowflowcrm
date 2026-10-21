@@ -1,9 +1,11 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { hasAuthCookie, hasFreelancerAuthCookie, isFrameworkRoute, isFreelancerRoute, isPublicRoute, safeReturnPath } from '@/lib/auth/routeProtection';
+import { isKnownAppRoute, hasAuthCookie, hasFreelancerAuthCookie, isFrameworkRoute, isFreelancerRoute, isPublicRoute, safeReturnPath } from '@/lib/auth/routeProtection';
 
 export function proxy(request: NextRequest) {
   const { pathname, search } = request.nextUrl;
   if (isFrameworkRoute(pathname)) return NextResponse.next();
+  // Unknown URLs get a real 404 instead of a login redirect.
+  if (!isPublicRoute(pathname) && !isKnownAppRoute(pathname)) return NextResponse.next();
 
   const authenticated = hasAuthCookie(request.cookies);
   const freelancerAuthenticated = hasFreelancerAuthCookie(request.cookies);

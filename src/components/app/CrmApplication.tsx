@@ -499,8 +499,8 @@ export default function App() {
   };
 
   const handleLogout = () => {
-    void logout();
     setShowLoginModal(false);
+    void logout().finally(() => router.replace('/login'));
   };
 
   // Handlers

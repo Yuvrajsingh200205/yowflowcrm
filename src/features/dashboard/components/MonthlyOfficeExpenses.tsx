@@ -40,6 +40,7 @@ export function MonthlyOfficeExpenses({ expenses: filteredOfficeExpenses, allExp
       <div>
         <label className="block text-xs font-extrabold text-slate-500 uppercase mb-0.5">Filter Category</label>
         <select
+          aria-label="Filter by category"
           value={expenseCategoryFilter}
           onChange={(e) => setExpenseCategoryFilter(e.target.value)}
           className="w-full bg-white border border-slate-200 rounded-lg px-2 py-1 text-slate-800 font-bold text-xs focus:ring-2 focus:ring-rose-500 cursor-pointer"
@@ -69,6 +70,7 @@ export function MonthlyOfficeExpenses({ expenses: filteredOfficeExpenses, allExp
       <div>
         <label className="block text-xs font-extrabold text-slate-500 uppercase mb-0.5">Filter Spent By</label>
         <select
+          aria-label="Filter by who spent"
           value={expenseSpentByFilter}
           onChange={(e) => setExpenseSpentByFilter(e.target.value)}
           className="w-full bg-white border border-slate-200 rounded-lg px-2 py-1 text-slate-800 font-bold text-xs focus:ring-2 focus:ring-rose-500 cursor-pointer"

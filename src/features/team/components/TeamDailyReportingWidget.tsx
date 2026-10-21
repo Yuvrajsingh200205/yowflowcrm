@@ -286,6 +286,7 @@ export const TeamDailyReportingWidget: React.FC<TeamDailyReportingWidgetProps> =
             <span className="text-xs font-bold text-slate-700 uppercase">Date:</span>
             <input
               type="date"
+              aria-label="Report date"
               value={selectedDate}
               onChange={(e) => setSelectedDate(e.target.value)}
               className="bg-white border border-slate-300 rounded-lg px-2 py-0.5 text-xs font-mono font-bold text-slate-900 focus:outline-[#24291E] shadow-2xs cursor-pointer"
@@ -354,6 +355,7 @@ export const TeamDailyReportingWidget: React.FC<TeamDailyReportingWidgetProps> =
         {/* Dropdown Filters */}
         <div className="flex items-center gap-2 flex-wrap">
           <select
+            aria-label="Filter by role"
             value={roleFilter}
             onChange={(e) => setRoleFilter(e.target.value)}
             className="bg-white border border-slate-300 rounded-lg px-2.5 py-1.5 text-xs font-bold text-slate-800 shadow-2xs cursor-pointer"
@@ -365,6 +367,7 @@ export const TeamDailyReportingWidget: React.FC<TeamDailyReportingWidgetProps> =
           </select>
 
           <select
+            aria-label="Filter by member status"
             value={statusFilter}
             onChange={(e) => setStatusFilter(e.target.value as any)}
             className="bg-white border border-slate-300 rounded-lg px-2.5 py-1.5 text-xs font-bold text-slate-800 shadow-2xs cursor-pointer"

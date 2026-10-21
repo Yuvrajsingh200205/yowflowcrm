@@ -65,7 +65,7 @@ export function FinancialFilterBar({
                 type="date"
                 value={tempFromDate}
                 onChange={(e) => setTempFromDate(e.target.value)}
-                placeholder="From"
+                aria-label="From date" placeholder="From"
                 className="h-10 rounded-xl border border-slate-200 bg-white pl-9 pr-3 text-xs font-semibold text-slate-700 shadow-2xs transition focus:border-rose-700 focus:outline-none focus:ring-2 focus:ring-rose-700/20"
               />
             </div>
@@ -81,7 +81,7 @@ export function FinancialFilterBar({
                 type="date"
                 value={tempToDate}
                 onChange={(e) => setTempToDate(e.target.value)}
-                placeholder="To"
+                aria-label="To date" placeholder="To"
                 className="h-10 rounded-xl border border-slate-200 bg-white pl-9 pr-3 text-xs font-semibold text-slate-700 shadow-2xs transition focus:border-rose-700 focus:outline-none focus:ring-2 focus:ring-rose-700/20"
               />
             </div>

@@ -9,6 +9,7 @@ import {
   hasAuthCookie,
   hasFreelancerAuthCookie,
   isFrameworkRoute,
+  isKnownAppRoute,
   isFreelancerRoute,
   isPublicRoute,
   safeReturnPath,
@@ -27,7 +28,9 @@ describe('route protection helpers', () => {
     expect(isPublicRoute('/freelancer/login')).toBe(true);
     expect(isPublicRoute('/freelancer/join')).toBe(true);
     expect(isPublicRoute('/freelancer/onboarding')).toBe(true);
-    expect(isPublicRoute('/freelancers/join')).toBe(true);
+    expect(isPublicRoute('/for-freelancers')).toBe(true);
+    // the CRM workspace route of the same name root must stay protected
+    expect(isPublicRoute('/freelancers')).toBe(false);
     expect(isPublicRoute('/dashboard')).toBe(false);
   });
 
@@ -71,7 +74,7 @@ describe('route protection helpers', () => {
     expect(safeReturnPath('/projects/new')).toBe('/projects/new');
     expect(safeReturnPath('/dashboard?_rsc=abc')).toBe('/dashboard?_rsc=abc');
     expect(safeReturnPath('/login')).toBe('/dashboard');
-    expect(safeReturnPath('/freelancers/join')).toBe('/dashboard');
+    expect(safeReturnPath('/for-freelancers')).toBe('/dashboard');
     expect(safeReturnPath('/freelancer/login')).toBe('/dashboard');
     expect(safeReturnPath('/freelancer/join')).toBe('/dashboard');
     expect(safeReturnPath('/freelancer/onboarding?token=secret')).toBe('/dashboard');
@@ -81,7 +84,7 @@ describe('route protection helpers', () => {
   });
 
   it('serves marketing and account pages publicly', () => {
-    for (const path of ['/', '/features', '/pricing', '/about', '/contact', '/changelog', '/privacy', '/terms', '/signup', '/forgot-password', '/reset-password', '/verify-email', '/freelancers/join', '/freelancers/pricing']) {
+    for (const path of ['/', '/features', '/pricing', '/about', '/contact', '/changelog', '/privacy', '/terms', '/signup', '/forgot-password', '/reset-password', '/verify-email', '/for-freelancers']) {
       expect(isPublicRoute(path), path).toBe(true);
     }
   });
@@ -90,6 +93,13 @@ describe('route protection helpers', () => {
     for (const path of ['/dashboard', '/clients', '/freelancers', '/leads', '/projects', '/shoots', '/expenses', '/team', '/settings', '/roles-permissions']) {
       expect(isPublicRoute(path), path).toBe(false);
     }
+  });
+
+  it('treats unknown URLs as not part of the app so they can 404', () => {
+    expect(isKnownAppRoute('/this-page-does-not-exist')).toBe(false);
+    expect(isKnownAppRoute('/projects/123')).toBe(true);
+    expect(isKnownAppRoute('/freelancer/dashboard')).toBe(true);
+    expect(isKnownAppRoute('/leads')).toBe(true);
   });
 
   it('derives cookie names from the brand prefix', () => {

@@ -7,7 +7,6 @@ import { BTN_GHOST, BTN_PRIMARY, CARD, FIELD, LABEL } from '@/features/team/comp
 import { indianMobileError, nextIndianMobileValue } from '@/lib/validation/indianMobile';
 import { ApiError } from '@/lib/api/client';
 import { freelancerPortalApi } from '@/lib/api/freelancerPortal';
-import { getMockFreelancerAccount } from '@/features/freelancer-growth/mockFreelancerStore';
 import { BRAND } from '@/config/brand';
 
 const STEPS = ['Account', 'Profile', 'Skills', 'Availability', 'Rates', 'Review'];
@@ -46,7 +45,6 @@ const roleToPrimarySkill: Record<string, 'LEAD_PHOTOGRAPHER' | 'CINEMATOGRAPHER'
 
 export const PublicFreelancerRegistration: React.FC = () => {
   const router = useRouter();
-  const [fromCheckout, setFromCheckout] = useState(false);
   const [step, setStep] = useState(0);
   const [submitted, setSubmitted] = useState(false);
   const [submittedName, setSubmittedName] = useState('');
@@ -86,36 +84,6 @@ export const PublicFreelancerRegistration: React.FC = () => {
   }), [form, accountPasswordError]);
   const invalid = (index: number) => index === 0 ? errors.account : index === 1 ? errors.profile : index === 3 ? errors.availability : index === 4 ? errors.rates : false;
   const next = () => { if (!invalid(step)) setStep((current) => Math.min(STEPS.length - 1, current + 1)); };
-
-  useEffect(() => {
-    const purchasedAccount = getMockFreelancerAccount();
-    if (purchasedAccount) {
-      setForm((current) => ({
-        ...current,
-        name: purchasedAccount.fullName || '',
-        email: purchasedAccount.email || '',
-        phone: purchasedAccount.phone || '',
-        password: purchasedAccount.password || '',
-        confirmPassword: purchasedAccount.password || '',
-        headline: purchasedAccount.headline || '',
-        bio: purchasedAccount.bio || '',
-        role: purchasedAccount.role || roles[0],
-        experience: String(purchasedAccount.experienceYears ?? '0'),
-        skills: purchasedAccount.skills?.join(', ') || '',
-        city: purchasedAccount.city || '',
-        travel: purchasedAccount.travelAvailable ?? true,
-        availability: purchasedAccount.availability || 'Open to Work',
-        from: purchasedAccount.availableFrom || '',
-        until: purchasedAccount.availableUntil || '',
-        dailyRate: purchasedAccount.dailyRate || '',
-        eventRate: purchasedAccount.eventRate || '',
-        negotiable: purchasedAccount.negotiable ?? true,
-        portfolioLinks: purchasedAccount.portfolioLinks || '',
-        profilePhoto: purchasedAccount.profilePhoto || '',
-      }));
-    }
-    setFromCheckout(new URLSearchParams(window.location.search).get('fromCheckout') === 'true');
-  }, []);
 
   const submitApplication = async () => {
     setSubmitting(true);
@@ -182,7 +150,7 @@ export const PublicFreelancerRegistration: React.FC = () => {
         <div className="relative mx-auto max-w-5xl">
           <span className="inline-flex items-center gap-1.5 rounded-full border border-white/20 bg-white/10 px-3 py-1 text-xs font-extrabold uppercase tracking-[.14em] text-[#E6E8E4]"><Sparkles className="size-3.5" /> {BRAND.name}</span>
           <h1 className="mt-4 text-3xl font-black tracking-tight sm:text-4xl">Join our freelancer network</h1>
-          <p className="mt-2 max-w-2xl text-sm font-medium leading-relaxed text-[#dfeae7] sm:text-base">{fromCheckout ? 'Your plan is purchased. Complete this profile so your panel can open with the right details.' : 'Find meaningful wedding assignments, build a trusted studio relationship, and keep your profile ready for the right production opportunity.'}</p>
+          <p className="mt-2 max-w-2xl text-sm font-medium leading-relaxed text-[#dfeae7] sm:text-base">Find meaningful assignments, build trusted studio relationships, and keep your profile ready for the right production.</p>
           <div className="mt-5 flex flex-wrap gap-2 text-xs font-bold text-[#e1ece9]"><span className="rounded-full bg-white/10 px-3 py-1.5">Professional opportunities</span><span className="rounded-full bg-white/10 px-3 py-1.5">Clear assignment terms</span><span className="rounded-full bg-white/10 px-3 py-1.5">One trusted profile</span></div>
         </div>
       </section>

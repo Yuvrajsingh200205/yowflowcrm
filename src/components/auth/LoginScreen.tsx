@@ -70,8 +70,6 @@ export const LoginScreen: React.FC<LoginScreenProps> = ({ onLogin }) => {
       </form>
       <p className="mt-8 border-t border-line-soft pt-6 text-center text-sm text-fg-muted">
         Freelancer? <Link href="/freelancer/login" className="font-medium text-fg underline-offset-4 hover:underline">Freelancer login</Link>
-        <span className="mx-2 text-fg-subtle" aria-hidden="true">·</span>
-        Client? <Link href="/client/login" className="font-medium text-fg underline-offset-4 hover:underline">Client portal</Link>
       </p>
     </AuthShell>
   );

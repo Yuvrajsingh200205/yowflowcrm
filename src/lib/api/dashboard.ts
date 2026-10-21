@@ -48,7 +48,19 @@ export interface DashboardSummary {
   }[];
 }
 
+export interface DashboardTrends {
+  months: string[];
+  revenue: number[] | null;
+  expenses: number[] | null;
+  leads: number[];
+  bookings: number[];
+}
+
 export const dashboardApi = {
+  async trends(months = 8): Promise<DashboardTrends> {
+    const { data } = await apiRequest<DashboardTrends>(`/dashboard/trends?months=${months}`);
+    return data;
+  },
   async summary(): Promise<DashboardSummary> {
     const { data } = await apiRequest<DashboardSummary>('/dashboard/summary');
     return data;

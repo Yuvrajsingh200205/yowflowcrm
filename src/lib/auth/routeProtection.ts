@@ -1,3 +1,4 @@
+import { TAB_ROUTES } from '@/components/app/crmRoutes';
 import { BRAND } from '@/config/brand';
 export const ACCESS_COOKIE = `${BRAND.cookiePrefix}_access_token`;
 export const REFRESH_COOKIE = `${BRAND.cookiePrefix}_refresh_token`;
@@ -24,12 +25,7 @@ const PUBLIC_PREFIXES = [
   '/changelog',
   '/privacy',
   '/terms',
-  '/client',
-  // Marketing for freelancers only — `/freelancers` itself is the CRM workspace and must stay protected.
-  '/freelancers/join',
-  '/freelancers/pricing',
-  '/freelancers/checkout',
-  '/panel',
+  '/for-freelancers',
 ];
 
 const PUBLIC_FREELANCER_ROUTES = ['/freelancer/login', '/freelancer/join', '/freelancer/onboarding'];
@@ -45,6 +41,20 @@ const PUBLIC_FILES = [
   '/robots.txt',
   '/sitemap.xml',
 ];
+
+/**
+ * First path segments that belong to the authenticated application. Anything
+ * else that is not public is an unknown URL and must 404, not bounce a visitor
+ * to the login screen.
+ */
+export const APP_ROUTE_ROOTS = new Set([
+  ...Object.values(TAB_ROUTES).map((route) => route.split('/')[1]),
+  'projects', 'expenses', 'payments', 'shoots', 'client-gallery', 'admin', 'freelancer',
+]);
+
+export function isKnownAppRoute(pathname: string): boolean {
+  return APP_ROUTE_ROOTS.has(pathname.split('/')[1] ?? '');
+}
 
 export function isPublicRoute(pathname: string): boolean {
   if (PUBLIC_ROUTES.includes(pathname)) return true;

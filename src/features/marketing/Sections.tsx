@@ -139,14 +139,14 @@ export function HowItWorks() {
         <Reveal><SectionHead eyebrow="How it works" title="From first enquiry to final payment." center /></Reveal>
         <ol className="mt-16 grid gap-8 md:grid-cols-5 md:gap-5">
           {STEPS.map((s, i) => (
-            <Reveal key={s.n} delay={i * 0.07}>
-              <li className="relative">
+            <li key={s.n} className="relative">
+              <Reveal delay={i * 0.07}>
                 {i < STEPS.length - 1 && <span className="absolute left-10 top-5 hidden h-px w-[calc(100%-1rem)] bg-gradient-to-r from-[var(--accent)]/50 to-transparent md:block" aria-hidden="true" />}
                 <span className="relative grid size-10 place-items-center rounded-full border border-[color-mix(in_srgb,var(--accent)_50%,var(--border))] bg-surface font-mono text-xs font-semibold text-brand">{s.n}</span>
                 <h3 className="mt-5 font-display text-lg font-semibold tracking-tight">{s.title}</h3>
                 <p className="mt-2 text-sm leading-relaxed text-fg-muted">{s.body}</p>
-              </li>
-            </Reveal>
+              </Reveal>
+            </li>
           ))}
         </ol>
       </div>

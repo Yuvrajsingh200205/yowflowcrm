@@ -113,7 +113,7 @@ export const FAQS = [
 
 export const FOOTER_COLUMNS = [
   { title: 'Product', links: [{ href: '/features', label: 'Features' }, { href: '/pricing', label: 'Pricing' }, { href: '/changelog', label: 'Changelog' }, { href: '/#how-it-works', label: 'How it works' }] },
-  { title: 'Company', links: [{ href: '/about', label: 'About' }, { href: '/contact', label: 'Contact' }] },
-  { title: 'Sign in', links: [{ href: '/login', label: 'Studio login' }, { href: '/freelancer/login', label: 'Freelancer login' }, { href: '/client/login', label: 'Client portal' }] },
+  { title: 'Company', links: [{ href: '/about', label: 'About' }, { href: '/for-freelancers', label: 'For freelancers' }, { href: '/contact', label: 'Contact' }] },
+  { title: 'Sign in', links: [{ href: '/login', label: 'Studio login' }, { href: '/freelancer/login', label: 'Freelancer login' }] },
   { title: 'Legal', links: [{ href: '/privacy', label: 'Privacy policy' }, { href: '/terms', label: 'Terms of service' }] },
 ] as const;

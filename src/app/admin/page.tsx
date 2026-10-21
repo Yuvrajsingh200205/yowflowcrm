@@ -1,7 +1,6 @@
 import { redirect } from 'next/navigation';
-import { AdminRedirectNotice } from '@/components/experience/ExperienceLayouts';
 
+/** Legacy /admin entry point; the workspace lives at /dashboard. */
 export default function AdminIndexPage() {
   redirect('/dashboard');
-  return <AdminRedirectNotice />;
 }
