@@ -8,7 +8,7 @@ Last run: 21 Oct 2026, macOS, Node 25, Chromium (Playwright 1.x), isolated local
 |---|---|---|
 | Backend integration + unit | Vitest + Supertest, real PostgreSQL | **300 / 300** (24 files) — includes signup, email verification, password reset, contact form, API keys, billing, dashboard trends, workspace members, **client-portal auth (12) and data API (12: tenant isolation, hidden-section leakage, download gating, album cap, keyset pagination, thumbnails from real JPEGs, comments/requests/share links/notifications, parallel-upload race)**, error mapping and query budgets |
 | Frontend unit | Vitest | **56 / 56** |
-| End-to-end | Playwright | **75** (70 + 5 client-portal) |
+| End-to-end | Playwright | **77** (70 + 7 client-portal and shared-link) |
 | Accessibility | axe-core (WCAG 2.0/2.1 A + AA), 11 public + 4 app pages | **0 serious/critical violations** |
 | Responsive | Playwright at 375 / 768 / 1440, 11 public + 4 app pages | **no horizontal overflow**, screenshots reviewed |
 | Type-check | `tsc --noEmit` (both repos) | clean |

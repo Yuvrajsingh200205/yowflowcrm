@@ -59,7 +59,7 @@ test.describe('authentication and account lifecycle', () => {
     await page.getByLabel(lbl('Password')).fill('Sup3rSecret!x');
     await page.getByRole('button', { name: 'Create workspace' }).click();
     await expect(page).toHaveURL(/\/dashboard/, { timeout: 30_000 });
-    await expect(page.getByRole('status').filter({ hasText: 'Verify your email' })).toBeVisible();
+    await expect(page.getByRole('status').filter({ hasText: 'Verify your email' }).first()).toBeVisible();
     await expect(page.getByRole('heading', { name: /Get started with Yowflow/ })).toBeVisible();
 
     const link = await waitForMail('verify-email', email);

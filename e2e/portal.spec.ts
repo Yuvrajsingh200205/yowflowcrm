@@ -63,7 +63,7 @@ test.describe('client portal, end to end', () => {
     // ── Studio UI: invite, then publish ──
     await page.goto('/clients');
     await page.getByLabel('Search clients').fill(title);
-    await page.getByRole('button', { name: /Client portal/ }).first().click();
+    await page.getByRole('button', { name: /Portal access/ }).first().click();
     const dialog = page.getByRole('dialog');
     await expect(dialog.getByText('Not published yet')).toBeVisible();
 
@@ -168,7 +168,7 @@ test.describe('client portal, end to end', () => {
     // ── Studio sees the activity and replies ──
     await page.goto('/clients');
     await page.getByLabel('Search clients').fill(title);
-    await page.getByRole('button', { name: /Client portal/ }).first().click();
+    await page.getByRole('button', { name: /Portal access/ }).first().click();
     const sd = page.getByRole('dialog');
     await sd.getByRole('tab', { name: 'Activity' }).click();
     await expect(sd.getByText('Change the highlight song', { exact: true })).toBeVisible();
@@ -320,5 +320,40 @@ test.describe('client portal, end to end', () => {
     await expect(gp.getByRole('heading', { name: /couldn’t find this gallery/ })).toBeVisible();
     expect(errors.filter((e) => !/40[134]/.test(e))).toEqual([]);
     await guest.close(); await context.close();
+  });
+
+  test('the original client gallery, Photos upload and Portal access all still work from Clients', async ({ page, context }) => {
+    test.setTimeout(120_000);
+    const errors = trackErrors(page);
+    await signIn(page);
+    const title = `Legacy Couple ${Date.now()}`;
+    const client = await api<{ id: string }>(page.request, 'post', '/clients', { displayName: title, primaryPhone: '9812345611', primaryEmail: uniqueEmail('legacy') });
+    const project = await api<{ id: string }>(page.request, 'post', '/projects', { clientId: client.id, name: title, type: 'WEDDING', weddingDate: '2027-03-01', totalQuotation: '90000.00' });
+    await upload(page.request, project.id, 'legacy-0.jpg', 'Haldi');
+
+    await page.goto('/clients');
+    await page.getByLabel('Search clients').fill(title);
+    const card = page.locator('article').filter({ hasText: title }).first();
+    await expect(card).toBeVisible();
+
+    // Photos modal (studio upload manager)
+    await card.getByRole('button', { name: /Photos/ }).click();
+    await expect(page.getByText('1 file in this gallery')).toBeVisible();
+    await page.getByRole('button', { name: 'Done' }).click();
+
+    // Portal access (new portal manager)
+    await card.getByRole('button', { name: /Portal access/ }).click();
+    await expect(page.getByRole('dialog').getByRole('tab', { name: 'Gallery' })).toBeVisible();
+    await page.keyboard.press('Escape');
+
+    // Open Portal → the original gallery page
+    const popup = context.waitForEvent('page');
+    await card.getByRole('button', { name: /Open Portal/ }).click();
+    const gallery = await popup;
+    await gallery.waitForLoadState('networkidle');
+    await expect(gallery).toHaveURL(/\/client-gallery\//);
+    await expect(gallery.getByText(/Application error|Something went wrong/i)).toHaveCount(0);
+    await expect(gallery.locator('body')).not.toBeEmpty();
+    expect(errors).toEqual([]);
   });
 });
