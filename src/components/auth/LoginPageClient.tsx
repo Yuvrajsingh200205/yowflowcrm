@@ -20,7 +20,15 @@ export function LoginPageClient() {
     // before authentication. A pre-login prefetch can cache the redirected
     // unauthenticated route payload, so the post-login replace lands on a page
     // whose data hooks never ran until a manual browser refresh.
-    void import('@/components/app/CrmApplication');
+    // Deferred to idle time so it never competes with the login screen's own load.
+    const warm = () => { void import('@/components/app/CrmApplication'); };
+    const w = window as Window & { requestIdleCallback?: (cb: () => void, o?: { timeout: number }) => number; cancelIdleCallback?: (id: number) => void };
+    if (w.requestIdleCallback) {
+      const id = w.requestIdleCallback(warm, { timeout: 4000 });
+      return () => w.cancelIdleCallback?.(id);
+    }
+    const t = window.setTimeout(warm, 2500);
+    return () => window.clearTimeout(t);
   }, []);
 
   useEffect(() => {

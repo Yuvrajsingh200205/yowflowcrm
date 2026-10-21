@@ -749,7 +749,7 @@ export const ProjectFormModal: React.FC<ProjectFormModalProps> = ({
                   type="tel"
                   inputMode="tel"
                   maxLength={20}
-                  pattern="[+0-9() -]{7,20}"
+                  pattern="[+0-9\(\) \-]{7,20}"
                   placeholder="+1 415 555 0132"
                   value={clientContactMobile}
                   onChange={(e) => setClientContactMobile(nextIndianMobileValue(e.target.value, clientContactMobile))}

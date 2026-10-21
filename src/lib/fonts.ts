@@ -10,7 +10,9 @@ import { Inter, JetBrains_Mono, Space_Grotesk } from 'next/font/google';
  */
 export const displayFont = Space_Grotesk({
   subsets: ['latin'],
-  display: 'swap',
+  // `optional` + the automatic size-matched fallback means headings never re-flow when the
+  // font arrives, which keeps LCP and CLS stable. The font is preloaded, so it is used almost always.
+  display: 'optional',
   weight: ['500', '600', '700'],
   variable: '--font-display-face',
 });
@@ -24,5 +26,6 @@ export const sansFont = Inter({
 export const monoFont = JetBrains_Mono({
   subsets: ['latin'],
   display: 'swap',
+  preload: false, // only used for IDs and figures, never above the fold
   variable: '--font-mono-face',
 });

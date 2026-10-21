@@ -1172,6 +1172,7 @@ export const LeadsManagement: React.FC<LeadsManagementProps> = ({ currentUser, t
                               <div className="flex items-center gap-1.5 bg-indigo-50/80 border border-indigo-100 px-2.5 py-1.5 rounded-xl text-indigo-950 font-extrabold text-xs w-full">
                                 <UserCheck className="w-3.5 h-3.5 text-indigo-600 shrink-0" />
                                 <select
+                                  aria-label={`Assign ${lead.clientName}`}
                                   value={lead.assignedTo || ''}
                                   disabled={!canAssignLead}
                                   onChange={(e) => handleUpdateAssignedTo(lead.id, e.target.value)}
@@ -1235,6 +1236,7 @@ export const LeadsManagement: React.FC<LeadsManagementProps> = ({ currentUser, t
                           <td className="border-r border-[#eee8e4] p-2.5 align-top sm:p-3.5">
                             <div className="py-0.5">
                               <select
+                                aria-label={`Status for ${lead.clientName}`}
                                 value={lead.status}
                                 disabled={!canChangeLeadStatus}
                                 onChange={(e) => {

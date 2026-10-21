@@ -57,30 +57,34 @@ Legend: [x] done · [~] in progress · [ ] todo
 ## Phase 2 — Brand identity  [x]
 - [x] Name **Yowflow**, tagline, value prop, SVG mark + wordmark, favicon (`app/icon.svg`)
 - [ ] OG image (PNG) → Phase 5; trademark/domain check on "Yowflow" is on the owner
-## Phase 3 — Design system  [~]
-- [x] Tokens: colour (light + dark, semantic; **ink + lime**, dark-first signature look), type (Space Grotesk / Inter / JetBrains Mono), radius, elevation, motion, z-index (`globals.css`)
-- [x] Legacy palette migrated (plum → deep green) via `scripts/codemod_palette.py`; legacy Tailwind remaps feed from the same tokens
-- [x] Components (`src/components/ui`): Button, Field/Input/Textarea/Select/Checkbox, Badge, Card, Dialog + Drawer, Tabs, Dropdown, Tooltip, Toast, Table (sortable), Pagination, Skeleton, Empty/Error states, Line/Bar charts, Logo, ThemeToggle
-- [x] `/design-system` docs page; verified at 375 / 1440, light + dark, no console errors, no horizontal overflow
-- [ ] App shell: sidebar, topbar, notifications, Cmd+K command palette
-- [ ] Combobox / DatePicker / FileUpload / Stepper (add as pages need them)
-- [ ] Legacy screens still on hand-coloured Tailwind: dark mode is shell-and-new-pages only until rebuilt (Phase 4)
-## Phase 4 — Pages  [ ]
-- [ ] A. Marketing (landing, pricing, features, about, contact, privacy, terms, 404)
-- [ ] B. Auth (login, signup, forgot/reset, verify email)
-- [ ] C. App: onboarding, dashboard, settings (profile/billing/team/notifications/API keys), notifications, all existing CRM pages rebuilt and split
-- [ ] C2. Client portal + freelancer portal
-- [ ] D. Admin panel
-## Phase 5 — Quality bar  [ ]
-- [ ] Responsive, a11y AA, Lighthouse 90+, SEO (meta, OG, sitemap, robots, JSON-LD)
-## Phase 6 — Backend  [ ]
-- [ ] Audit fixes, prisma bump, TODO triage, forgot/verify email, API keys, billing (test mode)
-## Phase 7 — Testing  [ ]
-- [ ] Unit, API, Playwright e2e, screenshots 375/768/1440, lint/type/build/Lighthouse, `TEST_REPORT.md`
-## Phase 8 — Docs & handover  [ ]
-- [ ] README, DEPLOYMENT, demo account, feature list, CHANGELOG
+## Phase 3 — Design system  [x]
+- [x] Tokens (light + dark, semantic), type, radius, elevation, motion, z-index
+- [x] 25+ components with hover/focus/active/disabled/loading/error states; `/design-system`
+- [x] App shell: sidebar, top bar, notifications, ⌘K command palette, verify-email banner
+
+## Phase 4 — Pages  [~]
+- [x] A. Marketing: home (all 13 sections), features, pricing (+ comparison), about, contact (working), changelog, privacy, terms, 404, for-freelancers
+- [x] B. Auth: login, signup, forgot/reset password, verify email (+ freelancer login)
+- [x] C. App: dashboard (KPIs, charts, onboarding checklist), settings (profile, workspace, team, billing, notifications, security, API keys, access), notifications centre, ⌘K
+- [~] C2. Existing CRM screens (leads, projects, shoots, finance, team, …) are re-themed and a11y-clean but not restructured; the six god-components (RoleDashboards 6.4k LOC, ProjectDetailModal, …) still need splitting
+- [~] C3. Freelancer portal: shell + login rebuilt; inner pages re-themed only
+- [x] Placeholder client-portal pages removed; clients use share links (`/share/[token]`) and the staff-facing gallery screens
+- [ ] D. Separate admin panel: the project has none (the owner workspace is the admin surface)
+
+## Phase 5 — Quality bar  [x]
+- [x] Responsive 375/768/1440 (no overflow on 15 pages), axe AA clean, Lighthouse desktop 100 / mobile 82–93, SEO (sitemap, robots, OG, JSON-LD)
+
+## Phase 6 — Backend  [x]
+- [x] Audit fixes (see TEST_REPORT.md), signup/verify/reset, contact, API keys, billing (Razorpay test mode), dashboard trends, workspace members, neutral seed
+- [ ] Triage the ~95 TODO/FIXME markers; bump Prisma to clear the 3 npm-audit highs (dev-tooling path)
+
+## Phase 7 — Testing  [x]
+- [x] Unit, API (backend), Playwright E2E (70), axe, responsive screenshots, Lighthouse → `TEST_REPORT.md`
+
+## Phase 8 — Docs & handover  [x]
+- [x] README, DEPLOYMENT, CHANGELOG, SECURITY_ROTATION, demo-account notes
 
 ## Owner decisions (21 Oct)
 - Product name is **Yowflow**; logo supplied (`public/brand`, `src/app/icon.png`). Cookie prefix `yf`.
-- Previous deep-green/gold theme rejected → ink + lime, matching the logo. Dark is the signature look; light is supported. Legacy screens stay light until rebuilt.
+- Previous deep-green/gold theme rejected → ink + lime, matching the logo. Dark is the signature marketing look; the CRM shell stays light until legacy screens are dark-ready.
 - Work continues autonomously through all phases; no per-step permission prompts.

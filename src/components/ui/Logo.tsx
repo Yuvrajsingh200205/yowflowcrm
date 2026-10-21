@@ -6,11 +6,11 @@ import { cn } from '@/lib/cn';
  * The Yowflow mark sits on its own near-black tile, so it reads correctly on
  * both light and dark pages. Swap the file at BRAND.logo.mark to re-skin.
  */
-export function LogoMark({ className, priority }: { className?: string; priority?: boolean }) {
+export function LogoMark({ className, priority, decorative }: { className?: string; priority?: boolean; decorative?: boolean }) {
   return (
     <Image
       src={BRAND.logo.mark}
-      alt={BRAND.name}
+      alt={decorative ? '' : BRAND.name}
       width={64}
       height={64}
       priority={priority}
@@ -22,7 +22,7 @@ export function LogoMark({ className, priority }: { className?: string; priority
 export function Logo({ className, markClassName, showName = true, priority }: { className?: string; markClassName?: string; showName?: boolean; priority?: boolean }) {
   return (
     <span className={cn('inline-flex items-center gap-2.5', className)}>
-      <LogoMark className={markClassName} priority={priority} />
+      <LogoMark className={markClassName} priority={priority} decorative={showName} />
       {showName && <span className="font-display text-[1.35rem] font-bold leading-none tracking-tight text-fg">{BRAND.name}</span>}
     </span>
   );

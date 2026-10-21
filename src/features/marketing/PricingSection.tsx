@@ -9,7 +9,8 @@ import { cn } from '@/lib/cn';
 
 const inr = (n: number) => `₹${n.toLocaleString('en-IN')}`;
 
-export function PricingSection({ compact }: { compact?: boolean }) {
+export function PricingSection({ compact, headingLevel = 3 }: { compact?: boolean; headingLevel?: 2 | 3 }) {
+  const H = `h${headingLevel}` as 'h2' | 'h3';
   const [yearly, setYearly] = React.useState(true);
   return (
     <div>
@@ -32,13 +33,14 @@ export function PricingSection({ compact }: { compact?: boolean }) {
           return (
             <article key={p.id} className={cn('relative flex flex-col rounded-[var(--radius-xl)] border bg-surface p-7', p.highlight ? 'border-[color-mix(in_srgb,var(--accent)_60%,var(--border))] shadow-[0_0_80px_-24px_rgba(180,240,60,.45)]' : 'border-line-soft')}>
               {p.highlight && <span className="absolute -top-3 left-7 rounded-full bg-lime px-3 py-1 text-[11px] font-semibold uppercase tracking-wide text-on-lime">Most popular</span>}
-              <h3 className="font-display text-xl font-semibold tracking-tight">{p.name}</h3>
+              <H className="font-display text-xl font-semibold tracking-tight">{p.name}</H>
               <p className="mt-1 text-sm text-fg-muted">{p.tagline}</p>
               <p className="mt-6 flex items-baseline gap-1.5">
-                <span className="font-display text-5xl font-semibold tracking-tight tabular">{inr(price)}</span>
+                {/* System font: the rupee sign would otherwise pull in the large latin-ext web-font files. */}
+                <span className="text-5xl font-semibold tracking-tight tabular [font-family:ui-sans-serif,system-ui,sans-serif]">{inr(price)}</span>
                 <span className="text-sm text-fg-subtle">/ month</span>
               </p>
-              <p className="mt-1 h-5 text-xs text-fg-subtle">{yearly ? `Billed ${inr(p.monthly * YEARLY_MONTHS_CHARGED)} yearly` : 'Billed monthly'}</p>
+              <p className="mt-1 h-5 text-xs text-fg-subtle [font-family:ui-sans-serif,system-ui,sans-serif]">{yearly ? `Billed ${inr(p.monthly * YEARLY_MONTHS_CHARGED)} yearly` : 'Billed monthly'}</p>
               <Button asChild variant={p.highlight ? 'accent' : 'secondary'} size="lg" className="mt-6 w-full"><Link href={p.id === 'scale' ? '/contact' : `/signup?plan=${p.id}`}>{p.cta}</Link></Button>
               <ul className="mt-7 space-y-3 border-t border-line-soft pt-6">
                 {p.features.map((f) => <li key={f} className="flex gap-3 text-sm text-fg-muted"><Check className="mt-0.5 size-4 shrink-0 text-brand" aria-hidden="true" />{f}</li>)}

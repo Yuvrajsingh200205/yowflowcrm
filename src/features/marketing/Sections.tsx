@@ -28,28 +28,28 @@ export function Hero() {
       </div>
 
       <div className="mx-auto max-w-6xl px-4 text-center sm:px-6">
-        <Reveal>
+        <div className="motion-safe:animate-[ui-fade-up_600ms_var(--ease-out)_both]">
           <p className="mx-auto inline-flex items-center gap-2 rounded-full border border-line bg-[color-mix(in_srgb,var(--surface)_70%,transparent)] px-3.5 py-1.5 text-xs font-medium text-fg-muted backdrop-blur">
             <span className="size-1.5 rounded-full bg-lime shadow-[0_0_10px_var(--accent)]" aria-hidden="true" />{HERO.eyebrow}
           </p>
-        </Reveal>
-        <Reveal delay={0.06}>
+        </div>
+        <div>
           <h1 className="mx-auto mt-6 max-w-4xl font-display text-[2.6rem] font-semibold leading-[1.04] tracking-tight text-balance sm:text-6xl lg:text-7xl">
             Every lead, shoot and delivery. <span className="bg-gradient-to-r from-[#B4F03C] to-[#E4FF9E] bg-clip-text text-transparent">One calm workspace.</span>
           </h1>
-        </Reveal>
-        <Reveal delay={0.12}>
+        </div>
+        <div className="motion-safe:animate-[ui-fade-up_600ms_var(--ease-out)_both] [animation-delay:120ms]">
           <p className="mx-auto mt-6 max-w-2xl text-base leading-relaxed text-fg-muted sm:text-lg">{HERO.subtitle}</p>
-        </Reveal>
-        <Reveal delay={0.18}>
+        </div>
+        <div className="motion-safe:animate-[ui-fade-up_600ms_var(--ease-out)_both] [animation-delay:180ms]">
           <div className="mt-9 flex flex-col items-center justify-center gap-3 sm:flex-row">
             <Button asChild variant="accent" size="lg"><Link href={HERO.primary.href}>{HERO.primary.label}<ArrowRight /></Link></Button>
             <Button asChild variant="secondary" size="lg"><Link href={HERO.secondary.href}>{HERO.secondary.label}</Link></Button>
           </div>
           <p className="mt-4 text-xs text-fg-subtle">{HERO.note}</p>
-        </Reveal>
+        </div>
 
-        <Reveal delay={0.24} y={36} className="relative mx-auto mt-16 max-w-5xl">
+        <div className="relative mx-auto mt-16 max-w-5xl motion-safe:animate-[ui-fade-up_700ms_var(--ease-out)_both] [animation-delay:240ms]">
           <div className="absolute -inset-x-6 -top-6 -z-10 h-40 bg-[radial-gradient(ellipse_at_top,rgba(180,240,60,.28),transparent_70%)] blur-2xl" aria-hidden="true" />
           <div className="rounded-[1.4rem] border border-line bg-[linear-gradient(180deg,rgba(255,255,255,.08),rgba(255,255,255,.02))] p-1.5 shadow-[0_40px_120px_-30px_rgba(0,0,0,.8),0_0_0_1px_rgba(180,240,60,.08)]">
             <div className="overflow-hidden rounded-[1.1rem] border border-line-soft bg-surface">
@@ -61,7 +61,7 @@ export function Hero() {
             </div>
           </div>
           <div className="pointer-events-none absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-[var(--background)] to-transparent" aria-hidden="true" />
-        </Reveal>
+        </div>
       </div>
     </section>
   );

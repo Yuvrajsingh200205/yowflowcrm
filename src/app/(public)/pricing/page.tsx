@@ -39,7 +39,7 @@ export default function PricingPage() {
   return (
     <>
       <PageHero eyebrow="Pricing" title="Simple pricing for studios of every size." lead="Start with a 14-day free trial. Upgrade, downgrade or cancel whenever you like." />
-      <div className="mx-auto max-w-6xl px-4 pb-24 sm:px-6"><PricingSection /></div>
+      <div className="mx-auto max-w-6xl px-4 pb-24 sm:px-6"><PricingSection headingLevel={2} /></div>
 
       <section aria-labelledby="compare" className="mx-auto max-w-5xl px-4 pb-24 sm:px-6 sm:pb-32">
         <h2 id="compare" className="font-display text-2xl font-semibold tracking-tight sm:text-3xl">Compare plans</h2>

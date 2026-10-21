@@ -4148,7 +4148,7 @@ export const ProjectDetailModal: React.FC<ProjectDetailModalProps> = ({
                   type="tel"
                   inputMode="tel"
                   maxLength={20}
-                  pattern="[+0-9() -]{7,20}"
+                  pattern="[+0-9\(\) \-]{7,20}"
                   value={editingCrewData.mobile}
                   onChange={(e) => setEditingCrewData({ ...editingCrewData, mobile: nextIndianMobileValue(e.target.value, editingCrewData.mobile) })}
                   placeholder="9876543210"

@@ -424,7 +424,7 @@ export const RoleColumnCrewManager: React.FC<RoleColumnCrewManagerProps> = ({
                                     type="tel"
                                     inputMode="numeric"
                                     maxLength={20}
-                                    pattern="[+0-9() -]{7,20}"
+                                    pattern="[+0-9\(\) \-]{7,20}"
                                     placeholder="Mobile / Contact No."
                                     value={crew.mobile || ''}
                                     onChange={(e) => onUpdateMember(crew.id, { mobile: nextIndianMobileValue(e.target.value, crew.mobile || '') })}
@@ -444,7 +444,7 @@ export const RoleColumnCrewManager: React.FC<RoleColumnCrewManagerProps> = ({
                                     type="tel"
                                     inputMode="numeric"
                                     maxLength={20}
-                                    pattern="[+0-9() -]{7,20}"
+                                    pattern="[+0-9\(\) \-]{7,20}"
                                     placeholder="Mobile / Contact No."
                                     value={crew.mobile || ''}
                                     onChange={(e) => onUpdateMember(crew.id, { mobile: nextIndianMobileValue(e.target.value, crew.mobile || '') })}
