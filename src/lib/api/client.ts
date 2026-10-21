@@ -283,6 +283,24 @@ export function invalidateReadCache(pathPrefix?: string): void {
   }
 }
 
+/** Transient failures worth repeating: service busy / gateway trouble / dropped connection. */
+const isTransient = (error: unknown) => error instanceof ApiError && [0, 502, 503, 504].includes(error.status);
+
+/** Retries an idempotent read with short backoff so a brief database hiccup never reaches the user. */
+async function withReadRetry<T>(run: () => Promise<T>, attempts = 3): Promise<T> {
+  let lastError: unknown;
+  for (let i = 0; i < attempts; i++) {
+    try {
+      return await run();
+    } catch (error) {
+      lastError = error;
+      if (!isTransient(error) || i === attempts - 1) throw error;
+      await new Promise((resolve) => setTimeout(resolve, 400 * 3 ** i + Math.random() * 200));
+    }
+  }
+  throw lastError;
+}
+
 export async function apiRequest<T>(
   path: string,
   init: RequestInit & { timeoutMs?: number; fresh?: boolean } = {},
@@ -307,7 +325,7 @@ export async function apiRequest<T>(
     if (pending) return pending as Promise<{ data: T; meta: ApiMeta }>;
   }
 
-  const request = performRequest<T>(path, init)
+  const request = withReadRetry(() => performRequest<T>(path, init))
     .then((result) => {
       recent.set(path, { at: Date.now(), result });
       return result;
