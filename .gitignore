@@ -9,7 +9,8 @@ coverage/
 .env*
 !.env.example
 .env.local
-docs/.next-e2e/
+docs/
+.next-e2e/
 playwright-report/
 test-results/
 e2e/.artifacts/
