@@ -52,7 +52,7 @@ const PUBLIC_FILES = [
  */
 export const APP_ROUTE_ROOTS = new Set([
   ...Object.values(TAB_ROUTES).map((route) => route.split('/')[1]),
-  'projects', 'expenses', 'payments', 'shoots', 'admin', 'freelancer', 'client',
+  'projects', 'expenses', 'payments', 'shoots', 'client-gallery', 'admin', 'freelancer', 'client',
 ]);
 
 export function isKnownAppRoute(pathname: string): boolean {
