@@ -271,4 +271,54 @@ test.describe('client portal, end to end', () => {
     expect(await photos.nth(COUNT - 1).locator('img').getAttribute('loading')).toBe('lazy');
     await context.close();
   });
+
+  test('a shared link opens in one click for anyone: paged gallery, lightbox, password, revoke', async ({ page, browser }) => {
+    test.setTimeout(180_000);
+    const { context, projectId } = await publishedPortal(page, browser, 60);
+    const open = await api<{ id: string; token: string }>(page.request, 'post', `/projects/${projectId}/gallery/share-links`, { title: 'For family', accessType: 'VIEW_DOWNLOAD' });
+    const locked = await api<{ id: string; token: string }>(page.request, 'post', `/projects/${projectId}/gallery/share-links`, { title: 'Private', accessType: 'VIEW_ONLY', password: 'Family#2026' });
+
+    const guest = await browser.newContext({ baseURL: 'http://localhost:3002', viewport: { width: 375, height: 800 } });
+    const gp = await guest.newPage();
+    const errors = trackErrors(gp);
+    await gp.goto(`/share/${open.token}`);
+    await expect(gp.getByRole('heading', { level: 1 })).toBeVisible();
+    const photos = gp.getByRole('list', { name: 'Photographs' }).getByRole('listitem');
+    await expect(photos).toHaveCount(48);
+    expect(await gp.evaluate(() => document.documentElement.scrollWidth - window.innerWidth)).toBeLessThanOrEqual(1);
+    await gp.mouse.wheel(0, 20_000);
+    await expect(photos).toHaveCount(60);
+    const axe = await new AxeBuilder({ page: gp }).withTags(['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa']).analyze();
+    expect(axe.violations.filter((v) => v.impact === 'serious' || v.impact === 'critical').map((v) => v.id)).toEqual([]);
+
+    await photos.first().getByRole('button').click();
+    const lb = gp.getByRole('dialog');
+    await expect(lb.getByRole('img')).toBeVisible();
+    await gp.keyboard.press('ArrowRight');
+    await expect(lb.getByText('2 / 60')).toBeVisible();
+    await expect(lb.getByRole('button', { name: 'Download original' })).toBeVisible();
+    await gp.keyboard.press('Escape');
+
+    // password gate
+    await gp.goto(`/share/${locked.token}`);
+    await expect(gp.getByRole('heading', { name: 'This gallery is private' })).toBeVisible();
+    await gp.getByLabel(lbl('Password')).fill('wrong');
+    await gp.getByRole('button', { name: 'View gallery' }).click();
+    await expect(gp.getByText('That password isn’t correct.')).toBeVisible();
+    await gp.getByLabel(lbl('Password')).fill('Family#2026');
+    await gp.getByRole('button', { name: 'View gallery' }).click();
+    await expect(photos.first()).toBeVisible();
+    await expect(gp.getByRole('button', { name: 'Download original' })).toHaveCount(0);
+
+    // revoked and unknown links say so plainly
+    await api(page.request, 'post', `/projects/${projectId}/gallery/share-links`, { title: 'tmp', accessType: 'VIEW_ONLY' });
+    const del = await page.request.delete(`/api/v1/projects/${projectId}/gallery/share-links/${open.id}`);
+    expect(del.ok()).toBeTruthy();
+    await gp.goto(`/share/${open.token}`);
+    await expect(gp.getByRole('heading', { name: 'This link was turned off' })).toBeVisible();
+    await gp.goto('/share/doesnotexist1234');
+    await expect(gp.getByRole('heading', { name: /couldn’t find this gallery/ })).toBeVisible();
+    expect(errors.filter((e) => !/40[134]/.test(e))).toEqual([]);
+    await guest.close(); await context.close();
+  });
 });
