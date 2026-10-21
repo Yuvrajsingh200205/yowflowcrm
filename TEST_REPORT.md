@@ -6,7 +6,7 @@ Last run: 21 Oct 2026, macOS, Node 25, Chromium (Playwright 1.x), isolated local
 
 | Layer | Tool | Result |
 |---|---|---|
-| Backend integration + unit | Vitest + Supertest, real PostgreSQL | **all green** (see the backend run in the final summary) — includes 36+ new tests for signup, email verification, password reset, contact form, API keys, billing, dashboard trends and workspace members |
+| Backend integration + unit | Vitest + Supertest, real PostgreSQL | **265 / 265** (20 files) — includes ~40 new tests for signup, email verification, password reset, contact form, API keys, billing, dashboard trends and workspace members |
 | Frontend unit | Vitest | **61 / 61** |
 | End-to-end | Playwright | **70 / 70** |
 | Accessibility | axe-core (WCAG 2.0/2.1 A + AA), 11 public + 4 app pages | **0 serious/critical violations** |
