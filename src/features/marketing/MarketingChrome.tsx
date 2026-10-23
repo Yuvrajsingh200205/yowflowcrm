@@ -9,6 +9,28 @@ import { FOOTER_COLUMNS, NAV_LINKS } from '@/config/marketing';
 import { Logo } from '@/components/ui/Logo';
 import { Button } from '@/components/ui/Button';
 import { cn } from '@/lib/cn';
+import { useAuthSession } from '@/components/auth/AuthSessionProvider';
+import { destinationForAuthenticatedUser } from '@/lib/auth/accountRouting';
+
+/** Log in / start trial for visitors; Open dashboard / Sign out for someone who is already signed in. */
+function NavAccount({ mobile }: { mobile?: boolean }) {
+  const { currentUser, isHydrated, logout } = useAuthSession();
+  const [busy, setBusy] = React.useState(false);
+  if (isHydrated && currentUser) {
+    return (
+      <>
+        <Button asChild variant={mobile ? 'accent' : 'accent'} size={mobile ? 'md' : 'sm'}><Link href={destinationForAuthenticatedUser(currentUser, null)}>{currentUser.freelancerProfile ? 'Open my portal' : 'Open dashboard'}</Link></Button>
+        <Button variant={mobile ? 'secondary' : 'ghost'} size={mobile ? 'md' : 'sm'} loading={busy} onClick={async () => { setBusy(true); await logout(); setBusy(false); }}>Sign out</Button>
+      </>
+    );
+  }
+  return (
+    <>
+      <Button asChild variant={mobile ? 'secondary' : 'ghost'} size={mobile ? 'md' : 'sm'}><Link href="/login">Log in</Link></Button>
+      <Button asChild variant="accent" size={mobile ? 'md' : 'sm'}><Link href="/signup">Start free trial</Link></Button>
+    </>
+  );
+}
 
 export function MarketingNav() {
   const [scrolled, setScrolled] = React.useState(false);
@@ -46,8 +68,7 @@ export function MarketingNav() {
         </nav>
 
         <div className="hidden items-center gap-2 md:flex">
-          <Button asChild variant="ghost" size="sm"><Link href="/login">Log in</Link></Button>
-          <Button asChild variant="accent" size="sm"><Link href="/signup">Start free trial</Link></Button>
+          <NavAccount />
         </div>
 
         <button type="button" onClick={() => setOpen((o) => !o)} aria-expanded={open} aria-controls="mobile-menu" aria-label={open ? 'Close menu' : 'Open menu'} className="grid size-10 cursor-pointer place-items-center rounded-md text-fg hover:bg-[var(--hover)] md:hidden">
@@ -61,8 +82,7 @@ export function MarketingNav() {
             {NAV_LINKS.map((l) => <Link key={l.href} href={l.href} className="rounded-md px-3 py-3 text-base font-medium text-fg hover:bg-[var(--hover)]">{l.label}</Link>)}
           </nav>
           <div className="mt-4 grid gap-2">
-            <Button asChild variant="secondary"><Link href="/login">Log in</Link></Button>
-            <Button asChild variant="accent"><Link href="/signup">Start free trial</Link></Button>
+            <NavAccount mobile />
           </div>
         </div>
       )}

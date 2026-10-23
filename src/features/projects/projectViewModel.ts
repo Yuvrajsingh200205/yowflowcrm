@@ -182,9 +182,45 @@ function taskAssigneeId(task: ProjectTask, team: TeamMember[]) {
 
 function crewUserId(crew: CrewMemberAssignment, team: TeamMember[]) {
   if (crew.userId && isPersistedProjectId(crew.userId)) return crew.userId;
-  const name = crew.name.trim().toLowerCase();
+  const name = (crew.name || '').trim().toLowerCase();
   if (!name) return undefined;
   return team.find((member) => member.name.trim().toLowerCase() === name)?.id;
+}
+
+type PlannedRoleSlotInput = NonNullable<NonNullable<CreateProjectInput['shoots']>[number]['plannedRoleSlots']>[number];
+
+/**
+ * Crew rows that are not backed by a team member become `plannedRoleSlots`.
+ * A named row is one slot carrying its handover data. An unnamed row is a
+ * required position nobody has been assigned to yet ("2 photographers, 1
+ * assistant"), so it is stored as a per-role headcount. Dropping these is what
+ * made a shoot lose its crew counts the moment the project was saved.
+ */
+export function buildPlannedRoleSlots(crew: CrewMemberAssignment[] = [], team: TeamMember[] = []): PlannedRoleSlotInput[] {
+  const named: PlannedRoleSlotInput[] = [];
+  const unassignedByRole = new Map<string, number>();
+  for (const row of crew) {
+    const role = row.role?.trim();
+    if (!role || crewUserId(row, team)) continue;
+    const name = (row.name || '').trim();
+    if (!name) {
+      unassignedByRole.set(role, (unassignedByRole.get(role) || 0) + 1);
+      continue;
+    }
+    const copyInHD = (row.copyInHD || row.hardDriveName || '').trim();
+    named.push({
+      role,
+      requiredCount: 1,
+      name,
+      ...(row.mobile?.trim() ? { mobile: row.mobile.trim() } : {}),
+      ...(row.dataReceived ? { dataReceived: true } : {}),
+      ...(row.dataSizeGB ? { dataSizeGb: String(Math.round(row.dataSizeGB * 100) / 100) } : {}),
+      ...(copyInHD ? { copyInHD } : {}),
+      ...(row.backupInHD?.trim() ? { backupInHD: row.backupInHD.trim() } : {}),
+    });
+  }
+  const unassigned = [...unassignedByRole].map(([role, requiredCount]) => ({ role, requiredCount }));
+  return [...named, ...unassigned];
 }
 
 /** Maps only API-provided values; unavailable legacy workflow sections stay empty. */
@@ -355,20 +391,7 @@ export function toCreateProjectInput(project: Project, team: TeamMember[] = []):
         startTime: toIsoDateTime(shootDate, shoot.startTime || shoot.time),
         location: shoot.venue || shoot.location || undefined,
       notes: shoot.notes || undefined,
-      plannedRoleSlots: (shoot.crewAssignments || []).flatMap((crew) => {
-        const role = crew.role?.trim();
-        if (!role || crewUserId(crew, team) || !crew.name?.trim()) return [];
-        return [{
-          role,
-          requiredCount: 1,
-          name: crew.name.trim(),
-          ...(crew.mobile?.trim() ? { mobile: crew.mobile.trim() } : {}),
-          ...(crew.dataReceived ? { dataReceived: true } : {}),
-          ...(crew.dataSizeGB ? { dataSizeGb: String(crew.dataSizeGB) } : {}),
-          ...((crew.copyInHD || crew.hardDriveName)?.trim() ? { copyInHD: (crew.copyInHD || crew.hardDriveName || '').trim() } : {}),
-          ...(crew.backupInHD?.trim() ? { backupInHD: crew.backupInHD.trim() } : {}),
-        }];
-      }),
+        plannedRoleSlots: buildPlannedRoleSlots(shoot.crewAssignments, team),
         status: toBackendShootStatus(shoot.status),
         shootType: 'PHOTO_AND_VIDEO' as const,
         ...(crewAssignments.length ? { crewAssignments } : {}),

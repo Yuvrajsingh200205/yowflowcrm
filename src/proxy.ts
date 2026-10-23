@@ -23,14 +23,8 @@ export function proxy(request: NextRequest) {
   }
 
   if (isPublicRoute(pathname)) {
-    if (pathname === '/login' && authenticated) {
-      const target = safeReturnPath(request.nextUrl.searchParams.get('returnTo'));
-      if (freelancerAuthenticated || target.startsWith('/freelancer/')) return NextResponse.next();
-      const redirectTo = request.nextUrl.clone();
-      redirectTo.pathname = target;
-      redirectTo.search = '';
-      return NextResponse.redirect(redirectTo);
-    }
+    // /login and /signup are never redirected at the edge: a signed-in visitor sees an explicit
+    // "continue or sign out" choice rendered by the page instead of being forwarded silently.
     return NextResponse.next();
   }
 

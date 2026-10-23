@@ -69,7 +69,10 @@ export const ShootManagement: React.FC<ShootManagementProps> = ({ projects, onUp
       cinematographer: shoot.cinematographer || '',
       droneOperator: shoot.droneOperator || '',
       assistant: shoot.assistant || '',
-      crewAssignments: shoot.crewAssignments ? [...shoot.crewAssignments] : [],
+      // Copy the rows too: the modal edits them in place, and sharing the
+      // project's row objects hides the change from the "did shoots change"
+      // check, so the edit would never be saved.
+      crewAssignments: (shoot.crewAssignments || []).map((crew) => ({ ...crew })),
     });
   };
 
@@ -671,6 +674,7 @@ export const ShootManagement: React.FC<ShootManagementProps> = ({ projects, onUp
                           return (
                             <div
                               key={s.id}
+                              data-testid="shoot-card"
                               className={`rounded-xl border p-4 shadow-xs transition space-y-3 bg-white ${
                                 dateInfo.isDone
                                   ? 'border-emerald-200 bg-emerald-50/20'
@@ -744,7 +748,7 @@ export const ShootManagement: React.FC<ShootManagementProps> = ({ projects, onUp
                                 });
                                 const entries = Object.entries(roleCounts);
                                 return (
-                                  <div className="flex flex-wrap items-center gap-2 bg-[#f8f5f2] p-2.5 rounded-xl border border-[#e6ded8] text-xs">
+                                  <div data-testid="team-breakdown" className="flex flex-wrap items-center gap-2 bg-[#f8f5f2] p-2.5 rounded-xl border border-[#e6ded8] text-xs">
                                     <span className="text-[10px] font-black text-[#1C2018] uppercase tracking-wider flex items-center gap-1.5 shrink-0">
                                       <Users className="w-3.5 h-3.5 text-[#24291E]" />
                                       TEAM BREAKDOWN:

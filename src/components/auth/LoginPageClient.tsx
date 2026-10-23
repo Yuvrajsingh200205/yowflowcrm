@@ -7,6 +7,7 @@ import { LoginInput } from '@/lib/api/auth';
 import { useAuthSession } from '@/components/auth/AuthSessionProvider';
 import { safeReturnPath } from '@/lib/auth/routeProtection';
 import { destinationForAuthenticatedUser } from '@/lib/auth/accountRouting';
+import { AlreadySignedIn } from '@/components/auth/AlreadySignedIn';
 
 export function LoginPageClient() {
   const router = useRouter();
@@ -31,12 +32,6 @@ export function LoginPageClient() {
     return () => window.clearTimeout(t);
   }, []);
 
-  useEffect(() => {
-    if (isHydrated && currentUser && !loginRedirectingRef.current) {
-      router.replace(destinationForAuthenticatedUser(currentUser, returnTo));
-    }
-  }, [currentUser, isHydrated, returnTo, router]);
-
   const handleLogin = async (input: LoginInput) => {
     loginRedirectingRef.current = true;
     try {
@@ -48,5 +43,7 @@ export function LoginPageClient() {
     }
   };
 
+  // Someone who is already signed in gets a clear choice instead of being silently forwarded.
+  if (isHydrated && currentUser && !loginRedirectingRef.current) return <AlreadySignedIn user={currentUser} intent="login" />;
   return <LoginScreen onLogin={handleLogin} />;
 }

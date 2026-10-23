@@ -13,6 +13,7 @@ import { Field, Input } from '@/components/ui/Field';
 import { Spinner } from '@/components/ui/Spinner';
 import { useToast } from '@/components/ui/Toast';
 import { useAuthSession } from './AuthSessionProvider';
+import { AlreadySignedIn } from './AlreadySignedIn';
 import { AuthShell } from './AuthShell';
 import { PasswordField, isStrongPassword } from './PasswordField';
 
@@ -25,6 +26,12 @@ function FormError({ children }: { children: React.ReactNode }) {
 
 /* ───────────────────────────── Signup ───────────────────────────── */
 export function SignupScreen() {
+  const { currentUser, isHydrated } = useAuthSession();
+  if (isHydrated && currentUser) return <AlreadySignedIn user={currentUser} intent="signup" />;
+  return <SignupForm />;
+}
+
+function SignupForm() {
   const router = useRouter();
   const params = useSearchParams();
   const { login } = useAuthSession();

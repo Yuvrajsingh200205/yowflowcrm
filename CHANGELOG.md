@@ -40,6 +40,10 @@
 - Large films: **multipart upload up to 5 GB** with progress and per-part retry (S3-compatible storage).
 - Readable messages when payments are not configured (503 "not enabled") instead of a generic error.
 
+### Sign-in and sign-out
+- Fixed: the sidebar account menu's **Log out** appeared to do nothing once the 15-minute access token had expired (logout needed a valid access token, so cookies stayed and `/login` bounced straight back into the app). Logout now works from the refresh cookie alone for staff, freelancers and the client portal.
+- Signed-in visitors get "continue or sign out" on `/login` and `/signup`, and "Open dashboard / Sign out" in the landing-page header.
+
 ### Security and quality
 - Upgraded Next.js to 16.4.2 and dompurify (critical advisories); frontend `npm audit` is clean.
 - Test runs can no longer send real e-mail or touch payment accounts, whatever is in the developer's `.env`.

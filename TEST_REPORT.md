@@ -6,9 +6,9 @@ Last run: 21 Oct 2026, macOS, Node 25, Chromium (Playwright 1.x), isolated local
 
 | Layer | Tool | Result |
 |---|---|---|
-| Backend integration + unit | Vitest + Supertest, real PostgreSQL | **315 / 315** (26 files) — includes signup, email verification, password reset, contact form, API keys, billing, dashboard trends, workspace members, **client-portal auth (12) and data API (12: tenant isolation, hidden-section leakage, download gating, album cap, keyset pagination, thumbnails from real JPEGs, comments/requests/share links/notifications, parallel-upload race)**, error mapping and query budgets |
+| Backend integration + unit | Vitest + Supertest, real PostgreSQL | **319 / 319** (26 files) — includes signup, email verification, password reset, contact form, API keys, billing, dashboard trends, workspace members, **client-portal auth (12) and data API (12: tenant isolation, hidden-section leakage, download gating, album cap, keyset pagination, thumbnails from real JPEGs, comments/requests/share links/notifications, parallel-upload race)**, error mapping and query budgets |
 | Frontend unit | Vitest | **64 / 64** |
-| End-to-end | Playwright | **81 / 81** (last full run, fresh database) |
+| End-to-end | Playwright | **85 / 85** (last full run, fresh database) |
 | Accessibility | axe-core (WCAG 2.0/2.1 A + AA), 11 public + 4 app pages | **0 serious/critical violations** |
 | Responsive | Playwright at 375 / 768 / 1440, 11 public + 4 app pages | **no horizontal overflow**, screenshots reviewed |
 | Type-check | `tsc --noEmit` (both repos) | clean |
@@ -16,6 +16,7 @@ Last run: 21 Oct 2026, macOS, Node 25, Chromium (Playwright 1.x), isolated local
 | Lighthouse | v12, production build | see below |
 
 ## Added in this round
+- **Sign-in / sign-out flows (backend 3, E2E 4):** logout with only the refresh cookie (expired access token) for staff, freelancer and client portal; signed-in visitors see an explicit "continue or sign out" choice on `/login` and `/signup` and "Open dashboard / Sign out" on the landing page instead of a silent redirect.
 - **Freelancer product (backend 14 tests, E2E 3):** studio-scoped join, application → approval → plan purchase (Razorpay signature, free plan, plan switch, cancel) → search eligibility → connection accept; portfolio upload with real images; profile fields saving independently; every freelancer page loads with no API error and passes axe.
 - **Multipart upload (backend 4, E2E 1):** every presigned request is re-signed with an independent SigV4 implementation; 60 MB film sent in 4 parts through the UI (storage mocked).
 - **Stale-response race fixed** in the leads, clients, projects, tasks, team and freelancer list hooks (this was the long-standing flaky "create a lead… filters" test).

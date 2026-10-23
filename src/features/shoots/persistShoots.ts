@@ -1,7 +1,7 @@
 import { ApiError } from '@/lib/api/client';
 import { shootsApi, type BackendCrewRole, type BackendShoot, type BackendShootStatus } from '@/lib/api/shoots';
 import type { CrewMemberAssignment, DataBackup, Project, ShootEvent, TeamMember } from '@/types';
-import { firstIsoDate, isPersistedProjectId } from '@/features/projects/projectViewModel';
+import { buildPlannedRoleSlots, firstIsoDate, isPersistedProjectId } from '@/features/projects/projectViewModel';
 
 export function toCrewRole(role: string): BackendCrewRole {
   const value = role.toLowerCase();
@@ -253,21 +253,9 @@ function mergeShootCrew(local: ShootEvent, fresh: ShootEvent, team: TeamMember[]
   return { ...fresh, crewAssignments: dedupeCrewSlots(merged.length ? merged : fresh.crewAssignments || []) };
 }
 
+/** Named slots plus per-role headcounts of the still-unassigned ones. */
 export function toPlannedRoleSlots(shoot: ShootEvent, team: TeamMember[]) {
-  return (shoot.crewAssignments || []).flatMap((row) => {
-    const role = row.role?.trim();
-    if (!role || memberId(row, team) || !row.name?.trim()) return [];
-    return [{
-      role,
-      requiredCount: 1,
-      ...(row.name?.trim() ? { name: row.name.trim() } : {}),
-      ...(row.mobile?.trim() ? { mobile: row.mobile.trim() } : {}),
-      ...(row.dataReceived ? { dataReceived: true } : {}),
-      ...(row.dataSizeGB ? { dataSizeGb: toDataSizeGb(row.dataSizeGB) } : {}),
-      ...((row.copyInHD || row.hardDriveName)?.trim() ? { copyInHD: (row.copyInHD || row.hardDriveName || '').trim() } : {}),
-      ...(row.backupInHD?.trim() ? { backupInHD: row.backupInHD.trim() } : {}),
-    }];
-  });
+  return buildPlannedRoleSlots(shoot.crewAssignments, team);
 }
 
 function memberId(crew: CrewMemberAssignment, team: TeamMember[]) {
