@@ -14,12 +14,14 @@ interface LoginScreenProps {
   onLogin: (input: LoginInput) => Promise<void>;
   onAddTeamMember?: unknown;
   onClose?: () => void;
+  /** Set right after signup: greets the new owner and prefills their email. */
+  justRegistered?: { email?: string };
 }
 
 const REMEMBER_KEY = `${BRAND.cookiePrefix}-remembered-account`;
 
-export const LoginScreen: React.FC<LoginScreenProps> = ({ onLogin }) => {
-  const [identifier, setIdentifier] = useState('');
+export const LoginScreen: React.FC<LoginScreenProps> = ({ onLogin, justRegistered }) => {
+  const [identifier, setIdentifier] = useState(justRegistered?.email ?? '');
   const [password, setPassword] = useState('');
   const [rememberMe, setRememberMe] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -27,6 +29,7 @@ export const LoginScreen: React.FC<LoginScreenProps> = ({ onLogin }) => {
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   useEffect(() => {
+    if (justRegistered?.email) return;
     try { const r = window.localStorage.getItem(REMEMBER_KEY); if (r) setIdentifier(r); } catch { /* storage unavailable */ }
   }, []);
 
@@ -57,6 +60,7 @@ export const LoginScreen: React.FC<LoginScreenProps> = ({ onLogin }) => {
       footer={<>New to {BRAND.name}? <Link href="/signup" className="font-medium text-brand underline-offset-4 hover:underline">Start a free trial</Link></>}
     >
       <form onSubmit={handleLogin} noValidate className="space-y-5">
+        {justRegistered && <div role="status" className="rounded-[var(--radius-md)] border border-ok/40 bg-ok-bg px-4 py-3 text-sm text-ok">Your workspace is ready. Sign in with your email and password to continue. We’ve also emailed you a link to verify your address.</div>}
         {error && <div role="alert" className="rounded-[var(--radius-md)] border border-bad/40 bg-bad-bg px-4 py-3 text-sm text-bad">{error}</div>}
         <Field label="Email" error={fieldErrors.identifier} required>
           {(a) => <Input id={a.id} name="identifier" type="email" inputMode="email" autoComplete="username" value={identifier} onChange={(e) => { setIdentifier(e.target.value); setError(null); }} aria-describedby={a.describedBy} invalid={a.invalid} placeholder="you@studio.com" autoFocus />}

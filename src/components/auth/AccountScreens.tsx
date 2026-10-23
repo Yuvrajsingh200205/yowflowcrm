@@ -6,7 +6,6 @@ import { useRouter, useSearchParams } from 'next/navigation';
 import { CheckCircle2, MailCheck, TriangleAlert } from 'lucide-react';
 import { ApiError } from '@/lib/api/client';
 import { accountApi } from '@/lib/api/auth';
-import { destinationForAuthenticatedUser } from '@/lib/auth/accountRouting';
 import { BRAND } from '@/config/brand';
 import { Button } from '@/components/ui/Button';
 import { Field, Input } from '@/components/ui/Field';
@@ -34,8 +33,6 @@ export function SignupScreen() {
 function SignupForm() {
   const router = useRouter();
   const params = useSearchParams();
-  const { login } = useAuthSession();
-  const { toast } = useToast();
   const plan = (['starter', 'studio', 'scale'] as const).find((p) => p === params.get('plan'));
   const [f, setF] = React.useState({ studioName: '', fullName: '', email: '', password: '' });
   const [errs, setErrs] = React.useState<Partial<Record<keyof typeof f, string>>>({});
@@ -55,10 +52,11 @@ function SignupForm() {
     if (Object.values(next).some(Boolean)) return;
     setBusy(true); setError(null);
     try {
-      await accountApi.signup({ ...f, email: f.email.trim(), plan });
-      const user = await login({ email: f.email.trim(), password: f.password });
-      toast({ tone: 'success', title: `Welcome to ${BRAND.name}`, description: 'Check your inbox to verify your email.' });
-      router.replace(destinationForAuthenticatedUser(user, null));
+      const email = f.email.trim();
+      await accountApi.signup({ ...f, email, plan });
+      // Creating the workspace does not sign anyone in: the owner signs in on
+      // the login page with the credentials they just chose.
+      router.replace(`/login?registered=1&email=${encodeURIComponent(email)}`);
     } catch (err) {
       setError(msg(err, 'We couldn’t create your workspace. Check your connection and try again.'));
     } finally { setBusy(false); }

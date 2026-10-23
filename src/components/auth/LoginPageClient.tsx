@@ -45,5 +45,7 @@ export function LoginPageClient() {
 
   // Someone who is already signed in gets a clear choice instead of being silently forwarded.
   if (isHydrated && currentUser && !loginRedirectingRef.current) return <AlreadySignedIn user={currentUser} intent="login" />;
-  return <LoginScreen onLogin={handleLogin} />;
+  const registeredEmail = searchParams.get('email')?.trim();
+  const justRegistered = searchParams.get('registered') === '1' ? { email: registeredEmail || undefined } : undefined;
+  return <LoginScreen onLogin={handleLogin} justRegistered={justRegistered} />;
 }

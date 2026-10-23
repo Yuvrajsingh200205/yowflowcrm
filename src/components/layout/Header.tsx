@@ -92,6 +92,12 @@ export const Sidebar: React.FC<SidebarProps> = ({ activeTab, setActiveTab, isOpe
         </nav>
 
         <div className="shrink-0 border-t border-line-soft p-3">
+          {/* A plain, always-visible sign-out: it must never depend on a menu opening. */}
+          {onLogout && (
+            <button type="button" onClick={onLogout} className="mb-1 flex w-full cursor-pointer items-center gap-3 rounded-[var(--radius-lg)] px-3 py-2 text-left text-[13px] font-medium text-fg-muted transition-colors hover:bg-[var(--hover)] hover:text-fg focus-visible:outline-2 focus-visible:outline-[var(--ring)]">
+              <LogOut className="size-4" aria-hidden="true" />Log out
+            </button>
+          )}
           <Dropdown>
             <DropdownTrigger asChild>
               <button type="button" className="flex w-full cursor-pointer items-center gap-3 rounded-[var(--radius-lg)] p-2 text-left transition-colors hover:bg-[var(--hover)] focus-visible:outline-2 focus-visible:outline-[var(--ring)]">
@@ -113,12 +119,6 @@ export const Sidebar: React.FC<SidebarProps> = ({ activeTab, setActiveTab, isOpe
               {onLogout && <DropdownItem destructive onSelect={onLogout}><LogOut />Log out</DropdownItem>}
             </DropdownContent>
           </Dropdown>
-          {/* A plain, always-visible sign-out: it must never depend on a menu opening. */}
-          {onLogout && (
-            <button type="button" onClick={onLogout} className="mt-1 flex w-full cursor-pointer items-center gap-3 rounded-[var(--radius-lg)] px-3 py-2 text-left text-[13px] font-medium text-fg-muted transition-colors hover:bg-[var(--hover)] hover:text-fg focus-visible:outline-2 focus-visible:outline-[var(--ring)]">
-              <LogOut className="size-4" aria-hidden="true" />Log out
-            </button>
-          )}
         </div>
       </aside>
     </>

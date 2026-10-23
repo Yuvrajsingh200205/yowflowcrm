@@ -58,6 +58,16 @@ test.describe('authentication and account lifecycle', () => {
 
     await page.getByLabel(lbl('Password')).fill('Sup3rSecret!x');
     await page.getByRole('button', { name: 'Create workspace' }).click();
+
+    // Signing up does not sign anyone in: the owner lands on the login page and signs in themselves.
+    await expect(page).toHaveURL(/\/login/, { timeout: 30_000 });
+    await expect(page.getByText(/Your workspace is ready/)).toBeVisible();
+    await expect(page.getByLabel('Email')).toHaveValue(email);
+    await page.goto('/dashboard');
+    await expect(page).toHaveURL(/\/login/);
+    await page.getByLabel('Email').fill(email);
+    await page.getByLabel(lbl('Password')).fill('Sup3rSecret!x');
+    await page.getByRole('button', { name: 'Sign in' }).click();
     await expect(page).toHaveURL(/\/dashboard/, { timeout: 30_000 });
     await expect(page.getByRole('status').filter({ hasText: 'Verify your email' }).first()).toBeVisible();
     await expect(page.getByRole('heading', { name: /Get started with Yowflow/ })).toBeVisible();
@@ -87,8 +97,7 @@ test.describe('authentication and account lifecycle', () => {
     await page.getByLabel('Work email').fill(email);
     await page.getByLabel(lbl('Password')).fill('OldPassw0rd!x');
     await page.getByRole('button', { name: 'Create workspace' }).click();
-    await expect(page).toHaveURL(/\/dashboard/, { timeout: 30_000 });
-    await page.context().clearCookies();
+    await expect(page).toHaveURL(/\/login/, { timeout: 30_000 });
 
     await page.goto('/forgot-password');
     await page.getByLabel('Email').fill(email);
