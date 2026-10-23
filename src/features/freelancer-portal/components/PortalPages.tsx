@@ -4,8 +4,10 @@ import { useEffect, useMemo, useState } from 'react';
 import Link from 'next/link';
 import { AlertCircle, BriefcaseBusiness, CalendarDays, Camera, CheckCircle2, ChevronLeft, ChevronRight, Clock, Loader2, MapPin, Save, Trash2, Video, X } from 'lucide-react';
 import { ApiError } from '@/lib/api/client';
-import { freelancerPortalApi, AvailabilityStatus, PortalAvailability, PortalPortfolioItem, PortalShootSummary } from '@/lib/api/freelancerPortal';
+import { loadRazorpay } from '@/lib/api/billing';
+import { freelancerPortalApi, AvailabilityStatus, PortalAvailability, PortalFreelancer, PortalPortfolioItem, PortalShootSummary } from '@/lib/api/freelancerPortal';
 import { getFreelancerProfileCompletion } from '../profileCompletion';
+import { composeNotes, parseNotes, type NoteKey, type ParsedNotes } from '../profileNotes';
 import { useFreelancerPortal } from '../useFreelancerPortal';
 import { PortalCard, PortalState } from './FreelancerPortalShell';
 import { BRAND } from '@/config/brand';
@@ -53,7 +55,7 @@ export function DashboardPage() {
         </PortalCard>
         <PortalCard>
           <p className="text-sm font-black">Searchability</p>
-          <p className={`mt-2 inline-flex items-center gap-2 rounded-full px-3 py-1 text-xs font-black ${data.searchable ? 'bg-[#527A68]/10 text-[#527A68]' : 'bg-[#B78332]/10 text-[#B78332]'}`}>
+          <p className={`mt-2 inline-flex items-center gap-2 rounded-full px-3 py-1 text-xs font-black ${data.searchable ? 'bg-[#527A68]/10 text-[#2E5242]' : 'bg-[#B78332]/10 text-[#7A5210]'}`}>
             {data.searchable ? <CheckCircle2 className="size-4" /> : <AlertCircle className="size-4" />}
             {data.searchable ? 'Visible to studio search' : 'Not searchable yet'}
           </p>
@@ -74,73 +76,100 @@ export function DashboardPage() {
   );
 }
 
+const ROLE_OPTIONS: Array<[string, string]> = [
+  ['LEAD_PHOTOGRAPHER', 'Lead photographer'], ['CANDID_PHOTOGRAPHER', 'Candid photographer'], ['TRADITIONAL_PHOTOGRAPHER', 'Traditional photographer'],
+  ['CINEMATOGRAPHER', 'Cinematographer'], ['TRADITIONAL_VIDEOGRAPHER', 'Traditional videographer'], ['DRONE_OPERATOR', 'Drone operator'],
+  ['ASSISTANT', 'Assistant'], ['LIGHT_ASSISTANT', 'Light assistant'], ['LIVE_EDITOR', 'Editor'], ['COORDINATOR', 'Coordinator'], ['OTHER', 'Other'],
+];
+const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+
 export function ProfilePage() {
   const { data, setData, loading, error, reload } = useFreelancerPortal();
   const [saving, setSaving] = useState(false);
-  const [message, setMessage] = useState('');
+  const [message, setMessage] = useState<{ tone: 'ok' | 'bad'; text: string } | null>(null);
   const profile = data?.freelancer;
-  const [form, setForm] = useState<Record<string, string>>({});
-  const value = (key: keyof NonNullable<typeof profile>) => form[String(key)] ?? String(profile?.[key] ?? '');
-  if (loading) return <LoadingState />;
-  if (error || !data || !profile) return <ErrorState text={error || 'No profile loaded.'} retry={reload} />;
+  const [form, setForm] = useState<Record<string, string> | null>(null);
+  const [notes, setNotes] = useState<ParsedNotes | null>(null);
+  const [travel, setTravel] = useState(true);
+  useEffect(() => {
+    if (!profile || form) return;
+    setForm({
+      fullName: profile.fullName, email: profile.email ?? '', city: profile.city ?? '', primarySkill: profile.primarySkill,
+      experienceYears: String(profile.experienceYears ?? 0), rate: String(Number(profile.rate ?? 0)), skills: profile.skills.join(', '), equipmentNotes: profile.equipmentNotes ?? '',
+    });
+    setNotes(parseNotes(profile.notes));
+    setTravel(profile.travelAvailable);
+  }, [profile, form]);
+  if (loading || (profile && !form)) return <LoadingState />;
+  if (error || !data || !profile || !form || !notes) return <ErrorState text={error || 'No profile loaded.'} retry={reload} />;
   const completion = getFreelancerProfileCompletion(profile);
   const latestApplication = profile.applications[0];
-  const latestSubscription = profile.subscriptions[0];
+  const latestSubscription = profile.subscriptions.find((x) => x.status === 'ACTIVE' || x.status === 'PAST_DUE');
+  const set = (k: string) => (e: { target: { value: string } }) => setForm({ ...form, [k]: e.target.value });
+  const setNote = (k: NoteKey) => (e: { target: { value: string } }) => setNotes({ ...notes, fields: { ...notes.fields, [k]: e.target.value } });
   const save = async () => {
+    setMessage(null);
+    if (!form.fullName.trim()) { setMessage({ tone: 'bad', text: 'Your name cannot be empty.' }); return; }
+    if (form.email.trim() && !EMAIL_RE.test(form.email.trim())) { setMessage({ tone: 'bad', text: 'Enter a valid email address.' }); return; }
+    if (!(Number(form.rate) >= 0)) { setMessage({ tone: 'bad', text: 'Enter your daily rate as a number.' }); return; }
     setSaving(true);
-    setMessage('');
     try {
       const updated = await freelancerPortalApi.updateProfile({
-        fullName: value('fullName'),
-        email: value('email') || null,
-        city: value('city') || null,
-        experienceYears: Number(value('experienceYears')) || 0,
-        skills: value('skills').split(',').map((s) => s.trim()).filter(Boolean),
-        equipmentNotes: value('equipmentNotes') || null,
-        notes: value('notes') || null,
-      });
+        fullName: form.fullName.trim(),
+        email: form.email.trim() || null,
+        city: form.city.trim() || null,
+        primarySkill: form.primarySkill,
+        experienceYears: Math.max(0, Math.min(70, Number(form.experienceYears) || 0)),
+        rate: String(Number(form.rate) || 0),
+        travelAvailable: travel,
+        skills: form.skills.split(',').map((x) => x.trim()).filter(Boolean),
+        equipmentNotes: form.equipmentNotes.trim() || null,
+        notes: composeNotes(notes) || null,
+      } as Partial<PortalFreelancer>);
       setData({ ...data, freelancer: { ...profile, ...updated } });
-      setMessage('Profile updated.');
+      setMessage({ tone: 'ok', text: 'Profile updated.' });
     } catch (err) {
-      setMessage(err instanceof ApiError ? err.message : 'Unable to update profile.');
+      setMessage({ tone: 'bad', text: err instanceof ApiError ? err.message : 'Unable to update your profile.' });
     } finally {
       setSaving(false);
     }
   };
   const initials = profile.fullName.split(/\s+/).slice(0, 2).map((part) => part[0]).join('').toUpperCase() || 'F';
-  const roleLabel = (profile.primarySkill || 'OTHER').replaceAll('_', ' ').toLowerCase().replace(/\b\w/g, (m) => m.toUpperCase());
   return (
     <div className="space-y-6">
       <section className="overflow-hidden rounded-2xl bg-linear-to-r from-[#10120D] to-[#141711] p-6 text-white shadow-sm">
         <p className="text-xs font-black uppercase tracking-[.14em] text-[#B6E25D]">{BRAND.name}</p>
         <h1 className="mt-3 text-4xl font-black tracking-tight">My Profile</h1>
-        <p className="mt-2 max-w-2xl text-base font-medium leading-6 text-white/65">Review and refine the details you submitted after purchase.</p>
+        <p className="mt-2 max-w-2xl text-base font-medium leading-6 text-white/65">Keep your details current so studios can find and book you.</p>
       </section>
       <div className="grid gap-5 rounded-2xl border border-[#EDE8E2] bg-white p-5 shadow-sm lg:grid-cols-[300px_1fr]">
-        <aside className="rounded-2xl border border-[#EDE8E2] bg-[#FBFDF6] p-6 text-center">
-          <div className="mx-auto grid size-40 place-items-center rounded-full bg-[#EDF4F2] text-5xl font-black text-[#292F22]">{initials.slice(0, 1)}</div>
-          <button type="button" className="mt-5 inline-flex min-h-11 items-center justify-center gap-2 rounded-xl border border-[#C7E982] bg-white px-5 text-sm font-black text-[#1C2018] transition hover:bg-[#EDF4F2]"><Camera className="size-4" />Upload Photo</button>
-          <p className="mt-4 text-sm font-bold text-[#1E2319]">{latestSubscription?.plan?.name ?? 'Freelancer'}{latestSubscription?.plan?.billingInterval ? ` · ${String(latestSubscription.plan.billingInterval).toLowerCase()}` : ''}</p>
+        <aside className="h-fit rounded-2xl border border-[#EDE8E2] bg-[#FBFDF6] p-6 text-center">
+          <div className="mx-auto grid size-32 place-items-center rounded-full bg-[#EDF4F2] text-5xl font-black text-[#292F22]" aria-hidden="true">{initials.slice(0, 1)}</div>
+          <p className="mt-4 text-sm font-bold text-[#1E2319]">{latestSubscription?.plan?.name ?? 'No active plan'}{latestSubscription?.plan?.billingInterval ? ` · ${String(latestSubscription.plan.billingInterval).toLowerCase()}` : ''}</p>
           <div className="mt-6 rounded-xl border border-[#eee7e2] bg-white p-3 text-left text-xs font-bold text-[#1E2319]">
             <p>Completion: {completion.percentage}%</p>
+            {completion.missing.length ? <p className="mt-1 font-medium text-[#686164]">To do: {completion.missing.join(', ')}</p> : null}
             <p className="mt-1">Application: {latestApplication?.status ?? 'No application'}</p>
+            {latestApplication?.status === 'REJECTED' && latestApplication.rejectionReason ? <p className="mt-1 font-medium text-[#8F2F2D]">Reason: {latestApplication.rejectionReason}</p> : null}
             <p className="mt-1">Searchable: {data.searchable ? 'Yes' : 'Not yet'}</p>
           </div>
         </aside>
         <div className="grid gap-4 lg:grid-cols-2">
-          <label><span className={label}>Name</span><input className={field} value={value('fullName')} onChange={(e) => setForm({ ...form, fullName: e.target.value })} /></label>
-          <label><span className={label}>Studio / Brand</span><input className={field} value={value('notes').split('\n').find((line) => line.startsWith('Studio:'))?.replace('Studio:', '').trim() || profile.fullName} onChange={(e) => setForm({ ...form, notes: e.target.value })} /></label>
-          <label><span className={label}>Phone</span><input className={field} value={profile.phone} disabled /></label>
-          <label><span className={label}>Email</span><input className={field} value={value('email')} onChange={(e) => setForm({ ...form, email: e.target.value })} /></label>
-          <label><span className={label}>Base city</span><input className={field} value={value('city')} onChange={(e) => setForm({ ...form, city: e.target.value })} /></label>
-          <label><span className={label}>Primary role</span><input className={field} value={roleLabel} disabled /></label>
-          <label className="lg:col-span-2"><span className={label}>Professional headline</span><input className={field} value={value('notes').split('\n').find((line) => line.startsWith('Headline:'))?.replace('Headline:', '').trim() || ''} onChange={(e) => setForm({ ...form, notes: e.target.value })} /></label>
-          <label><span className={label}>Experience years</span><input type="number" className={field} value={value('experienceYears')} onChange={(e) => setForm({ ...form, experienceYears: e.target.value })} /></label>
-          <label><span className={label}>Daily rate</span><input className={field} value={String(profile.rate ?? '')} disabled /></label>
-          <label className="lg:col-span-2"><span className={label}>Skills, comma separated</span><input className={field} value={form.skills ?? profile.skills.join(', ')} onChange={(e) => setForm({ ...form, skills: e.target.value })} /></label>
-          <label className="lg:col-span-2"><span className={label}>Portfolio links</span><textarea className={field} value={value('notes').split('\n').find((line) => line.startsWith('Portfolio:'))?.replace('Portfolio:', '').trim() || ''} onChange={(e) => setForm({ ...form, notes: e.target.value })} placeholder="Instagram, YouTube, website or Behance link" /></label>
-          <label className="lg:col-span-2"><span className={label}>Bio / notes</span><textarea className={field} value={value('notes')} onChange={(e) => setForm({ ...form, notes: e.target.value })} /></label>
-          <div className="flex flex-wrap items-center gap-3 lg:col-span-2"><button className={btn} onClick={save} disabled={saving}>{saving ? 'Saving…' : 'Save profile'}</button>{message ? <p className="text-sm font-bold text-[#686164]">{message}</p> : null}</div>
+          <label><span className={label}>Name</span><input className={field} value={form.fullName} onChange={set('fullName')} /></label>
+          <label><span className={label}>Studio / Brand</span><input className={field} value={notes.fields.Studio} onChange={setNote('Studio')} placeholder="Optional" /></label>
+          <label><span className={label}>Phone (used to sign in)</span><input className={field} value={profile.phone} disabled /></label>
+          <label><span className={label}>Email</span><input type="email" className={field} value={form.email} onChange={set('email')} /></label>
+          <label><span className={label}>Base city</span><input className={field} value={form.city} onChange={set('city')} /></label>
+          <label><span className={label}>Primary role</span><select className={field} value={form.primarySkill} onChange={set('primarySkill')}>{ROLE_OPTIONS.map(([v, l]) => <option key={v} value={v}>{l}</option>)}</select></label>
+          <label className="lg:col-span-2"><span className={label}>Professional headline</span><input className={field} value={notes.fields.Headline} maxLength={160} onChange={setNote('Headline')} placeholder="e.g. Candid wedding photographer" /></label>
+          <label><span className={label}>Experience (years)</span><input type="number" min={0} max={70} className={field} value={form.experienceYears} onChange={set('experienceYears')} /></label>
+          <label><span className={label}>Daily rate (₹)</span><input type="number" min={0} className={field} value={form.rate} onChange={set('rate')} /></label>
+          <label className="flex items-center gap-2 text-sm font-bold lg:col-span-2"><input type="checkbox" checked={travel} onChange={(e) => setTravel(e.target.checked)} /> Open to travel and outstation work</label>
+          <label className="lg:col-span-2"><span className={label}>Skills, comma separated</span><input className={field} value={form.skills} onChange={set('skills')} /></label>
+          <label className="lg:col-span-2"><span className={label}>Equipment</span><textarea rows={2} className={field} value={form.equipmentNotes} onChange={set('equipmentNotes')} placeholder="Cameras, lenses, lights, drone…" /></label>
+          <label className="lg:col-span-2"><span className={label}>Portfolio links</span><textarea rows={2} className={field} value={notes.fields.Portfolio} onChange={setNote('Portfolio')} placeholder="Instagram, YouTube, website or Behance link" /></label>
+          <label className="lg:col-span-2"><span className={label}>About you</span><textarea rows={4} className={field} value={notes.fields.Bio} onChange={setNote('Bio')} /></label>
+          <div className="flex flex-wrap items-center gap-3 lg:col-span-2"><button className={btn} onClick={save} disabled={saving}>{saving ? 'Saving…' : 'Save profile'}</button>{message ? <p role={message.tone === 'bad' ? 'alert' : 'status'} className={`text-sm font-bold ${message.tone === 'bad' ? 'text-red-700' : 'text-emerald-700'}`}>{message.text}</p> : null}</div>
         </div>
       </div>
       <ProfileAvailabilityCalendar />
@@ -155,9 +184,9 @@ const statusCopy: Record<AvailabilityStatus, string> = {
 };
 
 const statusClass: Record<AvailabilityStatus, string> = {
-  AVAILABLE: 'border-[#527A68] bg-[#527A68]/10 text-[#527A68]',
-  PARTIALLY_AVAILABLE: 'border-[#B78332] bg-[#B78332]/10 text-[#B78332]',
-  UNAVAILABLE: 'border-[#B94A48] bg-[#B94A48]/10 text-[#B94A48]',
+  AVAILABLE: 'border-[#527A68] bg-[#527A68]/10 text-[#2E5242]',
+  PARTIALLY_AVAILABLE: 'border-[#B78332] bg-[#B78332]/10 text-[#7A5210]',
+  UNAVAILABLE: 'border-[#B94A48] bg-[#B94A48]/10 text-[#8F2F2D]',
 };
 
 const dateKey = (date: Date) => {
@@ -334,9 +363,9 @@ function ProfileAvailabilityCalendar() {
           <div className="mb-3 flex flex-wrap items-center justify-between gap-2">
             <p className="text-lg font-black">{month.toLocaleDateString('en-IN', { month: 'long', year: 'numeric' })}</p>
             <div className="flex flex-wrap gap-2 text-[11px] font-black">
-              <span className="rounded-full border border-[#527A68]/30 bg-[#527A68]/10 px-2.5 py-1 text-[#527A68]">Available</span>
-              <span className="rounded-full border border-[#B78332]/30 bg-[#B78332]/10 px-2.5 py-1 text-[#B78332]">Partial</span>
-              <span className="rounded-full border border-[#B94A48]/30 bg-[#B94A48]/10 px-2.5 py-1 text-[#B94A48]">Unavailable</span>
+              <span className="rounded-full border border-[#527A68]/30 bg-[#527A68]/10 px-2.5 py-1 text-[#2E5242]">Available</span>
+              <span className="rounded-full border border-[#B78332]/30 bg-[#B78332]/10 px-2.5 py-1 text-[#7A5210]">Partial</span>
+              <span className="rounded-full border border-[#B94A48]/30 bg-[#B94A48]/10 px-2.5 py-1 text-[#8F2F2D]">Unavailable</span>
               <span className="rounded-full border border-[#292F22]/25 bg-[#292F22]/10 px-2.5 py-1 text-[#292F22]">Shoot</span>
             </div>
           </div>
@@ -373,7 +402,7 @@ function ProfileAvailabilityCalendar() {
               <h3 className="mt-1 text-xl font-black">{displayDate(selectedDate)}</h3>
               <p className="mt-1 text-sm font-bold text-[#686164]">{selectedRecord ? statusCopy[selectedRecord.status] : 'No availability marked'}</p>
             </div>
-            {selectedRecord ? <button type="button" onClick={clearAvailability} disabled={savingDate === selectedDate} className="grid size-10 place-items-center rounded-xl border border-[#B94A48]/30 bg-white text-[#B94A48] disabled:opacity-60" aria-label="Clear availability"><Trash2 className="size-4" /></button> : null}
+            {selectedRecord ? <button type="button" onClick={clearAvailability} disabled={savingDate === selectedDate} className="grid size-10 place-items-center rounded-xl border border-[#B94A48]/30 bg-white text-[#8F2F2D] disabled:opacity-60" aria-label="Clear availability"><Trash2 className="size-4" /></button> : null}
           </div>
           <div className="mt-4 space-y-2">
             <p className={label}>Availability</p>
@@ -579,7 +608,7 @@ export function AvailabilityPage() {
             <p className="mt-1 text-2xl font-black">{selectedDate}</p>
             <p className="text-sm font-bold text-[#686164]">{selectedRecord ? statusCopy[selectedRecord.status] : 'No status marked'}</p>
           </div>
-          {selectedRecord ? <button className="inline-flex min-h-10 items-center gap-2 rounded-xl border border-[#B94A48]/30 px-3 text-sm font-black text-[#B94A48]" onClick={deleteDate} disabled={savingDate === selectedDate}><Trash2 className="size-4" /> Clear</button> : null}
+          {selectedRecord ? <button className="inline-flex min-h-10 items-center gap-2 rounded-xl border border-[#B94A48]/30 px-3 text-sm font-black text-[#8F2F2D]" onClick={deleteDate} disabled={savingDate === selectedDate}><Trash2 className="size-4" /> Clear</button> : null}
         </div>
         <div className="mt-4 flex flex-wrap gap-2">
           {(['AVAILABLE', 'PARTIALLY_AVAILABLE', 'UNAVAILABLE'] as AvailabilityStatus[]).map((status) => (
@@ -603,42 +632,90 @@ export function AvailabilityPage() {
   );
 }
 
+const PORTFOLIO_TYPES = ['image/jpeg', 'image/png', 'image/webp', 'video/mp4'];
+const PORTFOLIO_MAX = 25 * 1024 * 1024;
+
 export function PortfolioPage() {
   const { data, setData, loading, error, reload } = useFreelancerPortal();
-  const [form, setForm] = useState({ fileObjectId: '', title: '', description: '', category: '', isPublished: true });
-  const [message, setMessage] = useState('');
+  const [form, setForm] = useState({ title: '', description: '', category: '', isPublished: true });
+  const [file, setFile] = useState<File | null>(null);
+  const [busy, setBusy] = useState(false);
+  const [message, setMessage] = useState<{ tone: 'ok' | 'bad'; text: string } | null>(null);
   if (loading) return <LoadingState />;
   if (error || !data) return <ErrorState text={error || 'No portfolio loaded.'} retry={reload} />;
+  const items = data.freelancer.portfolioItems;
+
+  const pick = (f: File | undefined) => {
+    setMessage(null);
+    if (!f) { setFile(null); return; }
+    if (!PORTFOLIO_TYPES.includes(f.type)) { setMessage({ tone: 'bad', text: 'Choose a JPG, PNG or WEBP image, or an MP4 film.' }); setFile(null); return; }
+    if (f.size > PORTFOLIO_MAX) { setMessage({ tone: 'bad', text: 'That file is over 25 MB. Choose a smaller one.' }); setFile(null); return; }
+    setFile(f);
+    setForm((cur) => ({ ...cur, title: cur.title || f.name.replace(/\.[^.]+$/, '').slice(0, 80) }));
+  };
   const create = async () => {
+    if (!file) return;
+    setBusy(true); setMessage(null);
     try {
-      const item = await freelancerPortalApi.createPortfolioItem(form);
-      setData({ ...data, freelancer: { ...data.freelancer, portfolioItems: [item, ...data.freelancer.portfolioItems] } });
-      setForm({ fileObjectId: '', title: '', description: '', category: '', isPublished: true });
-      setMessage('Portfolio item added.');
+      const intent = await freelancerPortalApi.portfolioUploadIntent({ originalName: file.name, mimeType: file.type });
+      const put = await fetch(intent.uploadUrl, { method: 'PUT', headers: intent.requiredHeaders, body: file });
+      if (!put.ok) throw new Error('The upload did not finish. Please try again.');
+      const item = await freelancerPortalApi.portfolioUpload({ bucket: intent.bucket, objectKey: intent.objectKey, originalName: file.name, mimeType: file.type, sizeBytes: file.size, title: form.title.trim(), description: form.description.trim() || undefined, category: form.category.trim() || undefined, isPublished: form.isPublished });
+      setData({ ...data, freelancer: { ...data.freelancer, portfolioItems: [item, ...items] } });
+      setForm({ title: '', description: '', category: '', isPublished: true }); setFile(null);
+      setMessage({ tone: 'ok', text: 'Added to your portfolio.' });
     } catch (err) {
-      setMessage(err instanceof ApiError ? err.message : 'Unable to add portfolio item.');
-    }
+      setMessage({ tone: 'bad', text: err instanceof ApiError ? err.message : err instanceof Error ? err.message : 'Unable to add this item.' });
+    } finally { setBusy(false); }
   };
   const toggle = async (item: PortalPortfolioItem) => {
-    const updated = await freelancerPortalApi.updatePortfolioItem(item.id, { isPublished: !item.isPublished });
-    setData({ ...data, freelancer: { ...data.freelancer, portfolioItems: data.freelancer.portfolioItems.map((p) => p.id === item.id ? updated : p) } });
+    try {
+      const updated = await freelancerPortalApi.updatePortfolioItem(item.id, { isPublished: !item.isPublished });
+      setData({ ...data, freelancer: { ...data.freelancer, portfolioItems: items.map((p) => (p.id === item.id ? { ...p, isPublished: updated.isPublished } : p)) } });
+    } catch (err) { setMessage({ tone: 'bad', text: err instanceof ApiError ? err.message : 'Could not update this item.' }); }
+  };
+  const remove = async (item: PortalPortfolioItem) => {
+    if (!window.confirm(`Remove "${item.title}" from your portfolio?`)) return;
+    try {
+      await freelancerPortalApi.deletePortfolioItem(item.id);
+      setData({ ...data, freelancer: { ...data.freelancer, portfolioItems: items.filter((p) => p.id !== item.id) } });
+    } catch (err) { setMessage({ tone: 'bad', text: err instanceof ApiError ? err.message : 'Could not remove this item.' }); }
   };
   return (
     <div className="space-y-5">
       <h1 className="text-3xl font-black">Portfolio</h1>
       <PortalCard>
-        <p className="font-black">Add existing uploaded file</p>
-        <p className="mt-1 text-xs font-medium text-[#686164]">Upload binaries through the existing Files API, then attach the resulting FileObject ID here.</p>
+        <p className="font-black">Add a work sample</p>
+        <p className="mt-1 text-xs font-medium text-[#686164]">Studios see published items when they look for freelancers. JPG, PNG, WEBP or MP4, up to 25 MB.</p>
         <div className="mt-4 grid gap-3 sm:grid-cols-2">
-          <input className={field} placeholder="FileObject ID" value={form.fileObjectId} onChange={(e) => setForm({ ...form, fileObjectId: e.target.value })} />
-          <input className={field} placeholder="Title" value={form.title} onChange={(e) => setForm({ ...form, title: e.target.value })} />
-          <input className={field} placeholder="Category" value={form.category} onChange={(e) => setForm({ ...form, category: e.target.value })} />
-          <label className="flex items-center gap-2 text-sm font-bold"><input type="checkbox" checked={form.isPublished} onChange={(e) => setForm({ ...form, isPublished: e.target.checked })} /> Published</label>
-          <textarea className={`${field} sm:col-span-2`} placeholder="Description" value={form.description} onChange={(e) => setForm({ ...form, description: e.target.value })} />
+          <label className="sm:col-span-2"><span className={label}>Photo or film</span><input type="file" accept={PORTFOLIO_TYPES.join(',')} className={field} onChange={(e) => pick(e.target.files?.[0])} /></label>
+          <label><span className={label}>Title</span><input className={field} value={form.title} maxLength={160} onChange={(e) => setForm({ ...form, title: e.target.value })} /></label>
+          <label><span className={label}>Category</span><input className={field} value={form.category} maxLength={80} placeholder="Candid, Cinematic, Drone…" onChange={(e) => setForm({ ...form, category: e.target.value })} /></label>
+          <label className="sm:col-span-2"><span className={label}>Description</span><textarea className={field} rows={2} value={form.description} onChange={(e) => setForm({ ...form, description: e.target.value })} /></label>
+          <label className="flex items-center gap-2 text-sm font-bold"><input type="checkbox" checked={form.isPublished} onChange={(e) => setForm({ ...form, isPublished: e.target.checked })} /> Visible to studios</label>
         </div>
-        <div className="mt-4 flex items-center gap-3"><button className={btn} onClick={create} disabled={!form.fileObjectId || !form.title}>Add item</button>{message ? <p className="text-sm font-bold text-[#686164]">{message}</p> : null}</div>
+        <div className="mt-4 flex flex-wrap items-center gap-3"><button className={btn} onClick={create} disabled={busy || !file || !form.title.trim()}>{busy ? 'Uploading…' : 'Add to portfolio'}</button>{message ? <p role={message.tone === 'bad' ? 'alert' : 'status'} className={`text-sm font-bold ${message.tone === 'bad' ? 'text-red-700' : 'text-emerald-700'}`}>{message.text}</p> : null}</div>
       </PortalCard>
-      <div className="grid gap-3 sm:grid-cols-2">{data.freelancer.portfolioItems.length ? data.freelancer.portfolioItems.map((item) => <PortalCard key={item.id}><p className="font-black">{item.title}</p><p className="text-sm font-medium text-[#686164]">{item.description || 'No description'}</p><button onClick={() => toggle(item)} className="mt-3 text-sm font-black text-[#292F22]">{item.isPublished ? 'Unpublish' : 'Publish'}</button></PortalCard>) : <PortalState title="No portfolio items yet" text="Add approved FileObject media to build your freelancer portfolio." />}</div>
+      <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+        {items.length ? items.map((item) => (
+          <PortalCard key={item.id} className="overflow-hidden !p-0">
+            {item.fileObject?.url
+              ? item.fileObject.mimeType.startsWith('video/')
+                ? <video src={item.fileObject.url} controls preload="metadata" className="aspect-[4/3] w-full bg-black object-cover" />
+                // eslint-disable-next-line @next/next/no-img-element
+                : <img src={item.fileObject.url} alt={item.title} loading="lazy" className="aspect-[4/3] w-full object-cover" />
+              : <div className="grid aspect-[4/3] place-items-center bg-[#F7FCEE] text-xs font-bold text-[#686164]">No preview</div>}
+            <div className="p-4">
+              <p className="font-black">{item.title}</p>
+              <p className="text-sm font-medium text-[#686164]">{item.description || item.category || 'No description'}</p>
+              <div className="mt-3 flex items-center gap-4">
+                <button onClick={() => toggle(item)} className="text-sm font-black text-[#292F22] underline-offset-2 hover:underline">{item.isPublished ? 'Hide from studios' : 'Show to studios'}</button>
+                <button onClick={() => remove(item)} className="text-sm font-black text-red-700 underline-offset-2 hover:underline" aria-label={`Remove ${item.title}`}>Remove</button>
+              </div>
+            </div>
+          </PortalCard>
+        )) : <PortalState title="No work samples yet" text="Add your best photographs or films so studios can see your style." />}
+      </div>
     </div>
   );
 }
@@ -646,21 +723,65 @@ export function PortfolioPage() {
 export function SubscriptionPage() {
   const { data, loading, error, reload } = useFreelancerPortal();
   const [plans, setPlans] = useState<Awaited<ReturnType<typeof freelancerPortalApi.plans>> | null>(null);
-  const [notice, setNotice] = useState('');
-  useMemo(() => { if (data && !plans) void freelancerPortalApi.plans().then(setPlans).catch(() => setPlans([])); }, [data, plans]);
+  const [notice, setNotice] = useState<{ tone: 'ok' | 'bad'; text: string } | null>(null);
+  const [busy, setBusy] = useState('');
+  useEffect(() => { if (data && !plans) void freelancerPortalApi.plans().then(setPlans).catch(() => setPlans([])); }, [data, plans]);
   if (loading) return <LoadingState />;
   if (error || !data) return <ErrorState text={error || 'No subscription loaded.'} retry={reload} />;
-  const subscription = data.freelancer.subscriptions[0];
+  const live = data.freelancer.subscriptions.find((x) => x.status === 'ACTIVE' || x.status === 'PAST_DUE');
+
+  const choose = async (planId: string) => {
+    setBusy(planId); setNotice(null);
+    try {
+      const co = await freelancerPortalApi.startCheckout(planId);
+      if (!('orderId' in co)) { setNotice({ tone: 'ok', text: 'Your plan is active.' }); reload(); return; }
+      await loadRazorpay();
+      if (!window.Razorpay) throw new Error('The payment window could not open.');
+      const rz = new window.Razorpay({
+        key: co.keyId, amount: co.amount, currency: co.currency, order_id: co.orderId, name: co.name, description: co.description,
+        theme: { color: '#B4F03C' },
+        handler: async (r: { razorpay_order_id: string; razorpay_payment_id: string; razorpay_signature: string }) => {
+          try { await freelancerPortalApi.verifyCheckout({ orderId: r.razorpay_order_id, paymentId: r.razorpay_payment_id, signature: r.razorpay_signature }); setNotice({ tone: 'ok', text: 'Payment received. Your plan is active and studios can find you.' }); reload(); }
+          catch (e) { setNotice({ tone: 'bad', text: e instanceof ApiError ? `${e.message} If you were charged, contact your studio with payment id ${r.razorpay_payment_id}.` : 'We could not confirm the payment. If you were charged, contact your studio.' }); }
+          finally { setBusy(''); }
+        },
+        modal: { ondismiss: () => setBusy('') },
+      });
+      rz.on('payment.failed', (r) => setNotice({ tone: 'bad', text: r.error?.description ?? 'The payment did not go through. Please try again.' }));
+      rz.open();
+    } catch (e) {
+      setNotice({ tone: 'bad', text: e instanceof ApiError ? e.message : e instanceof Error ? e.message : 'Could not start checkout.' });
+      setBusy('');
+    }
+  };
+  const cancel = async () => {
+    if (!window.confirm('Cancel your plan? You will stop appearing in studio search straight away.')) return;
+    setBusy('cancel');
+    try { await freelancerPortalApi.cancelSubscription(); setNotice({ tone: 'ok', text: 'Your plan was cancelled.' }); reload(); }
+    catch (e) { setNotice({ tone: 'bad', text: e instanceof ApiError ? e.message : 'Could not cancel. Try again.' }); }
+    finally { setBusy(''); }
+  };
+
   return (
     <div className="space-y-5">
       <h1 className="text-3xl font-black">Subscription</h1>
       <PortalCard>
         <p className="text-sm font-black">Current plan</p>
-        <p className="mt-2 text-2xl font-black">{subscription?.plan.name ?? 'No active subscription'}</p>
-        <p className="text-sm font-bold text-[#686164]">{subscription ? `${subscription.status} · ${subscription.currentPeriodEnd ? `ends ${new Date(subscription.currentPeriodEnd).toLocaleDateString()}` : 'no expiry set'}` : 'Checkout is not enabled yet.'}</p>
+        <p className="mt-2 text-2xl font-black">{live?.plan.name ?? 'No active plan'}</p>
+        <p className="text-sm font-bold text-[#686164]">{live ? `${live.status === 'PAST_DUE' ? 'Payment overdue' : 'Active'} · ${live.currentPeriodEnd ? `renews or ends ${new Date(live.currentPeriodEnd).toLocaleDateString('en-IN')}` : 'no expiry set'}` : 'Choose a plan to be listed in studio search.'}</p>
+        {live ? <button className={`${btn} mt-4`} onClick={cancel} disabled={busy === 'cancel'}>{busy === 'cancel' ? 'Cancelling…' : 'Cancel plan'}</button> : null}
       </PortalCard>
-      <div className="grid gap-3 sm:grid-cols-2">{plans?.length ? plans.map((plan) => <PortalCard key={plan.id}><p className="font-black">{plan.name}</p><p className="mt-1 text-sm font-bold text-[#686164]">{plan.currency} {Number(plan.price).toLocaleString('en-IN')} · {plan.billingInterval}</p><button className={`${btn} mt-4`} onClick={() => setNotice('Subscription checkout coming soon. No transaction was created.')}>Choose Plan</button></PortalCard>) : <PortalState title="No plans available" text="The studio has not published freelancer plans yet." />}</div>
-      {notice ? <p className="rounded-xl bg-[#B78332]/10 px-4 py-3 text-sm font-bold text-[#B78332]">{notice}</p> : null}
+      <div className="grid gap-3 sm:grid-cols-2">
+        {plans?.length ? plans.map((plan) => (
+          <PortalCard key={plan.id}>
+            <p className="font-black">{plan.name}</p>
+            <p className="mt-1 text-sm font-bold text-[#686164]">{Number(plan.price) === 0 ? 'Free' : `₹${Number(plan.price).toLocaleString('en-IN')}`} · {String(plan.billingInterval).toLowerCase()}</p>
+            {plan.description ? <p className="mt-2 text-sm font-medium text-[#686164]">{plan.description}</p> : null}
+            <button className={`${btn} mt-4`} disabled={Boolean(busy) || live?.plan.id === plan.id} onClick={() => void choose(plan.id)}>{live?.plan.id === plan.id ? 'Current plan' : busy === plan.id ? 'Opening…' : Number(plan.price) === 0 ? 'Activate' : 'Pay and activate'}</button>
+          </PortalCard>
+        )) : <PortalState title="No plans available" text="Your studio has not published plans yet." />}
+      </div>
+      {notice ? <p role={notice.tone === 'bad' ? 'alert' : 'status'} className={`rounded-xl px-4 py-3 text-sm font-bold ${notice.tone === 'bad' ? 'bg-red-50 text-red-700' : 'bg-emerald-50 text-emerald-700'}`}>{notice.text}</p> : null}
     </div>
   );
 }
@@ -723,7 +844,7 @@ export function SimplePortalListPage({ kind }: { kind: 'connections' | 'assignme
                       {savingId === connection.id ? <Loader2 className="size-4 animate-spin" /> : <CheckCircle2 className="size-4" />}
                       Accept
                     </button>
-                    <button type="button" onClick={() => void respond(connection.id, 'DECLINED')} disabled={savingId === connection.id} className="inline-flex min-h-11 items-center gap-2 rounded-xl border border-[#B94A48]/30 bg-white px-4 text-sm font-black text-[#B94A48] disabled:opacity-60">
+                    <button type="button" onClick={() => void respond(connection.id, 'DECLINED')} disabled={savingId === connection.id} className="inline-flex min-h-11 items-center gap-2 rounded-xl border border-[#B94A48]/30 bg-white px-4 text-sm font-black text-[#8F2F2D] disabled:opacity-60">
                       <X className="size-4" />
                       Decline
                     </button>

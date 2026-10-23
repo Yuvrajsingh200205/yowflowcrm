@@ -20,6 +20,7 @@ export interface PortalFileObject {
   originalName: string;
   mimeType: string;
   sizeBytes: string | number;
+  url?: string | null;
 }
 
 export interface PortalPortfolioItem {
@@ -204,7 +205,8 @@ export interface PortalMe {
 }
 
 export interface PublicApplicationInput {
-  organizationSlug?: string;
+  /** Slug of the studio whose join link the freelancer opened. */
+  studio?: string;
   fullName: string;
   phone: string;
   password: string;
@@ -218,6 +220,8 @@ export interface PublicApplicationInput {
   expectedRate?: string;
   notes?: string;
 }
+
+export type PortalCheckout = { activated: true } | { activated: false; orderId: string; amount: number; currency: string; keyId: string; mode: string; name: string; description: string };
 
 export interface OnboardingValidation {
   valid: boolean;
@@ -300,6 +304,14 @@ export const freelancerPortalApi = {
     portalRequest<PortalPortfolioItem>('/portfolio', { method: 'POST', body: JSON.stringify(input) }),
   updatePortfolioItem: (id: string, input: Partial<PortalPortfolioItem>) =>
     portalRequest<PortalPortfolioItem>(`/portfolio/${encodeURIComponent(id)}`, { method: 'PATCH', body: JSON.stringify(input) }),
+  portfolioUploadIntent: (input: { originalName: string; mimeType: string }) =>
+    portalRequest<{ bucket: string; objectKey: string; uploadUrl: string; requiredHeaders: Record<string, string> }>('/portfolio/upload-intent', { method: 'POST', body: JSON.stringify(input) }),
+  portfolioUpload: (input: { bucket: string; objectKey: string; originalName: string; mimeType: string; sizeBytes: number; title: string; description?: string; category?: string; isPublished?: boolean }) =>
+    portalRequest<PortalPortfolioItem>('/portfolio/upload', { method: 'POST', body: JSON.stringify(input) }),
   deletePortfolioItem: (id: string) => portalRequest<void>(`/portfolio/${encodeURIComponent(id)}`, { method: 'DELETE' }),
   plans: () => portalRequest<PortalPlan[]>('/plans'),
+  joinStudio: (slug?: string) => portalRequest<{ name: string; slug: string }>(`/join-studio${slug ? `?studio=${encodeURIComponent(slug)}` : ''}`),
+  startCheckout: (planId: string) => portalRequest<PortalCheckout>('/subscription/checkout', { method: 'POST', body: JSON.stringify({ planId }) }),
+  verifyCheckout: (input: { orderId: string; paymentId: string; signature: string }) => portalRequest<{ activated: boolean }>('/subscription/verify', { method: 'POST', body: JSON.stringify(input) }),
+  cancelSubscription: () => portalRequest<{ canceled: boolean }>('/subscription/cancel', { method: 'POST' }),
 };

@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useEffect, useMemo, useState } from 'react';
-import { useRouter } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 import { ArrowLeft, ArrowRight, BriefcaseBusiness, CalendarDays, CheckCircle2, CircleDollarSign, Eye, EyeOff, MapPin, Sparkles, UserPlus } from 'lucide-react';
 import { BTN_GHOST, BTN_PRIMARY, CARD, FIELD, LABEL } from '@/features/team/components/TeamUiKit';
 import { indianMobileError, nextIndianMobileValue } from '@/lib/validation/indianMobile';
@@ -45,6 +45,16 @@ const roleToPrimarySkill: Record<string, 'LEAD_PHOTOGRAPHER' | 'CINEMATOGRAPHER'
 
 export const PublicFreelancerRegistration: React.FC = () => {
   const router = useRouter();
+  const studioSlug = useSearchParams().get('studio')?.trim().toLowerCase() || undefined;
+  const [studio, setStudio] = useState<{ name: string; slug: string } | null>(null);
+  const [studioError, setStudioError] = useState('');
+  useEffect(() => {
+    let live = true;
+    freelancerPortalApi.joinStudio(studioSlug).then((s) => { if (live) setStudio(s); }).catch((e) => {
+      if (live) setStudioError(e instanceof ApiError && e.status === 404 ? 'We could not find that studio. Check the link you were given.' : e instanceof ApiError ? e.message : 'Could not open this page. Please try again.');
+    });
+    return () => { live = false; };
+  }, [studioSlug]);
   const [step, setStep] = useState(0);
   const [submitted, setSubmitted] = useState(false);
   const [submittedName, setSubmittedName] = useState('');
@@ -99,6 +109,7 @@ export const PublicFreelancerRegistration: React.FC = () => {
         form.negotiable ? 'Rates negotiable by project.' : 'Rates marked fixed by applicant.',
       ].filter(Boolean).join('\n');
       await freelancerPortalApi.submitApplication({
+        studio: studio?.slug,
         fullName: form.name.trim(),
         email: form.email.trim(),
         phone: form.phone,
@@ -134,7 +145,7 @@ export const PublicFreelancerRegistration: React.FC = () => {
       <section className="mx-auto max-w-2xl text-center">
         <div className="mx-auto grid size-16 place-items-center rounded-2xl bg-emerald-50 text-emerald-700"><CheckCircle2 className="size-8" /></div>
         <h1 className="mt-5 text-3xl font-black tracking-tight text-slate-900">Application submitted</h1>
-        <p className="mx-auto mt-3 max-w-lg text-sm font-medium leading-relaxed text-slate-600">Thanks, {submittedName}. Your {BRAND.name} freelancer profile is ready. Sign in with {form.email} and the password you created to open your panel.</p>
+        <p className="mx-auto mt-3 max-w-lg text-sm font-medium leading-relaxed text-slate-600">Thanks, {submittedName}. Your {studio?.name ?? BRAND.name} freelancer profile is ready. Sign in with {form.email} and the password you created to open your panel.</p>
         <div className="mt-6 flex flex-wrap justify-center gap-2">
           <button type="button" onClick={() => router.push('/login?returnTo=/freelancer/profile')} className={BTN_PRIMARY}>Continue to Login</button>
           <button type="button" onClick={() => { setSubmitted(false); setStep(0); }} className={BTN_GHOST}>Start another application</button>
@@ -143,13 +154,24 @@ export const PublicFreelancerRegistration: React.FC = () => {
     </main>
   );
 
+  if (studioError) return (
+    <main className="grid min-h-screen place-items-center bg-[#FBFDF6] p-6">
+      <section role="alert" className="max-w-md text-center">
+        <h1 className="text-2xl font-black text-slate-900">Ask your studio for its join link</h1>
+        <p className="mt-3 text-sm font-medium leading-relaxed text-slate-600">{studioError}</p>
+        <button type="button" onClick={() => router.push('/login')} className={`${BTN_GHOST} mt-6`}>Already have an account? Sign in</button>
+      </section>
+    </main>
+  );
+  if (!studio) return <main className="grid min-h-screen place-items-center bg-[#FBFDF6]"><p role="status" className="text-sm font-bold text-slate-600">Opening the application…</p></main>;
+
   return (
     <main className="min-h-screen bg-[#FBFDF6] pb-12">
       <section className="relative overflow-hidden bg-[radial-gradient(circle_at_88%_8%,rgba(204,235,142,.2),transparent_30%),linear-gradient(125deg,#21261C,#191C15_50%,#11130E)] px-5 py-8 text-white sm:px-8 sm:py-12">
         <div className="absolute -bottom-20 -right-10 size-64 rounded-full border-[34px] border-white/[.04]" />
         <div className="relative mx-auto max-w-5xl">
           <span className="inline-flex items-center gap-1.5 rounded-full border border-white/20 bg-white/10 px-3 py-1 text-xs font-extrabold uppercase tracking-[.14em] text-[#E6E8E4]"><Sparkles className="size-3.5" /> {BRAND.name}</span>
-          <h1 className="mt-4 text-3xl font-black tracking-tight sm:text-4xl">Join our freelancer network</h1>
+          <h1 className="mt-4 text-3xl font-black tracking-tight sm:text-4xl">Join {studio.name} as a freelancer</h1>
           <p className="mt-2 max-w-2xl text-sm font-medium leading-relaxed text-[#dfeae7] sm:text-base">Find meaningful assignments, build trusted studio relationships, and keep your profile ready for the right production.</p>
           <div className="mt-5 flex flex-wrap gap-2 text-xs font-bold text-[#e1ece9]"><span className="rounded-full bg-white/10 px-3 py-1.5">Professional opportunities</span><span className="rounded-full bg-white/10 px-3 py-1.5">Clear assignment terms</span><span className="rounded-full bg-white/10 px-3 py-1.5">One trusted profile</span></div>
         </div>
