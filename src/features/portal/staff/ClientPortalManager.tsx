@@ -127,7 +127,7 @@ function GalleryPanel({ projectId, clientName }: { projectId: string; clientName
     const section = uploadSection.trim() || 'Gallery';
     for (const [i, file] of chosen.entries()) {
       setProgress(`Uploading ${i + 1} of ${chosen.length}…`);
-      try { await galleryApi.upload(projectId, file, section); } catch (e) { failures.push(e instanceof Error ? e.message : `${file.name}: upload failed.`); }
+      try { await galleryApi.upload(projectId, file, section, file.size > 50 * 1024 * 1024 ? (f) => setProgress(`Uploading ${i + 1} of ${chosen.length} · ${Math.round(f * 100)}%`) : undefined); } catch (e) { failures.push(e instanceof Error ? e.message : `${file.name}: upload failed.`); }
     }
     setProgress(null);
     if (fileInput.current) fileInput.current.value = '';

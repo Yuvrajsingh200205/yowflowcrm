@@ -356,4 +356,37 @@ test.describe('client portal, end to end', () => {
     await expect(gallery.locator('body')).not.toBeEmpty();
     expect(errors).toEqual([]);
   });
+
+  test('a 60 MB film is sent in parts and registered (storage mocked)', async ({ page }) => {
+    test.setTimeout(120_000);
+    await signIn(page);
+    const title = `Film Couple ${Date.now()}`;
+    const client = await api<{ id: string }>(page.request, 'post', '/clients', { displayName: title, primaryPhone: '9812345622', primaryEmail: uniqueEmail('film') });
+    const project = await api<{ id: string }>(page.request, 'post', '/projects', { clientId: client.id, name: title, type: 'WEDDING', weddingDate: '2027-04-01', totalQuotation: '50000.00' });
+
+    const cors = { 'access-control-allow-origin': '*', 'access-control-allow-methods': 'PUT, OPTIONS', 'access-control-allow-headers': '*', 'access-control-expose-headers': 'etag' };
+    const put: string[] = []; let complete: { parts: Array<{ partNumber: number; etag: string }> } | null = null;
+    await page.route(`**/api/v1/projects/${project.id}/gallery/multipart/init`, (r) => r.fulfill({ json: { success: true, data: { bucket: 'b', objectKey: `org/gallery_media/2027-01-01/${'z'.repeat(8)}-film.mp4`, uploadId: 'UP1', partSize: 16 * 1024 * 1024, parts: [1, 2, 3, 4].map((n) => ({ partNumber: n, url: `https://parts.test/film?partNumber=${n}&uploadId=UP1` })) } } }));
+    await page.route('https://parts.test/**', (r) => {
+      if (r.request().method() === 'OPTIONS') return r.fulfill({ status: 204, headers: cors });
+      put.push(new URL(r.request().url()).searchParams.get('partNumber') ?? '');
+      return r.fulfill({ status: 200, headers: { ...cors, etag: `"etag-${put.length}"` }, body: '' });
+    });
+    await page.route(`**/api/v1/projects/${project.id}/gallery/multipart/complete`, (r) => { complete = r.request().postDataJSON(); return r.fulfill({ json: { success: true, data: { bucket: 'b', objectKey: 'x' } } }); });
+
+    await page.goto('/clients');
+    await page.getByLabel('Search clients').fill(title);
+    await page.getByRole('button', { name: /Portal access/ }).first().click();
+    const dialog = page.getByRole('dialog');
+    await dialog.getByRole('combobox', { name: 'Section' }).fill('Films');
+    const film = path.join(__dirname, '.artifacts', 'film.mp4');
+    fs.mkdirSync(path.dirname(film), { recursive: true });
+    fs.writeFileSync(film, Buffer.alloc(60 * 1024 * 1024, 1));
+    await dialog.locator('input[type=file]').setInputFiles(film);
+    await expect(page.getByText('1 file uploaded')).toBeVisible({ timeout: 60_000 });
+    expect(put.sort()).toEqual(['1', '2', '3', '4']);
+    expect(complete!.parts).toHaveLength(4);
+    expect(complete!.parts.every((p) => p.etag.startsWith('"etag-'))).toBe(true);
+    await expect(dialog.getByText('Films').first()).toBeVisible();
+  });
 });
