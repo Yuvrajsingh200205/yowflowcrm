@@ -31,6 +31,21 @@
 - Galleries are now created as drafts; nothing reaches a client until the studio publishes.
 - Replaced the localStorage-based prototype (`/client-gallery`).
 
+### Freelancer product
+- Studios share a **join link** (`/freelancer/join?studio=<slug>`); applications are filed under the right studio instead of the first one in the database.
+- Studio-side **Applications** review is now wired to real data (start review, approve, reject with a reason); previously real applications never appeared.
+- Freelancers can **buy a listing plan** (Razorpay test/live, signature-verified, free plans supported, switching plans retires the old one, cancel anytime). Approved + subscribed freelancers appear in the studio's freelancer search.
+- **Portfolio uploads** with real photo/film files and thumbnails (no more typing a file id); profile fields save independently (headline, bio, portfolio links no longer overwrite each other), rate/role/equipment are editable.
+- One person can work with several studios: sign-in picks the account by password instead of failing with "provide organizationSlug".
+- Large films: **multipart upload up to 5 GB** with progress and per-part retry (S3-compatible storage).
+- Readable messages when payments are not configured (503 "not enabled") instead of a generic error.
+
+### Security and quality
+- Upgraded Next.js to 16.4.2 and dompurify (critical advisories); frontend `npm audit` is clean.
+- Test runs can no longer send real e-mail or touch payment accounts, whatever is in the developer's `.env`.
+- Auth and client-portal sign-in pages show their heading in the first HTML (mobile Lighthouse 90–94).
+- `docs/SECURITY_ROTATION.md` added.
+
 ### Fixed
 - Intermittent "An unexpected database error occurred": pool exhaustion is now reported as a retryable 503 with `Retry-After`, reads retry automatically, connection-pool limits are configured, Vercel functions run in the database's region.
 - Parallel first uploads into a new gallery section could fail with a unique-constraint error (serialised with an advisory lock).

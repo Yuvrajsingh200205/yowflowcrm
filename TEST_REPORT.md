@@ -6,14 +6,20 @@ Last run: 21 Oct 2026, macOS, Node 25, Chromium (Playwright 1.x), isolated local
 
 | Layer | Tool | Result |
 |---|---|---|
-| Backend integration + unit | Vitest + Supertest, real PostgreSQL | **300 / 300** (24 files) — includes signup, email verification, password reset, contact form, API keys, billing, dashboard trends, workspace members, **client-portal auth (12) and data API (12: tenant isolation, hidden-section leakage, download gating, album cap, keyset pagination, thumbnails from real JPEGs, comments/requests/share links/notifications, parallel-upload race)**, error mapping and query budgets |
-| Frontend unit | Vitest | **56 / 56** |
-| End-to-end | Playwright | **77** (70 + 7 client-portal and shared-link) |
+| Backend integration + unit | Vitest + Supertest, real PostgreSQL | **315 / 315** (26 files) — includes signup, email verification, password reset, contact form, API keys, billing, dashboard trends, workspace members, **client-portal auth (12) and data API (12: tenant isolation, hidden-section leakage, download gating, album cap, keyset pagination, thumbnails from real JPEGs, comments/requests/share links/notifications, parallel-upload race)**, error mapping and query budgets |
+| Frontend unit | Vitest | **64 / 64** |
+| End-to-end | Playwright | **81 / 81** (last full run, fresh database) |
 | Accessibility | axe-core (WCAG 2.0/2.1 A + AA), 11 public + 4 app pages | **0 serious/critical violations** |
 | Responsive | Playwright at 375 / 768 / 1440, 11 public + 4 app pages | **no horizontal overflow**, screenshots reviewed |
 | Type-check | `tsc --noEmit` (both repos) | clean |
 | Lint | ESLint (backend) | clean (0 warnings) |
 | Lighthouse | v12, production build | see below |
+
+## Added in this round
+- **Freelancer product (backend 14 tests, E2E 3):** studio-scoped join, application → approval → plan purchase (Razorpay signature, free plan, plan switch, cancel) → search eligibility → connection accept; portfolio upload with real images; profile fields saving independently; every freelancer page loads with no API error and passes axe.
+- **Multipart upload (backend 4, E2E 1):** every presigned request is re-signed with an independent SigV4 implementation; 60 MB film sent in 4 parts through the UI (storage mocked).
+- **Stale-response race fixed** in the leads, clients, projects, tasks, team and freelancer list hooks (this was the long-standing flaky "create a lead… filters" test).
+- Tests can no longer send real e-mail: `SMTP_*` and `RAZORPAY_*` are blanked for both Vitest and the E2E backend.
 
 ## What the E2E suite covers (75 tests)
 
@@ -28,23 +34,20 @@ Last run: 21 Oct 2026, macOS, Node 25, Chromium (Playwright 1.x), isolated local
 
 The suite runs against a throw-away database (`yowflow_e2e`), a backend on :5051 and a production build on :3002, so it never touches real data. Dev e-mail is captured from the backend log to exercise verification and reset links.
 
-## Lighthouse (production build, Lighthouse 12, simulated throttling)
+## Lighthouse (production build, Lighthouse 12, simulated mobile throttling, re-measured 23 Oct 2026)
 
-| Page | Mobile P / A / BP / SEO | Desktop P / A / BP / SEO |
-|---|---|---|
-| `/` | 87 / 100 / 100 / 100 | 100 / 100 / 100 / 100 |
-| `/features` | 93 / 99 / 100 / 100 | 100 / 99 / 100 / 100 |
-| `/pricing` | 92 / 98* / 100 / 100 | 100 / 98* / 100 / 100 |
-| `/contact` | 93 / 99 / 100 / 100 | 100 / 99 / 100 / 100 |
-| `/about` | 91 / 99 / 100 / 100 | 100 / 99 / 100 / 100 |
-| `/login` | 86 / 100 / 100 / 100 | — |
-| `/signup` | 82 / 100 / 100 / 100 | — |
+| Page | Mobile P / A / BP / SEO |
+|---|---|
+| `/` | 90 / 100 / 100 / 100 |
+| `/features` | 94 / 100 / 100 / 100 |
+| `/pricing` | 94 / 100 / 100 / 100 |
+| `/login` | 90–91 / – |
+| `/signup` | 92 / – |
+| `/forgot-password` | 93–94 / – |
+| `/client/login` | 87 → static heading fallback added afterwards (not re-measured) |
 
-\* the two remaining accessibility notes (logo `alt` duplicating adjacent text, heading order on `/pricing`) were fixed after this run.
-
-Performance work that moved the numbers: hero content no longer hidden until hydration (was +2.5 s LCP), scroll-reveal rewritten without an animation library, font preloads trimmed (`optional` display for the display face, mono face not preloaded), rupee amounts set in the system font to avoid a large latin-ext download, and the heavy workspace bundle is now warmed on idle instead of on the login screen's critical path.
-
-Mobile home (87) and the auth pages (82–86) are slightly under the 90 target in the simulated 4×CPU / slow-4G profile; desktop is 100 everywhere. Remaining cost is shared client JS (React, Radix, the auth provider); route-level splitting of the auth provider is the next lever.
+Auth pages now ship their heading in the first HTML (Suspense fallback instead of an empty page), which is what moved them from 82–86 to 90+.
+Desktop scores were 100 on the pages measured earlier and were not re-run. Client-portal and freelancer-join pages are intentionally `noindex`, so their SEO score is lower by design.
 
 ## Defects found and fixed during testing
 

@@ -10,13 +10,12 @@ import { Button } from '@/components/ui/Button';
 import { Field, Input } from '@/components/ui/Field';
 import { Spinner } from '@/components/ui/Spinner';
 import { portalApi, errorMessage } from './api';
+import { PORTAL_AUTH_HEADING, PORTAL_AUTH_POINTS } from './authCopy';
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
-const HEADING = 'Your wedding memories, in one private place.';
-const POINTS = ['Watch your gallery the moment it is ready', 'Pick favourites and choose album photographs', 'Track payments, deliveries and requests'];
 const link = 'font-medium text-brand underline-offset-4 hover:underline';
 
-const Shell = (p: Omit<React.ComponentProps<typeof AuthShell>, 'heading' | 'points'>) => <AuthShell heading={HEADING} points={POINTS} {...p} />;
+const Shell = (p: Omit<React.ComponentProps<typeof AuthShell>, 'heading' | 'points'>) => <AuthShell heading={PORTAL_AUTH_HEADING} points={PORTAL_AUTH_POINTS} {...p} />;
 const FormError = ({ children }: { children: React.ReactNode }) => <div role="alert" className="rounded-[var(--radius-md)] border border-bad/40 bg-bad-bg px-4 py-3 text-sm text-bad">{children}</div>;
 
 /** Only same-app portal paths are honoured, so a crafted returnTo can never leave the site. */

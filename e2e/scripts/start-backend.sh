@@ -18,6 +18,8 @@ export SEED_DEMO_DATA=true
 export SEED_ORG_NAME="E2E Studio" SEED_ORG_SLUG="e2e-studio"
 export SEED_ADMIN_EMAIL="owner@e2e.test" SEED_ADMIN_PASSWORD="E2eOwner#2026"
 unset RAZORPAY_KEY_ID RAZORPAY_KEY_SECRET
+# E-mail must go to the backend log (the tests read links from it), never to a real mailbox, whatever the developer's .env holds.
+export SMTP_HOST="" SMTP_USER="" SMTP_PASS=""
 
 dropdb --if-exists yowflow_e2e
 createdb yowflow_e2e

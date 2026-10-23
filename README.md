@@ -75,7 +75,17 @@ See [`DEPLOYMENT.md`](DEPLOYMENT.md).
 
 ## Client portal
 
-Couples sign in at `/client/login` (invite link from the studio → set password). Studios manage it from **Clients → Client portal**:
+Couples sign in at `/client/login` (invite link from the studio → set password). Studios manage it from **Clients → Portal access** (the original gallery page stays under **Open Portal / Photos**):
 invite, publish, per-section gates (visible / download / share / watermark), upload, and the couple's requests, notes and album picks.
 Backend: `/api/v1/portal/*` (couple) and `/api/v1/projects/:id/gallery/*`, `/api/v1/clients/:id/portal-access` (studio). Portal sessions use their own httpOnly cookies and never grant staff access.
 Thumbnails/previews are generated with `sharp` on upload (`GALLERY_DERIVATIVES=inline`); older uploads can be optimised from the studio panel.
+
+## Freelancers
+
+Each studio shares its own join link (**Freelancer Team → Applications → Copy link**, `/freelancer/join?studio=<slug>`).
+Applicants are reviewed there; approved freelancers sign in at `/login`, keep their profile, availability and portfolio, and can buy a
+listing plan (**Plan** page, Razorpay) to appear in that studio's freelancer search. Studios mark interest and the freelancer accepts or declines in **My vendors**.
+A freelancer may work with several studios with the same phone/e-mail; the password selects the account.
+
+Large films (over 50 MB, up to 5 GB) upload in parts and need S3-compatible storage (`STORAGE_PROVIDER=R2`, `STORAGE_REGION=auto`, and a bucket CORS rule that
+allows `PUT` from your site and exposes the `ETag` header). See `docs/SECURITY_ROTATION.md` for the deployment settings checklist.

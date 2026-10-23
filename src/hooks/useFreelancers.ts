@@ -1,6 +1,6 @@
 'use client';
 
-import { useCallback, useEffect, useMemo, useState } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import {
   BackendFreelancer,
   FreelancerInput,
@@ -15,22 +15,26 @@ export function useFreelancers(query: FreelancerListQuery = {}, enabled = true) 
   const [error, setError] = useState<ApiError | null>(null);
   const [loading, setLoading] = useState(enabled);
   const queryKey = useMemo(() => JSON.stringify(query), [query]);
+  const latest = useRef(0);
 
   const load = useCallback(async () => {
     if (!enabled) {
       setLoading(false);
       return;
     }
+    const id = ++latest.current; // ignore answers to superseded requests
     setLoading(true);
     setError(null);
     try {
       const response = await freelancersApi.list(query);
+      if (id !== latest.current) return;
       setData(response.data);
       setMeta(response.meta);
     } catch (error) {
+      if (id !== latest.current) return;
       setError(error instanceof ApiError ? error : new ApiError(0, 'Unable to load freelancers.'));
     } finally {
-      setLoading(false);
+      if (id === latest.current) setLoading(false);
     }
   }, [enabled, queryKey]);
 

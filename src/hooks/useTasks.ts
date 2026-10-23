@@ -1,6 +1,6 @@
 'use client';
 
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { tasksApi, type BackendTask, type BackendTaskStatus, type CreateTaskInput, type TaskListQuery } from '@/lib/api/tasks';
 import type { ApiMeta } from '@/lib/api/client';
 
@@ -10,19 +10,23 @@ export function useTasks(query: TaskListQuery, enabled: boolean) {
   const [loading, setLoading] = useState(enabled);
   const [error, setError] = useState<Error | null>(null);
   const queryKey = JSON.stringify(query);
+  const latest = useRef(0);
 
   const refresh = useCallback(async () => {
     if (!enabled) return;
+    const id = ++latest.current; // ignore answers to superseded requests
     setLoading(true);
     setError(null);
     try {
       const result = await tasksApi.list(query);
+      if (id !== latest.current) return;
       setData(result.items);
       setMeta(result.meta);
     } catch (reason) {
+      if (id !== latest.current) return;
       setError(reason instanceof Error ? reason : new Error('Unable to load tasks.'));
     } finally {
-      setLoading(false);
+      if (id === latest.current) setLoading(false);
     }
   }, [enabled, queryKey]);
 

@@ -53,7 +53,7 @@ Legend: [x] done · [~] in progress · [ ] todo
 - [x] Previous-client images removed; neutral SVG art. [x] Owner/other-client names scrubbed from demo data (full demo-data rewrite → Phase 6)
 - [x] Neutral seed org + `.env.example` (BRAND_*). [ ] Realistic fake dataset → Phase 6
 - [x] Docs (webhook URL etc.) use placeholders
-- [ ] Rotation checklist in `docs/SECURITY_ROTATION.md`
+- [x] Rotation checklist in `docs/SECURITY_ROTATION.md`
 ## Phase 2 — Brand identity  [x]
 - [x] Name **Yowflow**, tagline, value prop, SVG mark + wordmark, favicon (`app/icon.svg`)
 - [ ] OG image (PNG) → Phase 5; trademark/domain check on "Yowflow" is on the owner
