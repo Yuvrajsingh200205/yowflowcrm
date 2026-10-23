@@ -113,6 +113,12 @@ export const Sidebar: React.FC<SidebarProps> = ({ activeTab, setActiveTab, isOpe
               {onLogout && <DropdownItem destructive onSelect={onLogout}><LogOut />Log out</DropdownItem>}
             </DropdownContent>
           </Dropdown>
+          {/* A plain, always-visible sign-out: it must never depend on a menu opening. */}
+          {onLogout && (
+            <button type="button" onClick={onLogout} className="mt-1 flex w-full cursor-pointer items-center gap-3 rounded-[var(--radius-lg)] px-3 py-2 text-left text-[13px] font-medium text-fg-muted transition-colors hover:bg-[var(--hover)] hover:text-fg focus-visible:outline-2 focus-visible:outline-[var(--ring)]">
+              <LogOut className="size-4" aria-hidden="true" />Log out
+            </button>
+          )}
         </div>
       </aside>
     </>
@@ -215,6 +221,7 @@ export const TopHeader: React.FC<TopHeaderProps> = ({
           )}
 
           {currentUser && <NotificationBell enabled />}
+          {currentUser && onLogout && <Tooltip content="Log out"><Button variant="ghost" size="icon" onClick={onLogout} aria-label="Log out"><LogOut /></Button></Tooltip>}
         </div>
       </div>
       <CommandPalette commands={commands} open={paletteOpen} onOpenChange={setPaletteOpen} />

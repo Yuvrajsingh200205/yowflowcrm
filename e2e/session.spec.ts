@@ -21,6 +21,22 @@ test.describe('sign-in, sign-out and already-signed-in flows', () => {
     await expect(page).toHaveURL(/\/login/);
   });
 
+  test('plain Log out buttons in the sidebar and the top bar sign out (no menu needed)', async ({ page, context }) => {
+    await signIn(page);
+    await page.goto('/dashboard');
+    await page.waitForLoadState('networkidle');
+    await context.clearCookies({ name: ACCESS });
+    await page.locator('aside').getByRole('button', { name: 'Log out' }).click();
+    await expect(page).toHaveURL(/\/login/);
+    await expect(page.getByLabel('Email')).toBeVisible();
+
+    await signIn(page);
+    await page.goto('/leads');
+    await page.locator('header').getByRole('button', { name: 'Log out' }).click();
+    await expect(page).toHaveURL(/\/login/);
+    await expect(page.getByLabel('Email')).toBeVisible();
+  });
+
   test('a signed-in visitor sees their account on the landing page, /login and /signup instead of a silent redirect', async ({ page }) => {
     await signIn(page);
     await page.goto('/');
