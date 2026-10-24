@@ -34,6 +34,19 @@ describe('route protection helpers', () => {
     expect(isPublicRoute('/dashboard')).toBe(false);
   });
 
+  it('keeps the customer booking page and quote link public, and the staff Quotes screens protected', () => {
+    // Customers have no account; the slug or token in the URL is the credential.
+    expect(isPublicRoute('/enquire/lumen-studio')).toBe(true);
+    expect(isPublicRoute('/quote/aB3_-xyzaB3_-xyzaB3_-xyz')).toBe(true);
+    // "/quotes" shares a prefix with "/quote" but is the staff screen.
+    expect(isPublicRoute('/quotes')).toBe(false);
+    expect(isPublicRoute('/sales-setup')).toBe(false);
+    expect(isKnownAppRoute('/quotes')).toBe(true);
+    expect(isKnownAppRoute('/sales-setup')).toBe(true);
+    expect(safeReturnPath('/quotes')).toBe('/quotes');
+    expect(safeReturnPath('/enquire/lumen-studio')).toBe('/dashboard');
+  });
+
   it('marks freelancer portal pages protected without sending them to internal CRM auth', () => {
     expect(isFreelancerRoute('/freelancer/dashboard')).toBe(true);
     expect(isFreelancerRoute('/freelancer/profile')).toBe(true);

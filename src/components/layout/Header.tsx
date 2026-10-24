@@ -4,6 +4,7 @@ import React from 'react';
 import { AlertCircle, CheckCircle2, Download, LogOut, Menu, MoreHorizontal, Search, ShieldCheck, Sparkles, Upload, UserCheck, X } from 'lucide-react';
 import { ProjectStatus, TeamMember } from '@/types';
 import { NotificationBell } from '@/features/notifications/NotificationBell';
+import type { StudioNotification } from '@/hooks/useNotifications';
 import { Logo } from '@/components/ui/Logo';
 import { Button } from '@/components/ui/Button';
 import { Dropdown, DropdownContent, DropdownItem, DropdownLabel, DropdownSeparator, DropdownTrigger } from '@/components/ui/Dropdown';
@@ -137,11 +138,13 @@ interface TopHeaderProps {
   currentUser?: TeamMember | { id: string; name: string; role: string; email: string } | null;
   onLogout?: () => void;
   canAccessTab?: (tab: TabType) => boolean;
+  /** A notification that points at a record was clicked. */
+  onOpenNotification?: (item: StudioNotification) => void;
   counts: { total: number; running: number; completed: number; readyToDeliver: number; pending: number; urgent: number };
 }
 
 export const TopHeader: React.FC<TopHeaderProps> = ({
-  activeTab, setActiveTab, statusFilter, setStatusFilter, onOpenAIModal, onToggleMobileSidebar, onExportData, onImportData, currentUser, onLogout, canAccessTab, counts,
+  activeTab, setActiveTab, statusFilter, setStatusFilter, onOpenAIModal, onToggleMobileSidebar, onExportData, onImportData, currentUser, onLogout, canAccessTab, onOpenNotification, counts,
 }) => {
   const [paletteOpen, setPaletteOpen] = React.useState(false);
   useCommandShortcut(React.useCallback(() => setPaletteOpen((o) => !o), []));
@@ -220,7 +223,7 @@ export const TopHeader: React.FC<TopHeaderProps> = ({
             </Dropdown>
           )}
 
-          {currentUser && <NotificationBell enabled />}
+          {currentUser && <NotificationBell enabled onOpenEntity={onOpenNotification} />}
           {currentUser && onLogout && <Tooltip content="Log out"><Button variant="ghost" size="icon" onClick={onLogout} aria-label="Log out"><LogOut /></Button></Tooltip>}
         </div>
       </div>

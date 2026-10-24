@@ -74,6 +74,8 @@ import { expenseService } from '@/features/expenses/services/expenseService';
 import type { Expense } from '@/features/expenses/types';
 import { ToastProvider } from '@/components/common';
 import { SettingsManager } from '@/features/settings/SettingsManager';
+import { QuotesScreen, type QuoteIntent } from '@/features/sales/QuotesScreen';
+import { SalesSetupScreen } from '@/features/sales/SalesSetupScreen';
 import { AccessDenied } from './CrmStatePanels';
 import { ROUTE_TABS, TAB_ROUTES } from './crmRoutes';
 import { apiErrorMessage, getEmployeeAssignmentConflict, isEmployeeAttendanceUser, leaveTypeInput, normalizeLeaveRequest, toShiftValue } from './crmAppUtils';
@@ -468,6 +470,8 @@ export default function App() {
   const [selectedProjectForInvoice, setSelectedProjectForInvoice] = useState<Project | null>(null);
   const [isAIModalOpen, setIsAIModalOpen] = useState(false);
   const [isAllPaymentsModalOpen, setIsAllPaymentsModalOpen] = useState(false);
+  // A lead asking the Quotes screen to make or list quotes for it.
+  const [quoteIntent, setQuoteIntent] = useState<QuoteIntent | null>(null);
   const [selectedMemberForModal, setSelectedMemberForModal] = useState<TeamMember | null>(null);
 
   const handleSelectProject = (project: Project, roleContext?: string) => {
@@ -1038,6 +1042,12 @@ export default function App() {
           onOpenAIModal={() => setIsAIModalOpen(true)}
           onToggleMobileSidebar={() => setIsMobileSidebarOpen(!isMobileSidebarOpen)}
           canAccessTab={canAccessTab}
+          onOpenNotification={(item) => {
+            const id = item.entityId ?? '';
+            if (item.entityType === 'Quotation' && canAccessTab('quotes')) { setQuoteIntent({ kind: 'open', quoteId: id }); setActiveTab('quotes'); }
+            else if (item.entityType === 'Lead' && canAccessTab('leads')) setActiveTab('leads');
+            else if (item.entityType === 'Project' && canAccessTab('projects')) navigateInsideCrm(`/projects/${encodeURIComponent(id)}`);
+          }}
           onExportData={handleExportData}
           onImportData={handleImportData}
           currentUser={currentUser}
@@ -1172,7 +1182,18 @@ export default function App() {
           {/* Leads & Inquiries Management (Visible ONLY to Owner, Manager, and Sales) */}
           {visibleTab === 'leads' && (
             hasPermission(currentUser, accessRoles, 'leads.view') ? (
-              <LeadsManagement currentUser={currentUser} team={team} />
+              <LeadsManagement
+                currentUser={currentUser}
+                team={team}
+                onQuoteLead={(leadId, leadName, hasQuotes) => {
+                  setQuoteIntent(hasQuotes ? { kind: 'list', leadId, leadName } : { kind: 'create', leadId });
+                  setActiveTab('quotes');
+                }}
+                onOpenQuote={(quoteId) => {
+                  setQuoteIntent({ kind: 'open', quoteId });
+                  setActiveTab('quotes');
+                }}
+              />
             ) : (
               <AccessDenied />
             )
@@ -1412,6 +1433,23 @@ export default function App() {
                 currency: currentUser.organization?.currency || 'INR',
               },
             }} />
+          )}
+
+          {visibleTab === 'quotes' && (
+            canAccessTab('quotes') ? (
+              <QuotesScreen
+                permissions={currentUser?.permissions ?? []}
+                intent={quoteIntent}
+                onIntentHandled={() => setQuoteIntent(null)}
+                onOpenProject={(projectId) => navigateInsideCrm(`/projects/${encodeURIComponent(projectId)}`)}
+              />
+            ) : (
+              <AccessDenied />
+            )
+          )}
+
+          {visibleTab === 'sales_setup' && (
+            canAccessTab('sales_setup') ? <SalesSetupScreen permissions={currentUser?.permissions ?? []} /> : <AccessDenied />
           )}
 
           {visibleTab === 'clients' && (

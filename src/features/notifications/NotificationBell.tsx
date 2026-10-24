@@ -2,10 +2,11 @@
 
 import * as React from 'react';
 import { Bell } from 'lucide-react';
-import { useNotifications } from '@/hooks/useNotifications';
+import { useNotifications, type StudioNotification } from '@/hooks/useNotifications';
 import { cn } from '@/lib/cn';
 
-export function NotificationBell({ enabled }: { enabled: boolean }) {
+/** `onOpenEntity` receives the notification when it points at a record (a quote, a lead, a project) so the app can go there. */
+export function NotificationBell({ enabled, onOpenEntity }: { enabled: boolean; onOpenEntity?: (item: StudioNotification) => void }) {
   const { items, unread, open, setOpen, markRead, markAllRead } = useNotifications(enabled);
   const ref = React.useRef<HTMLDivElement>(null);
 
@@ -55,7 +56,10 @@ export function NotificationBell({ enabled }: { enabled: boolean }) {
                 <button
                   key={item.id}
                   type="button"
-                  onClick={() => { if (!item.isRead) void markRead(item.id); }}
+                  onClick={() => {
+                    if (!item.isRead) void markRead(item.id);
+                    if (item.entityType && item.entityId && onOpenEntity) { setOpen(false); onOpenEntity(item); }
+                  }}
                   className={cn('flex w-full cursor-pointer gap-3 border-b border-line-soft px-4 py-3 text-left transition-colors last:border-b-0 hover:bg-[var(--hover)]', !item.isRead && 'bg-[color-mix(in_srgb,var(--accent)_7%,transparent)]')}
                 >
                   <span className={cn('mt-1.5 size-2 shrink-0 rounded-full', item.isRead ? 'bg-transparent' : 'bg-lime')} aria-hidden="true" />

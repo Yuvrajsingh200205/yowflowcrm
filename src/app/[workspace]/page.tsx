@@ -17,6 +17,8 @@ const WORKSPACES = new Set([
   'deliveries',
   'roles-permissions',
   'settings',
+  'quotes',
+  'sales-setup',
 ]);
 
 export function generateStaticParams() {

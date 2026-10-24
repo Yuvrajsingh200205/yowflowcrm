@@ -1,21 +1,28 @@
-# Test report — Yowflow 2.0
+# Test report — Yowflow 2.1
 
-Last run: 21 Oct 2026, macOS, Node 25, Chromium (Playwright 1.x), isolated local PostgreSQL.
+Last run: 24 Oct 2026, macOS, Node 25, Chromium (Playwright 1.x), isolated local PostgreSQL.
 
 ## Summary
 
 | Layer | Tool | Result |
 |---|---|---|
-| Backend integration + unit | Vitest + Supertest, real PostgreSQL | **319 / 319** (26 files) — includes signup, email verification, password reset, contact form, API keys, billing, dashboard trends, workspace members, **client-portal auth (12) and data API (12: tenant isolation, hidden-section leakage, download gating, album cap, keyset pagination, thumbnails from real JPEGs, comments/requests/share links/notifications, parallel-upload race)**, error mapping and query budgets |
-| Frontend unit | Vitest | **64 / 64** |
-| End-to-end | Playwright | **85 / 85** (last full run, fresh database) |
-| Accessibility | axe-core (WCAG 2.0/2.1 A + AA), 11 public + 4 app pages | **0 serious/critical violations** |
+| Backend integration + unit | Vitest + Supertest, real PostgreSQL | **357 / 357** (31 files; 1 opt-in query-budget test skipped) — adds **quote engine 38 (catalogue and setup, booking page, instant and approval quotes, public quote page, booking and date guard, PDFs, reminders, permission sync)**; earlier: 319 — includes signup, email verification, password reset, contact form, API keys, billing, dashboard trends, workspace members, **client-portal auth (12) and data API (12: tenant isolation, hidden-section leakage, download gating, album cap, keyset pagination, thumbnails from real JPEGs, comments/requests/share links/notifications, parallel-upload race)**, error mapping and query budgets |
+| Frontend unit | Vitest | **89 / 89** (adds pricing, formatting, brand colours, route protection) |
+| End-to-end | Playwright | **98 / 98** (full run, fresh database; adds `sales.spec.ts`, 11 tests) |
+| Accessibility | axe-core (WCAG 2.0/2.1 A + AA), 11 public + 4 app pages, plus booking page, quote page, Quotes and the four Sales setup tabs | **0 serious/critical violations** |
 | Responsive | Playwright at 375 / 768 / 1440, 11 public + 4 app pages | **no horizontal overflow**, screenshots reviewed |
 | Type-check | `tsc --noEmit` (both repos) | clean |
 | Lint | ESLint (backend) | clean (0 warnings) |
 | Lighthouse | v12, production build | see below |
 
-## Added in this round
+## Added in this round (Quote in seconds)
+- **Backend (38 integration tests):** catalogue rules and tenant isolation; business details validation (UPI, IFSC, GSTIN, phone, email, website, blank clears); availability (capacity, notice, booking window, closed dates); enquiry page in OFF / APPROVAL / AUTO modes, bot trap, lead de-duplication, unknown or hidden package ids; public quote page (view tracking, add-on re-pricing, expiry, decline, questions, unguessable tokens); acceptance books client, project, milestones and draft invoice, and undoes itself if the date was just taken; staff booking with administrator override; quote and invoice PDFs (and a fallback when fonts are missing); invoice open and mark-issued; daily reminders (tiers, once-only, opt-out); permission catalogue sync for existing studios.
+- **Frontend unit (25):** quote arithmetic matches the server (₹1,35,700 sample), payment plan, date maths without time-zone drift, Indian rupee formatting, mobile number forms, studio colour contrast, public and protected route rules.
+- **E2E `sales.spec.ts` (11):** owner sets up price list, business details, closed dates and booking page → customer picks a date and package, gets the quote instantly, switches an add-on, accepts, sees UPI QR and bank details → staff see the booking, activity timeline, PDFs, draft invoice → booked date and closed date cannot be picked → approval mode: enquiry waits, notification opens it, review and send, customer declines with a reason → staff build a quote from a lead's row, edit it, send, book it → dead links → axe on public and staff screens → no sideways scroll at 375px.
+- **Bugs found by these tests and fixed:** blank text settings were stored as empty strings instead of cleared; `GET /invoices/:id` and invoice status updates always failed (the invoice table has no `deletedAt` column but the lookup filtered on it); success and warning text colours failed WCAG AA contrast; a validation notice outlived the form and followed the customer to the quote page; the enquiry form left city alone on a row.
+- **Test hygiene:** the crew-count spec now uses its own phone number (project intake attaches to an existing client with the same number, which another spec had created).
+
+## Earlier rounds
 - **Sign-in / sign-out flows (backend 3, E2E 4):** logout with only the refresh cookie (expired access token) for staff, freelancer and client portal; signed-in visitors see an explicit "continue or sign out" choice on `/login` and `/signup` and "Open dashboard / Sign out" on the landing page instead of a silent redirect.
 - **Freelancer product (backend 14 tests, E2E 3):** studio-scoped join, application → approval → plan purchase (Razorpay signature, free plan, plan switch, cancel) → search eligibility → connection accept; portfolio upload with real images; profile fields saving independently; every freelancer page loads with no API error and passes axe.
 - **Multipart upload (backend 4, E2E 1):** every presigned request is re-signed with an independent SigV4 implementation; 60 MB film sent in 4 parts through the UI (storage mocked).

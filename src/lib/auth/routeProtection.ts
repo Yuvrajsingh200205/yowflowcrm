@@ -12,6 +12,10 @@ const PUBLIC_PREFIXES = [
   // the URL is the credential and the API enforces revocation, expiry and any
   // password before returning a single photograph.
   '/share',
+  // A studio's booking page and the quotation it sends are opened by customers who have no account;
+  // the slug / token in the URL is the credential and the API enforces everything else.
+  '/enquire',
+  '/quote',
   // The couple's portal has its own session (httpOnly portal cookies); each screen
   // loads /portal/me and redirects to /client/login on 401, and the API enforces scope.
   '/client',

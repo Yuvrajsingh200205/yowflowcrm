@@ -33,7 +33,8 @@ test.describe('shoot crew headcounts', () => {
     const errors = trackErrors(page);
     await page.goto('/projects/new');
     await page.getByPlaceholder('e.g. Vikram & Meera Royal Wedding').fill(`Crew Count Wedding ${stamp}`);
-    await page.getByPlaceholder('+1 415 555 0132').fill('9812345678');
+    // A phone no other spec uses: project intake attaches to an existing client with the same number, and the card would then carry that client's name.
+    await page.getByPlaceholder('+1 415 555 0132').fill(`9${String(stamp).slice(-9)}`);
 
     await page.getByRole('button', { name: /Shoot plan/ }).click();
     for (let i = 0; i < 3; i++) await page.getByRole('button', { name: 'Add Shoot' }).click();

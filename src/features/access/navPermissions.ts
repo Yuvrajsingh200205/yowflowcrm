@@ -17,4 +17,6 @@ export const TAB_PERMISSIONS: Partial<Record<TabType, string | string[]>> = {
   // the page are gated separately on their own permissions.
   access: 'ROLE_VIEW',
   settings: ['SETTING_VIEW', 'ORG_VIEW'],
+  quotes: ['QUOTATION_VIEW', 'QUOTATION_CREATE'],
+  sales_setup: ['CATALOG_VIEW', 'CATALOG_MANAGE', 'BOOKING_SETUP_MANAGE'],
 };

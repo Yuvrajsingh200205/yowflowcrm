@@ -25,6 +25,7 @@ Set these environment variables (Production):
 | `BRAND_NAME`, `BRAND_COOKIE_PREFIX`, `BRAND_SUPPORT_EMAIL` | White-label identity |
 | `RAZORPAY_KEY_ID`, `RAZORPAY_KEY_SECRET` | Optional. `rzp_test_…` keys enable billing in test mode |
 | `META_*` | Optional, for Meta Lead Ads |
+| `CRON_SECRET` | Required for reminders. `openssl rand -hex 32`. Vercel Cron (scheduled in the backend's `vercel.json`) sends it as a bearer token |
 
 Never commit `.env`. Rotate the secrets listed in `yowflow_backend/docs/SECURITY_ROTATION.md` for every new customer deployment.
 
@@ -52,6 +53,7 @@ docker run -p 5000:5000 --env-file .env yowflow-backend
 2. Verify `/sitemap.xml`, `/robots.txt` and the OG image on your domain.
 3. In Razorpay's dashboard (test mode) run a test payment from **Settings → Billing**.
 4. Run `npm run e2e` against a staging database before promoting a release.
+5. **Sales setup** (sidebar → Sales → Sales setup): add your packages, switch on the booking page, then open `/enquire/<your-studio-slug>` in a private window and make a test enquiry. Customers never need an account for `/enquire/…` or `/quote/…`.
 
 ## Demo account
 

@@ -8,9 +8,9 @@ import { LeadFormModal } from './LeadFormModal';
 import { LeadsFilterBar } from './LeadsFilterBar';
 import { LeadsHeader } from './LeadsHeader';
 import { LeadsKpiGrid } from './LeadsKpiGrid';
-import { LeadQuotationModal } from './LeadQuotationModal';
+import { LeadQuoteActions } from './LeadQuoteActions';
+import { useLeadQuotes } from '../useLeadQuotes';
 import { LeadBookingModal, LeadHistoryModal, LeadNoteModal } from './LeadSecondaryModals';
-import { LeadQuotationPreview } from './LeadQuotationPreview';
 import { LeadTargetsModal } from './LeadTargetsModal';
 import { LeadDeleteConfirmModal } from './LeadDeleteConfirmModal';
 import { LeadAnalyticsDashboard } from './LeadAnalyticsDashboard';
@@ -104,11 +104,14 @@ const DEFAULT_LEAD_TARGETS: LeadTargets = {
 };
 
 interface LeadsManagementProps {
-  currentUser?: TeamMember | { id?: string; name?: string; role?: string; email?: string } | null;
+  currentUser?: TeamMember | { id?: string; name?: string; role?: string; email?: string; permissions?: string[] } | null;
   team?: TeamMember[];
+  /** Make a quote for a lead, or (when it already has some) show the lead's quotes. */
+  onQuoteLead?: (leadId: string, leadName: string, hasQuotes: boolean) => void;
+  onOpenQuote?: (quoteId: string) => void;
 }
 
-export const LeadsManagement: React.FC<LeadsManagementProps> = ({ currentUser, team = [] }) => {
+export const LeadsManagement: React.FC<LeadsManagementProps> = ({ currentUser, team = [], onQuoteLead, onOpenQuote }) => {
   const { can, role } = usePermission();
 
   const [activeSubTab, setActiveSubTab] = useState<'list' | 'analytics'>('list');
@@ -134,14 +137,11 @@ export const LeadsManagement: React.FC<LeadsManagementProps> = ({ currentUser, t
   const [assignedTo, setAssignedTo] = useState('');
   const [notes, setNotes] = useState('');
 
-  // Quotation Upload Modal State
-  const [quotationModalLead, setQuotationModalLead] = useState<OwnerLead | null>(null);
-  const [previewQuotation, setPreviewQuotation] = useState<{ file: LeadQuotationFile; lead: OwnerLead } | null>(null);
-  const [newQuoteFileName, setNewQuoteFileName] = useState('');
-  const [newQuoteFileType, setNewQuoteFileType] = useState('pdf');
-  const [newQuoteFileSize, setNewQuoteFileSize] = useState('');
-  const [newQuoteNotes, setNewQuoteNotes] = useState('');
-  const [newQuoteDataUrl, setNewQuoteDataUrl] = useState<string | undefined>(undefined);
+  // Quotes come from the quote engine: one lookup gives every lead its latest quote.
+  const quotePerms = (currentUser as { permissions?: string[] } | null | undefined)?.permissions ?? [];
+  const canCreateQuote = quotePerms.includes('QUOTATION_CREATE');
+  const canViewQuotes = quotePerms.includes('QUOTATION_VIEW');
+  const leadQuotes = useLeadQuotes(canViewQuotes);
 
   // History Modal State
   const [historyModalLead, setHistoryModalLead] = useState<OwnerLead | null>(null);
@@ -152,7 +152,6 @@ export const LeadsManagement: React.FC<LeadsManagementProps> = ({ currentUser, t
 
   // Delete Confirmation Modal State
   const [leadToDelete, setLeadToDelete] = useState<OwnerLead | null>(null);
-  const [quoteToDelete, setQuoteToDelete] = useState<{ leadId: string; quoteId: string; fileName: string } | null>(null);
 
   // Booking Deal Amount Modal State
   const [bookingAmountModalLead, setBookingAmountModalLead] = useState<OwnerLead | null>(null);
@@ -394,49 +393,6 @@ export const LeadsManagement: React.FC<LeadsManagementProps> = ({ currentUser, t
     }
   };
 
-  // Quotation Upload Handler
-  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (file) {
-      setNewQuoteFileName(file.name);
-      const sizeMb = (file.size / (1024 * 1024)).toFixed(1);
-      setNewQuoteFileSize(`${sizeMb} MB`);
-      
-      const ext = file.name.split('.').pop()?.toLowerCase();
-      if (ext === 'pdf') setNewQuoteFileType('pdf');
-      else if (ext === 'xlsx' || ext === 'xls' || ext === 'csv') setNewQuoteFileType('excel');
-      else if (ext === 'doc' || ext === 'docx') setNewQuoteFileType('word');
-      else if (['jpg', 'jpeg', 'png', 'webp'].includes(ext || '')) setNewQuoteFileType('image');
-
-      const reader = new FileReader();
-      reader.onload = () => {
-        setNewQuoteDataUrl(reader.result as string);
-      };
-      reader.readAsDataURL(file);
-    }
-  };
-
-  const handleSaveQuotation = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!canEditLead || !quotationModalLead || !newQuoteFileName.trim()) return;
-
-    window.alert('Quotation uploads are not connected because the backend does not expose a lead quotation/file API yet.');
-
-    // Reset quote form
-    setNewQuoteFileName('');
-    setNewQuoteFileSize('');
-    setNewQuoteNotes('');
-    setNewQuoteDataUrl(undefined);
-  };
-
-  const handleDeleteQuotation = (leadId: string, quoteId: string, fileName?: string) => {
-    setQuoteToDelete({
-      leadId,
-      quoteId,
-      fileName: fileName || 'Quotation Document',
-    });
-  };
-
   // PRIVACY FILTER:
   // If user is Owner/Studio Manager, they see ALL leads.
   // If user is a normal team member, they see ONLY leads where createdBy or assignedTo matches their name!
@@ -476,7 +432,7 @@ export const LeadsManagement: React.FC<LeadsManagementProps> = ({ currentUser, t
   const activeCount = accessibleLeads.filter((l) => l.status !== 'booked' && l.status !== 'lost').length;
   const totalPipelineRevenue = accessibleLeads.reduce((acc, l) => acc + (l.budgetEstimate || 0), 0);
   const bookedRevenue = accessibleLeads.filter((l) => l.status === 'booked').reduce((acc, l) => acc + (l.budgetEstimate || 0), 0);
-  const totalQuotationsCount = accessibleLeads.reduce((acc, l) => acc + (l.quotations?.length || 0), 0);
+  const totalQuotationsCount = leadQuotes.total;
 
   // Target Performance Calculations
   const now = new Date();
@@ -813,7 +769,7 @@ export const LeadsManagement: React.FC<LeadsManagementProps> = ({ currentUser, t
                   const staffBooked = staffLeads.filter((l) => l.status === 'booked').length;
                   const staffActive = staffLeads.filter((l) => l.status !== 'booked' && l.status !== 'lost').length;
                   const staffValue = staffLeads.reduce((acc, l) => acc + (l.budgetEstimate || 0), 0);
-                  const staffQuotes = staffLeads.reduce((acc, l) => acc + (l.quotations?.length || 0), 0);
+                  const staffQuotes = staffLeads.reduce((acc, l) => acc + (leadQuotes.byLead.get(l.id)?.count ?? 0), 0);
 
                   return (
                     <div key={staffName} className="p-4 rounded-2xl bg-slate-50 border border-slate-200 hover:border-indigo-300 transition space-y-3">
@@ -892,7 +848,6 @@ export const LeadsManagement: React.FC<LeadsManagementProps> = ({ currentUser, t
                   const whatsappLink = `https://wa.me/91${lead.mobile.replace(/\D/g, '')}?text=Hello%20${encodeURIComponent(
                     lead.clientName
                   )},%20thank%20you%20for%20inquiring%20with%20our%20Wedding%20Photography%20Studio!`;
-                  const quoteCount = lead.quotations?.length || 0;
 
                   return (
                     <article key={lead.id} className="overflow-hidden rounded-2xl border border-[#e1d9d4] bg-white shadow-sm">
@@ -966,33 +921,14 @@ export const LeadsManagement: React.FC<LeadsManagementProps> = ({ currentUser, t
 
                         <div className="space-y-1.5">
                           <p className="text-[10px] font-black uppercase tracking-wider text-slate-400">Quotation</p>
-                          <div className="flex flex-wrap gap-2">
-                            <button
-                              onClick={() => setQuotationModalLead(lead)}
-                              className={`flex min-h-10 flex-1 items-center justify-center gap-1.5 rounded-xl border px-3 py-2 text-xs font-extrabold transition ${
-                                quoteCount > 0
-                                  ? 'border-indigo-200 bg-indigo-50 text-indigo-900 hover:bg-indigo-100'
-                                  : 'border-slate-200 bg-slate-50 text-slate-600 hover:bg-slate-100'
-                              }`}
-                              title="Manage & Attach Quotation Files"
-                            >
-                              <Paperclip className="size-4 text-indigo-600" />
-                              <span>Quote ({quoteCount})</span>
-                              {quoteCount > 0 && <span className="size-2 rounded-full bg-emerald-500" />}
-                            </button>
-                            <button
-                              onClick={() => {
-                                const firstQuote = lead.quotations?.[0];
-                                if (firstQuote) setPreviewQuotation({ file: firstQuote, lead });
-                                else setQuotationModalLead(lead);
-                              }}
-                              className="flex min-h-10 flex-1 items-center justify-center gap-1.5 rounded-xl border border-emerald-300 bg-emerald-100 px-3 py-2 text-xs font-extrabold text-emerald-900 hover:bg-emerald-200"
-                              title="View / Preview Quotation Document"
-                            >
-                              <Eye className="size-4 text-emerald-700" />
-                              <span>View</span>
-                            </button>
-                          </div>
+                          <LeadQuoteActions
+                              summary={leadQuotes.byLead.get(lead.id)}
+                              canCreate={canCreateQuote && !!onQuoteLead}
+                              canView={canViewQuotes && !!onOpenQuote}
+                              onCreate={() => onQuoteLead?.(lead.id, lead.clientName, false)}
+                              onOpen={(id) => onOpenQuote?.(id)}
+                              onViewAll={() => onQuoteLead?.(lead.id, lead.clientName, true)}
+                            />
                         </div>
 
                         <div className="space-y-1.5">
@@ -1101,8 +1037,6 @@ export const LeadsManagement: React.FC<LeadsManagementProps> = ({ currentUser, t
                         lead.clientName
                       )},%20thank%20you%20for%20inquiring%20with%20our%20Wedding%20Photography%20Studio!`;
 
-                      const quoteCount = lead.quotations?.length || 0;
-
                       return (
                         <React.Fragment key={lead.id}>
                           <tr className="group align-top border-b border-[#e1d9d4] transition hover:bg-[#fbfdfc]">
@@ -1197,38 +1131,15 @@ export const LeadsManagement: React.FC<LeadsManagementProps> = ({ currentUser, t
 
                           {/* Quotation Documents */}
                           <td className="border-r border-[#eee8e4] p-2.5 align-top sm:p-3.5">
-                            <div className="flex flex-wrap gap-1.5 py-0.5">
-                              <button
-                                onClick={() => setQuotationModalLead(lead)}
-                                className={`px-2.5 py-1.5 rounded-xl font-extrabold text-xs flex items-center gap-1.5 transition border cursor-pointer ${
-                                  quoteCount > 0
-                                    ? 'bg-indigo-50 text-indigo-900 border-indigo-200 hover:bg-indigo-100'
-                                    : 'bg-slate-50 text-slate-600 border-slate-200 hover:bg-slate-100'
-                                }`}
-                                title="Manage & Attach Quotation Files"
-                              >
-                                <Paperclip className="w-3.5 h-3.5 text-indigo-600" />
-                                <span>Quote ({quoteCount})</span>
-                                {quoteCount > 0 && (
-                                  <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
-                                )}
-                              </button>
-
-                              <button
-                                onClick={() => {
-                                  const firstQuote = lead.quotations?.[0];
-                                  if (firstQuote) {
-                                    setPreviewQuotation({ file: firstQuote, lead });
-                                  } else {
-                                    setQuotationModalLead(lead);
-                                  }
-                                }}
-                                className="px-2.5 py-1.5 bg-emerald-100 hover:bg-emerald-200 text-emerald-900 border border-emerald-300 rounded-xl font-extrabold text-xs flex items-center gap-1 transition cursor-pointer shadow-2xs"
-                                title="View / Preview Quotation Document"
-                              >
-                                <Eye className="w-3.5 h-3.5 text-emerald-700" />
-                                <span>View</span>
-                              </button>
+                            <div className="py-0.5">
+                              <LeadQuoteActions
+                                summary={leadQuotes.byLead.get(lead.id)}
+                                canCreate={canCreateQuote && !!onQuoteLead}
+                                canView={canViewQuotes && !!onOpenQuote}
+                                onCreate={() => onQuoteLead?.(lead.id, lead.clientName, false)}
+                                onOpen={(id) => onOpenQuote?.(id)}
+                                onViewAll={() => onQuoteLead?.(lead.id, lead.clientName, true)}
+                            />
                             </div>
                           </td>
 
@@ -1365,22 +1276,6 @@ export const LeadsManagement: React.FC<LeadsManagementProps> = ({ currentUser, t
         onClose={() => setShowAddLeadModal(false)}
         onSubmit={handleSaveLead}
       />
-      <LeadQuotationModal
-        lead={quotationModalLead}
-        fileName={newQuoteFileName}
-        fileType={newQuoteFileType}
-        notes={newQuoteNotes}
-        isOwner={isOwner}
-        userName={userName}
-        onClose={() => setQuotationModalLead(null)}
-        onPreview={(file, lead) => setPreviewQuotation({ file, lead })}
-        onDelete={handleDeleteQuotation}
-        onFileChange={handleFileChange}
-        onFileNameChange={setNewQuoteFileName}
-        onFileTypeChange={setNewQuoteFileType}
-        onNotesChange={setNewQuoteNotes}
-        onSubmit={handleSaveQuotation}
-      />
       <LeadHistoryModal
         lead={historyModalLead}
         onClose={() => setHistoryModalLead(null)}
@@ -1391,10 +1286,6 @@ export const LeadsManagement: React.FC<LeadsManagementProps> = ({ currentUser, t
         onValueChange={setQuickNoteText}
         onClose={() => setNoteModalLead(null)}
         onSubmit={handleSaveQuickNote}
-      />
-      <LeadQuotationPreview
-        preview={previewQuotation}
-        onClose={() => setPreviewQuotation(null)}
       />
       <LeadBookingModal
         lead={bookingAmountModalLead}
@@ -1417,20 +1308,6 @@ export const LeadsManagement: React.FC<LeadsManagementProps> = ({ currentUser, t
         message={`Are you sure you want to delete lead "${leadToDelete?.clientName || 'Inquiry Record'}"? This action cannot be undone.`}
         onConfirm={handleConfirmDeleteLead}
         onCancel={() => setLeadToDelete(null)}
-      />
-
-      <LeadDeleteConfirmModal
-        open={!!quoteToDelete}
-        title="Delete Quotation File"
-        itemTitle={quoteToDelete?.fileName || 'Quotation Document'}
-        message={`Are you sure you want to delete quotation document "${quoteToDelete?.fileName || ''}"?`}
-        onConfirm={() => {
-          if (quoteToDelete) {
-            window.alert('Quotation deletion is not connected because the backend does not expose a lead quotation/file API yet.');
-            setQuoteToDelete(null);
-          }
-        }}
-        onCancel={() => setQuoteToDelete(null)}
       />
 
       <LeadTargetsModal

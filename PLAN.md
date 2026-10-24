@@ -88,3 +88,30 @@ Legend: [x] done · [~] in progress · [ ] todo
 - Product name is **Yowflow**; logo supplied (`public/brand`, `src/app/icon.png`). Cookie prefix `yf`.
 - Previous deep-green/gold theme rejected → ink + lime, matching the logo. Dark is the signature marketing look; the CRM shell stays light until legacy screens are dark-ready.
 - Work continues autonomously through all phases; no per-step permission prompts.
+
+## Phase 7 — Quote in seconds  [x]
+Goal: a customer fills in their event and sees a priced quotation within seconds; the studio sees who opened it, and acceptance books the date.
+- [x] Price list (packages, add-ons, GST, per-day / per-guest pricing, starter set), booking page + QR, availability (capacity, notice, window, closed dates, double-booking guard), business and payment details, reminders: *Sales setup*
+- [x] Public booking page `/enquire/<studio>` (instant quote, approval, or enquiry only) and customer quote page `/quote/<token>` (extras, accept, decline, ask, PDF, payment details after acceptance)
+- [x] Quotes screen: Today list with WhatsApp links, search/filter, detail with timeline, builder, send (email / WhatsApp / link), preview, PDF, book now with override, invoice panel (PDF, mark as issued)
+- [x] Leads rows create and show quotes; notifications open the quote; project form warns on a full or closed date
+- [x] Daily reminder job (Vercel Cron, `CRON_SECRET`), quote and invoice PDFs with GST, bank details and UPI QR
+- [x] Tests: backend 37 new integration tests, frontend unit tests, Playwright `e2e/sales.spec.ts` (setup → instant quote → accept → booking, approval flow, builder, axe, 375px)
+
+### Not built yet (deliberately), in rough order of value
+1. **Online advance payment on the quote** (Razorpay order + auto-marking the payment milestone paid). Today the customer sees UPI link/QR/bank and the studio confirms receipt. Needs each studio's own gateway account.
+2. **Official WhatsApp Business API** (automatic sending and replies). Needs Meta business verification and approved templates; today the app opens `wa.me` with the message written.
+3. **Indian GST detail**: CGST + SGST vs IGST split by state, HSN/SAC codes, GSTR-ready exports. Today a line carries one GST rate and the PDF shows the combined GST.
+4. **Reports and exports**: quote funnel (sent → opened → accepted), conversion by source, revenue forecast, CSV/Excel.
+5. **Studio public website** (portfolio, package pages, SEO). `/enquire/<studio>` is client-rendered and set to noindex until it is server-rendered.
+6. **Quote options and versions**: Good / Better / Best on one quote, edit history, discount approval.
+7. **E-sign contracts** (legally valid e-signature, contract templates). Today acceptance is a typed name with time and device recorded.
+8. **Google Calendar / ICS sync** for shoots and for the customer ("add to calendar").
+9. **More lead sources and routing**: Instagram / Facebook DMs, portals, round-robin assignment, lead scoring.
+10. **Telephony**: click-to-call, call logging, missed-call lead capture.
+11. **AI quote builder** (suggest a package from the enquiry and budget).
+12. **Availability by crew**, not just a per-day capacity; hard block (not just a warning) when staff create a project on a full date.
+13. **CSV import** of leads and clients; reviews and testimonials; couple questionnaires and itinerary builder.
+14. **PWA / push notifications**, SMS (DLT-registered), customised email templates.
+15. **Supplier directory** (venues, decorators) alongside the freelancer network.
+

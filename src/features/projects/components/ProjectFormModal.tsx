@@ -17,6 +17,7 @@ const SCHEDULE_DATE_MAX = `${new Date().getFullYear() + 10}-12-31`;
 import { normalizeTeamMember } from '@/features/team/teamViewModel';
 import { ArrowLeft, ArrowRight, X, Save, IndianRupee, Phone, MapPin, Music, Link2, Calendar, Sparkles, Plus, Trash2, Camera, CheckSquare, UserCheck, Folder, Upload, FileText, Eye, Paperclip, Users, UserPlus, Clock3 } from 'lucide-react';
 import { isPersistedProjectId } from '@/features/projects/projectViewModel';
+import { DateAvailabilityHint } from '@/features/sales/DateAvailabilityHint';
 import { loadProjectTasks } from '@/features/projects/persistProjectTasks';
 import { shootsApi } from '@/lib/api/shoots';
 import { projectsApi } from '@/lib/api/projects';
@@ -899,6 +900,7 @@ export const ProjectFormModal: React.FC<ProjectFormModalProps> = ({
                               onChange={(e) => handleShootChange(index, 'date', e.target.value)}
                               className="w-full bg-white border border-slate-200 rounded px-2 py-1 text-xs text-slate-800"
                             />
+                            <DateAvailabilityHint date={shoot.date} excludeProjectId={existingProject && isPersistedProjectId(existingProject.id) ? existingProject.id : undefined} />
                           </div>
 
                           <div>

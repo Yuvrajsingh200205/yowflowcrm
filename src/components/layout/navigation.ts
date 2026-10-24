@@ -1,9 +1,9 @@
 import {
-  Banknote, Camera, Crown, Film, FolderKanban, HardDrive, Heart, LayoutDashboard, Settings, ShieldCheck, Target, UserCheck, Users,
+  Banknote, Camera, Crown, FileText, Film, FolderKanban, HardDrive, Heart, LayoutDashboard, Settings, ShieldCheck, SlidersHorizontal, Target, UserCheck, Users,
   type LucideIcon,
 } from 'lucide-react';
 
-export type TabType = 'dashboard' | 'roles' | 'projects' | 'shoots' | 'expenses' | 'data' | 'team' | 'freelancers' | 'clients' | 'deliveries' | 'owner_workspace' | 'equipment' | 'leads' | 'access' | 'settings';
+export type TabType = 'dashboard' | 'roles' | 'projects' | 'shoots' | 'expenses' | 'data' | 'team' | 'freelancers' | 'clients' | 'deliveries' | 'owner_workspace' | 'equipment' | 'leads' | 'access' | 'settings' | 'quotes' | 'sales_setup';
 
 export type NavItem = { id: TabType; label: string; icon: LucideIcon; keywords?: string };
 export type NavGroup = { label: string; items: NavItem[] };
@@ -21,7 +21,9 @@ export const NAV_GROUPS: NavGroup[] = [
     label: 'Sales',
     items: [
       { id: 'leads', label: 'Leads & Inquiries', icon: Target, keywords: 'enquiry pipeline meta' },
+      { id: 'quotes', label: 'Quotes', icon: FileText, keywords: 'quotation proposal estimate price send whatsapp' },
       { id: 'clients', label: 'Clients', icon: Heart, keywords: 'couples customers' },
+      { id: 'sales_setup', label: 'Sales setup', icon: SlidersHorizontal, keywords: 'packages pricing catalogue booking page enquiry availability calendar upi gst reminders' },
     ],
   },
   {
@@ -66,4 +68,6 @@ export const PAGE_TITLES: Record<TabType, string> = {
   leads: 'Leads & Inquiries',
   access: 'Roles & Permissions',
   settings: 'Settings',
+  quotes: 'Quotes',
+  sales_setup: 'Sales setup',
 };

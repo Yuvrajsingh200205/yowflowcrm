@@ -25,8 +25,9 @@
   --border-soft: #E8EBDF;
   --border-strong: #C3C9B8;
   --ring: #4D7C0F;
-  --success: #2F7D5B;
-  --warning: #A8701A;
+  /* success/warning darkened from #2F7D5B / #A8701A: on their tinted backgrounds those measured 4.3 and 3.7 against the 4.5 AA minimum */
+  --success: #25694A;
+  --warning: #84560F;
   --danger: #B3382E;
   --on-danger: #FFFFFF;
   --info: #3B6F8F;

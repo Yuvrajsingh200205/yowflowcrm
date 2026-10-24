@@ -317,7 +317,9 @@ export const BACKEND_MODULE_META: Record<string, { label: string; description: s
   freelancer: { label: 'Freelancers', description: 'External crew and payouts.' },
   task: { label: 'Tasks', description: 'Studio and editing tasks.' },
   attendance: { label: 'Attendance & leave', description: 'View, mark and manage attendance and leave.' },
-  quotation: { label: 'Quotations', description: 'Proposals.' },
+  quotation: { label: 'Quotations', description: 'Quotes sent to customers, with open and accept tracking.' },
+  catalog: { label: 'Packages & pricing', description: 'The price list that quotes and the booking page are built from.' },
+  booking_setup: { label: 'Booking setup', description: 'Booking page, availability, business details and reminders.' },
   invoice: { label: 'Invoices', description: 'Receivables.' },
   payment: { label: 'Payments', description: 'Cash received.' },
   expense: { label: 'Expenses', description: 'Cost ledger.' },
@@ -332,7 +334,7 @@ export const BACKEND_MODULE_META: Record<string, { label: string; description: s
 export const BACKEND_MODULE_ORDER = [
   'dashboard', 'lead', 'client', 'project', 'event', 'shoot',
   'finance', 'team', 'attendance', 'freelancer', 'task',
-  'quotation', 'invoice', 'payment', 'expense', 'delivery',
+  'quotation', 'catalog', 'booking_setup', 'invoice', 'payment', 'expense', 'delivery',
   'file', 'notification', 'report', 'organization', 'audit', 'setting',
 ];
 

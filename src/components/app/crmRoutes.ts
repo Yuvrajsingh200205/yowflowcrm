@@ -16,6 +16,8 @@ export const TAB_ROUTES: Record<TabType, string> = {
   deliveries: '/deliveries',
   access: '/roles-permissions',
   settings: '/settings',
+  quotes: '/quotes',
+  sales_setup: '/sales-setup',
 };
 
 export const ROUTE_TABS = Object.fromEntries(

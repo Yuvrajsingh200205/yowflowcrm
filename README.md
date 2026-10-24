@@ -1,6 +1,6 @@
 # Yowflow — Frontend
 
-**The operating system for photo & video studios.** Leads, projects, shoots, freelancers, invoices and client galleries in one workspace.
+**The operating system for photo & video studios.** Instant quotes, leads, projects, shoots, freelancers, invoices and client galleries in one workspace.
 
 This repository is the Next.js (App Router) frontend. It talks to the Yowflow backend (`yowflow_backend`) over HTTP and proxies `/api/v1` through Next rewrites so auth cookies stay first-party.
 
@@ -53,7 +53,8 @@ Rules that keep re-skinning safe:
 
 ```text
 src/
-├── app/                  routes (public marketing, auth, workspace, /client portal, /freelancer portal)
+├── app/                  routes (public marketing, auth, workspace, /client portal, /freelancer portal,
+│                         /enquire/<studio> booking page and /quote/<token> customer quote, both public)
 ├── components/ui/        design-system components
 ├── components/layout/    app shell: sidebar, top bar, command palette
 ├── features/             domain modules (leads, projects, shoots, finance, …)

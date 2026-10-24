@@ -9,6 +9,7 @@ export const metadata: Metadata = {
 };
 
 const RELEASES = [
+  { version: '2.1', date: 'October 2026', title: 'Quote in seconds', items: ['A booking page and QR code for your studio: customers pick a free date and a package and get a priced quote on screen', 'Packages and add-ons with GST, per-day and per-guest pricing; quotes can be sent instantly or after your approval', 'Customers open a private quote link, switch extras on or off, and accept online; you see when it was opened', 'Accepted quotes create the project, payment schedule and a draft invoice, and block the date for everyone else', 'Quote and invoice PDFs with GST, bank details and a UPI QR code', 'A Today list of quotes and payments to follow up, with WhatsApp messages ready to send, plus daily email reminders'] },
   { version: '2.0', date: 'October 2026', title: `${BRAND.name} 2.0`, items: ['New brand, design system and dark/light themes', 'Redesigned workspace shell with command palette (⌘K)', 'Self-serve signup, password reset and email verification', 'Public contact form and refreshed marketing site'] },
   { version: '1.5', date: 'September 2026', title: 'Client portal and galleries', items: ['Private galleries with album selection and comments', 'Expiring and password-protected share links', 'Client payment schedule and request tracking'] },
   { version: '1.4', date: 'August 2026', title: 'Freelancer network', items: ['Freelancer onboarding with single-use invitations', 'Availability, assignments and payouts', 'Meta Lead Ads integration for instant lead capture'] },

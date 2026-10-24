@@ -1,5 +1,20 @@
 # Changelog
 
+## 2.1.0 — Quote in seconds
+
+### Product
+- **Sales setup** (new): price list of packages and add-ons (fixed, per day or per guest pricing, GST, optional quantities, starter set), booking page settings with link and QR code, availability (capacity per day, notice, booking window, closed dates, calendar), business and payment details (UPI, bank, GSTIN, terms, brand colour), reminders.
+- **Booking page** `/enquire/<studio>`: customers pick a date from a live availability calendar, a package and extras, see an estimate, and submit. The studio chooses *instant quote*, *draft for approval* or *enquiry only*. Bot trap, per-IP rate limit, lead de-duplication by phone and date.
+- **Customer quote page** `/quote/<token>`: studio-branded, extras switch on and off with server-side re-pricing, accept with a typed name (recorded with time and device), decline, ask a question, PDF, and payment details (UPI link, QR code, bank) once accepted.
+- **Quotes** (new): Today list (needs review, not opened, opened not accepted, expiring, payments to collect, follow-ups) with WhatsApp links; all quotes with search and filters; quote detail with activity timeline; builder with live totals and payment plan; send by email, WhatsApp or link; preview as the customer; PDF; book now with an availability guard and administrator override; invoice panel with PDF and "mark as issued".
+- **Leads**: each lead row shows its latest quote or a *Create quote* button, replacing the old attach-a-file flow that was never connected.
+- New project form warns when a function date is already full or closed.
+- Notifications open the quote, lead or project they are about.
+- Roles screen lists the new permission groups (Packages & pricing, Booking setup).
+
+### Fixed
+- Status text colours (success, warning) now meet WCAG AA contrast on their tinted backgrounds.
+
 ## 2.0.0 — Yowflow rebrand and redesign
 
 ### Brand
