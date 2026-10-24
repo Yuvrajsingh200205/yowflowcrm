@@ -49,10 +49,60 @@ export interface CatalogItem {
   isActive: boolean;
   isPublic: boolean;
   isPopular: boolean;
+  /** Added from the ready-made library and not yet checked: the price is only an example. */
+  isExample: boolean;
+  templateKey: string | null;
   sortOrder: number;
 }
 
 export type CatalogInput = Omit<CatalogItem, 'id'>;
+
+// ── Ready-made library and quick quote ─────────────────────────────────────
+export interface TemplateGroup { id: string; label: string; eventTypes: EventType[]; blurb: string }
+export interface TemplateItem {
+  key: string;
+  group: string;
+  kind: CatalogKind;
+  name: string;
+  description: string;
+  inclusions: string[];
+  pricingType: PricingType;
+  unitPrice: number;
+  unitLabel: string | null;
+  taxRate: number;
+  allowQuantity: boolean;
+  minQuantity: number;
+  maxQuantity: number | null;
+  isPopular: boolean;
+  inDefaultKit: boolean;
+  /** The studio already has this one. */
+  added: boolean;
+}
+export interface Readiness {
+  packages: number;
+  addons: number;
+  /** Items whose price is still only an example. */
+  examplePrices: number;
+  paymentDetails: boolean;
+  businessPhone: boolean;
+  bookingPageOn: boolean;
+  slug: string;
+}
+export interface QuickQuoteInput {
+  name: string;
+  phone: string;
+  email?: string | null;
+  eventType?: EventType | null;
+  eventDate?: string | null;
+  eventDays?: number;
+  guestCount?: number | null;
+  venueCity?: string | null;
+  packageId?: string | null;
+  addonIds?: string[];
+  /** Instead of a package: one line the studio prices itself. */
+  custom?: { service: string; unitPrice: number; taxRate?: number };
+}
+export interface QuickQuoteResult { id: string; quotationNumber: string; grandTotal: number; status: QuoteStatus; leadId: string; reusedLead: boolean }
 
 // ── Settings ────────────────────────────────────────────────────────────────
 export interface SalesSettings {
@@ -405,7 +455,14 @@ export const catalogApi = {
   seedStarter: async () => (await apiRequest<CatalogItem[]>('/catalog/starter', { method: 'POST' })).data,
 };
 
+export const templatesApi = {
+  list: async () => (await apiRequest<{ groups: TemplateGroup[]; items: TemplateItem[] }>('/catalog/templates', { fresh: true })).data,
+  add: async (keys: string[]) => (await apiRequest<{ added: number; skipped: number }>('/catalog/templates/import', { method: 'POST', ...json({ keys }) })).data,
+  confirmPrices: async () => (await apiRequest<{ confirmed: number }>('/catalog/templates/confirm-prices', { method: 'POST' })).data,
+};
+
 export const salesSetupApi = {
+  readiness: async () => (await apiRequest<Readiness>('/sales-setup/readiness', { fresh: true })).data,
   settings: async () => (await apiRequest<SalesSettings>('/sales-setup/settings', { fresh: true })).data,
   updateSettings: async (input: SalesSettingsInput) => (await apiRequest<SalesSettings>('/sales-setup/settings', { method: 'PUT', ...json(input) })).data,
   enquiryPage: async () => (await apiRequest<EnquiryPageSettings>('/sales-setup/enquiry-page', { fresh: true })).data,
@@ -421,8 +478,9 @@ export const quotesApi = {
   list: async (q: QuoteListQuery = {}): Promise<{ data: QuoteSummary[]; meta: ApiMeta }> => apiRequest<QuoteSummary[]>(`/quotations${query({ ...q, needsReview: q.needsReview === undefined ? undefined : String(q.needsReview), sortBy: 'createdAt', sortOrder: 'desc' })}`, { fresh: true }),
   get: async (id: string) => (await apiRequest<QuoteDetail>(`/quotations/${enc(id)}`, { fresh: true })).data,
   events: async (id: string) => (await apiRequest<QuoteEvent[]>(`/quotations/${enc(id)}/events`, { fresh: true })).data,
+  quick: async (input: QuickQuoteInput) => (await apiRequest<QuickQuoteResult>('/quotations/quick', { method: 'POST', ...json(input) })).data,
   today: async () => (await apiRequest<TodayList>('/quotations/today', { fresh: true })).data,
-  fromLead: async (input: QuoteFromLeadInput) => (await apiRequest<{ id: string; quotationNumber: string }>('/quotations/from-lead', { method: 'POST', ...json(input) })).data,
+  fromLead: async (input: QuoteFromLeadInput) => (await apiRequest<{ id: string; quotationNumber: string; grandTotal: number | string; status: QuoteStatus }>('/quotations/from-lead', { method: 'POST', ...json(input) })).data,
   update: async (id: string, input: QuoteUpdateInput) => (await apiRequest<QuoteDetail>(`/quotations/${enc(id)}`, { method: 'PATCH', ...json(input) })).data,
   send: async (id: string, channel: SendChannel) => (await apiRequest<SendResult>(`/quotations/${enc(id)}/send`, { method: 'POST', ...json({ channel }) })).data,
   convert: async (id: string, overrideAvailability?: boolean) => (await apiRequest<BookingResult>(`/quotations/${enc(id)}/convert`, { method: 'POST', ...json({ overrideAvailability }) })).data,

@@ -98,6 +98,12 @@ Goal: a customer fills in their event and sees a priced quotation within seconds
 - [x] Daily reminder job (Vercel Cron, `CRON_SECRET`), quote and invoice PDFs with GST, bank details and UPI QR
 - [x] Tests: backend 37 new integration tests, frontend unit tests, Playwright `e2e/sales.spec.ts` (setup → instant quote → accept → booking, approval flow, builder, axe, 375px)
 
+### Round 2: templates and quick quote  [x]
+- [x] Ready-made library (28 packages, 12 add-ons), default kit for every new studio, example-price flags and confirmation, copy, get-ready checklist, Quick quote wizard (see CHANGELOG 2.2.0)
+- [ ] Hindi (Devanagari) interface for the owner-facing screens: the screens are written in short plain English with icons, but a Hindi switch would help more owners (needs a translation layer across the app).
+- [ ] Let studios save their own quote as a reusable template (today: copy a package and edit it).
+- [ ] Studio-type starter kits chosen at signup (wedding studio, kids and family, corporate) instead of one common kit.
+
 ### Not built yet (deliberately), in rough order of value
 1. **Online advance payment on the quote** (Razorpay order + auto-marking the payment milestone paid). Today the customer sees UPI link/QR/bank and the studio confirms receipt. Needs each studio's own gateway account.
 2. **Official WhatsApp Business API** (automatic sending and replies). Needs Meta business verification and approved templates; today the app opens `wa.me` with the message written.

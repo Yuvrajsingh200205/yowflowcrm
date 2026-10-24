@@ -2,7 +2,7 @@ import AxeBuilder from '@axe-core/playwright';
 import { expect, test, type Page } from '@playwright/test';
 import fs from 'fs';
 import path from 'path';
-import { lbl, signIn, trackErrors } from './helpers';
+import { lbl, signIn, trackErrors, uniqueEmail } from './helpers';
 
 const SLUG = 'e2e-studio';
 const SHOTS = path.join(__dirname, '.artifacts', 'screenshots');
@@ -61,15 +61,24 @@ test.describe.serial('quote in seconds', () => {
     await page.goto('/sales-setup');
     await expect(page.getByRole('heading', { level: 2, name: 'Sales setup' })).toBeVisible();
 
-    // An empty price list offers a starter set.
+    // A new studio is told what to do first, and an empty price list offers ready-made packages.
+    await expect(page.getByRole('heading', { name: 'Get ready to send quotes' })).toBeVisible();
+    await expect(page.getByText('0 of 4 done')).toBeVisible();
     await expect(page.getByText('Your price list is empty')).toBeVisible();
     await shot(page, 'setup-empty');
-    await page.getByRole('button', { name: 'Use starter packages' }).click();
+    await page.getByRole('button', { name: 'Add ready-made packages' }).click();
+    const library = page.getByRole('dialog', { name: 'Ready-made packages' });
+    await expect(library.getByText('Wedding Signature')).toBeVisible();
+    await shot(page, 'setup-library');
+    await library.getByRole('button', { name: /^Add \d+ to my price list/ }).click();
     await expect(page.getByText('Wedding Signature').first()).toBeVisible();
     await expect(page.getByText('Drone coverage').first()).toBeVisible();
+    // The prices are examples, and the app says so until the studio has looked at them.
+    await expect(page.getByText(/prices are only an example/)).toBeVisible();
+    await expect(page.getByText('1 of 4 done')).toBeVisible();
 
     // Validation on the package form, then a real edit.
-    await page.getByRole('button', { name: 'Add package' }).click();
+    await page.getByRole('button', { name: 'Add my own package' }).click();
     const dialog = page.getByRole('dialog');
     await dialog.getByRole('button', { name: 'Add package' }).click();
     await expect(dialog.getByText('Give it a name of at least 2 letters.')).toBeVisible();
@@ -81,6 +90,18 @@ test.describe.serial('quote in seconds', () => {
     await expect(page.getByText('Wedding Essentials updated')).toBeVisible();
     await expect(page.getByText('₹50,000').first()).toBeVisible();
     await shot(page, 'setup-packages');
+
+    // Copy makes a new item to change, and the library knows what is already added.
+    await page.getByRole('button', { name: 'Make a copy of Wedding Essentials' }).click();
+    await expect(page.getByRole('dialog').getByLabel(/^Name/)).toHaveValue('Copy of Wedding Essentials');
+    await page.getByRole('dialog').getByRole('button', { name: 'Cancel' }).click();
+    await page.getByRole('button', { name: 'Add ready-made packages' }).click();
+    const more = page.getByRole('dialog', { name: 'Ready-made packages' });
+    await expect(more.getByText('Already added').first()).toBeVisible();
+    await more.getByRole('button', { name: /Birthday & Kids/ }).click();
+    await more.getByText('Kids Photo Shoot').click();
+    await more.getByRole('button', { name: 'Add 1 to my price list' }).click();
+    await expect(page.getByText('Kids Photo Shoot').first()).toBeVisible();
 
     // Business details and payments.
     await page.getByRole('tab', { name: 'Business & payments' }).click();
@@ -326,15 +347,19 @@ test.describe.serial('quote in seconds', () => {
     await page.goto('/leads');
     await page.getByRole('row', { name: /Kabir Malhotra/ }).getByRole('button', { name: 'Create quote' }).click();
     await expect(page).toHaveURL(/\/quotes$/);
-    const dialog = page.getByRole('dialog');
+    const dialog = page.getByRole('dialog', { name: /Make a quote|Quote is ready/ });
     await expect(dialog.getByText('Kabir Malhotra')).toBeVisible();
-    await expect(dialog.getByLabel('Search leads')).toHaveCount(0);
+    await expect(dialog.getByText('Step 1 of 2')).toBeVisible();
 
-    // Without a package the form says what is missing.
-    await dialog.getByRole('button', { name: 'Create quote' }).click();
-    await expect(dialog.getByText('Choose a package, or “Custom quote”.')).toBeVisible();
-    await dialog.getByLabel(/^Package/).selectOption({ label: 'Wedding Signature · ₹85,000 per day' });
-    await dialog.getByRole('button', { name: 'Create quote' }).click();
+    // Without a package, it says what to do.
+    await dialog.getByRole('button', { name: 'Next' }).click();
+    await expect(dialog.getByText('Tap a package, or choose “Something else”.')).toBeVisible();
+    await dialog.getByRole('radio', { name: /Wedding Signature/ }).check();
+    await dialog.getByRole('button', { name: 'Next' }).click();
+    await expect(dialog.getByText('Step 2 of 2')).toBeVisible();
+    await dialog.getByRole('button', { name: 'Make the quote' }).click();
+    await expect(dialog.getByText('₹1,00,300')).toBeVisible();
+    await dialog.getByRole('button', { name: 'See full quote' }).click();
 
     // The new quote opens as a draft with the package priced from the price list.
     const detail = page.getByRole('dialog', { name: /Kabir Malhotra/ });
@@ -371,6 +396,74 @@ test.describe.serial('quote in seconds', () => {
     const leadRow = page.getByRole('row', { name: /Kabir Malhotra/ });
     await expect(leadRow.getByRole('button', { name: /Open quote QTN-.*Accepted/ })).toBeVisible();
     expect(errors).toEqual([]);
+  });
+
+  test('a quick quote for a walk-in customer takes a minute and can be sent on WhatsApp', async ({ page }) => {
+    const errors = trackErrors(page);
+    await signIn(page);
+    await page.goto('/quotes');
+    await page.getByRole('button', { name: 'Make a quote' }).click();
+    const d = page.getByRole('dialog', { name: /Make a quote|Quote is ready/ });
+    await expect(d.getByText('Step 1 of 3')).toBeVisible();
+
+    // One question at a time, and each mistake is explained in plain words.
+    await d.getByRole('button', { name: 'Next' }).click();
+    await expect(d.getByText('Write the customer’s name.')).toBeVisible();
+    await expect(d.getByText(/Write a 10-digit mobile number/)).toBeVisible();
+    await d.getByLabel(lbl('Customer name')).fill('Sunita Verma');
+    await d.getByLabel(lbl('Mobile number')).fill('98111 55566');
+    await d.getByRole('button', { name: 'Next' }).click();
+
+    await d.getByRole('button', { name: /Birthday & Kids/ }).click();
+    await expect(d.getByRole('radio', { name: /Wedding Signature/ })).toHaveCount(0);
+    await d.getByRole('radio', { name: /Birthday Party Coverage/ }).check();
+    await d.getByRole('button', { name: 'Next' }).click();
+    await shot(page, 'quick-details');
+
+    // 12,000 plus 18% GST, worked out before anything is made.
+    await expect(d.getByText('₹14,160')).toBeVisible();
+    await d.getByLabel('Number of guests').fill('50');
+    await d.getByRole('button', { name: 'Make the quote' }).click();
+    await expect(d.getByRole('heading', { name: '₹14,160' })).toBeVisible();
+    await expect(d.getByText(/still has an example price/)).toBeVisible();
+    await shot(page, 'quick-ready');
+
+    // Sharing opens WhatsApp in a new tab and marks the quote as sent.
+    const [wa] = await Promise.all([page.waitForEvent('popup'), d.getByRole('button', { name: 'Send on WhatsApp' }).click()]);
+    await wa.close().catch(() => undefined);
+    await expect(d.getByText(/Sent\. If WhatsApp did not open/)).toBeVisible();
+    const [pdf] = await Promise.all([page.waitForEvent('popup'), d.getByRole('button', { name: 'Download PDF' }).click()]);
+    await pdf.close().catch(() => undefined);
+
+    await d.getByRole('button', { name: 'See full quote' }).click();
+    const detail = page.getByRole('dialog', { name: /Sunita Verma/ });
+    await expect(detail.getByText('Sent', { exact: true })).toBeVisible();
+    await expect(detail.getByText('Sent by whatsapp')).toBeVisible();
+
+    // The customer is now a lead, so nothing typed is lost.
+    await page.goto('/leads');
+    await expect(page.getByRole('row', { name: /Sunita Verma/ })).toBeVisible();
+    expect(errors).toEqual([]);
+  });
+
+  test('a brand-new studio already has packages and can make its first quote at once', async ({ page }) => {
+    const email = uniqueEmail('freshstudio');
+    const signup = await page.request.post('/api/v1/auth/signup', { data: { studioName: `Fresh Frames ${Date.now()}`, fullName: 'Neha Verma', email, password: 'Sup3rSecret!x' } });
+    expect(signup.status()).toBe(201);
+    await signIn(page, email, 'Sup3rSecret!x');
+    await page.goto('/quotes');
+    await expect(page.getByRole('heading', { name: 'Get ready to send quotes' })).toBeVisible();
+    await page.getByRole('button', { name: 'Make a quote' }).click();
+    const d = page.getByRole('dialog', { name: /Make a quote|Quote is ready/ });
+    await d.getByLabel(lbl('Customer name')).fill('First Customer');
+    await d.getByLabel(lbl('Mobile number')).fill('9822233344');
+    await d.getByRole('button', { name: 'Next' }).click();
+    // Nothing was set up by hand: the everyday packages are simply there.
+    await expect(d.getByRole('radio', { name: /Wedding Signature/ })).toBeVisible();
+    await d.getByRole('radio', { name: /Wedding Signature/ }).check();
+    await d.getByRole('button', { name: 'Next' }).click();
+    await d.getByRole('button', { name: 'Make the quote' }).click();
+    await expect(d.getByRole('heading', { name: '₹1,00,300' })).toBeVisible();
   });
 
   test('links that lead nowhere say so plainly', async ({ page }) => {
@@ -415,6 +508,35 @@ test.describe('quality: accessibility and small screens', () => {
     }
   });
 
+  test('the quick quote steps and the ready-made library have no serious accessibility violations', async ({ page }) => {
+    await signIn(page);
+    await page.goto('/quotes');
+    await page.getByRole('button', { name: 'Make a quote' }).click();
+    const d = page.getByRole('dialog', { name: /Make a quote|Quote is ready/ });
+    await page.waitForTimeout(500);
+    expect(await axe(page), 'step 1').toEqual([]);
+    await d.getByLabel(lbl('Customer name')).fill('Axe Check');
+    await d.getByLabel(lbl('Mobile number')).fill('9811100099');
+    await d.getByRole('button', { name: 'Next' }).click();
+    await page.waitForTimeout(500);
+    expect(await axe(page), 'step 2').toEqual([]);
+    await d.getByRole('radio', { name: /Wedding Signature/ }).check();
+    await d.getByRole('button', { name: 'Next' }).click();
+    await page.waitForTimeout(500);
+    expect(await axe(page), 'step 3').toEqual([]);
+    await d.getByRole('button', { name: 'Make the quote' }).click();
+    await expect(d.getByRole('heading', { name: /₹/ })).toBeVisible();
+    await page.waitForTimeout(500);
+    expect(await axe(page), 'ready').toEqual([]);
+    await d.getByRole('button', { name: 'Done' }).click();
+
+    await page.goto('/sales-setup');
+    await page.getByRole('button', { name: 'Add ready-made packages' }).click();
+    await expect(page.getByRole('dialog', { name: 'Ready-made packages' })).toBeVisible();
+    await page.waitForTimeout(500);
+    expect(await axe(page), 'library').toEqual([]);
+  });
+
   test('nothing overflows on a 375px phone', async ({ page }) => {
     await page.setViewportSize({ width: 375, height: 800 });
     const overflow = () => page.evaluate(() => document.documentElement.scrollWidth - window.innerWidth);
@@ -434,5 +556,15 @@ test.describe('quality: accessibility and small screens', () => {
       expect(await overflow(), url).toBeLessThanOrEqual(1);
       await shot(page, `${url.slice(1)}-375`);
     }
+    // The steps a non-technical person walks through must fit a small phone too.
+    await page.goto('/quotes');
+    await page.getByRole('button', { name: 'Make a quote' }).click();
+    const d = page.getByRole('dialog', { name: /Make a quote|Quote is ready/ });
+    await d.getByLabel(lbl('Customer name')).fill('Phone Check');
+    await d.getByLabel(lbl('Mobile number')).fill('9811100088');
+    await d.getByRole('button', { name: 'Next' }).click();
+    await expect(d.getByRole('radio', { name: /Wedding Signature/ })).toBeVisible();
+    expect(await overflow(), 'quick quote step 2').toBeLessThanOrEqual(1);
+    await shot(page, 'quick-step2-375', false);
   });
 });

@@ -60,7 +60,7 @@ function toInput(f: Form, original: Form): SalesSettingsInput {
   return out as SalesSettingsInput;
 }
 
-export function BusinessTab() {
+export function BusinessTab({ onChanged }: { onChanged?: () => void }) {
   const { toast } = useToast();
   const { data, error, loading, reload } = useLoad(() => salesSetupApi.settings(), []);
   const [f, setF] = React.useState<Form | null>(null);
@@ -86,6 +86,7 @@ export function BusinessTab() {
       await salesSetupApi.updateSettings(toInput(f, original));
       toast({ tone: 'success', title: 'Business details saved' });
       await reload();
+      onChanged?.();
     } catch (e) {
       setErrors(fieldErrors(e));
       toast({ tone: 'error', title: 'Couldn’t save your details', description: errorMessage(e, 'Please try again.') });

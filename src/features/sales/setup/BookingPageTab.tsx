@@ -61,11 +61,12 @@ function SharePanel({ slug, live }: { slug: string; live: boolean }) {
   );
 }
 
-export function BookingPageTab({ onNavigate }: { onNavigate: (tab: string) => void }) {
+export function BookingPageTab({ onNavigate, onChanged }: { onNavigate: (tab: string) => void; onChanged?: () => void }) {
   const { toast } = useToast();
   const { data, error, loading, reload } = useLoad(async () => {
     const [page, packages] = await Promise.all([salesSetupApi.enquiryPage(), catalogApi.list({ kind: 'PACKAGE', active: true })]);
-    return { page, packageCount: packages.filter((p) => p.isPublic).length };
+    const shown = packages.filter((p) => p.isPublic);
+    return { page, packageCount: shown.length, exampleCount: shown.filter((p) => p.isExample).length };
   }, []);
   const [form, setForm] = React.useState<Form | null>(null);
   const [errors, setErrors] = React.useState<Record<string, string>>({});
@@ -88,6 +89,7 @@ export function BookingPageTab({ onNavigate }: { onNavigate: (tab: string) => vo
       await salesSetupApi.updateEnquiryPage({ ...form, headline: form.headline.trim(), intro: form.intro.trim(), thankYouMessage: form.thankYouMessage.trim() });
       toast({ tone: 'success', title: 'Booking page saved' });
       await reload();
+      onChanged?.();
     } catch (e) {
       setErrors(fieldErrors(e));
       toast({ tone: 'error', title: 'Couldn’t save the booking page', description: errorMessage(e, 'Please try again.') });
@@ -95,6 +97,7 @@ export function BookingPageTab({ onNavigate }: { onNavigate: (tab: string) => vo
   };
 
   const noPackages = data.packageCount === 0;
+  const showExamples = data.exampleCount > 0 && form.isEnabled;
 
   return (
     <div className="space-y-6">
@@ -112,6 +115,12 @@ export function BookingPageTab({ onNavigate }: { onNavigate: (tab: string) => vo
               <Field label="Introduction" hint="One or two friendly lines under the headline." error={errors.intro}>{(a) => <Textarea id={a.id} rows={3} value={form.intro} onChange={(e) => set('intro', e.target.value)} maxLength={2000} aria-describedby={a.describedBy} />}</Field>
               <Field label="Thank-you message" hint="Shown after a submission when the customer does not get an instant quote." error={errors.thankYouMessage}>{(a) => <Textarea id={a.id} rows={2} value={form.thankYouMessage} onChange={(e) => set('thankYouMessage', e.target.value)} maxLength={1000} aria-describedby={a.describedBy} />}</Field>
             </div>
+
+            {showExamples && (
+              <p role="status" className="rounded-[var(--radius-md)] bg-warn-bg px-3 py-2 text-[13px] text-fg">
+                <strong>{data.exampleCount} {data.exampleCount === 1 ? 'package still has' : 'packages still have'} an example price.</strong> Customers would be quoted that price. <button type="button" className="cursor-pointer font-semibold underline" onClick={() => onNavigate('packages')}>Check your prices</button> before you share the page.
+              </p>
+            )}
 
             <fieldset>
               <legend className="mb-2 text-sm font-medium text-fg">What happens when someone enquires?</legend>

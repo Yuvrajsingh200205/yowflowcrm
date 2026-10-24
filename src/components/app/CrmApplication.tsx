@@ -76,6 +76,7 @@ import { ToastProvider } from '@/components/common';
 import { SettingsManager } from '@/features/settings/SettingsManager';
 import { QuotesScreen, type QuoteIntent } from '@/features/sales/QuotesScreen';
 import { SalesSetupScreen } from '@/features/sales/SalesSetupScreen';
+import type { SetupTab } from '@/features/sales/GettingStarted';
 import { AccessDenied } from './CrmStatePanels';
 import { ROUTE_TABS, TAB_ROUTES } from './crmRoutes';
 import { apiErrorMessage, getEmployeeAssignmentConflict, isEmployeeAttendanceUser, leaveTypeInput, normalizeLeaveRequest, toShiftValue } from './crmAppUtils';
@@ -472,6 +473,8 @@ export default function App() {
   const [isAllPaymentsModalOpen, setIsAllPaymentsModalOpen] = useState(false);
   // A lead asking the Quotes screen to make or list quotes for it.
   const [quoteIntent, setQuoteIntent] = useState<QuoteIntent | null>(null);
+  // Which Sales setup tab to open when something elsewhere sends the user there.
+  const [salesSetupTab, setSalesSetupTab] = useState<SetupTab | null>(null);
   const [selectedMemberForModal, setSelectedMemberForModal] = useState<TeamMember | null>(null);
 
   const handleSelectProject = (project: Project, roleContext?: string) => {
@@ -1442,6 +1445,7 @@ export default function App() {
                 intent={quoteIntent}
                 onIntentHandled={() => setQuoteIntent(null)}
                 onOpenProject={(projectId) => navigateInsideCrm(`/projects/${encodeURIComponent(projectId)}`)}
+                onOpenSalesSetup={canAccessTab('sales_setup') ? (tab) => { setSalesSetupTab(tab); setActiveTab('sales_setup'); } : undefined}
               />
             ) : (
               <AccessDenied />
@@ -1449,7 +1453,7 @@ export default function App() {
           )}
 
           {visibleTab === 'sales_setup' && (
-            canAccessTab('sales_setup') ? <SalesSetupScreen permissions={currentUser?.permissions ?? []} /> : <AccessDenied />
+            canAccessTab('sales_setup') ? <SalesSetupScreen permissions={currentUser?.permissions ?? []} initialTab={salesSetupTab} onTabHandled={() => setSalesSetupTab(null)} /> : <AccessDenied />
           )}
 
           {visibleTab === 'clients' && (

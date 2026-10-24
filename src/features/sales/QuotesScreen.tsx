@@ -3,7 +3,8 @@
 import * as React from 'react';
 import { Plus } from 'lucide-react';
 import { Button, Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui';
-import { NewQuoteDialog } from './quotes/NewQuoteDialog';
+import { GettingStarted, type SetupTab } from './GettingStarted';
+import { QuickQuoteDialog } from './quotes/QuickQuoteDialog';
 import { QuoteDetail } from './quotes/QuoteDetail';
 import { QuoteList } from './quotes/QuoteList';
 import { TodayPanel } from './quotes/TodayPanel';
@@ -17,11 +18,14 @@ interface Props {
   intent?: QuoteIntent | null;
   onIntentHandled?: () => void;
   onOpenProject?: (projectId: string) => void;
+  /** Go to Sales setup, optionally on a particular tab. */
+  onOpenSalesSetup?: (tab: SetupTab) => void;
 }
 
-export function QuotesScreen({ permissions, intent, onIntentHandled, onOpenProject }: Props) {
+export function QuotesScreen({ permissions, intent, onIntentHandled, onOpenProject, onOpenSalesSetup }: Props) {
   const canCreate = permissions.includes('QUOTATION_CREATE');
   const canPayments = permissions.includes('PAYMENT_VIEW');
+  const canSetUp = permissions.includes('CATALOG_MANAGE') || permissions.includes('BOOKING_SETUP_MANAGE');
   const [tab, setTab] = React.useState('today');
   const [detailId, setDetailId] = React.useState<string | null>(null);
   const [creating, setCreating] = React.useState<{ leadId: string | null } | null>(null);
@@ -45,8 +49,10 @@ export function QuotesScreen({ permissions, intent, onIntentHandled, onOpenProje
           <h2 className="font-display text-2xl font-semibold tracking-tight">Quotes</h2>
           <p className="mt-1 text-sm text-fg-muted">See who needs a reply today, what has been opened, and what was accepted.</p>
         </div>
-        {canCreate && <Button onClick={() => setCreating({ leadId: null })}><Plus />New quote</Button>}
+        {canCreate && <Button size="lg" onClick={() => setCreating({ leadId: null })}><Plus />Make a quote</Button>}
       </header>
+
+      {onOpenSalesSetup && <GettingStarted canAct={canSetUp} onGo={onOpenSalesSetup} version={version} />}
 
       <Tabs value={tab} onValueChange={setTab}>
         <TabsList aria-label="Quote views">
@@ -58,7 +64,15 @@ export function QuotesScreen({ permissions, intent, onIntentHandled, onOpenProje
       </Tabs>
 
       {detailId && <QuoteDetail id={detailId} permissions={permissions} onClose={() => setDetailId(null)} onChanged={bump} onOpenProject={onOpenProject} />}
-      {creating && <NewQuoteDialog initialLeadId={creating.leadId} onClose={() => setCreating(null)} onCreated={(id) => { setCreating(null); bump(); setDetailId(id); }} />}
+      {creating && (
+        <QuickQuoteDialog
+          initialLeadId={creating.leadId}
+          canAddTemplates={permissions.includes('CATALOG_MANAGE')}
+          onClose={() => { setCreating(null); bump(); }}
+          onCreated={(id) => { setCreating(null); bump(); setDetailId(id); }}
+          onOpenPrices={() => { setCreating(null); onOpenSalesSetup?.('packages'); }}
+        />
+      )}
     </div>
   );
 }

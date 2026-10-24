@@ -1,5 +1,14 @@
 # Changelog
 
+## 2.2.0 — Ready-made templates and Quick quote
+
+- **Ready-made library** (Sales setup → Packages & pricing → *Add ready-made packages*): 28 packages across weddings, pre-wedding, engagement and roka, haldi and mehendi, sangeet and reception, birthdays and kids, baby and family, anniversaries, corporate events and product shoots, plus 12 add-ons. Tick what you offer; prices are examples until you change them or confirm them.
+- **Every new studio starts with the everyday set already in its price list**, so the first quote needs no setup. Existing studios add it with one tap.
+- **Example prices are flagged** (badge on the item, banner on the list, warning on the booking page and on a freshly made quote) until the studio edits the item or presses *These are my prices*.
+- **Quick quote** replaces the old "New quote" form: three short steps (who, which package, optional details), then *Send on WhatsApp*, *Copy link* or *Download PDF*. Makes the lead too, reuses an open lead with the same mobile number and date, and accepts a hand-typed price when no package fits. Works for non-technical users: one question at a time, big buttons, plain words, picture icons for each occasion.
+- **Get-ready checklist** on Quotes and Sales setup: add packages, put your own prices, add phone and UPI, switch on the booking page. It disappears once done.
+- *Copy* on any package to make a variation.
+
 ## 2.1.0 — Quote in seconds
 
 ### Product

@@ -1,11 +1,12 @@
 'use client';
 
 import * as React from 'react';
-import { EyeOff, Package, Pencil, Plus, Puzzle, Sparkles, Star, Trash2 } from 'lucide-react';
+import { Copy, EyeOff, Library, Package, Pencil, Plus, Puzzle, Star, Trash2, TriangleAlert } from 'lucide-react';
 import { Badge, Button, Dialog, DialogContent, EmptyState, ErrorState, Field, Input, Select, Skeleton, Textarea, useToast } from '@/components/ui';
-import { catalogApi, EVENT_TYPE_LABELS, EVENT_TYPES, type CatalogInput, type CatalogItem, type CatalogKind, type EventType, type PricingType } from '@/lib/api/sales';
+import { catalogApi, templatesApi, EVENT_TYPE_LABELS, EVENT_TYPES, type CatalogInput, type CatalogItem, type CatalogKind, type EventType, type PricingType } from '@/lib/api/sales';
 import { errorMessage, fieldErrors, inr } from '../format';
 import { ConfirmDialog, MoneyInput, NumberInput, Panel, Toggle, useLoad } from '../ui';
+import { TemplateLibraryDialog } from './TemplateLibraryDialog';
 
 export const priceSuffix = (i: Pick<CatalogItem, 'pricingType' | 'unitLabel'>) =>
   i.pricingType === 'PER_DAY' ? 'per day' : i.pricingType === 'PER_PERSON' ? 'per guest' : i.unitLabel ? `per ${i.unitLabel}` : '';
@@ -81,9 +82,9 @@ function toInput(kind: CatalogKind, f: FormState): Partial<CatalogInput> {
   };
 }
 
-function ItemDialog({ kind, item, onClose, onSaved }: { kind: CatalogKind; item: CatalogItem | null; onClose: () => void; onSaved: () => void }) {
+function ItemDialog({ kind, item, copyOf, onClose, onSaved }: { kind: CatalogKind; item: CatalogItem | null; copyOf?: CatalogItem | null; onClose: () => void; onSaved: () => void }) {
   const { toast } = useToast();
-  const [f, setF] = React.useState<FormState>(() => (item ? fromItem(item) : blank()));
+  const [f, setF] = React.useState<FormState>(() => (item ? fromItem(item) : copyOf ? { ...fromItem(copyOf), name: `Copy of ${copyOf.name}`.slice(0, 160), isPopular: false } : blank()));
   const [errors, setErrors] = React.useState<Record<string, string>>({});
   const [busy, setBusy] = React.useState(false);
   const set = <K extends keyof FormState>(key: K, value: FormState[K]) => { setF((s) => ({ ...s, [key]: value })); setErrors((e) => ({ ...e, [key]: '' })); };
@@ -116,7 +117,7 @@ function ItemDialog({ kind, item, onClose, onSaved }: { kind: CatalogKind; item:
     <Dialog open onOpenChange={(open) => { if (!open && !busy) onClose(); }}>
       <DialogContent
         size="lg"
-        title={item ? `Edit ${noun}` : `New ${noun}`}
+        title={item ? `Edit ${noun}` : copyOf ? `Copy of ${copyOf.name}` : `New ${noun}`}
         description={kind === 'PACKAGE' ? 'A package is the main thing a customer buys, such as “Wedding – Signature”.' : 'An add-on is an optional extra a customer can switch on, such as a drone or an extra album.'}
         footer={<><Button variant="secondary" onClick={onClose} disabled={busy}>Cancel</Button><Button type="submit" form="catalog-form" loading={busy}>{item ? 'Save changes' : `Add ${noun}`}</Button></>}
       >
@@ -175,7 +176,7 @@ function ItemDialog({ kind, item, onClose, onSaved }: { kind: CatalogKind; item:
   );
 }
 
-function Row({ item, canManage, onEdit, onDelete }: { item: CatalogItem; canManage: boolean; onEdit: () => void; onDelete: () => void }) {
+function Row({ item, canManage, onEdit, onCopy, onDelete }: { item: CatalogItem; canManage: boolean; onEdit: () => void; onCopy: () => void; onDelete: () => void }) {
   const suffix = priceSuffix(item);
   return (
     <li className="flex flex-wrap items-start justify-between gap-3 border-b border-line-soft px-4 py-3.5 last:border-b-0">
@@ -183,6 +184,7 @@ function Row({ item, canManage, onEdit, onDelete }: { item: CatalogItem; canMana
         <div className="flex flex-wrap items-center gap-2">
           <p className="font-medium text-fg">{item.name}</p>
           {item.isPopular && <Badge tone="accent"><Star className="size-3" aria-hidden="true" />Most popular</Badge>}
+          {item.isExample && <Badge tone="warning"><TriangleAlert className="size-3" aria-hidden="true" />Example price</Badge>}
           {!item.isActive && <Badge tone="neutral">Inactive</Badge>}
           {item.isActive && !item.isPublic && <Badge tone="neutral"><EyeOff className="size-3" aria-hidden="true" />Team only</Badge>}
         </div>
@@ -197,6 +199,7 @@ function Row({ item, canManage, onEdit, onDelete }: { item: CatalogItem; canMana
       {canManage && (
         <div className="flex shrink-0 items-center gap-1">
           <Button variant="ghost" size="sm" onClick={onEdit} aria-label={`Edit ${item.name}`}><Pencil />Edit</Button>
+          <Button variant="ghost" size="sm" onClick={onCopy} aria-label={`Make a copy of ${item.name}`}><Copy />Copy</Button>
           <Button variant="ghost" size="icon" className="size-8 text-bad hover:text-bad" onClick={onDelete} aria-label={`Delete ${item.name}`}><Trash2 /></Button>
         </div>
       )}
@@ -204,12 +207,15 @@ function Row({ item, canManage, onEdit, onDelete }: { item: CatalogItem; canMana
   );
 }
 
-export function PackagesTab({ canManage }: { canManage: boolean }) {
+export function PackagesTab({ canManage, onChanged }: { canManage: boolean; onChanged?: () => void }) {
   const { toast } = useToast();
   const { data, error, loading, reload } = useLoad(() => catalogApi.list(), []);
-  const [editing, setEditing] = React.useState<{ kind: CatalogKind; item: CatalogItem | null } | null>(null);
+  const [editing, setEditing] = React.useState<{ kind: CatalogKind; item: CatalogItem | null; copyOf?: CatalogItem | null } | null>(null);
   const [deleting, setDeleting] = React.useState<CatalogItem | null>(null);
+  const [library, setLibrary] = React.useState(false);
+  const [confirming, setConfirming] = React.useState(false);
   const [busy, setBusy] = React.useState(false);
+  const refresh = async () => { await reload(); onChanged?.(); };
 
   if (loading && !data) return <div className="space-y-4"><Skeleton className="h-40" /><Skeleton className="h-40" /></div>;
   if (error && !data) return <ErrorState title="Couldn’t load your price list" description={error} action={{ label: 'Try again', onClick: () => void reload() }} />;
@@ -217,21 +223,29 @@ export function PackagesTab({ canManage }: { canManage: boolean }) {
   const items = data ?? [];
   const packages = items.filter((i) => i.kind === 'PACKAGE');
   const addons = items.filter((i) => i.kind === 'ADDON');
-
-  const seed = async () => {
-    setBusy(true);
-    try { await catalogApi.seedStarter(); toast({ tone: 'success', title: 'Starter packages added', description: 'Edit the names and prices to match your studio.' }); await reload(); }
-    catch (e) { toast({ tone: 'error', title: 'Couldn’t add the starter packages', description: errorMessage(e, 'Please try again.') }); }
-    finally { setBusy(false); }
-  };
+  const examples = items.filter((i) => i.isExample && i.isActive).length;
 
   const remove = async () => {
     if (!deleting) return;
     setBusy(true);
-    try { await catalogApi.remove(deleting.id); toast({ tone: 'success', title: `${deleting.name} deleted`, description: 'Quotes that already used it are not affected.' }); setDeleting(null); await reload(); }
+    try { await catalogApi.remove(deleting.id); toast({ tone: 'success', title: `${deleting.name} deleted`, description: 'Quotes that already used it are not affected.' }); setDeleting(null); await refresh(); }
     catch (e) { toast({ tone: 'error', title: 'Couldn’t delete it', description: errorMessage(e, 'Please try again.') }); }
     finally { setBusy(false); }
   };
+
+  const confirmPrices = async () => {
+    setBusy(true);
+    try { await templatesApi.confirmPrices(); toast({ tone: 'success', title: 'Prices confirmed', description: 'They will go on your quotes as they are.' }); setConfirming(false); await refresh(); }
+    catch (e) { toast({ tone: 'error', title: 'Couldn’t save that', description: errorMessage(e, 'Please try again.') }); }
+    finally { setBusy(false); }
+  };
+
+  const dialogs = (
+    <>
+      {library && <TemplateLibraryDialog preselectDefaults={items.length === 0} onClose={() => setLibrary(false)} onAdded={() => { setLibrary(false); void refresh(); }} />}
+      {editing && <ItemDialog kind={editing.kind} item={editing.item} copyOf={editing.copyOf} onClose={() => setEditing(null)} onSaved={() => { setEditing(null); void refresh(); }} />}
+    </>
+  );
 
   if (items.length === 0) {
     return (
@@ -240,16 +254,16 @@ export function PackagesTab({ canManage }: { canManage: boolean }) {
           <EmptyState
             icon={<Package />}
             title="Your price list is empty"
-            description={canManage ? 'Add the packages and extras you sell. Quotes and your booking page are built from this list, so a customer gets a price in seconds.' : 'Ask an admin to add your packages and extras.'}
+            description={canManage ? 'Start with our ready-made packages for weddings, birthdays, pre-wedding shoots, corporate events and more. Tick what you offer, then change the prices to your own.' : 'Ask an admin to add your packages and extras.'}
           />
           {canManage && (
             <div className="flex flex-wrap justify-center gap-2 pb-10">
-              <Button onClick={() => void seed()} loading={busy}><Sparkles />Use starter packages</Button>
-              <Button variant="secondary" onClick={() => setEditing({ kind: 'PACKAGE', item: null })}><Plus />Add my own package</Button>
+              <Button size="lg" onClick={() => setLibrary(true)}><Library />Add ready-made packages</Button>
+              <Button size="lg" variant="secondary" onClick={() => setEditing({ kind: 'PACKAGE', item: null })}><Plus />Add my own package</Button>
             </div>
           )}
         </div>
-        {editing && <ItemDialog kind={editing.kind} item={editing.item} onClose={() => setEditing(null)} onSaved={() => { setEditing(null); void reload(); }} />}
+        {dialogs}
       </>
     );
   }
@@ -259,13 +273,13 @@ export function PackagesTab({ canManage }: { canManage: boolean }) {
       title={title}
       description={description}
       icon={icon}
-      actions={canManage && <Button size="sm" onClick={() => setEditing({ kind, item: null })}><Plus />{kind === 'PACKAGE' ? 'Add package' : 'Add add-on'}</Button>}
+      actions={canManage && <Button size="sm" variant="secondary" onClick={() => setEditing({ kind, item: null })}><Plus />{kind === 'PACKAGE' ? 'Add my own package' : 'Add my own add-on'}</Button>}
     >
       {rows.length === 0 ? (
         <p className="rounded-[var(--radius-md)] bg-surface-sunken px-4 py-6 text-center text-sm text-fg-muted">{kind === 'PACKAGE' ? 'No packages yet.' : 'No add-ons yet. Extras such as a drone or an album let customers build their own quote.'}</p>
       ) : (
         <ul className="-mx-5 -my-5 divide-y-0">
-          {rows.map((i) => <Row key={i.id} item={i} canManage={canManage} onEdit={() => setEditing({ kind: i.kind, item: i })} onDelete={() => setDeleting(i)} />)}
+          {rows.map((i) => <Row key={i.id} item={i} canManage={canManage} onEdit={() => setEditing({ kind: i.kind, item: i })} onCopy={() => setEditing({ kind: i.kind, item: null, copyOf: i })} onDelete={() => setDeleting(i)} />)}
         </ul>
       )}
     </Panel>
@@ -273,10 +287,23 @@ export function PackagesTab({ canManage }: { canManage: boolean }) {
 
   return (
     <div className="space-y-6">
+      {canManage && (
+        <div className="flex flex-wrap items-center justify-between gap-3">
+          <p className="text-sm text-fg-muted">{items.length} items in your price list.</p>
+          <Button onClick={() => setLibrary(true)}><Library />Add ready-made packages</Button>
+        </div>
+      )}
+      {canManage && examples > 0 && (
+        <div role="status" className="flex flex-wrap items-center justify-between gap-3 rounded-[var(--radius-lg)] bg-warn-bg p-4">
+          <p className="flex min-w-0 flex-1 items-start gap-2 text-sm text-fg"><TriangleAlert className="mt-0.5 size-4 shrink-0 text-warn" aria-hidden="true" /><span><strong>{examples} {examples === 1 ? 'price is' : 'prices are'} only an example.</strong> Press <em>Edit</em> on each one and put your own price. If a price is already right, you can confirm all of them at once.</span></p>
+          <Button variant="secondary" onClick={() => setConfirming(true)}>These are my prices</Button>
+        </div>
+      )}
       {group('Packages', 'The main things you sell. A customer picks one when they enquire.', Package, 'PACKAGE', packages)}
       {group('Add-ons', 'Optional extras. Customers can switch them on or off on their quote.', Puzzle, 'ADDON', addons)}
-      {editing && <ItemDialog kind={editing.kind} item={editing.item} onClose={() => setEditing(null)} onSaved={() => { setEditing(null); void reload(); }} />}
+      {dialogs}
       <ConfirmDialog open={Boolean(deleting)} title={`Delete “${deleting?.name ?? ''}”?`} description="Quotes you have already made keep their own copy of this item. It will no longer appear on your booking page or in new quotes." confirmLabel="Delete" destructive busy={busy} onConfirm={() => void remove()} onClose={() => setDeleting(null)} />
+      <ConfirmDialog open={confirming} title="Are these your real prices?" description={`${examples} ${examples === 1 ? 'price' : 'prices'} will stop being marked as examples. Customers will be quoted exactly these amounts.`} confirmLabel="Yes, these are my prices" busy={busy} onConfirm={() => void confirmPrices()} onClose={() => setConfirming(false)} />
     </div>
   );
 }
