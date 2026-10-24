@@ -1,4 +1,4 @@
-# Test report — Yowflow 2.1
+# Test report — Yowflow 2.2
 
 Last run: 24 Oct 2026, macOS, Node 25, Chromium (Playwright 1.x), isolated local PostgreSQL.
 
@@ -6,16 +6,21 @@ Last run: 24 Oct 2026, macOS, Node 25, Chromium (Playwright 1.x), isolated local
 
 | Layer | Tool | Result |
 |---|---|---|
-| Backend integration + unit | Vitest + Supertest, real PostgreSQL | **357 / 357** (31 files; 1 opt-in query-budget test skipped) — adds **quote engine 38 (catalogue and setup, booking page, instant and approval quotes, public quote page, booking and date guard, PDFs, reminders, permission sync)**; earlier: 319 — includes signup, email verification, password reset, contact form, API keys, billing, dashboard trends, workspace members, **client-portal auth (12) and data API (12: tenant isolation, hidden-section leakage, download gating, album cap, keyset pagination, thumbnails from real JPEGs, comments/requests/share links/notifications, parallel-upload race)**, error mapping and query budgets |
-| Frontend unit | Vitest | **89 / 89** (adds pricing, formatting, brand colours, route protection) |
-| End-to-end | Playwright | **98 / 98** (full run, fresh database; adds `sales.spec.ts`, 11 tests) |
+| Backend integration + unit | Vitest + Supertest, real PostgreSQL | **371 / 371** (32 files; 1 opt-in query-budget test skipped) — adds **quote engine 38 (catalogue and setup, booking page, instant and approval quotes, public quote page, booking and date guard, PDFs, reminders, permission sync)**; earlier: 319 — includes signup, email verification, password reset, contact form, API keys, billing, dashboard trends, workspace members, **client-portal auth (12) and data API (12: tenant isolation, hidden-section leakage, download gating, album cap, keyset pagination, thumbnails from real JPEGs, comments/requests/share links/notifications, parallel-upload race)**, error mapping and query budgets |
+| Frontend unit | Vitest | **96 / 96** (adds pricing, formatting, brand colours, route protection, occasions and the get-ready checklist) |
+| End-to-end | Playwright | **101 / 101** (full run, fresh database; `sales.spec.ts` has 14 tests) |
 | Accessibility | axe-core (WCAG 2.0/2.1 A + AA), 11 public + 4 app pages, plus booking page, quote page, Quotes and the four Sales setup tabs | **0 serious/critical violations** |
 | Responsive | Playwright at 375 / 768 / 1440, 11 public + 4 app pages | **no horizontal overflow**, screenshots reviewed |
 | Type-check | `tsc --noEmit` (both repos) | clean |
 | Lint | ESLint (backend) | clean (0 warnings) |
 | Lighthouse | v12, production build | see below |
 
-## Added in this round (Quote in seconds)
+## Added in the templates round
+- **Backend (14 tests):** the library is well formed (unique keys, real groups, valid quantities, 28 packages, a default kit); listing marks what a studio already has; adding is idempotent and remembers the template even after a rename; unknown templates are refused; managers may add, the rest of the team may not; one studio never sees another's list; example prices are flagged on import, cleared by editing an item and by confirming; the readiness endpoint; every new signup starts with the default kit; quick quote makes a lead and a priced draft quote, reuses an open lead with the same mobile and date, accepts a hand-typed price, explains invalid details, and cannot use another studio's package.
+- **Frontend unit (7):** occasion chips and event types, price suffixes, checklist logic.
+- **E2E (+3, 14 in `sales.spec.ts`):** library import with example-price banner, copy, "already added"; Quick quote for a walk-in (validation in plain words, estimate before making, WhatsApp and PDF open, sent status, lead created); a brand-new studio makes its first quote with no setup; axe on every wizard step and the library; the wizard fits a 375px phone.
+
+## Added in the Quote-in-seconds round
 - **Backend (38 integration tests):** catalogue rules and tenant isolation; business details validation (UPI, IFSC, GSTIN, phone, email, website, blank clears); availability (capacity, notice, booking window, closed dates); enquiry page in OFF / APPROVAL / AUTO modes, bot trap, lead de-duplication, unknown or hidden package ids; public quote page (view tracking, add-on re-pricing, expiry, decline, questions, unguessable tokens); acceptance books client, project, milestones and draft invoice, and undoes itself if the date was just taken; staff booking with administrator override; quote and invoice PDFs (and a fallback when fonts are missing); invoice open and mark-issued; daily reminders (tiers, once-only, opt-out); permission catalogue sync for existing studios.
 - **Frontend unit (25):** quote arithmetic matches the server (₹1,35,700 sample), payment plan, date maths without time-zone drift, Indian rupee formatting, mobile number forms, studio colour contrast, public and protected route rules.
 - **E2E `sales.spec.ts` (11):** owner sets up price list, business details, closed dates and booking page → customer picks a date and package, gets the quote instantly, switches an add-on, accepts, sees UPI QR and bank details → staff see the booking, activity timeline, PDFs, draft invoice → booked date and closed date cannot be picked → approval mode: enquiry waits, notification opens it, review and send, customer declines with a reason → staff build a quote from a lead's row, edit it, send, book it → dead links → axe on public and staff screens → no sideways scroll at 375px.
