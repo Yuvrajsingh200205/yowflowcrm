@@ -40,7 +40,7 @@ import { rbacApi } from '@/lib/api/rbac';
 import { isPersistedProjectId, normalizeProject, toBackendProjectStatus } from '@/features/projects/projectViewModel';
 import { projectStatusChangeSteps } from '@/features/projects/projectStatusFlow';
 import { projectsApi } from '@/lib/api/projects';
-import { persistStudioProject } from '@/features/projects/persistProject';
+import { persistStudioProject, type SaveOptions } from '@/features/projects/persistProject';
 import { attachShoots, persistProjectShoots, persistSingleCrewDataHandover } from '@/features/shoots/persistShoots';
 import { shootsApi } from '@/lib/api/shoots';
 import { attendanceApi } from '@/lib/api/attendance';
@@ -520,7 +520,7 @@ export default function App() {
     hasPermission(currentUser, accessRoles, 'shoots.assign_cinematographer') ||
     hasPermission(currentUser, accessRoles, 'shoots.assign_freelancer');
 
-  const handleSaveProject = async (savedProject: Project) => {
+  const handleSaveProject = async (savedProject: Project, options?: SaveOptions) => {
     const exists = projects.some((project) => project.id === savedProject.id);
     if (exists) {
       if (!hasPermission(currentUser, accessRoles, 'weddings.edit') && !hasPermission(currentUser, accessRoles, 'clients.edit')) return;
@@ -532,7 +532,7 @@ export default function App() {
       const { next, existing } = assignmentConflict;
       throw new Error(`${next.employeeName} is already assigned on ${existing.date} for "${existing.shootTitle}" in ${existing.projectName}.`);
     }
-    const persisted = await persistStudioProject(savedProject, team);
+    const persisted = await persistStudioProject(savedProject, team, options);
     setProjects((prev) => {
       const next = prev.filter((project) => project.id !== savedProject.id && project.id !== persisted.id);
       return [persisted, ...next];

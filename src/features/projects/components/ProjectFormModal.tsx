@@ -7,7 +7,7 @@ import { useToast } from '@/components/common';
 import { mergeAssignees, FREELANCER_ASSIGNEE, UNASSIGNED_ASSIGNEE, assigneeSelectValue } from '@/features/projects/assigneeOptions';
 import { useTeam } from '@/hooks/useTeam';
 import { CLIENT_ASSET_ACCEPT, CLIENT_ASSET_MAX_BYTES, clientAssetsApi, type ProjectClientAsset, uploadProjectClientAsset } from '@/lib/api/clientAssets';
-import { PAYMENT_MODE_OPTIONS, paymentsApi, toPaymentMethod, type PaymentMethod } from '@/lib/api/payments';
+import { PAYMENT_MODE_OPTIONS } from '@/lib/api/payments';
 import { ApiError } from '@/lib/api/client';
 import { indianMobileError, nextIndianMobileValue } from '@/lib/validation/indianMobile';
 import { getTodayDateString } from '@/utils/shootTracking';
@@ -20,8 +20,10 @@ import { isPersistedProjectId } from '@/features/projects/projectViewModel';
 import { DateAvailabilityHint } from '@/features/sales/DateAvailabilityHint';
 import { loadProjectTasks } from '@/features/projects/persistProjectTasks';
 import { shootsApi } from '@/lib/api/shoots';
-import { projectsApi } from '@/lib/api/projects';
 import { toShootEvent } from '@/features/shoots/persistShoots';
+
+const newAttemptKey = () =>
+  typeof crypto !== 'undefined' && typeof crypto.randomUUID === 'function' ? `project-${crypto.randomUUID()}` : `project-${Date.now()}-${Math.random().toString(36).slice(2)}`;
 
 function projectSaveErrorMessage(error: unknown) {
   if (error instanceof ApiError) {
@@ -93,7 +95,7 @@ interface ProjectFormModalProps {
   isOpen: boolean;
   variant?: 'modal' | 'page';
   onClose: () => void;
-  onSave: (project: Project) => Project | void | Promise<Project | void>;
+  onSave: (project: Project, options?: { idempotencyKey?: string }) => Project | void | Promise<Project | void>;
   existingProject?: Project | null;
   team?: TeamMember[];
 }
@@ -508,13 +510,9 @@ export const ProjectFormModal: React.FC<ProjectFormModalProps> = ({
   const hasFinancialAmount = totalBudget !== '' || advanceReceived !== '';
   const [saving, setSaving] = useState(false);
   const submitInFlight = useRef(false);
-  // Stable for the life of this form: retrying a failed submit must replay the
-  // same advance rather than record it twice.
-  const advanceIdempotencyKey = useRef(
-    typeof crypto !== 'undefined' && typeof crypto.randomUUID === 'function'
-      ? crypto.randomUUID()
-      : `advance-${Date.now()}-${Math.random().toString(36).slice(2)}`,
-  );
+  // One key for this form. If a save times out after the server already saved the project, pressing Save again
+  // sends the same key and gets that project back instead of making a second one.
+  const attemptKey = useRef(newAttemptKey());
 
   const handleSubmit = async (e?: React.SyntheticEvent) => {
     e?.preventDefault();
@@ -618,45 +616,18 @@ export const ProjectFormModal: React.FC<ProjectFormModalProps> = ({
 
     submitInFlight.current = true;
     setSaving(true);
-    let rollbackProjectId: string | undefined;
     try {
-      const persistedProject = createdProjectId ? undefined : await onSave(newProject);
+      // One request saves the project with its client, shoots, tasks and any advance, all or nothing. If something is
+      // wrong, nothing is saved, so fixing it and pressing Save again can never leave a second copy behind.
+      const persistedProject = createdProjectId ? undefined : await onSave(newProject, { idempotencyKey: attemptKey.current });
       const projectId = createdProjectId || (persistedProject && typeof persistedProject === 'object' && 'id' in persistedProject
         ? persistedProject.id
         : (existingProject?.id && !existingProject.id.startsWith('proj-') ? existingProject.id : undefined));
-      if (!existingProject && !createdProjectId) rollbackProjectId = projectId;
+      // From here on the project exists: pressing Save again only finishes what is left (the files), it does not create it again.
+      if (!existingProject && projectId) setCreatedProjectId(projectId);
 
-      // "Advance Received" is not a column on Project — every screen derives it
-      // from the project's COMPLETED payments (see `normalizeProject` and the
-      // dashboard's `received` aggregate). Recording it as a real payment is
-      // what makes the number, and the computed Balance Due, survive a refresh.
-      if (!existingProject && !createdProjectId && advanceAmount > 0) {
-        if (!projectId) {
-          throw new Error('The project was saved but returned no database id, so the advance could not be recorded.');
-        }
-        const advanceClientId =
-          persistedProject && typeof persistedProject === 'object' && 'clientId' in persistedProject
-            ? (persistedProject as Project).clientId
-            : undefined;
-        if (!advanceClientId) {
-          throw new Error('The project was saved but returned no client id, so the advance could not be recorded.');
-        }
-        setCreatedProjectId(projectId);
-        await paymentsApi.createProjectPayment(
-          {
-            clientId: advanceClientId,
-            projectId,
-            amount: advanceAmount,
-            paymentDate: advancePaymentDate,
-            paymentMethod: toPaymentMethod(advanceMode) as PaymentMethod,
-            notes: 'Advance booking amount',
-          },
-          advanceIdempotencyKey.current,
-        );
-      }
       if (clientAssets.length) {
         if (!projectId) throw new Error('The project was saved, but did not return a database id for client asset upload.');
-        setCreatedProjectId(projectId);
         const assetsToUpload = [...clientAssets];
         setClientAssets((items) => items.map((item) => ({ ...item, status: 'uploading' })));
         const results = await Promise.allSettled(assetsToUpload.map((asset) => uploadProjectClientAsset(projectId, asset.file, { category: asset.category, title: asset.file.name })));
@@ -666,24 +637,21 @@ export const ProjectFormModal: React.FC<ProjectFormModalProps> = ({
             if (results[index].status === 'fulfilled') { if (asset.previewUrl) URL.revokeObjectURL(asset.previewUrl); return []; }
             return [{ ...asset, status: 'error' as const, error: 'Upload failed' }];
           }));
-          throw new Error(`${failed} client asset${failed === 1 ? '' : 's'} failed to upload.`);
+          throw new Error(`The project is saved, but ${failed} file${failed === 1 ? '' : 's'} did not upload. Press Save again to upload ${failed === 1 ? 'it' : 'them'}; the project will not be created twice.`);
         }
       }
-    const assigned = [...new Set(tasks.map((row) => row.assignedTo?.trim()).filter((name) => name && name !== 'Unassigned'))];
-    const extra = assigned.length ? ` Assigned to ${assigned.join(', ')}.` : '';
+      const assigned = [...new Set(tasks.map((row) => row.assignedTo?.trim()).filter((name) => name && name !== 'Unassigned'))];
+      const extra = assigned.length ? ` Assigned to ${assigned.join(', ')}.` : '';
       showToast((existingProject ? 'Project saved to the studio records.' : 'Project created and saved.') + extra);
       onClose();
     } catch (error) {
-      if (!existingProject && rollbackProjectId) {
-        try {
-          await projectsApi.remove(rollbackProjectId);
-          setCreatedProjectId(null);
-        } catch {
-          showToast('Project save failed, but the partially-created project could not be rolled back automatically. Please delete it manually.', { variant: 'error' });
-        }
+      if (error instanceof ApiError && error.code === 'IDEMPOTENCY_CONFLICT') {
+        // The form was changed after an attempt that may have gone through. Look before saving again.
+        attemptKey.current = newAttemptKey();
+        showToast('An earlier attempt may already have saved this project. Check the project list first. If it is not there, press Save again.', { variant: 'error' });
+        return;
       }
-      // Surface what actually failed. A generic message here is how a lost
-      // advance looked like "the budget did not save".
+      // Say what actually failed, so it can be fixed and saved again.
       showToast(projectSaveErrorMessage(error), { variant: 'error' });
       return;
     } finally {

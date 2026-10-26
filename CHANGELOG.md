@@ -1,5 +1,12 @@
 # Changelog
 
+## 2.2.1 — Creating a project is all or nothing
+
+- **Fixed:** when saving a new project failed (for example the advance was rejected) and the studio fixed the problem and saved again, the project from the failed try was already there, so there were two. A new project, its client, shoots, tasks and its advance payment are now saved in one step on the server: if anything is wrong, nothing is saved.
+- **Fixed:** the form no longer deletes a half-saved project when something fails (that permanent delete could leave a payment behind and left the project showing in the list).
+- A save that timed out after the server had already saved the project is recognised when you press Save again: you get that project back instead of a second one.
+- If only the client files fail to upload, the project stays saved and pressing Save again uploads just the files. The message says so.
+
 ## 2.2.0 — Ready-made templates and Quick quote
 
 - **Ready-made library** (Sales setup → Packages & pricing → *Add ready-made packages*): 28 packages across weddings, pre-wedding, engagement and roka, haldi and mehendi, sangeet and reception, birthdays and kids, baby and family, anniversaries, corporate events and product shoots, plus 12 add-ons. Tick what you offer; prices are examples until you change them or confirm them.

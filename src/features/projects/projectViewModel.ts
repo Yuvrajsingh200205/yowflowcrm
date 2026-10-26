@@ -6,6 +6,7 @@ import type {
   UpdateProjectInput,
 } from '@/lib/api/projects';
 import { FREELANCER_ASSIGNEE, UNASSIGNED_ASSIGNEE } from '@/features/projects/assigneeOptions';
+import { toPaymentMethod } from '@/lib/api/payments';
 import type { CrewMemberAssignment, Project, ProjectTask, TeamMember } from '@/types';
 
 const UUID_RE = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
@@ -397,6 +398,7 @@ export function toCreateProjectInput(project: Project, team: TeamMember[] = []):
         ...(crewAssignments.length ? { crewAssignments } : {}),
       }];
     });
+  const advance = (project.payments || []).find((payment) => payment.type === 'advance' && Number(payment.amount) > 0);
   return {
     client: {
       displayName: project.clientWeddingTitle.trim(),
@@ -404,6 +406,7 @@ export function toCreateProjectInput(project: Project, team: TeamMember[] = []):
     },
     status: toBackendProjectStatus(project.status),
     ...projectCoreInput(project),
+    ...(advance ? { advancePayment: { amount: Number(advance.amount), paymentDate: advance.date, paymentMethod: toPaymentMethod(advance.paymentMode), notes: advance.notes || undefined } } : {}),
     ...(tasks.length ? { tasks } : {}),
     ...(shoots.length ? { shoots } : {}),
   };

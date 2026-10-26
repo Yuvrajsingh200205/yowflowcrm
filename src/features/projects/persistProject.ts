@@ -18,7 +18,12 @@ export function assignedNames(project: Project) {
   )];
 }
 
-export async function persistStudioProject(project: Project, team: TeamMember[] = []): Promise<Project> {
+export interface SaveOptions {
+  /** Identifies one attempt to create a project, so a retry can never make a second one. */
+  idempotencyKey?: string;
+}
+
+export async function persistStudioProject(project: Project, team: TeamMember[] = [], options: SaveOptions = {}): Promise<Project> {
   let roster = team;
   if (isPersistedProjectId(project.id) && !roster.length) {
     try {
@@ -56,7 +61,7 @@ export async function persistStudioProject(project: Project, team: TeamMember[] 
   // Create the project and its shoots together so a crew-assignment failure
   // rolls back the whole project instead of leaving a partial project behind.
   const createInput = toCreateProjectInput(project, roster);
-  const dto = await projectsApi.create(createInput);
+  const dto = await projectsApi.create(createInput, options.idempotencyKey);
   const created = normalizeProject(dto);
   return {
     ...project,
